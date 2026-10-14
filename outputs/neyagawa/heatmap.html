@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_9e31a0d066d96c22ddf85ac0dc934965 {
+                #map_286c5ab0aa89a5677be6567d8dd348d9 {
                     position: relative;
                     width: 1000.0px;
                     height: 650.0px;
@@ -494,7 +494,7 @@
 (function () {
     var MAP_W = 1000, MAP_H = 650;
     var BOUNDS = [[34.69875, 135.59848], [34.7845600023301, 135.65335]];            // [[south, west], [north, east]]
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965";
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9";
     var tries = 0;
     // The view Folium baked in, captured before any fit runs. apply() restores
     // it when the map returns to full width - see the else branch there.
@@ -721,7 +721,7 @@
     
 <script>
 (function () {
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965";
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9";
     var MARGIN = 6;     // px kept between a label's text and the frame edge
     var GAP = 4;        // px between a re-placed label and its line's tip
     var CLEAR = 2;      // px a label keeps from a button, control or legend
@@ -883,7 +883,7 @@
     
 <script>
 (function () {
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965";
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9";
     // One event of at least this many normalized units (L.DomEvent.
     // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
     // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
@@ -952,7 +952,7 @@
     
 <script>
 (function () {
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965";
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9";
     function start() {
         var m = window[NAME], ac = m && m.attributionControl;
         if (!ac || typeof ac.options.prefix !== "string") return;
@@ -998,7 +998,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965";
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9";
     var tries = 0;
 
     function start() {
@@ -1201,8 +1201,8 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965", STD = "tile_layer_bf8e2f478db38f58cd441062c5beb927", OPEN = "open_basemap_71aa79cb7db0a621a1389e49cb024409";
-    var BUSINESS = [["heat_map_11ce654ce23285e493ea0603e70262e2", true], ["heat_map_7f2e158cd1dd1c0bd8a8149f7a089cf2", false], ["feature_group_5367dc3bdf26df70cc6eb07c6c39495e", false], ["feature_group_b1e1fad6cd3a6bdbc06db55841e08b2b", false], ["feature_group_6bb7d97de163ac03dc4003883d880241", false], ["feature_group_d8baf6c7ca0489ae788d1f7bcd1a688d", false], ["feature_group_0d7a36217e6e44e5581d0aa8edc1f065", true]];
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9", STD = "tile_layer_8d9b1b1a0d83b910ac202555866cc274", OPEN = "open_basemap_1c3c946e1ae0f592d76b1594f73277f4";
+    var BUSINESS = [["heat_map_17137646d7c674ed687b9887ec762ed9", true], ["heat_map_afa3137462c717b88449eab37ca10b56", false], ["feature_group_32864aaaee0af4a0db2739190db38899", false], ["feature_group_8df952c098dc575e2e18c62de89435eb", false], ["feature_group_351cb1f06c15d77ea1ca5b5b9eadb2d0", false], ["feature_group_153c96c734fcbcf592b3cf9e0a795e84", false], ["feature_group_16906f1f37f552d540f3766409296ca3", true]];
     var KEY = "expanded-heatmap-basemap";
     var tries = 0;
     function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -1265,7 +1265,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965";
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9";
     var TEXT = "Use two fingers to move the map";
     var HINT_MS = 1500;     // shown this long after the last one-finger move
     var FADE_MS = 300;      // a little over the CSS transition
@@ -1360,7 +1360,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_9e31a0d066d96c22ddf85ac0dc934965";
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9";
     var REACH = 22;         // px from a center or centerline: a 44 px target
     var TIE_PX = 2;         // edges this close count as a tie, broken by kind
     var ROOM_PX = 200;      // map height the panel needs above the legend
@@ -1555,16 +1555,1139 @@ path.hm-pick-case { stroke: #000000; fill: none; }
     start();
 })();
 </script>
+    
+<style>
+    /* The two-finger notice above the open search box (Leaflet's controls
+       sit at 1000): on a phone the box covered half of it (owner's iPhone,
+       2026-10-08). The notice is brief and lets touches through. */
+    .hm-touch-hint { z-index: 1100; }
+    .hm-search { background: #ffffff; color: #1c2b2a;
+        border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; font: 13px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); }
+    .hm-search-row { display: flex; align-items: center; }
+    .hm-search-btn { width: 30px; height: 30px; border: 0; background: transparent;
+        color: inherit; cursor: pointer; padding: 0; display: flex;
+        align-items: center; justify-content: center; }
+    .hm-search-input { display: none; width: 230px; border: 0; outline: none;
+        background: transparent; color: inherit; font: inherit; font-size: 16px;
+        padding: 4px 6px 4px 0; }
+    .hm-search.open .hm-search-input { display: block; }
+    .hm-search-list { display: none; max-height: 260px; overflow-y: auto;
+        border-top: 1px solid #999999; width: 260px; }
+    .hm-search.open .hm-search-list.has { display: block; }
+    .hm-search-item { padding: 6px 8px; cursor: pointer; line-height: 1.3; }
+    .hm-search-item:hover, .hm-search-item.on { background: rgba(13,148,136,0.14); }
+    .hm-search-sub { font-size: 11px; opacity: 0.75; }
+    .hm-search-note { padding: 6px 8px; font-size: 12px; opacity: 0.8; }
+    .hm-search-head { padding: 5px 8px 1px; font-size: 11px; font-weight: 600; opacity: 0.65; }
+    .hm-search-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 7px; }
+    .hm-search-list [hidden] { display: none !important; }
+    .hm-search-fold { display: block; width: 100%; text-align: left; background: none; border: 0;
+        color: inherit; font: inherit; font-size: 11px; font-weight: 600; cursor: pointer;
+        padding: 6px 8px 4px; }
+    .hm-search-fold:focus-visible { outline: 2px solid #0d9488; outline-offset: -2px; }
+    .hm-search-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px;
+        border: 1px solid #999999; border-radius: 999px; background: rgba(13,148,136,0.07);
+        color: inherit; font: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
+    .hm-search-pill:hover, .hm-search-pill.on, .hm-search-pill:focus-visible {
+        background: rgba(13,148,136,0.2); border-color: #0d9488; outline: none; }
+    .hm-pill-line { width: 14px; height: 4px; border-radius: 2px; flex: none; }
+    .hm-pill-station { width: 8px; height: 8px; border-radius: 50%; flex: none;
+        background: #1a5490; }
+    .dark-base .hm-search-pill { border-color: var(--dm-border); }
+    .dark-base .hm-pill-station { background: var(--dm-station); }
+    .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
+        border-top: 1px solid #999999; }
+    .hm-search-credit a { color: inherit; }
+    .hm-search-area { stroke: #0d9488; }
+    .dark-base .hm-search-area { stroke: #5eead4; }
+    .hm-search-btn:focus-visible, .hm-search-input:focus-visible {
+        outline: 2px solid #0d9488; outline-offset: 1px; }
+    .dark-base .hm-search { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base .hm-search-list, .dark-base .hm-search-credit { border-top-color: var(--dm-border); }
+    @media (max-width: 480px) { .hm-search-input { width: 160px; } .hm-search-list { width: 190px; } }
+    /* THE FOUND PLACE'S MARKER (owner, 2026-10-11, after the phone test: "the
+       highlight feature gets dwarfed by nearby businesses and the heat
+       layer"; and "green highlight ring is too dull on dark mode"). Two rings
+       in a pane of their own above the dots (640: over Leaflet's marker pane
+       at 600, under its tooltips at 650): a casing in the page's colour and
+       the accent over it, the dark accent on the dark map. Colours here, not
+       in the path's own attributes, so the theme button recolours a marker
+       already shown. */
+    .leaflet-hmsearch-pane, .leaflet-hmsearchtip-pane { pointer-events: none; }
+    path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-ring { stroke: #0d9488; stroke-opacity: 1;
+        fill: #0d9488; fill-opacity: 0.14; }
+    /* A picked street's whole length (owner, 2026-10-13): the ring's two
+       colours as a line, and the ring itself hidden once the line is drawn,
+       its name label left at the street's middle. */
+    path.hm-search-streetcase { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-street { stroke: #0d9488; stroke-opacity: 1; fill: none; }
+    .dark-base path.hm-search-streetcase { stroke: #0B1220; }
+    .dark-base path.hm-search-street { stroke: #5eead4; }
+    path.hm-search-hid { display: none; }
+    .dark-base path.hm-search-case { stroke: #0B1220; }
+    .dark-base path.hm-search-ring { stroke: #5eead4; fill: #5eead4; fill-opacity: 0.2; }
+    /* While the marker shows, the businesses step back: the dots (the only
+       paths drawn with fill-opacity 0.85 and a 1 px stroke), their cluster
+       bubbles and the heat. Faded, never switched off: what is around the
+       place is the answer the reader came for, and their layer choices are
+       left as they are. Lines, stations and rings keep their strength. The
+       fade ends with the marker, or at the reader's first touch of the map.
+       A picked line fades them under a class of its own
+       (LINE_HIGHLIGHT_SCRIPT, hm-line-picked), which this never touches. */
+    .hm-searching .leaflet-overlay-pane path[fill-opacity="0.85"][stroke-width="1"],
+    .hm-searching .leaflet-marker-pane .business-cluster-icon,
+    .hm-searching .leaflet-heatmap-layer { opacity: 0.28; }
+</style>
+<script>
+(function () {
+    var NAME = "map_286c5ab0aa89a5677be6567d8dd348d9", URL = "/app/static/places/neyagawa.json?v=d701e9f65540";
+    // THE APP IS NOT ALWAYS AT THE HOST'S ROOT. Streamlit Community Cloud
+    // serves it under /~/+/, so "/app/static/..." asked of the host's root
+    // found nothing there, and the deployed search answered only with the
+    // map's own stations and lines: no street, landmark or neighborhood was
+    // ever found live (the owner's London report, 2026-10-12). Every local
+    // check had passed, the app there being at the root. The page's own path
+    // gives the prefix; the plain path is tried second, for a map opened
+    // outside the app. An answer that is not JSON (a host's HTML shell,
+    // status 200) counts as a failure.
+    var BASE = (function () {
+        try {
+            if (window.parent === window) return "";
+            var here = window.parent.location.pathname;
+            return here.substring(0, here.lastIndexOf("/"));
+        } catch (e) { return ""; }
+    })();
+    function abs(u) { return u && u.charAt(0) === "/" ? BASE + u : u; }
+    function getIndex(u) {
+        var opt = {credentials: "omit", referrerPolicy: "no-referrer"};
+        function text(r) { if (!r.ok) throw new Error(r.status); return r.text(); }
+        function json(txt) { if (txt.charAt(0) !== "{") throw new Error("not an index"); return txt; }
+        return fetch(abs(u), opt).then(text).then(json).catch(function (e) {
+            if (!BASE) throw e;
+            return fetch(u, opt).then(text).then(json);
+        });
+    }
+    var STATION_COLOR = "#1a5490", LINK_M = 300, DUP_M = 1500;
+    var MIN_LATIN = 4, MIN_CJK = 2, RING_M = 966;
+    // Suggestions at most: the map's own (pills) and other places, fewer on a
+    // phone (under 480 px) to keep the list off most of the map.
+    function narrow() { return (document.documentElement.clientWidth || window.innerWidth) < 480; }
+    function caps() { return narrow() ? {own: 4, places: 3, alone: 5} : {own: 6, places: 6, alone: 8}; }
+    var KIND_LABEL = {line: "Line", mapstation: "Station", station: "Station not on this map",
+                      junction: "Intersection", landmark: "Landmark", place: "Neighborhood",
+                      street: "Street", crossing: "Intersection"};
+    var KIND_RANK = {line: 0, mapstation: 0, junction: 1, landmark: 2, station: 3, place: 3,
+                     street: 4, crossing: 5};
+    var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
+    var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
+    // A station word written onto the name with no space (四条駅, 金鐘站,
+    // 강남역): the query less its last character still finds the station
+    // (batch 2b, 2026-10-08, for Chinese and Korean).
+    var STATION_SUFFIX = {"駅": 1, "站": 1, "역": 1};
+    var JUNK_Q = /#(n[/]?a|ref|value|div|name|num|null)|!error/i;
+    var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
+                        "boulevard": 1, "blvd": 1, "drive": 1, "dr": 1, "way": 1,
+                        "dori": 1, "通": 1, "通り": 1};
+    // A typed street word's full form, to rank that street type first.
+    var STREET_TYPE = {"st": "street", "ave": "avenue", "rd": "road", "dr": "drive",
+                       "blvd": "boulevard"};
+    // English abbreviations that are not the start of the word they stand for
+    // (prefixes such as "ave" for avenue match as they are): a
+    // typed one also tries the full word (sample cities, 2026-10-08).
+    var ABBR = {"blvd": "boulevard", "ct": "court", "hwy": "highway", "pkwy": "parkway",
+                "ln": "lane", "mt": "mount", "ft": "fort", "sq": "square", "fwy": "freeway",
+                "expy": "expressway", "ctr": "center", "jct": "junction", "ne": "northeast",
+                "nw": "northwest", "se": "southeast", "sw": "southwest"};
+    // Street words that LEAD a name in the local language ("Rue Peel", "Carrer
+    // de Balmes"): a query beginning with one asks for a street, as an English
+    // one ending with "St" does.
+    var STREET_LEAD = {};
+    // The local languages' words (batch 2a, 2026-10-08), switched on by the
+    // index's declared languages (languages.local), never for every map: a
+    // Czech "a" as a connector would split "Avenue A and 5th" in an English
+    // city. join: the word between two streets ("Rue Neuve et Boulevard
+    // Adolphe Max"); stop: articles a query may add or leave out; street and
+    // lead: street words, optional on streets, lead ones first in a name;
+    // station: a station word; abbr: abbreviations that are not prefixes
+    // ("St-Denis" for Saint-Denis; "avda" tries "av", which begins both
+    // avinguda and avenida). Words as norm() leaves them, accents stripped.
+    var LANG_WORDS = {
+        fr: {join: ["et"], stop: ["de", "du", "des", "la", "le", "les", "l", "d"],
+             street: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "place", "quai",
+                      "allee", "impasse", "montee", "square", "promenade"],
+             lead: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "quai", "allee", "impasse"],
+             // "metro": Marseille's feed names ten stations "Métro Vieux Port".
+             station: ["gare", "metro"],
+             abbr: {"bd": "boulevard", "st": "saint", "ste": "sainte", "ch": "chemin"}},
+        ca: {join: ["i"], stop: ["de", "del", "dels", "la", "el", "les", "els", "l", "d"],
+             street: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "placa", "rambla",
+                      "rbla", "ronda", "travessera", "via", "passatge"],
+             lead: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "rambla", "rbla",
+                    "ronda", "travessera", "passatge"],
+             station: ["estacio"], abbr: {"pg": "passeig", "rbla": "rambla", "avda": "av"}},
+        // Mexico City's street types and their abbreviations (batch 3,
+        // 2026-10-11): calzada, eje, cerrada, privada, andador, callejon.
+        es: {join: ["y"], stop: ["de", "del", "la", "el", "los", "las"],
+             street: ["calle", "c", "avenida", "av", "avda", "paseo", "plaza", "ronda", "pasaje",
+                      "calzada", "calz", "eje", "cerrada", "cda", "privada", "priv", "andador",
+                      "callejon", "retorno", "circuito", "prolongacion", "prol", "boulevard", "blvd"],
+             lead: ["calle", "c", "avenida", "av", "avda", "paseo", "ronda", "pasaje", "calzada",
+                    "calz", "cerrada", "cda", "privada", "priv", "andador", "callejon", "retorno",
+                    "circuito", "prolongacion", "prol", "boulevard", "blvd"],
+             station: ["estacion", "metro"],
+             abbr: {"avda": "av", "pza": "plaza", "pso": "paseo", "calz": "calzada", "cda": "cerrada",
+                    "priv": "privada", "prol": "prolongacion", "blvd": "boulevard"}},
+        // Portuguese (Sao Paulo, batch 3, 2026-10-11): "e" between two
+        // streets; titles a street name is typed with (Dr., Prof., Eng.).
+        pt: {join: ["e"], stop: ["de", "do", "da", "dos", "das"],
+             street: ["rua", "r", "avenida", "av", "alameda", "al", "travessa", "tv", "praca", "pca",
+                      "largo", "estrada", "rodovia", "viela", "viaduto", "ladeira"],
+             lead: ["rua", "r", "avenida", "av", "alameda", "al", "travessa", "tv", "largo",
+                    "estrada", "rodovia", "viela", "viaduto", "ladeira"],
+             station: ["estacao", "metro"],
+             abbr: {"al": "alameda", "tv": "travessa", "pca": "praca", "dr": "doutor",
+                    "prof": "professor", "eng": "engenheiro", "sta": "santa", "sto": "santo"}},
+        cs: {join: ["a"], stop: [],
+             street: ["ulice", "ul", "trida", "namesti", "nam", "nabrezi"],
+             lead: [], station: ["stanice", "nadrazi"], abbr: {}},
+        nl: {join: ["en"], stop: ["de", "het"],
+             street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
+             lead: [], station: [], abbr: {}},
+        // German (2026-10-13; docs/decisions_drafts/search-lang-de.md). The
+        // street word sits inside the name ("Hauptstrasse"), so a typed
+        // "Hauptstr." meets it as a prefix of the name's word, and "Str."
+        // alone through abbr. norm() writes sharp s as "ss" for every
+        // language and, where German is declared, "ae", "oe" and "ue" as the
+        // bare vowel on both sides (UMLAUT_FOLD). Not yet tried in a browser.
+        de: {join: ["und", "ecke"], stop: ["der", "die", "das", "den", "dem"],
+             street: ["strasse", "str", "weg", "allee", "platz", "gasse", "ring", "damm", "ufer",
+                      "chaussee"],
+             lead: [], station: ["bahnhof", "bf", "bhf", "hbf", "haltestelle"],
+             abbr: {"str": "strasse", "pl": "platz", "bf": "bahnhof", "bhf": "bahnhof",
+                    "hbf": "hauptbahnhof", "st": "sankt"}},
+        // da: search-final's search-lang-da.md (2026-10-13), as drafted; not yet tried in a browser.
+        da: {join: ["og"], stop: ["af", "den", "det", "de"],
+             street: ["gade", "vej", "alle", "plads", "torv", "straede", "boulevard", "sti", "bro",
+                      "kaj", "vaenge", "passage"],
+             lead: [], station: ["station", "st", "banegaard", "hovedbanegaard", "metro", "letbane"],
+             abbr: {"skt": "sankt", "sct": "sankt", "gl": "gammel", "ndr": "nordre", "sdr": "sondre",
+                    "nr": "norre", "kgs": "kongens", "chr": "christian", "ll": "lille"}},
+        // nb: search-final's search-lang-nb.md (2026-10-13), as drafted; not yet tried in a browser.
+        nb: {join: ["og"], stop: ["i", "på", "ved", "av"],
+             street: ["vei", "veien", "veg", "vegen", "gate", "gata", "gaten", "gt", "plass",
+                      "plassen", "pl", "alle", "sti", "stien", "torg", "terrasse", "bakken"],
+             lead: [], station: ["stasjon", "stasjonen", "holdeplass", "stoppested", "t-bane", "tbane"],
+             abbr: {"gt": "gate", "v": "vei", "vn": "veien", "pl": "plass", "dr": "doktor",
+                    "prof": "professor"}},
+        // sv: search-final's search-lang-sv.md (2026-10-13), as drafted; not yet tried in a browser.
+        sv: {join: ["och", "hörnet"], stop: ["den", "det", "de", "i", "på", "av", "vid"],
+             street: ["gatan", "gata", "vägen", "väg", "gränd", "stigen", "backen", "torget", "torg",
+                      "plan", "platsen", "plats", "allén", "allé", "gången"],
+             lead: [], station: ["station", "stationen", "centralstation", "hållplats", "tunnelbana",
+                                 "t-bana", "pendeltåg"],
+             abbr: {"g": "gatan", "v": "vägen", "gr": "gränd", "st": "sankt", "s:t": "sankt",
+                    "n": "norra", "s": "södra", "ö": "östra"}},
+        // lv: search-final's search-lang-lv.md (2026-10-13), as drafted; not yet tried in a browser.
+        lv: {join: ["un"], stop: [],
+             street: ["iela", "bulvaris", "prospekts", "gatve", "laukums", "aleja", "linija",
+                      "soseja", "cels", "dambis", "krastmala", "tilts", "skvers"],
+             lead: [], station: ["stacija", "pietura"],
+             abbr: {"bulv": "bulvaris", "prosp": "prospekts", "pr": "prospekts",
+                    "lauk": "laukums", "sk": "skersiela", "sv": "sveta"}},
+        // ro: search-final's search-lang-ro.md (2026-10-13), as drafted; not yet tried in a browser.
+        ro: {join: ["și", "si", "cu", "colț"], stop: ["de", "din", "la", "cel", "lui", "al", "a"],
+             street: ["strada", "str", "aleea", "al", "intrarea", "intr", "drumul", "dr", "bulevardul",
+                      "bd", "bdul", "bld", "blvd", "soseaua", "sos", "calea", "cal", "piata", "pta",
+                      "splaiul", "spl", "prelungirea", "prel", "fundatura", "fdt", "pasajul", "podul"],
+             lead: ["strada", "str", "aleea", "al", "intrarea", "intr", "drumul", "dr", "bulevardul",
+                    "bd", "bdul", "bld", "blvd", "soseaua", "sos", "calea", "cal", "splaiul", "spl",
+                    "prelungirea", "prel", "fundatura", "fdt"],
+             station: ["gara", "statia", "metrou", "halta"],
+             abbr: {"str": "strada", "bd": "bulevardul", "bdul": "bulevardul", "bld": "bulevardul",
+                    "blvd": "bulevardul", "sos": "soseaua", "pta": "piata", "spl": "splaiul",
+                    "prel": "prelungirea", "intr": "intrarea", "fdt": "fundatura", "sf": "sfantul",
+                    "dr": "doctor", "gen": "general", "ing": "inginer", "prof": "profesor"}},
+        // it: search-final's search-lang-it.md (2026-10-13), as drafted; not yet tried in a browser.
+        it: {join: ["e", "angolo"], stop: ["di", "del", "della", "dello", "dei", "degli", "delle", "da",
+                                            "il", "lo", "la", "i", "gli", "le", "l", "d"],
+             street: ["via", "v", "viale", "vle", "vicolo", "vic", "piazza", "pza", "pzza", "piazzale",
+                      "ple", "largo", "lgo", "corso", "cso", "lungotevere", "lgt", "lungarno", "ponte",
+                      "borgo", "circonvallazione", "strada"],
+             lead: ["via", "v", "viale", "vle", "vicolo", "vic", "corso", "cso", "lungotevere", "lgt",
+                    "lungarno", "borgo", "circonvallazione", "strada"],
+             station: ["stazione", "staz", "fermata", "metro"],
+             abbr: {"vle": "viale", "pza": "piazza", "pzza": "piazza", "ple": "piazzale", "lgo": "largo",
+                    "cso": "corso", "lgt": "lungotevere", "vic": "vicolo", "s": "san", "sta": "santa",
+                    "ss": "santi", "staz": "stazione"}},
+        // el: search-final's search-lang-el.md (2026-10-13), as drafted; not yet tried in a browser.
+        el: {join: ["και"], stop: ["του", "της", "των", "το", "την", "τον"],
+             street: ["οδος", "οδ", "λεωφορος", "λεωφ", "πλατεια", "πλ", "παροδος", "παρ", "στοα"],
+             lead: ["οδος", "οδ", "λεωφορος", "λεωφ", "παροδος", "παρ"],
+             station: ["σταθμος", "μετρο"],
+             abbr: {}},
+        // Batch 2b (2026-10-08). Chinese and Korean names are one word each
+        // to words(), so no street word is set aside and no connector is
+        // split (和 and 과 sit inside names: 太和街); two streets are typed
+        // with "/" or "&" between them. 站 and 역 are station words through
+        // STATION_SUFFIX above.
+        zh: {join: [], stop: [], street: [], lead: [], station: ["站"], abbr: {}},
+        ko: {join: [], stop: [], street: [], lead: [], station: ["역"], abbr: {}},
+        // Georgian: "და" (and) between two streets; the street word follows
+        // the name ("რუსთაველის გამზირი"); "მეტრო" names a metro station.
+        ka: {join: ["და"], stop: [],
+             street: ["ქუჩა", "გამზირი", "ქ", "გამზ", "მოედანი", "ჩიხი", "შესახვევი"],
+             lead: [], station: ["მეტრო", "სადგური"], abbr: {"ქ": "ქუჩა", "გამზ": "გამზირი"}}
+    };
+    var PAIR_SPLIT = /\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/;
+    // A language whose city is also searched in another: Barcelona's names are
+    // Catalan and carry Spanish on under 1% of rows, but a reader may type
+    // "Calle Balmes" (batch 2a, 2026-10-08).
+    var ALSO = {ca: ["es"]};
+    function useLanguages(codes) {
+        var joins = ["and", "at", "x", "y"];
+        codes = (codes || []).slice();
+        codes.slice().forEach(function (c) { (ALSO[c] || []).forEach(function (a) {
+            if (codes.indexOf(a) < 0) codes.push(a); }); });
+        if (codes.indexOf("de") >= 0) UMLAUT_FOLD = true;
+        if (codes.indexOf("da") >= 0 || codes.indexOf("nb") >= 0) NORDIC_FOLD = true;
+        codes.forEach(function (c) {
+            var w = LANG_WORDS[c];
+            if (!w) return;
+            w.join.forEach(function (x) { if (joins.indexOf(x) < 0) joins.push(x); STOP[x] = 1; });
+            w.stop.forEach(function (x) { STOP[x] = 1; });
+            w.street.forEach(function (x) { STREET_WORDS[x] = 1; });
+            w.lead.forEach(function (x) { STREET_LEAD[x] = 1; });
+            w.station.forEach(function (x) { STATION_WORDS[x] = 1; });
+            Object.keys(w.abbr).forEach(function (k) { ABBR[k] = w.abbr[k]; });
+        });
+        PAIR_SPLIT = new RegExp("\\s+(?:" + joins.join("|") + ")\\s+|\\s*[&\\/@]\\s*");
+    }
+    var CJK = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uac00-\ud7af\uf900-\ufaff]/;
+    var MARKS = /[\u0300-\u036f]/g;
+    var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
+    var UMLAUT_FOLD = false, NORDIC_FOLD = false;
+    var renderer = null;
+    var byIndex = [], crossURL = null, crossings = null, streetURL = null, streets = null;
+    // THE SEARCHED AREA (owner, 2026-10-12): the index names the
+    // municipalities it covers and carries their merged outline
+    // (place_index.outline). The outline is drawn only while the search box
+    // is open, so the map is not given a standing border; a search that finds
+    // nothing says where search stops.
+    var area = null, areaLayer = null;
+    var CREDIT_BELOW = true;
+    function showArea(map, on) {
+        if (areaLayer) { map.removeLayer(areaLayer); areaLayer = null; }
+        if (!on || !area || !area.outline || !area.outline.length) return;
+        var polys = area.outline.map(function (r) {
+            var ring = [];
+            for (var i = 0; i + 1 < r.length; i += 2) ring.push([r[i], r[i + 1]]);
+            return [ring];
+        });
+        areaLayer = L.polygon(polys, {fill: false, weight: 2, dashArray: "6 5", opacity: 0.9,
+                                      interactive: false, className: "hm-search-area"}).addTo(map);
+    }
+    // "Seattle", "Seattle and Bellevue", "Seattle and 10 more": the index
+    // lists the municipality with the most of the map's stations first.
+    function areaName() {
+        var n = (area && area.names || []).filter(Boolean);
+        if (!n.length) return "";
+        if (n.length === 1) return n[0];
+        if (n.length === 2) return n[0] + " and " + n[1];
+        return n[0] + " and " + (n.length - 1) + " more";
+    }
+
+    function norm(s) {
+        s = String(s).normalize("NFKC").toLowerCase();
+        // Before the marks go: a with a ring is "aa" in Danish and Norwegian.
+        if (NORDIC_FOLD) s = s.replace(/å/g, "aa");
+        s = s.normalize("NFD").replace(MARKS, "").normalize("NFC");
+        if (fold === "ja") s = s.replace(/ou/g, "o").replace(/uu/g, "u").replace(/oo/g, "o");
+        // Sharp s is "ss" (Zurich writes only "strasse"). Where German is
+        // declared, a typed "ae", "oe" or "ue" meets the umlaut, whose marks
+        // are stripped above: both sides lose the "e".
+        s = s.replace(/ß/g, "ss");
+        if (UMLAUT_FOLD) s = s.replace(/ae/g, "a").replace(/oe/g, "o").replace(/ue/g, "u");
+        // Greek final sigma is sigma (candidate 31; place_index.fold_name's
+        // casefold does the same). Romanian's cedilla and comma letters meet
+        // already: both lose their mark above (candidate 35).
+        s = s.replace(/ς/g, "σ");
+        // Danish and Norwegian letters no mark is stripped from, written as
+        // the drafted word lists write them: ae, o, aa.
+        if (NORDIC_FOLD) s = s.replace(/æ/g, "ae").replace(/ø/g, "o");
+        return s;
+    }
+    function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
+    // The searchable forms of one entry's names.
+    function prep(d) {
+        var toks = [], solo = [];
+        d.names.forEach(function (n) {
+            var ws = words(n);
+            toks = toks.concat(ws);
+            solo = solo.concat(ws);
+            // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
+            if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
+        });
+        d.bares = d.names.map(function (n) { return words(n).join(""); });
+        d.hay = " " + toks.join(" ") + " ";
+        // The words alone, for in-word hits: a joined form let "star" match
+        // inside "Rest Area" (Sydney, 2026-10-08).
+        d.solo = " " + solo.join(" ") + " ";
+        d.flat = norm(d.names.join(" | "));
+        d.first = norm(d.name);
+        return d;
+    }
+    function metres(a, b) {
+        var k = Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
+        return Math.sqrt(Math.pow((a.lat - b.lat) * 110540, 2) + Math.pow((a.lon - b.lon) * 111320 * k, 2));
+    }
+
+    // The map's own stations (the station markers and their tooltips) and
+    // lines (the legend's rows, the polylines of each), as the reader sees them.
+    function ownItems(map) {
+        var out = [], seen = {};
+        map.eachLayer(function (l) {
+            if (!(l instanceof L.CircleMarker) || l instanceof L.Circle) return;
+            if (l.options.color !== STATION_COLOR || !l.getTooltip()) return;
+            var c = l.getTooltip().getContent(), tmp = document.createElement("div");
+            tmp.innerHTML = typeof c === "string" ? c : (c && c.innerHTML) || "";
+            var b = tmp.querySelector("b"), name = ((b || tmp).textContent || "").trim();
+            var ll = l.getLatLng(), key = name + "@" + ll.lat + "," + ll.lng;
+            if (!name || seen[key]) return;
+            seen[key] = 1;
+            out.push({kind: "mapstation", name: name, names: [name], lat: ll.lat, lon: ll.lng, bbox: null});
+        });
+        document.querySelectorAll(".map-legend .hm-line-row[data-line]").forEach(function (row) {
+            var n = row.getAttribute("data-line"), name = (row.textContent || "").trim(), bounds = null,
+                color = null;
+            map.eachLayer(function (l) {
+                var cls = " " + ((l.options && l.options.className) || "") + " ";
+                if (l instanceof L.Polyline && cls.indexOf(" hm-line-" + n + " ") >= 0 && l.getBounds) {
+                    color = color || l.options.color;
+                    bounds = bounds ? bounds.extend(l.getBounds()) : L.latLngBounds(l.getBounds().getSouthWest(),
+                                                                                    l.getBounds().getNorthEast());
+                }
+            });
+            if (!name || !bounds) return;
+            var c = bounds.getCenter();
+            out.push({kind: "line", name: name, names: [name], lat: c.lat, lon: c.lng, row: row, color: color,
+                      bbox: [bounds.getSouth(), bounds.getWest(), bounds.getNorth(), bounds.getEast()]});
+        });
+        return out.map(prep);
+    }
+
+    // The core of a station name: its words, less a bracketed operator
+    // ("Arashiyama (Hankyu)") and words such as "station" or 駅.
+    function core(name) {
+        return words(String(name).replace(/[(（][^)）]*[)）]/g, " "))
+            .filter(function (w) { return !STATION_WORDS[w]; });
+    }
+    // An OSM station joins the nearest map station within LINK_M whose name it
+    // shares: the same core, or the same first word of 3 or more letters
+    // (Tōjiin and "Tōjiin・Ritsumeikan University"). The FIRST word, never any
+    // word: any word joined the scenic line's "Torokko Saga" to Saga-Arashiyama
+    // and the Eizan Cable's station to Yase-Hieizanguchi (Kyoto, 2026-10-07).
+    // A second pass joins one whose names the map station already holds
+    // (Randen's 西院, read "Sai", joins Saiin through Hankyu's). A joined OSM
+    // station lends the map station its names and is not listed itself; one
+    // that joins none is labeled as not on the map.
+    function link(rows) {
+        var stations = own.filter(function (d) { return d.kind === "mapstation"; });
+        stations.forEach(function (s) { s._core = core(s.name); });
+        function same(d, s) {
+            return d.names.some(function (n) {
+                if (CJK.test(n)) return false;
+                var c = core(n);
+                return c.length && (c.join("") === s._core.join("") || (c[0].length >= 3 && c[0] === s._core[0]));
+            });
+        }
+        function held(d, s) { return d.names.some(function (n) { return s.names.indexOf(n) >= 0; }); }
+        function join(d, test) {
+            var best = null, bestM = LINK_M + 1;
+            stations.forEach(function (s) {
+                var m = metres(d, s);
+                if (m < bestM && test(d, s)) { best = s; bestM = m; }
+            });
+            if (!best) return false;
+            d.names.forEach(function (n) { if (best.names.indexOf(n) < 0) best.names.push(n); });
+            best._linked = true;
+            return true;
+        }
+        var rest = rows.filter(function (d) { return d.kind !== "station" || !join(d, same); });
+        rest = rest.filter(function (d) { return d.kind !== "station" || !join(d, held); });
+        // Same name as a map station but too far to join: a stray duplicate in
+        // OSM (Kyoto's third 山科, 900 m east of the station), dropped rather
+        // than labeled as not on the map.
+        rest = rest.filter(function (d) {
+            return d.kind !== "station" || !stations.some(function (s) {
+                return metres(d, s) <= DUP_M && (same(d, s) || held(d, s));
+            });
+        });
+        stations.forEach(function (s) { if (s._linked) prep(s); });
+        return rest;
+    }
+
+    function load(map) {
+        if (!own) own = ownItems(map);
+        if (loading) return loading;
+        var t0 = performance.now();
+        loading = getIndex(URL)
+            .then(function (txt) {
+                var ix = JSON.parse(txt);
+                fold = ix.fold || null;
+                useLanguages(ix.languages && ix.languages.local);
+                own = ownItems(map);
+                var rows = ix.rows.map(function (r, i) {
+                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3], row: i,
+                                 names: [r[3]].concat(r[4] ? r[4].split("|") : []), bbox: r[5] || null});
+                });
+                // The rows in file order: the crossings file refers to streets
+                // by their place here.
+                byIndex = rows;
+                crossURL = ix.crossings || null;
+                streetURL = ix.streets || null;
+                area = ix.area || null;
+                data = own.concat(link(rows));
+                document.querySelector(".hm-search").setAttribute(
+                    "data-load-ms", Math.round(performance.now() - t0));
+                return data;
+            });
+        loading.catch(function () { loading = null; });
+        return loading;
+    }
+    // The street-pair intersections, a second file fetched only when a
+    // search asks for one (owner, 2026-10-08: the index's size, iPhone
+    // memory above all): a query in two halves ("5th and Pike"), or one of
+    // several words that finds no place in the first file ("Clark Lake").
+    // Each row is [lat, lon, street A, street B], the streets by their place
+    // in the first file; the name and the English pair are built from them.
+    function needCrossings(q, found) {
+        if (!crossURL || crossings) return false;
+        if (pairOf(q)) return true;
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        return qs.length > 1 && !found.some(function (d) { return !isOwn(d); });
+    }
+    function loadCrossings() {
+        if (crossings) return crossings;
+        var t0 = performance.now();
+        crossings = getIndex(crossURL)
+            .then(function (txt) {
+                function latin(d) { return d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0]; }
+                JSON.parse(txt).rows.forEach(function (r) {
+                    var a = byIndex[r[2]], b = byIndex[r[3]];
+                    if (!a || !b) return;
+                    var names = [a.name + " / " + b.name], ea = latin(a), eb = latin(b);
+                    if (ea && eb) names.push(ea + " / " + eb);
+                    data.push(prep({kind: "crossing", lat: r[0], lon: r[1], name: names[0], names: names,
+                                    bbox: null}));
+                });
+                document.querySelector(".hm-search").setAttribute(
+                    "data-crossings-ms", Math.round(performance.now() - t0));
+            });
+        // A failed fetch leaves the first file's answers, and is not retried.
+        crossings.catch(function () { crossURL = null; });
+        return crossings;
+    }
+
+    // Each street's drawn length, a third file fetched at the first street
+    // picked (owner, 2026-10-13): {rows, lines, scale}, `rows` ascending and
+    // each a street's place in the first file, `lines` its polylines beside
+    // it. A line is flat integers in units of 1/scale degree: the first
+    // point, then each later point as its difference from the one before.
+    // Resolves to a function from a row to its lines as [[lat, lon], ...].
+    function loadStreets() {
+        if (streets) return streets;
+        streets = getIndex(streetURL).then(function (txt) {
+            var f = JSON.parse(txt), k = f.scale || 100000;
+            return function (row) {
+                var lo = 0, hi = f.rows.length - 1;
+                while (lo <= hi) {
+                    var mid = (lo + hi) >> 1;
+                    if (f.rows[mid] === row) {
+                        return f.lines[mid].map(function (a) {
+                            var la = a[0], ln = a[1], pts = [[la / k, ln / k]];
+                            for (var i = 2; i < a.length; i += 2) {
+                                la += a[i];
+                                ln += a[i + 1];
+                                pts.push([la / k, ln / k]);
+                            }
+                            return pts;
+                        });
+                    }
+                    if (f.rows[mid] < row) lo = mid + 1; else hi = mid - 1;
+                }
+                return [];
+            };
+        });
+        // A failed fetch leaves the ring, and is not retried.
+        streets.catch(function () { streetURL = null; });
+        return streets;
+    }
+
+    // 2 for a word-start hit, 1 for a Latin word of 4 or more letters inside a
+    // romanized compound ("imadegawa" in "Horikawaimadegawa"), 0 for none.
+    function wordHit(d, w) {
+        if (CJK.test(w)) return d.flat.indexOf(w) >= 0 ? 2 : 0;
+        // A number is itself or its ordinal: "1" found 145th (Seattle).
+        if (/^[0-9]+$/.test(w)) return ["", "st", "nd", "rd", "th"].some(function (x) {
+            return d.hay.indexOf(" " + w + x + " ") >= 0; }) ? 2 : 0;
+        if (d.hay.indexOf(" " + w) >= 0) return 2;
+        if (ABBR[w] && d.hay.indexOf(" " + ABBR[w]) >= 0) return 2;
+        return w.length >= 4 && d.solo.indexOf(w) >= 0 ? 1 : 0;
+    }
+    function isStation(d) { return d.kind === "station" || d.kind === "mapstation"; }
+    // A query in two halves ("Clark and Lake", "5th & Pike", "四条 / 烏丸"):
+    // each half's words, street words left out unless that empties it.
+    function pairOf(q) {
+        var parts = norm(q).split(PAIR_SPLIT).map(function (p) {
+            // Articles left out too: "Carrer de Aragó" for Carrer d'Aragó.
+            var ws = words(p), core = ws.filter(function (w) { return !STREET_WORDS[w] && !STOP[w]; });
+            return core.length ? core : ws;
+        }).filter(function (ws) { return ws.length; });
+        return parts.length === 2 ? parts : null;
+    }
+    function sideHit(side, ws) {
+        var hay = " " + words(side).join(" ") + " ", flat = norm(side);
+        return ws.every(function (w) {
+            if (CJK.test(w)) return flat.indexOf(w) >= 0;
+            return hay.indexOf(" " + w) >= 0 || (ABBR[w] && hay.indexOf(" " + ABBR[w]) >= 0);
+        });
+    }
+    function pairHit(d, pair) {
+        return d.names.some(function (n) {
+            var s = n.split(" / ");
+            return s.length === 2 && ((sideHit(s[0], pair[0]) && sideHit(s[1], pair[1]))
+                                      || (sideHit(s[1], pair[0]) && sideHit(s[0], pair[1])));
+        });
+    }
+    function hits(d, qs) {
+        d._weak = 0;
+        for (var i = 0; i < qs.length; i++) {
+            var w = qs[i], h = wordHit(d, w);
+            if (h === 1) d._weak += 1;
+            if (h) continue;
+            if (STATION_WORDS[w] && isStation(d)) continue;
+            if (STREET_WORDS[w] && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) continue;
+            if (CJK.test(w) && w.length > 1 && STATION_SUFFIX[w.charAt(w.length - 1)] && isStation(d)
+                && d.flat.indexOf(w.slice(0, -1)) >= 0) continue;
+            return false;
+        }
+        return true;
+    }
+    function search(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return [];
+        var out = data.filter(function (d) { return hits(d, qs); });
+        if (!out.length && qs.length === 1 && CJK.test(qs[0]) && qs[0].length >= 3) {
+            // One CJK word that matches nothing: try it as two (烏丸四条).
+            for (var k = 1; k < qs[0].length && !out.length; k++) {
+                var two = [qs[0].slice(0, k), qs[0].slice(k)];
+                out = data.filter(function (d) { return hits(d, two); });
+            }
+        }
+        var nq = norm(q).trim(), bare = words(q).join(""), phrase = words(q).join(" "), pair = pairOf(q);
+        // A street word last asks for a street ("Lake Shore Dr" before the
+        // Lake Shore Drive Synagogue, whose name the query begins); first, it
+        // is often Saint or Doctor ("St Mary's", "Dr Martin Luther King").
+        // In French, Catalan or Spanish the street word leads ("Rue Peel").
+        var typeW = STREET_WORDS[qs[qs.length - 1]] ? qs[qs.length - 1] : (STREET_LEAD[qs[0]] ? qs[0] : null);
+        var streetQ = qs.length > 1 && typeW;
+        out.forEach(function (d) {
+            var s = KIND_RANK[d.kind] * 3 + Math.min(d.name.length, 40) / 10 + d._weak * 20;
+            // The name itself before another street's alternate name: "Paseo
+            // de la Reforma" listed two roads carrying it as an old or
+            // alternate name ahead of the avenue (Mexico City, live, 2026-10-12).
+            // So: the name itself, then a name holding the whole phrase
+            // ("Avenida Paseo de la Reforma", "New Oxford Street"), then an
+            // alternate name that is the phrase (which still leads where the
+            // typed name is the English of a local one: "Sanjo Street").
+            if (norm(d.name) === nq || words(d.name).join("") === bare) s -= 100;
+            else if ((" " + words(d.name).join(" ") + " ").indexOf(" " + phrase + " ") >= 0) s -= 80;
+            else if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 70;
+            else if (d.first.indexOf(nq) === 0) s -= 40;
+            // "Damen and North": the crossing whose two streets take the two
+            // halves, before North Damen Avenue's other crossings (Chicago,
+            // 2026-10-08).
+            if (pair && d.kind === "crossing" && pairHit(d, pair)) s -= 60;
+            var streetD = d.kind === "street" || d.kind === "crossing" || d.kind === "junction";
+            if (streetQ && streetD) s -= 45;
+            // And its own type first: "NE 45th St" is the Street, not the Court.
+            // Streets only: given to every kind, it put the Lake Shore Drive
+            // Synagogue, a landmark holding the word "drive", 0.5 ahead of
+            // the Drive for "Lake Shore Dr" (Chicago, live, 2026-10-12).
+            if (streetQ && streetD && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
+            // Whole words before parts: "Art Institute" before "Arturo ...".
+            // An abbreviation counts as its whole word: "bd St-Laurent" is
+            // Boulevard Saint-Laurent before Boulevard Laurentien (batch 2a).
+            if (qs.every(function (w) { return d.hay.indexOf(" " + w + " ") >= 0
+                    || (ABBR[w] && d.hay.indexOf(" " + ABBR[w] + " ") >= 0); })) s -= 4;
+            d._s = s;
+        });
+        // The map's own stations and lines first, as their own group, and only
+        // from the start of a word: an in-word hit put Takaragaike under "kara"
+        // and Umekōji-Kyotonishi under "Nish" (Kyoto, 2026-10-07).
+        out.sort(function (a, b) { return a._s - b._s; });
+        var cap = caps();
+        var mine = out.filter(function (d) { return isOwn(d) && !d._weak; }).slice(0, cap.own);
+        var rest = oneRowAStreet(out.filter(function (d) { return !isOwn(d); }))
+            .slice(0, mine.length ? cap.places : cap.alone);
+        return mine.concat(rest);
+    }
+    // ONE ROW FOR A STREET'S STRETCHES (owner, 2026-10-12). The index joins
+    // the ways of one name only where they share a node, so a street cut by
+    // a railway, a square or a renamed block is several rows: live, "North
+    // Bell Avenue" filled all five of Chicago's slots and "Brick Lane" four
+    // of London's, pushing every other answer out. Street rows of one name
+    // whose extents lie within STRETCH_M of each other are one suggestion:
+    // the stretch nearest the middle of the view, opening on all of them.
+    // A same-named street farther off stays its own row, because most
+    // repeats are other streets: measured on the 19 indexes, joining at
+    // 600 m takes London's 55,283 street rows to 55,003 and leaves its four
+    // Brick Lanes and 53 of 56 High Streets apart (2 km would still leave
+    // 41). Those rows are told apart instead: each carries the nearest
+    // neighborhood in the index within NEAR_PLACE_M, and the nearest to the
+    // middle of the view comes first. Re-measure STRETCH_M if the index's
+    // street grid changes (pipeline/place_index.py, 2 km cells).
+    var STRETCH_M = 600, NEAR_PLACE_M = 4000, hoods = null;
+    function nearHood(d) {
+        if (!hoods) hoods = data.filter(function (x) { return x.kind === "place"; });
+        var best = null, bestM = NEAR_PLACE_M, k = Math.cos(d.lat * Math.PI / 180);
+        for (var i = 0; i < hoods.length; i++) {
+            var h = hoods[i], dy = (h.lat - d.lat) * 111320, dx = (h.lon - d.lon) * 111320 * k;
+            var m = Math.sqrt(dx * dx + dy * dy);
+            if (m < bestM) { bestM = m; best = h; }
+        }
+        return best ? best.name : null;
+    }
+    function boxOf(d) { return d.bbox || [d.lat, d.lon, d.lat, d.lon]; }
+    function gapM(a, b) {
+        var dy = Math.max(0, a[0] - b[2], b[0] - a[2]) * 111320;
+        var dx = Math.max(0, a[1] - b[3], b[1] - a[3]) * 111320 * Math.cos((a[0] + b[0]) / 2 * Math.PI / 180);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    function oneRowAStreet(list) {
+        var groups = {}, kept = [], mid = null;
+        try { var c = window[NAME].getCenter(); mid = [c.lat, c.lng]; } catch (e) { mid = null; }
+        function off(d) { return mid ? Math.pow(d.lat - mid[0], 2) + Math.pow(d.lon - mid[1], 2) : 0; }
+        list.forEach(function (d) {
+            d._span = null;
+            d._hood = null;
+            d._rows = null;
+            if (d.kind !== "street") { kept.push({d: d}); return; }
+            var key = norm(d.name), gs = groups[key] || (groups[key] = []), box = boxOf(d);
+            for (var i = 0; i < gs.length; i++) {
+                var g = gs[i];
+                if (g.boxes.some(function (b) { return gapM(b, box) <= STRETCH_M; })) {
+                    g.boxes.push(box);
+                    g.rows.push(d.row);
+                    g.span = [Math.min(g.span[0], box[0]), Math.min(g.span[1], box[1]),
+                              Math.max(g.span[2], box[2]), Math.max(g.span[3], box[3])];
+                    if (off(d) < off(g.d)) g.d = d;
+                    return;
+                }
+            }
+            var ng = {d: d, boxes: [box], span: box.slice(), rows: [d.row]};
+            gs.push(ng);
+            kept.push(ng);
+        });
+        var rows = kept.map(function (g) {
+            if (g.boxes && g.boxes.length > 1) g.d._span = g.span;
+            if (g.rows) g.d._rows = g.rows;
+            return g.d;
+        });
+        rows.forEach(function (d) {
+            if (d.kind === "street" && groups[norm(d.name)].length > 1) d._hood = nearHood(d);
+        });
+        // Equal answers nearest the view first; the sort is stable, so every
+        // other order stands.
+        return rows.sort(function (a, b) {
+            return a._s - b._s || (a.kind === "street" && b.kind === "street"
+                                   && norm(a.name) === norm(b.name) ? off(a) - off(b) : 0);
+        });
+    }
+    function isOwn(d) { return d.kind === "line" || d.kind === "mapstation"; }
+    // WORK IN PROGRESS (owner, 2026-10-07): the suggestion rules below (the
+    // keyword gate, the caps, the pills) are a first cut, to be tuned against
+    // real search terms in testing; the aim is as few items as do the job,
+    // phones above all. It may go live in this state at the owner's call.
+    // Nothing is suggested until a full keyword is typed (owner, 2026-10-07:
+    // "North" for Northgate Station, "JR" for a JR line): a whole word of some
+    // name ("JR", "Oak", "5th"), at least MIN_LATIN letters of one, at least
+    // MIN_CJK characters of Chinese, Japanese or Korean, or a second word.
+    function ready(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return false;
+        // Several words count only with one real word among them: "#N/A" is
+        // "n" and "a", and found intersections everywhere (owner's junk
+        // searches, 2026-10-08).
+        if (qs.length > 1) return qs.some(function (w) { return w.length > 1 || CJK.test(w) || /[0-9]/.test(w); });
+        var w = qs[0];
+        if (CJK.test(w)) return w.length >= MIN_CJK;
+        if (w.length >= MIN_LATIN) return true;
+        return data.some(function (d) { return d.hay.indexOf(" " + w + " ") >= 0; });
+    }
+
+    function start() {
+        var map = window[NAME];
+        if (!map || !window.L) return;
+        var Ctl = L.Control.extend({
+            options: {position: "topleft"},
+            onAdd: function () {
+                var box = L.DomUtil.create("div", "hm-search leaflet-control");
+                box.innerHTML =
+                    '<div class="hm-search-row">' +
+                    '<button type="button" class="hm-search-btn" aria-label="Search places" title="Search places">' +
+                    '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.5" cy="6.5" r="5" ' +
+                    'fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.5L15 15" stroke="currentColor" ' +
+                    'stroke-width="2" stroke-linecap="round"/></svg></button>' +
+                    '<input class="hm-search-input" type="search" role="combobox" aria-expanded="false" ' +
+                    'aria-label="Search streets, intersections, stations, lines and places" ' +
+                    'placeholder="Street, station, place" autocomplete="off" autocorrect="off" ' +
+                    'autocapitalize="off" spellcheck="false" enterkeyhint="search"></div>' +
+                    '<div class="hm-search-list" role="listbox"></div>';
+                L.DomEvent.disableClickPropagation(box);
+                L.DomEvent.disableScrollPropagation(box);
+                return box;
+            }
+        });
+        map.addControl(new Ctl());
+        var box = document.querySelector(".hm-search");
+        var btn = box.querySelector(".hm-search-btn");
+        var input = box.querySelector(".hm-search-input");
+        var list = box.querySelector(".hm-search-list");
+        var shown = [], on = -1;
+
+        function note(text) {
+            var n = document.createElement("div");
+            n.className = "hm-search-note";
+            n.textContent = text;
+            list.appendChild(n);
+            list.classList.add("has");
+        }
+        var creditBelow = false;
+        // `found` is false for a search that found nothing: the note above
+        // it already says where search stops, so the area line is left out
+        // (owner, 2026-10-12).
+        function credit(found) {
+            var c = document.createElement("div");
+            c.className = "hm-search-credit";
+            if (CREDIT_BELOW && map.attributionControl) {
+                if (!creditBelow) {
+                    creditBelow = true;
+                    var creditEl = map.attributionControl.getContainer();
+                    var creditH = creditEl ? creditEl.offsetHeight : 0;
+                    map.attributionControl.addAttribution(
+                        'Search index <a href="https://opendatacommons.org/licenses/odbl/1-0/" ' +
+                        'target="_blank" rel="noopener noreferrer">ODbL</a> (<a href="' + abs(URL) +
+                        '" target="_blank" rel="noopener" download>download</a>' +
+                        (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') +
+                        (streetURL ? ', <a href="' + abs(streetURL) + '" target="_blank" rel="noopener" download>streets</a>' : '') + ')');
+                    // The line is taller now (two lines on a phone), and
+                    // the legend's bottom is clamped for a one-line credit
+                    // (_LEGEND_BOTTOM_CSS): it is raised by what the line
+                    // grew. Measured 2026-10-13 at a 343 px map: the line
+                    // goes from 14 to 28 px and an open legend's bottom 4 px
+                    // sat under it.
+                    var grew = creditEl ? creditEl.offsetHeight - creditH : 0;
+                    var lg = document.querySelector(".map-legend");
+                    if (lg && grew > 0) {
+                        var was = lg.style.bottom || getComputedStyle(lg).bottom;
+                        lg.style.bottom = "calc(" + was + " + " + grew + "px)";
+                    }
+                }
+                if (found === false || !areaName()) return;
+                c.textContent = "Search covers " + areaName() + ", outlined on the map.";
+                list.appendChild(c);
+                return;
+            }
+            // The short credit (owner, 2026-10-07, to save space in the box):
+            // the OSM Attribution Guideline's "© OpenStreetMap contributors"
+            // form, linked to the copyright page, the licence named and linked
+            // (ODbL 4.3), and the download link as the 4.6 offer (licence read
+            // 2026-10-07). It replaced 4.3(a)'s longer example wording. The
+            // offer covers the intersections file as well, which is part of
+            // the same derived database (owner, 2026-10-11); its link shows
+            // once the index has named the file. The street lines file is a
+            // third part of it, with a third link (owner, 2026-10-13).
+            c.innerHTML = 'Search data &copy; <a href="https://www.openstreetmap.org/copyright" ' +
+                'target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> ' +
+                '(<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
+                'rel="noopener noreferrer">ODbL</a>) · ' +
+                '<a href="' + abs(URL) + '" target="_blank" rel="noopener" download>Download this index</a>' +
+                (crossURL ? ' · <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') +
+                (streetURL ? ' · <a href="' + abs(streetURL) + '" target="_blank" rel="noopener" download>streets</a>' : '');
+            list.appendChild(c);
+        }
+        // On a phone (under 480 px), with both groups shown, each heading folds
+        // its group (owner, 2026-10-07): the map's own open, the places folded,
+        // and a reader's choice kept while they type.
+        var folded = {own: false, places: true};
+        function head(text, group, count, foldable) {
+            var h = document.createElement(foldable ? "button" : "div");
+            h.className = "hm-search-head";
+            if (foldable) {
+                h.type = "button";
+                h.className += " hm-search-fold";
+                h.setAttribute("aria-expanded", folded[group] ? "false" : "true");
+                h.textContent = (folded[group] ? "▸ " : "▾ ") + text + " (" + count + ")";
+                h.addEventListener("click", function () { folded[group] = !folded[group]; render(); });
+            } else {
+                h.textContent = text;
+            }
+            list.appendChild(h);
+        }
+        function render() {
+            list.innerHTML = "";
+            on = -1;
+            shown = [];
+            // Empty, or no full keyword yet: what the search is for (owner,
+            // 2026-10-07), and the credit, which shows whenever the box is open.
+            // Before a full keyword, the map's own stations and lines still
+            // answer, from the start of a word (owner, 2026-10-11: "l" showed
+            // the Linhas through a place with a word L, "lin" showed nothing,
+            // "linh" showed them again). The index's places wait for the
+            // keyword, as before.
+            var gated = !!data && !ready(input.value);
+            var early = gated && input.value.trim() && !JUNK_Q.test(input.value)
+                ? search(input.value).filter(isOwn) : [];
+            if (!input.value.trim() || (gated && !early.length)) {
+                note("Finds streets, intersections, stations, lines, neighborhoods and landmarks. " +
+                     "Businesses are not searchable, and what you type stays in your browser.");
+                credit();
+                input.setAttribute("aria-expanded", "false");
+                return;
+            }
+            if (!data) { note("Loading places…"); return; }
+            // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
+            // nothing, as no index holds one (place_index.junk_name).
+            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(false); return; }
+            shown = gated ? early : search(input.value);
+            if (!gated && needCrossings(input.value, shown)) {
+                // Shown again when the intersections arrive, or as it stands
+                // if they cannot.
+                loadCrossings().then(render, render);
+                if (!shown.length) { note("Loading intersections…"); return; }
+            }
+            if (!shown.length) {
+                note("No street, station or place by that name");
+                // The owner's wording (2026-10-12).
+                if (area) note("Search covers the outlined area only. Zoom out to see it.");
+                credit(false);
+                return;
+            }
+            var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
+            var foldable = nOwn > 0 && nPlaces > 0 && narrow();
+            var pills = null, rows = null;
+            shown.forEach(function (d, i) {
+                // A map station shows its Japanese (or other) name beside the
+                // map's; an OSM entry its first Latin alias.
+                var other = d.kind === "mapstation" ? d.names[1]
+                    : d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0];
+                var label = KIND_LABEL[d.kind] + (other && other !== d.name ? " · " + other : "");
+                if (isOwn(d)) {
+                    // The map's own stations and lines as pills (owner,
+                    // 2026-10-07), side by side so several share a row: a
+                    // line's in its map colour, a station's with the station
+                    // dot. The kind and other name are the pill's title.
+                    if (!pills) {
+                        head("On this map", "own", nOwn, foldable);
+                        pills = document.createElement("div");
+                        pills.className = "hm-search-pills";
+                        pills.hidden = foldable && folded.own;
+                        list.appendChild(pills);
+                    }
+                    var pill = document.createElement("button");
+                    pill.type = "button";
+                    pill.className = "hm-search-pill";
+                    pill.setAttribute("data-i", i);
+                    pill.title = label;
+                    pill.setAttribute("aria-label", d.name + ", " + label);
+                    var sw = document.createElement("span");
+                    sw.className = d.kind === "line" ? "hm-pill-line" : "hm-pill-station";
+                    if (d.kind === "line" && d.color) sw.style.background = d.color;
+                    pill.appendChild(sw);
+                    pill.appendChild(document.createTextNode(d.name));
+                    pill.addEventListener("click", function () { go(i); });
+                    pills.appendChild(pill);
+                    return;
+                }
+                if (!rows) {
+                    if (pills) head("Places", "places", nPlaces, foldable);
+                    rows = document.createElement("div");
+                    rows.hidden = foldable && folded.places;
+                    list.appendChild(rows);
+                }
+                var el = document.createElement("div");
+                el.className = "hm-search-item";
+                el.setAttribute("role", "option");
+                el.setAttribute("data-i", i);
+                var top = document.createElement("div");
+                // One of several streets of this name carries its
+                // neighborhood in parentheses (owner, 2026-10-12: "Brick
+                // Lane (Mile End New Town)"; oneRowAStreet). The mark on the
+                // map keeps the street's own name.
+                top.textContent = d.name + (d._hood && d._hood !== d.name ? " (" + d._hood + ")" : "");
+                var sub = document.createElement("div");
+                sub.className = "hm-search-sub";
+                sub.textContent = label;
+                el.appendChild(top);
+                el.appendChild(sub);
+                el.addEventListener("click", function () { go(i); });
+                rows.appendChild(el);
+            });
+            credit();
+            list.classList.add("has");
+            input.setAttribute("aria-expanded", "true");
+        }
+        function go(i) {
+            var d = shown[i];
+            if (!d) return;
+            unmark();
+            list.classList.remove("has");
+            input.setAttribute("aria-expanded", "false");
+            input.blur();
+            if (d.kind === "line") {
+                // The whole line in view, picked out as its legend row does
+                // (LINE_HIGHLIGHT_SCRIPT, which also gives it the picked
+                // look); a row already picked stays picked.
+                map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {padding: [30, 30]});
+                if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
+                return;
+            }
+            if (d.kind === "mapstation") {
+                // The station with its outermost ring in view, whether or not
+                // the rings are switched on (owner, 2026-10-07).
+                map.fitBounds(L.latLng(d.lat, d.lon).toBounds(2 * RING_M), {padding: [20, 20]});
+            } else if (d._span || d.bbox) {
+                // every stretch of the street in view (oneRowAStreet)
+                var bb = d._span || d.bbox;
+                map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], {maxZoom: 16, padding: [30, 30]});
+            } else {
+                map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
+            }
+            // A temporary marker, not interactive, so a tap still reaches the
+            // dots and rings under it: the casing, then the ring over it.
+            if (!map.getPane("hmsearch")) {
+                map.createPane("hmsearch").style.zIndex = 640;
+                // The name label has a pane of its own: TAP_SELECT_SCRIPT
+                // hides Leaflet's tooltip pane on a touch screen, where a
+                // hover label has no use, and this one is the search's answer.
+                map.createPane("hmsearchtip").style.zIndex = 645;
+                renderer = L.svg({pane: "hmsearch"});
+            }
+            marker = L.featureGroup([
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 8, className: "hm-search-case",
+                    pane: "hmsearch", renderer: renderer, interactive: false}),
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 4, className: "hm-search-ring",
+                    pane: "hmsearch", renderer: renderer, interactive: false})
+            ]).addTo(map);
+            marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top", pane: "hmsearchtip",
+                offset: [0, -16]}).openTooltip();
+            // A street's whole length, every stretch the result row stands
+            // for (oneRowAStreet), drawn when its file is in; the ring gives
+            // way to it and the name label stays. No file, or a street with
+            // no line in it, leaves the ring.
+            if (d.kind === "street" && streetURL && d._rows) {
+                var mine = marker, rowsOf = d._rows;
+                loadStreets().then(function (linesOf) {
+                    if (marker !== mine) return;
+                    var lines = [];
+                    rowsOf.forEach(function (r) { lines = lines.concat(linesOf(r)); });
+                    if (!lines.length) return;
+                    mine.getLayers().forEach(function (c) { if (c._path) c._path.classList.add("hm-search-hid"); });
+                    [["hm-search-streetcase", 9], ["hm-search-street", 5]].forEach(function (s) {
+                        mine.addLayer(L.polyline(lines, {weight: s[1], opacity: 1, className: s[0],
+                            pane: "hmsearch", renderer: renderer, interactive: false,
+                            lineCap: "round", lineJoin: "round"}));
+                    });
+                }, function () {});
+            }
+            map.getContainer().classList.add("hm-searching");
+            // The reader's first touch of the map ends the fade (the marker
+            // stays its 12 seconds). Armed after the move this search makes.
+            setTimeout(function () {
+                if (!marker) return;
+                ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                    map.getContainer().addEventListener(ev, unfade, {capture: true, passive: true});
+                });
+            }, 400);
+            timer = setTimeout(unmark, 12000);
+        }
+        function unfade() {
+            map.getContainer().classList.remove("hm-searching");
+            ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                map.getContainer().removeEventListener(ev, unfade, {capture: true});
+            });
+        }
+        function unmark() {
+            clearTimeout(timer);
+            if (marker) map.removeLayer(marker);
+            marker = null;
+            unfade();
+        }
+        function open() {
+            box.classList.add("open");
+            input.focus();
+            load(map).then(function () { showArea(map, true); render(); }, function () {
+                // No index (a map opened outside the site): the map's own
+                // stations and lines still answer.
+                data = own;
+                render();
+                note("Streets and places are searchable on the site's own map pages");
+            });
+        }
+        btn.addEventListener("click", function () {
+            // The button closes an open box, typed text or not (a phone has
+            // no Escape key); the text is cleared, as Escape clears it.
+            if (box.classList.contains("open")) {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+                showArea(map, false);
+                return;
+            }
+            open();
+        });
+        input.addEventListener("input", render);
+        input.addEventListener("keydown", function (e) {
+            e.stopPropagation();
+            // Pills and rows alike, in the order shown.
+            var items = Array.prototype.filter.call(list.querySelectorAll("[data-i]"),
+                function (el) { return !el.closest("[hidden]"); });   // a folded group's are skipped
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                if (!items.length) return;
+                on = (on + (e.key === "ArrowDown" ? 1 : items.length - 1)) % items.length;
+                items.forEach(function (el, k) { el.classList.toggle("on", k === on); });
+            } else if (e.key === "Enter") {
+                e.preventDefault();
+                if (items.length) go(Number(items[on >= 0 ? on : 0].getAttribute("data-i")));
+            } else if (e.key === "Escape") {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+                showArea(map, false);
+            }
+        });
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
     <div hidden data-ehm="ehm:v1:map/neyagawa:99c911663491b862"></div>
     
-            <div class="folium-map" id="map_9e31a0d066d96c22ddf85ac0dc934965" ></div>
+            <div class="folium-map" id="map_286c5ab0aa89a5677be6567d8dd348d9" ></div>
         
 </body>
 <script>
     
     
-            var map_9e31a0d066d96c22ddf85ac0dc934965 = L.map(
-                "map_9e31a0d066d96c22ddf85ac0dc934965",
+            var map_286c5ab0aa89a5677be6567d8dd348d9 = L.map(
+                "map_286c5ab0aa89a5677be6567d8dd348d9",
                 {
                     center: [34.74165500116506, 135.62591499999996],
                     crs: L.CRS.EPSG3857,
@@ -1582,7 +2705,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 
         
     
-            var tile_layer_bf8e2f478db38f58cd441062c5beb927 = L.tileLayer(
+            var tile_layer_8d9b1b1a0d83b910ac202555866cc274 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -1599,10 +2722,10 @@ path.hm-pick-case { stroke: #000000; fill: none; }
             );
         
     
-            tile_layer_bf8e2f478db38f58cd441062c5beb927.addTo(map_9e31a0d066d96c22ddf85ac0dc934965);
+            tile_layer_8d9b1b1a0d83b910ac202555866cc274.addTo(map_286c5ab0aa89a5677be6567d8dd348d9);
         
     
-        var open_basemap_71aa79cb7db0a621a1389e49cb024409 = (function () {
+        var open_basemap_1c3c946e1ae0f592d76b1594f73277f4 = (function () {
             var LIBS = ["https://files.dacekroberts.dev/lib/maplibre-gl.css", "https://files.dacekroberts.dev/lib/maplibre-gl.js", "https://files.dacekroberts.dev/lib/leaflet-maplibre-gl.js", "https://files.dacekroberts.dev/lib/pmtiles.js", "https://files.dacekroberts.dev/lib/basemaps.js"], loading = null;
             function load() {
                 if (loading) return loading;
@@ -2059,7 +3182,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
         })();
         
     
-            var heat_map_11ce654ce23285e493ea0603e70262e2 = L.heatLayer(
+            var heat_map_17137646d7c674ed687b9887ec762ed9 = L.heatLayer(
                 JSON.parse("[[34.764473,135.62291],[34.767942,135.616042],[34.748631,135.612469],[34.760809,135.624039],[34.760344,135.616654],[34.765077,135.620697],[34.767763,135.618261],[34.768884,135.612901],[34.74961,135.616262],[34.784889,135.62859],[34.788754,135.630881],[34.782476,135.629879],[34.776534,135.632863],[34.767165,135.612617],[34.779972,135.628317],[34.780745,135.625044],[34.753003,135.653533],[34.788173,135.629248],[34.747968,135.619851],[34.759999,135.613268],[34.771335,135.624067],[34.782359,135.638964],[34.785331,135.620906],[34.779719,135.624052],[34.75547,135.654394],[34.750174,135.612373],[34.768565,135.6152],[34.76601,135.629467],[34.769195,135.615939],[34.767647,135.611826],[34.781523,135.626799],[34.786731,135.62413],[34.778019,135.626392],[34.762289,135.615028],[34.76669,135.612676],[34.755684,135.610425],[34.767945,135.624978],[34.767817,135.615046],[34.762298,135.628214],[34.765633,135.630545],[34.783237,135.623544],[34.784061,135.628328],[34.747926,135.61939],[34.787128,135.62169],[34.754764,135.651994],[34.764527,135.612402],[34.745326,135.617083],[34.751108,135.606056],[34.764974,135.630209],[34.781447,135.628621],[34.784034,135.629753],[34.764229,135.618616],[34.765629,135.618174],[34.747464,135.608536],[34.777454,135.632662],[34.76694,135.616243],[34.758454,135.623808],[34.760809,135.624039],[34.768198,135.613633],[34.781337,135.632708],[34.757329,135.655437],[34.747895,135.614718],[34.78604,135.624993],[34.749009,135.61121],[34.783929,135.630241],[34.786863,135.628638],[34.766808,135.624539],[34.76032,135.611522],[34.76365,135.610624],[34.764972,135.627707],[34.751962,135.608204],[34.758179,135.624022],[34.784889,135.62859],[34.747117,135.617274],[34.763893,135.618729],[34.784738,135.636806],[34.786633,135.629413],[34.785342,135.628608],[34.747816,135.613988],[34.761651,135.620186],[34.777454,135.632662],[34.76312,135.620814],[34.77923,135.624748],[34.762801,135.620476],[34.761705,135.623619],[34.783359,135.627023],[34.746616,135.611317],[34.758454,135.623808],[34.745995,135.619322],[34.78341,135.627935],[34.783237,135.623544],[34.76081,135.615998],[34.785214,135.632053],[34.756884,135.626801],[34.779941,135.624927],[34.784831,135.634511],[34.76312,135.620814],[34.785075,135.627596],[34.787463,135.630153],[34.762477,135.623987],[34.783076,135.62977],[34.786863,135.628638],[34.782797,135.630284],[34.767763,135.618261],[34.749226,135.616469],[34.759491,135.62248],[34.766165,135.616541],[34.767919,135.613293],[34.74797,135.616424],[34.767763,135.618261],[34.762285,135.616127],[34.760809,135.624039],[34.787906,135.629243],[34.76669,135.612676],[34.764074,135.619421],[34.754444,135.643177],[34.749324,135.609171],[34.747968,135.619851],[34.786302,135.620767],[34.771675,135.619305],[34.766511,135.610765],[34.760215,135.616906],[34.769195,135.615939],[34.786863,135.628638],[34.754524,135.653612],[34.761032,135.615777],[34.760372,135.613803],[34.760372,135.613803],[34.747968,135.619851],[34.761898,135.626747],[34.75128,135.608489],[34.747071,135.616366],[34.747464,135.608536],[34.747209,135.612981],[34.781447,135.628621],[34.764708,135.622763],[34.78977,135.626897],[34.760594,135.615598],[34.761401,135.624146],[34.767411,135.625232],[34.754764,135.651994],[34.756439,135.654175],[34.758179,135.624022],[34.783178,135.627226],[34.770658,135.624172],[34.780073,135.632319],[34.783237,135.623544],[34.780849,135.630912],[34.766675,135.6266],[34.785137,135.62541],[34.763955,135.610804],[34.769794,135.616946],[34.748112,135.61401],[34.771171,135.619772],[34.780027,135.630342],[34.783892,135.625468],[34.784034,135.629753],[34.763893,135.618729],[34.78341,135.627935],[34.786863,135.628638],[34.762848,135.62154],[34.786863,135.628638],[34.785255,135.626992],[34.755267,135.65533],[34.765905,135.619238],[34.779572,135.625496],[34.765257,135.623754],[34.785779,135.62938],[34.765113,135.618014],[34.747542,135.617281],[34.789436,135.628156],[34.783178,135.627226],[34.783173,135.63157],[34.761386,135.624474],[34.786856,135.630645],[34.782804,135.625166],[34.757329,135.655437],[34.745448,135.613726],[34.785156,135.633705],[34.753231,135.606171],[34.786856,135.630645],[34.78757,135.628733],[34.765726,135.612142],[34.784045,135.628638],[34.784831,135.634511],[34.785032,135.627921],[34.788511,135.626912],[34.786863,135.628638],[34.768291,135.61813],[34.770271,135.623311],[34.782087,135.631178],[34.784469,135.626263],[34.760372,135.613803],[34.769195,135.615939],[34.769641,135.614202],[34.786856,135.630645],[34.766165,135.616541],[34.785075,135.627596],[34.76347,135.618278],[34.782797,135.630284],[34.767647,135.611826],[34.748903,135.612782],[34.764763,135.621239],[34.758629,135.622495],[34.762003,135.629883],[34.763664,135.617708],[34.747449,135.613225],[34.786952,135.627636],[34.750525,135.607534],[34.785032,135.627921],[34.760353,135.61634],[34.762661,135.622154],[34.747209,135.612981],[34.785906,135.630174],[34.765921,135.618264],[34.764968,135.619006],[34.784037,135.628977],[34.764208,135.617946],[34.763851,135.622444],[34.758736,135.655931],[34.763893,135.618729],[34.746855,135.612913],[34.781451,135.625111],[34.776295,135.631813],[34.76547,135.611192],[34.784037,135.628977],[34.787396,135.631098],[34.766726,135.618274],[34.782797,135.630284],[34.765846,135.62238],[34.754469,135.606539],[34.781451,135.625111],[34.780745,135.625044],[34.747209,135.612981],[34.766503,135.622788],[34.749059,135.610895],[34.786633,135.629413],[34.788727,135.631329],[34.765241,135.622299],[34.746516,135.614519],[34.78596,135.628711],[34.765846,135.62238],[34.757116,135.654627],[34.785214,135.632053],[34.782087,135.631178],[34.762488,135.624507],[34.762559,135.627136],[34.762661,135.622154],[34.77157,135.617095],[34.747816,135.613988],[34.787021,135.6256],[34.784889,135.62859],[34.758984,135.613185],[34.784889,135.62859],[34.78596,135.628711],[34.758318,135.618649],[34.75388,135.604246],[34.784045,135.628638],[34.767668,135.617231],[34.765241,135.622299],[34.781794,135.631435],[34.76601,135.629467],[34.763418,135.62359],[34.787539,135.629238],[34.747131,135.610925],[34.784083,135.627706],[34.78328,135.628727],[34.763851,135.622444],[34.762801,135.620476],[34.758454,135.623808],[34.764074,135.619421],[34.762668,135.625534],[34.78328,135.628727],[34.762801,135.620476],[34.765846,135.62238],[34.765241,135.622299],[34.786633,135.629413],[34.752191,135.652097],[34.762488,135.624507],[34.767118,135.625956],[34.786633,135.629413],[34.76744,135.625964],[34.783238,135.629191],[34.785214,135.632053],[34.786633,135.629413],[34.766405,135.62117],[34.784469,135.626263],[34.783929,135.630241],[34.765852,135.623637],[34.746364,135.612877],[34.783835,135.632213],[34.787463,135.630153],[34.764555,135.617349],[34.786856,135.630645],[34.747742,135.61039],[34.767763,135.618261],[34.766571,135.62445],[34.764208,135.617946],[34.767118,135.625956],[34.78399,135.622488],[34.78341,135.627935],[34.784988,135.629049],[34.782476,135.629879],[34.747509,135.612243],[34.765241,135.622299],[34.765426,135.618065],[34.785214,135.632053],[34.766096,135.621577],[34.785579,135.630751],[34.765852,135.623637],[34.787463,135.630153],[34.763626,135.62125],[34.780636,135.632983],[34.780849,135.630912],[34.768646,135.617048],[34.78328,135.628727],[34.779941,135.624927],[34.764159,135.617345],[34.764839,135.624882],[34.759504,135.623195],[34.757456,135.626213],[34.77873,135.631101],[34.749754,135.612207],[34.749009,135.61121],[34.78596,135.628711],[34.78328,135.628727],[34.769428,135.617801],[34.765387,135.62437],[34.747659,135.616001],[34.787539,135.629238],[34.784061,135.628328],[34.764208,135.617946],[34.763626,135.62125],[34.762488,135.624507],[34.756688,135.655639],[34.783237,135.623544],[34.76601,135.629467],[34.76298,135.618871],[34.764763,135.621239],[34.75717,135.648604],[34.781567,135.631256],[34.763626,135.62125],[34.762559,135.627136],[34.764974,135.630209],[34.784037,135.628977],[34.767,135.618853],[34.759513,135.621462],[34.77873,135.631101],[34.765846,135.62238],[34.785906,135.630174],[34.766405,135.62117],[34.783076,135.62977],[34.749878,135.608215],[34.762801,135.620476],[34.763626,135.62125],[34.764412,135.624128],[34.762774,135.623451],[34.749009,135.61121],[34.766675,135.6266],[34.762661,135.622154],[34.767082,135.622771],[34.785579,135.630751],[34.78328,135.628727],[34.787396,135.631098],[34.765241,135.622299],[34.768879,135.622874],[34.78596,135.628711],[34.76298,135.618871],[34.765852,135.623637],[34.764159,135.617345],[34.766859,135.611533],[34.758629,135.622495],[34.762801,135.620476],[34.755253,135.651501],[34.76298,135.618871],[34.787906,135.629243],[34.765549,135.619289],[34.763626,135.62125],[34.768646,135.617048],[34.782797,135.630284],[34.767373,135.615921],[34.770569,135.627028],[34.785032,135.627921],[34.783076,135.62977],[34.786863,135.628638],[34.767942,135.616042],[34.769832,135.621105],[34.782797,135.630284],[34.786927,135.629307],[34.786019,135.626914],[34.762774,135.623451],[34.76547,135.611192],[34.759491,135.62248],[34.762774,135.623451],[34.786633,135.629413],[34.78328,135.628727],[34.786927,135.629307],[34.765241,135.622299],[34.762488,135.624507],[34.786633,135.629413],[34.747449,135.613225],[34.76298,135.618871],[34.786633,135.629413],[34.782797,135.630284],[34.78328,135.628727],[34.770384,135.621823],[34.770271,135.623311],[34.744948,135.619335],[34.749344,135.614634],[34.763955,135.610804],[34.762733,135.616867],[34.762488,135.624507],[34.768185,135.623524],[34.766117,135.627373],[34.777454,135.632662],[34.766442,135.625789],[34.766571,135.62445],[34.783237,135.623544],[34.781228,135.639028],[34.748589,135.609225],[34.769195,135.615939],[34.759126,135.655084],[34.77923,135.624748],[34.764441,135.629919],[34.787054,135.623621],[34.784427,135.637296],[34.765852,135.623637],[34.764208,135.617946],[34.758357,135.622792],[34.749754,135.612207],[34.747012,135.612013],[34.768879,135.622874],[34.752441,135.608651],[34.784962,135.630066],[34.785137,135.62541],[34.788925,135.630411],[34.786863,135.628638],[34.761012,135.611663],[34.785214,135.632053],[34.760409,135.624037],[34.746695,135.618256],[34.787939,135.625905],[34.744651,135.61999]]"),
                 {
   "minOpacity": 0.35,
@@ -2077,10 +3200,10 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            heat_map_11ce654ce23285e493ea0603e70262e2.addTo(map_9e31a0d066d96c22ddf85ac0dc934965);
+            heat_map_17137646d7c674ed687b9887ec762ed9.addTo(map_286c5ab0aa89a5677be6567d8dd348d9);
         
     
-            var heat_map_7f2e158cd1dd1c0bd8a8149f7a089cf2 = L.heatLayer(
+            var heat_map_afa3137462c717b88449eab37ca10b56 = L.heatLayer(
                 JSON.parse("[[34.764473,135.62291],[34.767942,135.616042],[34.748631,135.612469],[34.760809,135.624039],[34.760344,135.616654],[34.765077,135.620697],[34.767763,135.618261],[34.768884,135.612901],[34.74961,135.616262],[34.784889,135.62859],[34.765835,135.603159],[34.788754,135.630881],[34.761096,135.602364],[34.782476,135.629879],[34.763508,135.639665],[34.776534,135.632863],[34.767165,135.612617],[34.733636,135.626503],[34.740539,135.62531],[34.779972,135.628317],[34.753564,135.626812],[34.780745,135.625044],[34.753003,135.653533],[34.763035,135.60796],[34.788173,135.629248],[34.773276,135.614051],[34.747968,135.619851],[34.756109,135.604694],[34.759999,135.613268],[34.771335,135.624067],[34.782359,135.638964],[34.773504,135.628414],[34.785331,135.620906],[34.760765,135.60267],[34.736647,135.62474],[34.762571,135.59845],[34.774797,135.601749],[34.779719,135.624052],[34.75547,135.654394],[34.750174,135.612373],[34.768565,135.6152],[34.759002,135.60092],[34.76601,135.629467],[34.769195,135.615939],[34.757533,135.597009],[34.767647,135.611826],[34.781523,135.626799],[34.760602,135.605394],[34.786731,135.62413],[34.779237,135.621233],[34.767506,135.595717],[34.778019,135.626392],[34.756726,135.627539],[34.752134,135.626606],[34.762289,135.615028],[34.76669,135.612676],[34.764994,135.604542],[34.733087,135.628525],[34.755684,135.610425],[34.748015,135.623651],[34.764007,135.606838],[34.767945,135.624978],[34.767817,135.615046],[34.762298,135.628214],[34.768359,135.643259],[34.765633,135.630545],[34.756837,135.608044],[34.783237,135.623544],[34.775481,135.648688],[34.784061,135.628328],[34.765684,135.638959],[34.747926,135.61939],[34.738838,135.623694],[34.787128,135.62169],[34.775948,135.62471],[34.754764,135.651994],[34.764527,135.612402],[34.745326,135.617083],[34.767648,135.596921],[34.751108,135.606056],[34.764974,135.630209],[34.770319,135.612732],[34.781447,135.628621],[34.784034,135.629753],[34.763066,135.599755],[34.764229,135.618616],[34.765629,135.618174],[34.747464,135.608536],[34.775121,135.627021],[34.777454,135.632662],[34.754263,135.604365],[34.76694,135.616243],[34.758454,135.623808],[34.760809,135.624039],[34.76231,135.632427],[34.765398,135.609416],[34.768198,135.613633],[34.781337,135.632708],[34.780324,135.640296],[34.757329,135.655437],[34.747895,135.614718],[34.773792,135.622985],[34.78604,135.624993],[34.749009,135.61121],[34.783929,135.630241],[34.786863,135.628638],[34.776032,135.639932],[34.766808,135.624539],[34.76032,135.611522],[34.759621,135.597443],[34.76365,135.610624],[34.764972,135.627707],[34.751962,135.608204],[34.774311,135.644854],[34.758179,135.624022],[34.784889,135.62859],[34.747117,135.617274],[34.763893,135.618729],[34.784738,135.636806],[34.759039,135.607925],[34.786633,135.629413],[34.785342,135.628608],[34.747816,135.613988],[34.761651,135.620186],[34.777454,135.632662],[34.76312,135.620814],[34.77923,135.624748],[34.762801,135.620476],[34.761705,135.623619],[34.783359,135.627023],[34.746616,135.611317],[34.767248,135.630798],[34.758454,135.623808],[34.763813,135.596832],[34.760397,135.601437],[34.745995,135.619322],[34.78341,135.627935],[34.783237,135.623544],[34.76081,135.615998],[34.785214,135.632053],[34.772846,135.613572],[34.756884,135.626801],[34.779941,135.624927],[34.784831,135.634511],[34.76312,135.620814],[34.785075,135.627596],[34.787463,135.630153],[34.768161,135.608057],[34.762477,135.623987],[34.783076,135.62977],[34.786863,135.628638],[34.782797,135.630284],[34.767763,135.618261],[34.749226,135.616469],[34.759491,135.62248],[34.766165,135.616541],[34.767919,135.613293],[34.74797,135.616424],[34.76064,135.610852],[34.767763,135.618261],[34.76022,135.60998],[34.762285,135.616127],[34.763668,135.607726],[34.760809,135.624039],[34.764314,135.602985],[34.787906,135.629243],[34.760682,135.600639],[34.76669,135.612676],[34.774105,135.619748],[34.776068,135.63918],[34.764074,135.619421],[34.754444,135.643177],[34.749324,135.609171],[34.747968,135.619851],[34.786302,135.620767],[34.765122,135.63671],[34.76225,135.598756],[34.771675,135.619305],[34.757283,135.612771],[34.766511,135.610765],[34.760215,135.616906],[34.759964,135.601771],[34.769195,135.615939],[34.754269,135.604517],[34.786863,135.628638],[34.775048,135.605204],[34.768161,135.608057],[34.754524,135.653612],[34.774922,135.617688],[34.761032,135.615777],[34.760372,135.613803],[34.760372,135.613803],[34.747968,135.619851],[34.762275,135.599572],[34.751803,135.627215],[34.768201,135.608833],[34.761898,135.626747],[34.75128,135.608489],[34.747071,135.616366],[34.747464,135.608536],[34.774657,135.650379],[34.747209,135.612981],[34.775121,135.627021],[34.781447,135.628621],[34.764708,135.622763],[34.767219,135.596187],[34.78977,135.626897],[34.760594,135.615598],[34.774192,135.629379],[34.761401,135.624146],[34.767411,135.625232],[34.754764,135.651994],[34.758639,135.610136],[34.76201,135.601657],[34.768359,135.643259],[34.756439,135.654175],[34.758179,135.624022],[34.783178,135.627226],[34.770658,135.624172],[34.780073,135.632319],[34.783237,135.623544],[34.780849,135.630912],[34.768174,135.633317],[34.776068,135.63918],[34.758518,135.602847],[34.766675,135.6266],[34.785137,135.62541],[34.763955,135.610804],[34.769794,135.616946],[34.748112,135.61401],[34.771171,135.619772],[34.756537,135.610922],[34.780027,135.630342],[34.783892,135.625468],[34.7638,135.600565],[34.776032,135.639932],[34.774206,135.604053],[34.784034,135.629753],[34.765586,135.602163],[34.774978,135.627584],[34.763893,135.618729],[34.78341,135.627935],[34.786863,135.628638],[34.762848,135.62154],[34.765553,135.607151],[34.786863,135.628638],[34.771863,135.632649],[34.785255,135.626992],[34.755267,135.65533],[34.765905,135.619238],[34.779572,135.625496],[34.765257,135.623754],[34.761368,135.636917],[34.785779,135.62938],[34.765113,135.618014],[34.747542,135.617281],[34.789436,135.628156],[34.783178,135.627226],[34.783173,135.63157],[34.761386,135.624474],[34.786856,135.630645],[34.782804,135.625166],[34.759841,135.611025],[34.757329,135.655437],[34.75277,135.629121],[34.745448,135.613726],[34.776455,135.603934],[34.759296,135.60059],[34.785156,135.633705],[34.775533,135.64496],[34.753231,135.606171],[34.729328,135.632686],[34.764864,135.607327],[34.786856,135.630645],[34.749444,135.624298],[34.776542,135.635616],[34.78757,135.628733],[34.765726,135.612142],[34.784045,135.628638],[34.784831,135.634511],[34.785032,135.627921],[34.788511,135.626912],[34.775948,135.62471],[34.761368,135.636917],[34.786863,135.628638],[34.768291,135.61813],[34.770271,135.623311],[34.782087,135.631178],[34.784469,135.626263],[34.760372,135.613803],[34.769195,135.615939],[34.769641,135.614202],[34.738608,135.624667],[34.77387,135.624825],[34.761217,135.600813],[34.761108,135.604331],[34.786856,135.630645],[34.766165,135.616541],[34.785075,135.627596],[34.76347,135.618278],[34.782797,135.630284],[34.767647,135.611826],[34.748903,135.612782],[34.764763,135.621239],[34.762471,135.607202],[34.758629,135.622495],[34.779799,135.640334],[34.762003,135.629883],[34.763664,135.617708],[34.762704,135.598923],[34.747449,135.613225],[34.786952,135.627636],[34.732088,135.626926],[34.766488,135.651676],[34.750525,135.607534],[34.766488,135.651676],[34.785032,135.627921],[34.760353,135.61634],[34.774302,135.628208],[34.762661,135.622154],[34.747209,135.612981],[34.785906,135.630174],[34.765921,135.618264],[34.764968,135.619006],[34.752997,135.630542],[34.78118,135.619711],[34.784037,135.628977],[34.764208,135.617946],[34.763851,135.622444],[34.758736,135.655931],[34.763893,135.618729],[34.746855,135.612913],[34.77612,135.614503],[34.752091,135.639684],[34.781451,135.625111],[34.757533,135.597009],[34.776295,135.631813],[34.77387,135.624825],[34.76301,135.609441],[34.76547,135.611192],[34.757665,135.603126],[34.784037,135.628977],[34.787396,135.631098],[34.78118,135.619711],[34.766726,135.618274],[34.782797,135.630284],[34.765846,135.62238],[34.754469,135.606539],[34.781451,135.625111],[34.780745,135.625044],[34.747209,135.612981],[34.766503,135.622788],[34.749059,135.610895],[34.774167,135.656533],[34.775522,135.606878],[34.786633,135.629413],[34.754606,135.629661],[34.788727,135.631329],[34.765241,135.622299],[34.746516,135.614519],[34.774597,135.601332],[34.78596,135.628711],[34.784064,135.642981],[34.765846,135.62238],[34.757116,135.654627],[34.760355,135.60294],[34.776471,135.639391],[34.785214,135.632053],[34.782087,135.631178],[34.762488,135.624507],[34.762559,135.627136],[34.762661,135.622154],[34.77157,135.617095],[34.747816,135.613988],[34.787021,135.6256],[34.784889,135.62859],[34.758984,135.613185],[34.784889,135.62859],[34.76968,135.606093],[34.78596,135.628711],[34.758318,135.618649],[34.757384,135.63378],[34.75388,135.604246],[34.774978,135.627584],[34.784045,135.628638],[34.753872,135.629911],[34.767668,135.617231],[34.765241,135.622299],[34.781794,135.631435],[34.766488,135.651676],[34.76601,135.629467],[34.767969,135.649413],[34.763418,135.62359],[34.787539,135.629238],[34.747131,135.610925],[34.761096,135.602364],[34.766488,135.651676],[34.784083,135.627706],[34.78328,135.628727],[34.763851,135.622444],[34.762801,135.620476],[34.758454,135.623808],[34.759498,135.633194],[34.764074,135.619421],[34.763603,135.608686],[34.762668,135.625534],[34.78328,135.628727],[34.762801,135.620476],[34.765846,135.62238],[34.765241,135.622299],[34.76968,135.606093],[34.756249,135.605757],[34.775359,135.638033],[34.77918,135.620242],[34.786633,135.629413],[34.752191,135.652097],[34.762488,135.624507],[34.767118,135.625956],[34.786633,135.629413],[34.776471,135.639391],[34.76744,135.625964],[34.783238,135.629191],[34.785214,135.632053],[34.786633,135.629413],[34.766405,135.62117],[34.784469,135.626263],[34.783929,135.630241],[34.765852,135.623637],[34.746364,135.612877],[34.783835,135.632213],[34.787463,135.630153],[34.755727,135.625628],[34.764555,135.617349],[34.786856,135.630645],[34.747742,135.61039],[34.763813,135.596832],[34.767763,135.618261],[34.766571,135.62445],[34.764208,135.617946],[34.767118,135.625956],[34.757665,135.603126],[34.78399,135.622488],[34.78341,135.627935],[34.784988,135.629049],[34.782476,135.629879],[34.747509,135.612243],[34.765241,135.622299],[34.765426,135.618065],[34.785214,135.632053],[34.766096,135.621577],[34.785579,135.630751],[34.769177,135.6107],[34.765852,135.623637],[34.787463,135.630153],[34.763626,135.62125],[34.780636,135.632983],[34.780849,135.630912],[34.768646,135.617048],[34.78328,135.628727],[34.776011,135.63315],[34.779941,135.624927],[34.764159,135.617345],[34.764839,135.624882],[34.757533,135.597009],[34.759504,135.623195],[34.757456,135.626213],[34.77873,135.631101],[34.749754,135.612207],[34.749009,135.61121],[34.78596,135.628711],[34.78328,135.628727],[34.769428,135.617801],[34.765387,135.62437],[34.747659,135.616001],[34.774711,135.612729],[34.787539,135.629238],[34.784061,135.628328],[34.764208,135.617946],[34.763626,135.62125],[34.762488,135.624507],[34.756688,135.655639],[34.783237,135.623544],[34.76601,135.629467],[34.76298,135.618871],[34.764763,135.621239],[34.75717,135.648604],[34.781567,135.631256],[34.763626,135.62125],[34.762559,135.627136],[34.764974,135.630209],[34.784037,135.628977],[34.767,135.618853],[34.759513,135.621462],[34.77873,135.631101],[34.761486,135.640175],[34.765846,135.62238],[34.785906,135.630174],[34.766405,135.62117],[34.765012,135.601658],[34.783076,135.62977],[34.749878,135.608215],[34.762801,135.620476],[34.763626,135.62125],[34.764412,135.624128],[34.762774,135.623451],[34.749009,135.61121],[34.766675,135.6266],[34.762661,135.622154],[34.767082,135.622771],[34.785579,135.630751],[34.770643,135.631573],[34.767345,135.610911],[34.78328,135.628727],[34.787396,135.631098],[34.765241,135.622299],[34.768879,135.622874],[34.751166,135.642663],[34.776471,135.639391],[34.78596,135.628711],[34.76298,135.618871],[34.765852,135.623637],[34.764159,135.617345],[34.766859,135.611533],[34.776068,135.63918],[34.758629,135.622495],[34.762801,135.620476],[34.755253,135.651501],[34.76298,135.618871],[34.787906,135.629243],[34.765549,135.619289],[34.763626,135.62125],[34.772797,135.631775],[34.768646,135.617048],[34.782797,135.630284],[34.767373,135.615921],[34.770569,135.627028],[34.785032,135.627921],[34.779799,135.640334],[34.783076,135.62977],[34.773504,135.628414],[34.786863,135.628638],[34.767942,135.616042],[34.769832,135.621105],[34.782797,135.630284],[34.786927,135.629307],[34.786019,135.626914],[34.762774,135.623451],[34.76547,135.611192],[34.759491,135.62248],[34.762774,135.623451],[34.756158,135.606504],[34.786633,135.629413],[34.750764,135.623414],[34.78328,135.628727],[34.786927,135.629307],[34.765241,135.622299],[34.76231,135.632427],[34.762488,135.624507],[34.786633,135.629413],[34.747449,135.613225],[34.76298,135.618871],[34.786633,135.629413],[34.782797,135.630284],[34.78328,135.628727],[34.759655,135.605515],[34.770384,135.621823],[34.770271,135.623311],[34.769282,135.643182],[34.771053,135.612621],[34.771053,135.612621],[34.744948,135.619335],[34.749344,135.614634],[34.75385,135.632199],[34.773603,135.601369],[34.757725,135.628751],[34.765586,135.602163],[34.763955,135.610804],[34.759841,135.611025],[34.762733,135.616867],[34.762488,135.624507],[34.768185,135.623524],[34.766117,135.627373],[34.777454,135.632662],[34.766442,135.625789],[34.77482,135.604733],[34.766571,135.62445],[34.774311,135.644854],[34.783237,135.623544],[34.784514,135.642454],[34.781228,135.639028],[34.774833,135.638455],[34.748589,135.609225],[34.769195,135.615939],[34.758599,135.608938],[34.759126,135.655084],[34.77923,135.624748],[34.772579,135.624689],[34.767349,135.608326],[34.765812,135.59917],[34.764441,135.629919],[34.774855,135.623718],[34.787054,135.623621],[34.784427,135.637296],[34.766488,135.651676],[34.765852,135.623637],[34.764208,135.617946],[34.775481,135.648688],[34.758357,135.622792],[34.749754,135.612207],[34.775928,135.602287],[34.747012,135.612013],[34.776282,135.60711],[34.768879,135.622874],[34.774218,135.624708],[34.752441,135.608651],[34.784962,135.630066],[34.785137,135.62541],[34.762423,135.60168],[34.773539,135.641483],[34.77359,135.604238],[34.788925,135.630411],[34.786863,135.628638],[34.761012,135.611663],[34.785214,135.632053],[34.760523,135.63044],[34.760409,135.624037],[34.746695,135.618256],[34.765322,135.602792],[34.787939,135.625905],[34.744651,135.61999]]"),
                 {
   "minOpacity": 0.35,
@@ -2098,255 +3221,255 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var feature_group_5367dc3bdf26df70cc6eb07c6c39495e = L.featureGroup(
+            var feature_group_32864aaaee0af4a0db2739190db38899 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_9f92d9c5418cd84537662fc014595533 = L.circle(
+            var circle_f62a702cfeffab7fe177c5b09c31f8f7 = L.circle(
                 [34.747501, 135.611219],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_5367dc3bdf26df70cc6eb07c6c39495e);
+            ).addTo(feature_group_32864aaaee0af4a0db2739190db38899);
         
     
-            var circle_ea51610765ba6e8c9ec3f62a13e6ef49 = L.circle(
+            var circle_a7e9c68401c3399bfef7ce25b4a4f0aa = L.circle(
                 [34.78456, 135.63094],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_5367dc3bdf26df70cc6eb07c6c39495e);
+            ).addTo(feature_group_32864aaaee0af4a0db2739190db38899);
         
     
-            var circle_42e3adc894b9774b1391c2d0bd5e9b4d = L.circle(
+            var circle_93547ab728fbd324ee382d63866cd5e7 = L.circle(
                 [34.755505, 135.65335],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_5367dc3bdf26df70cc6eb07c6c39495e);
+            ).addTo(feature_group_32864aaaee0af4a0db2739190db38899);
         
     
-            var circle_3a2f8e1cbf8be095a35e35dbbb457aa2 = L.circle(
+            var circle_49fba189235ab5e77378bfba8e4aa8c1 = L.circle(
                 [34.76397, 135.620741],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_5367dc3bdf26df70cc6eb07c6c39495e);
+            ).addTo(feature_group_32864aaaee0af4a0db2739190db38899);
         
     
-            var feature_group_b1e1fad6cd3a6bdbc06db55841e08b2b = L.featureGroup(
+            var feature_group_8df952c098dc575e2e18c62de89435eb = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_83c9ec6e289a949e9feb301d9897abd2 = L.circle(
+            var circle_67a40b659b0b339bcc2fb32b016ad7d3 = L.circle(
                 [34.747501, 135.611219],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_b1e1fad6cd3a6bdbc06db55841e08b2b);
+            ).addTo(feature_group_8df952c098dc575e2e18c62de89435eb);
         
     
-            var circle_d559281681fbc2aa5a89900198c81f34 = L.circle(
+            var circle_547feddc51c316100c0534802afdb945 = L.circle(
                 [34.78456, 135.63094],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_b1e1fad6cd3a6bdbc06db55841e08b2b);
+            ).addTo(feature_group_8df952c098dc575e2e18c62de89435eb);
         
     
-            var circle_fee04e1cbfb113cb61ea04279e8dba8c = L.circle(
+            var circle_533b197b8a41776e857853d2873a8bca = L.circle(
                 [34.755505, 135.65335],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_b1e1fad6cd3a6bdbc06db55841e08b2b);
+            ).addTo(feature_group_8df952c098dc575e2e18c62de89435eb);
         
     
-            var circle_39d472692376a31e4c6811b1625de811 = L.circle(
+            var circle_188993b4c6e7a264e365f65645e7decb = L.circle(
                 [34.76397, 135.620741],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_b1e1fad6cd3a6bdbc06db55841e08b2b);
+            ).addTo(feature_group_8df952c098dc575e2e18c62de89435eb);
         
     
-            var feature_group_6bb7d97de163ac03dc4003883d880241 = L.featureGroup(
+            var feature_group_351cb1f06c15d77ea1ca5b5b9eadb2d0 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_856565872c43d66667b70a0034abaf15 = L.circle(
+            var circle_944d005ba30e6c17c0a7688e4044eb80 = L.circle(
                 [34.747501, 135.611219],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_6bb7d97de163ac03dc4003883d880241);
+            ).addTo(feature_group_351cb1f06c15d77ea1ca5b5b9eadb2d0);
         
     
-            var circle_32d88526888d6d4a5e62e1a5f8e3119a = L.circle(
+            var circle_35e07953a8bfb56cefe9a3cdbc358b5a = L.circle(
                 [34.78456, 135.63094],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_6bb7d97de163ac03dc4003883d880241);
+            ).addTo(feature_group_351cb1f06c15d77ea1ca5b5b9eadb2d0);
         
     
-            var circle_f5dd0e6683327d1e14c1710bda159ee8 = L.circle(
+            var circle_97ac838ea8b83c93bc7119b1a6326079 = L.circle(
                 [34.755505, 135.65335],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_6bb7d97de163ac03dc4003883d880241);
+            ).addTo(feature_group_351cb1f06c15d77ea1ca5b5b9eadb2d0);
         
     
-            var circle_8283e952e2047b1b7c8701d11fd68714 = L.circle(
+            var circle_c0c640d143f71d5234632c58f50decaa = L.circle(
                 [34.76397, 135.620741],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_6bb7d97de163ac03dc4003883d880241);
+            ).addTo(feature_group_351cb1f06c15d77ea1ca5b5b9eadb2d0);
         
     
-            var feature_group_d8baf6c7ca0489ae788d1f7bcd1a688d = L.featureGroup(
+            var feature_group_153c96c734fcbcf592b3cf9e0a795e84 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_fe0511f3e69de1ea7151e123932f494b = L.circle(
+            var circle_44380155699986c358ec24e0be0822ed = L.circle(
                 [34.747501, 135.611219],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d8baf6c7ca0489ae788d1f7bcd1a688d);
+            ).addTo(feature_group_153c96c734fcbcf592b3cf9e0a795e84);
         
     
-            var circle_71a5a7463aae1f61fa0db29d4448be0d = L.circle(
+            var circle_5b73e44c7d465800e16e72fb68f65e84 = L.circle(
                 [34.78456, 135.63094],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d8baf6c7ca0489ae788d1f7bcd1a688d);
+            ).addTo(feature_group_153c96c734fcbcf592b3cf9e0a795e84);
         
     
-            var circle_7017fe9f9aa2ef9d212b7657f518a3a1 = L.circle(
+            var circle_9aaeda3ba64c2f2d12bdfb656719f349 = L.circle(
                 [34.755505, 135.65335],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d8baf6c7ca0489ae788d1f7bcd1a688d);
+            ).addTo(feature_group_153c96c734fcbcf592b3cf9e0a795e84);
         
     
-            var circle_c57aa8c9cb8b019bdfc3c7036051fbed = L.circle(
+            var circle_96e8e39cd0906c6216bdec86b46a936d = L.circle(
                 [34.76397, 135.620741],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d8baf6c7ca0489ae788d1f7bcd1a688d);
+            ).addTo(feature_group_153c96c734fcbcf592b3cf9e0a795e84);
         
     
-            var feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8 = L.featureGroup(
+            var feature_group_a023113ef5e5161469e1ac8450f637d5 = L.featureGroup(
                 {
 }
             );
         
     
-            var poly_line_c62a38f877da7765ef58f8f3f0965c71 = L.polyline(
+            var poly_line_6e8d49d1f063f44159bb24b920a5ba1d = L.polyline(
                 [[34.74783, 135.61195], [34.74815, 135.61248], [34.74842, 135.61277], [34.74874, 135.61309], [34.7492, 135.61348], [34.75044, 135.61455], [34.75164, 135.61553], [34.75325, 135.61681], [34.75339, 135.61695], [34.7535, 135.61706], [34.75395, 135.61743], [34.75423, 135.61762], [34.75433, 135.61769], [34.75451, 135.61778], [34.75481, 135.61789], [34.75523, 135.61796], [34.75571, 135.61799], [34.7561, 135.61797], [34.75619, 135.61797], [34.75675, 135.61793], [34.75701, 135.61791], [34.75735, 135.61789], [34.75809, 135.61789], [34.75825, 135.61792], [34.75873, 135.61807], [34.75967, 135.61841], [34.7613, 135.61902], [34.76185, 135.61924], [34.76248, 135.6195], [34.76267, 135.6196], [34.76295, 135.61977], [34.76322, 135.61999], [34.76331, 135.62006]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_b5d751cb59dc9e54f4be2a115e37e20a = L.polyline(
+            var poly_line_41058218f69da501a7f65712174680f2 = L.polyline(
                 [[34.78394, 135.63083], [34.7837, 135.63078], [34.78334, 135.63069], [34.78275, 135.63046], [34.78194, 135.63013], [34.7817, 135.63], [34.78133, 135.62981], [34.77958, 135.62881], [34.77634, 135.62689], [34.77458, 135.62586], [34.7742, 135.62566], [34.77392, 135.62554], [34.7735, 135.62544], [34.77318, 135.6254], [34.77306, 135.6254], [34.77287, 135.62538], [34.77275, 135.62537], [34.77259, 135.62537], [34.77251, 135.62536], [34.77207, 135.62535], [34.76981, 135.62529], [34.76905, 135.62523], [34.76882, 135.62518], [34.76843, 135.62506], [34.76815, 135.62493], [34.76783, 135.62474], [34.76756, 135.62455], [34.76723, 135.62427], [34.76635, 135.62337], [34.76522, 135.62218], [34.76519, 135.62213], [34.76461, 135.62145]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_6e68d5ae95b47e92e1d8644da0509cdf = L.polyline(
+            var poly_line_d6a31b92e7102a4633f0c8148b95d004 = L.polyline(
                 [[34.81561, 135.64823], [34.81556, 135.64818], [34.81535, 135.6479], [34.81514, 135.64757], [34.8149, 135.64706], [34.81468, 135.64643], [34.81455, 135.64599], [34.81448, 135.64565], [34.81442, 135.64504], [34.8144, 135.64429], [34.81441, 135.64367], [34.8144, 135.64356], [34.81438, 135.64313], [34.81433, 135.64273], [34.81427, 135.64247], [34.81418, 135.64218], [34.814, 135.64166], [34.81388, 135.64142], [34.81373, 135.6412], [34.81357, 135.64099], [34.81317, 135.64059], [34.81266, 135.6402], [34.81221, 135.63988]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_cf9bbd1eaf9cc9258a0ed00a168d0fa4 = L.polyline(
+            var poly_line_f07d901af6796efe08bc9aa2257482b5 = L.polyline(
                 [[34.79742, 135.62998], [34.7971, 135.62987], [34.79652, 135.62974], [34.7958, 135.62963], [34.79477, 135.62956], [34.79443, 135.62957], [34.79412, 135.62958], [34.79374, 135.62964], [34.79343, 135.62973], [34.79312, 135.62983], [34.79252, 135.63009], [34.79044, 135.63111], [34.79004, 135.63127], [34.78958, 135.63142], [34.78956, 135.63142], [34.7891, 135.63151], [34.78861, 135.63156], [34.78819, 135.63155], [34.7875, 135.63145], [34.78639, 135.63127], [34.78518, 135.63105]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_010321b64881308ed2143557ca24db8e = L.polyline(
+            var poly_line_c0a95d936984bb1917de54027e3dbd33 = L.polyline(
                 [[34.73599, 135.56606], [34.73639, 135.56665], [34.73674, 135.56725], [34.73685, 135.56746], [34.73714, 135.56813], [34.73727, 135.56846], [34.73735, 135.56871], [34.73738, 135.56879], [34.73749, 135.56912], [34.73762, 135.56972], [34.73772, 135.57054], [34.73775, 135.57124], [34.73775, 135.57165], [34.73775, 135.57259], [34.73769, 135.57365], [34.73759, 135.57452], [34.73758, 135.57455], [34.73758, 135.57465], [34.73756, 135.57474], [34.73754, 135.57493]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_ce0ad361b7c5df64ee7afc6a675677fb = L.polyline(
+            var poly_line_63e1c8c1ad94ffac9881448669dca8ec = L.polyline(
                 [[34.81104, 135.63911], [34.80995, 135.63847], [34.8098, 135.63838], [34.80895, 135.6379], [34.80843, 135.63763], [34.80792, 135.6374], [34.80593, 135.63661], [34.80556, 135.63645], [34.80475, 135.63611], [34.80442, 135.63593], [34.80392, 135.6356], [34.80281, 135.63469], [34.80237, 135.63432], [34.80034, 135.63234], [34.7993, 135.63131], [34.79902, 135.63105], [34.79879, 135.63086], [34.7981, 135.63036]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_a990af491d7982759a8e4b3147da57ba = L.polyline(
+            var poly_line_a6d1d8edf4bda0597353aa6ca21963a3 = L.polyline(
                 [[34.74033, 135.59218], [34.7407, 135.59309], [34.74098, 135.59391], [34.74122, 135.59463], [34.74185, 135.59667], [34.7422, 135.59779], [34.74235, 135.59841], [34.74248, 135.59912], [34.74254, 135.59965], [34.7426, 135.60088], [34.74266, 135.6014], [34.74273, 135.60179]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_d7d900ecec6d4ad6822a9af78e230aa5 = L.polyline(
+            var poly_line_b347bc6078823847a43e2d3a092aaabd = L.polyline(
                 [[34.73825, 135.58395], [34.73826, 135.58405], [34.73844, 135.58545], [34.73848, 135.58571], [34.73855, 135.58622], [34.73886, 135.58846], [34.73897, 135.58901], [34.73904, 135.58929], [34.73915, 135.58969], [34.73923, 135.58991], [34.73953, 135.5906]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_d9d5d3f99a27542da77cf6847b48c44a = L.polyline(
+            var poly_line_817cd82c287f2e11d874c9be5907a54c = L.polyline(
                 [[34.7432, 135.60338], [34.74344, 135.6038], [34.74378, 135.60444], [34.74452, 135.60563], [34.74565, 135.60743], [34.74618, 135.60833], [34.74648, 135.60887], [34.74717, 135.61049]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_6f2c21d0ac7d421108d7bcb59be32ddc = L.polyline(
+            var poly_line_2c25eb2371f5332740fc3015502a6602 = L.polyline(
                 [[34.73714, 135.57685], [34.73713, 135.57779], [34.73717, 135.57824], [34.7372, 135.57852], [34.73728, 135.57899], [34.73737, 135.57937], [34.7375, 135.57994], [34.73795, 135.58205]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_ddc2c306ef244044eab182a4c0437ac1 = L.polyline(
+            var poly_line_3473a40f049080ddb0d0f7c975c3623e = L.polyline(
                 [[34.74273, 135.60179], [34.74282, 135.60218], [34.7429, 135.60249], [34.74302, 135.60292], [34.7432, 135.60338]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_5c34dab2aeb8ad274f5205eb875bcdfa = L.polyline(
+            var poly_line_6c3fc1301b875048885883eed39efa3f = L.polyline(
                 [[34.76331, 135.62006], [34.7635, 135.62024], [34.76409, 135.62085], [34.76451, 135.62134], [34.76461, 135.62145]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_e4f33d34179a83b7997b497fb973c1bc = L.polyline(
+            var poly_line_6bfe68341d83ad3968de3815053f2bb3 = L.polyline(
                 [[34.74717, 135.61049], [34.7472, 135.61055], [34.74783, 135.61195]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_6c0a4edbbb094eb8da1cdfdb9921e5dd = L.polyline(
+            var poly_line_fc028dfaaa9fe866a0a5e84ac6c10e8f = L.polyline(
                 [[34.73953, 135.5906], [34.73976, 135.59109], [34.74033, 135.59218]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_faefd9451ae4741178903e4ac33b3bb4 = L.polyline(
+            var poly_line_634c04d0acc6ef4bc84dfb0cd8d34553 = L.polyline(
                 [[34.78518, 135.63105], [34.78394, 135.63083]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_b11ab18dbfed7a75dce1931c1048cb79 = L.polyline(
+            var poly_line_9665c82a02ffaa41f56e263cb7ffdba7 = L.polyline(
                 [[34.81221, 135.63988], [34.81104, 135.63911]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_d0ac568335c2ff471b3b6667091808ff = L.polyline(
+            var poly_line_b0513c46eba48a01e64a6af597bac9db = L.polyline(
                 [[34.7981, 135.63036], [34.79742, 135.62998]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_bfa68a9e1cd52bcdbabee49508ea06f6 = L.polyline(
+            var poly_line_2fbfaac44e576db2fa3f1677e3f0b8b4 = L.polyline(
                 [[34.73754, 135.57493], [34.73714, 135.57685]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var poly_line_c760cf13f173f74907eb5cfe6e755e0f = L.polyline(
+            var poly_line_f9239019f130aae67f032fd23be60cda = L.polyline(
                 [[34.73795, 135.58205], [34.73825, 135.58395]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var marker_5b2543e686669c9b39ed504ebe426a4b = L.marker(
+            var marker_fbe7b3eabfe24f89d9f98a30a82741ab = L.marker(
                 [34.76331, 135.62006],
                 {
   "zIndexOffset": 1000,
 }
-            ).addTo(feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8);
+            ).addTo(feature_group_a023113ef5e5161469e1ac8450f637d5);
         
     
-            var div_icon_d6795fefa1409d5717e69df425429fa4 = L.divIcon({
+            var div_icon_59b60883841054dc779e040114288089 = L.divIcon({
   "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"0\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(7.1px, -16.5px);\n                font-size: 14px; font-weight: bold; color: #787858; --dm-label: #81815e;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eKeihan Main Line\u003c/div\u003e\n        ",
   "iconSize": [0, 0],
   "iconAnchor": [0, 0],
@@ -2354,117 +3477,117 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
 });
         
     
-                marker_5b2543e686669c9b39ed504ebe426a4b.setIcon(div_icon_d6795fefa1409d5717e69df425429fa4);
+                marker_fbe7b3eabfe24f89d9f98a30a82741ab.setIcon(div_icon_59b60883841054dc779e040114288089);
             
     
-            feature_group_ffa8a68f3bbe5aa2a11c688358eb25e8.addTo(map_9e31a0d066d96c22ddf85ac0dc934965);
+            feature_group_a023113ef5e5161469e1ac8450f637d5.addTo(map_286c5ab0aa89a5677be6567d8dd348d9);
         
     
-            var feature_group_78f23cb9c73e22ce2d183109d03c2817 = L.featureGroup(
+            var feature_group_10c4aed16c91a7d2a4d3f486f28a84e6 = L.featureGroup(
                 {
 }
             );
         
     
-            var poly_line_6cbef96c12ea8167b3e54674b5bc3203 = L.polyline(
+            var poly_line_9e5465db6a2c503e9c757a2ffdf1949f = L.polyline(
                 [[34.69875, 135.59848], [34.69874, 135.59852], [34.69872, 135.59872], [34.69868, 135.59914], [34.69867, 135.59966], [34.69868, 135.59992], [34.6987, 135.60022], [34.69882, 135.60079], [34.69893, 135.60112], [34.69909, 135.6015], [34.70008, 135.60343], [34.70072, 135.6047], [34.70095, 135.60515], [34.70097, 135.60518], [34.70116, 135.60556], [34.7013, 135.60582], [34.7016, 135.60642], [34.70354, 135.61013], [34.7038, 135.61062], [34.70389, 135.61077], [34.7046, 135.61223], [34.70481, 135.6127], [34.70496, 135.61307], [34.70509, 135.61344], [34.70518, 135.61371], [34.7053, 135.61408], [34.70539, 135.61442], [34.70548, 135.61473], [34.70556, 135.61502], [34.70565, 135.61533], [34.70592, 135.61644], [34.70606, 135.61714], [34.70606, 135.61721], [34.70613, 135.61781], [34.70619, 135.61856], [34.70619, 135.61865], [34.7062, 135.61876], [34.70623, 135.61933], [34.70623, 135.61938], [34.70625, 135.61998], [34.70626, 135.62049]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_4af69864fc023373c7a4c3ad2de277ab = L.polyline(
+            var poly_line_dd08e82ffa0ed0529d77b88f63c0fbed = L.polyline(
                 [[34.70631, 135.62238], [34.70633, 135.62371], [34.70639, 135.62434], [34.70651, 135.62481], [34.70668, 135.62539], [34.70677, 135.62568], [34.70702, 135.6264], [34.70756, 135.62794], [34.70766, 135.62821], [34.70813, 135.62961], [34.70864, 135.63107], [34.70898, 135.63207], [34.70903, 135.63224], [34.70904, 135.63228], [34.70916, 135.63258], [34.70922, 135.63275], [34.70937, 135.63313], [34.70964, 135.63362], [34.70986, 135.63391], [34.71013, 135.63416], [34.71057, 135.6345], [34.7108, 135.63467], [34.71108, 135.63483], [34.71119, 135.63489], [34.71138, 135.63498], [34.71163, 135.63507], [34.71199, 135.63517], [34.71255, 135.63533], [34.71284, 135.63541], [34.71317, 135.63551], [34.71358, 135.63563], [34.71546, 135.63616], [34.71564, 135.63622], [34.71595, 135.63631], [34.71688, 135.63657], [34.71711, 135.63664], [34.71789, 135.63686], [34.71795, 135.63688]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_18a9ce5590319d279410bac16016437a = L.polyline(
+            var poly_line_da7d44164c99f5a1e0e511bd35b2f4c1 = L.polyline(
                 [[34.74534, 135.64487], [34.74526, 135.64478], [34.74485, 135.6444], [34.74433, 135.64393], [34.74413, 135.64378], [34.74393, 135.64365], [34.7437, 135.64352], [34.74353, 135.64345], [34.74242, 135.64305], [34.74224, 135.64298], [34.74211, 135.64294], [34.74154, 135.64274], [34.74092, 135.64252], [34.7408, 135.64247], [34.74039, 135.64233], [34.7401, 135.64223], [34.73985, 135.64213], [34.73914, 135.64189], [34.73854, 135.64169], [34.73844, 135.64165], [34.73736, 135.64129], [34.73634, 135.64096], [34.73583, 135.64075], [34.73567, 135.64069], [34.73511, 135.64036], [34.73461, 135.64001], [34.73434, 135.63983], [34.73398, 135.63965], [34.73376, 135.63957], [34.73327, 135.63943], [34.73299, 135.63937], [34.73274, 135.63932], [34.73236, 135.63931], [34.73187, 135.63929], [34.73117, 135.63927]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_156be6cb51e083c217e35d5ae1b64716 = L.polyline(
+            var poly_line_a66280e6f0d054cf162ec7d8b1df678d = L.polyline(
                 [[34.71896, 135.63717], [34.71902, 135.63718], [34.71954, 135.63732], [34.71971, 135.63737], [34.72076, 135.63765], [34.72113, 135.63775], [34.72114, 135.63777], [34.72122, 135.63777], [34.72169, 135.63791], [34.72234, 135.63809], [34.72248, 135.63813], [34.72276, 135.6382], [34.72277, 135.63821], [34.72296, 135.63826], [34.72312, 135.63831], [34.7233, 135.63835], [34.72374, 135.63847], [34.72386, 135.63851], [34.72394, 135.63853], [34.7243, 135.63864], [34.72469, 135.63874], [34.72486, 135.6388], [34.72491, 135.6388], [34.72492, 135.63882], [34.72567, 135.63901], [34.7257, 135.63902], [34.72587, 135.63906], [34.72592, 135.63908], [34.7265, 135.63918], [34.72695, 135.63926], [34.72745, 135.63928], [34.72793, 135.63927], [34.72808, 135.63925], [34.72891, 135.63923], [34.72963, 135.63922]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_48ac8256b8c4cc5d75efe38dee107fbc = L.polyline(
+            var poly_line_a5ceae3d8444d831eefe3c0443e631ea = L.polyline(
                 [[34.80094, 135.69791], [34.7997, 135.69771], [34.79954, 135.69769], [34.79891, 135.69761], [34.79709, 135.6974], [34.79401, 135.69704], [34.79249, 135.69687], [34.79134, 135.69671], [34.79074, 135.69661], [34.79033, 135.69652], [34.79011, 135.69643], [34.78972, 135.69625], [34.78935, 135.69606], [34.7889, 135.69576], [34.78731, 135.69464], [34.78532, 135.69328], [34.78512, 135.69314], [34.7848, 135.69293], [34.78458, 135.69279], [34.78415, 135.69251], [34.78169, 135.69085], [34.78142, 135.69067], [34.77969, 135.68948], [34.77918, 135.68908], [34.77883, 135.68878], [34.7785, 135.68843], [34.77823, 135.68808], [34.77792, 135.68767], [34.77774, 135.68739], [34.7776, 135.68713], [34.77668, 135.68502]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_cc18f463946a2e1fe595501015b0d41a = L.polyline(
+            var poly_line_1cd47c241d1d525a1c8b277ab5044eba = L.polyline(
                 [[34.76708, 135.66281], [34.76675, 135.66208], [34.76657, 135.66173], [34.76639, 135.66148], [34.76624, 135.66128], [34.76596, 135.66094], [34.76587, 135.66084], [34.76525, 135.6601], [34.76459, 135.65936], [34.76399, 135.65869], [34.76225, 135.65669], [34.761, 135.6552], [34.76081, 135.655], [34.76002, 135.6541], [34.75966, 135.65373], [34.75947, 135.65358], [34.75922, 135.65345], [34.759, 135.65338], [34.75874, 135.65333], [34.75857, 135.65332], [34.7583, 135.65332], [34.75753, 135.6533], [34.75677, 135.65331], [34.75674, 135.65331], [34.75592, 135.65337], [34.75583, 135.65337]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_e5984aa7a194de6cf3cdaae8c92071d4 = L.polyline(
+            var poly_line_7b1ef24c35f08ed360262543a9bdc1dd = L.polyline(
                 [[34.75518, 135.65333], [34.75507, 135.65333], [34.75486, 135.65331], [34.75441, 135.65322], [34.7541, 135.65312], [34.75377, 135.65297], [34.75352, 135.65283], [34.75325, 135.65264], [34.75313, 135.65249], [34.75269, 135.65204], [34.75157, 135.65096], [34.75131, 135.65071], [34.75051, 135.64993], [34.75043, 135.64986], [34.75021, 135.64964], [34.74936, 135.64881], [34.74916, 135.64861], [34.74912, 135.64858], [34.74912, 135.64857], [34.7471, 135.64657], [34.7465, 135.64598], [34.74647, 135.64596], [34.74608, 135.64557], [34.74595, 135.64544]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_6a24ed173cfe42e596bcd6217173dca0 = L.polyline(
+            var poly_line_5d477d75bb3f074ff5f4a519ad66ea9a = L.polyline(
                 [[34.77635, 135.68428], [34.77503, 135.68122], [34.7749, 135.68092], [34.77482, 135.68072], [34.77357, 135.67791], [34.77339, 135.67751], [34.77308, 135.6768], [34.77219, 135.67473], [34.77174, 135.67371], [34.77093, 135.67181], [34.77089, 135.67169], [34.76909, 135.66751], [34.76765, 135.66414], [34.76762, 135.66408]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_0e56493718bb5b2645ac951a1a0fb948 = L.polyline(
+            var poly_line_8fbafe761e0a304db332bd31a6ab2cc6 = L.polyline(
                 [[34.70631, 135.62238], [34.7063, 135.62218], [34.70626, 135.62049]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_58b2074f406f83f8351abfa203e497b3 = L.polyline(
+            var poly_line_dedd7cec32a190064cc67d7445e94e03 = L.polyline(
                 [[34.75583, 135.65337], [34.75518, 135.65333]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_1c95b9c4061f8423f6fa5a9e6527ee37 = L.polyline(
+            var poly_line_f040c8af5e71c6b553cad9455a5b9595 = L.polyline(
                 [[34.71795, 135.63688], [34.71896, 135.63717]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_2526c6da7377d28e5dc6f194411c6ee4 = L.polyline(
+            var poly_line_959b24790477b285a49151fc5206b7a9 = L.polyline(
                 [[34.76762, 135.66408], [34.76708, 135.66281]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_9cfc265dff1ff8e1a4e6b48ff43369a4 = L.polyline(
+            var poly_line_4cafbe4a447452244d24198b7eab5590 = L.polyline(
                 [[34.72963, 135.63922], [34.73117, 135.63927]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_7fa976fe8a3b849c57c82216378c0cd3 = L.polyline(
+            var poly_line_6a68ece4d4a55c76f61eaeed1ce032fd = L.polyline(
                 [[34.77668, 135.68502], [34.77635, 135.68428]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var poly_line_dbb5d8eb00d9697436040248e8f98c02 = L.polyline(
+            var poly_line_e095f4ef4356fe97472adf37bb451886 = L.polyline(
                 [[34.74595, 135.64544], [34.74534, 135.64487]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var marker_c15ab60c56c7c3d98cdd0e5e6d25affc = L.marker(
+            var marker_72a659c6b41063dce555bce81f40e347 = L.marker(
                 [34.69875, 135.59848],
                 {
   "zIndexOffset": 1000,
 }
-            ).addTo(feature_group_78f23cb9c73e22ce2d183109d03c2817);
+            ).addTo(feature_group_10c4aed16c91a7d2a4d3f486f28a84e6);
         
     
-            var div_icon_15669aa3d78a0447991f8d4b6b5ac450 = L.divIcon({
+            var div_icon_6e94ab88067006efa650a4a88fd99144 = L.divIcon({
   "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"1\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(-88.9px, -3.1px);\n                font-size: 14px; font-weight: bold; color: #C000A8; --dm-label: #e400c7;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eJR Gakkentoshi Line\u003c/div\u003e\n        ",
   "iconSize": [0, 0],
   "iconAnchor": [0, 0],
@@ -2472,25 +3595,25 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
 });
         
     
-                marker_c15ab60c56c7c3d98cdd0e5e6d25affc.setIcon(div_icon_15669aa3d78a0447991f8d4b6b5ac450);
+                marker_72a659c6b41063dce555bce81f40e347.setIcon(div_icon_6e94ab88067006efa650a4a88fd99144);
             
     
-            feature_group_78f23cb9c73e22ce2d183109d03c2817.addTo(map_9e31a0d066d96c22ddf85ac0dc934965);
+            feature_group_10c4aed16c91a7d2a4d3f486f28a84e6.addTo(map_286c5ab0aa89a5677be6567d8dd348d9);
         
     
-            var feature_group_ebe513ed2a524ca6339652b41b8bba08 = L.featureGroup(
+            var feature_group_42fe615a97959c8695173db7809054a7 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_marker_1e1c673c3fd3749789612e66978b9522 = L.circleMarker(
+            var circle_marker_8a0bef11f7c03c9f3a2417f74caf2ecc = L.circleMarker(
                 [34.747501, 135.611219],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_ebe513ed2a524ca6339652b41b8bba08);
+            ).addTo(feature_group_42fe615a97959c8695173db7809054a7);
         
     
-            circle_marker_1e1c673c3fd3749789612e66978b9522.bindTooltip(
+            circle_marker_8a0bef11f7c03c9f3a2417f74caf2ecc.bindTooltip(
                 `<div>
                      <b>Kayashima</b>
                  </div>`,
@@ -2500,13 +3623,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_6f77a4bf3204242ca29f9562b521a795 = L.circleMarker(
+            var circle_marker_c5b3da77e35eed3bd70861077f5b7ff3 = L.circleMarker(
                 [34.78456, 135.63094],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_ebe513ed2a524ca6339652b41b8bba08);
+            ).addTo(feature_group_42fe615a97959c8695173db7809054a7);
         
     
-            circle_marker_6f77a4bf3204242ca29f9562b521a795.bindTooltip(
+            circle_marker_c5b3da77e35eed3bd70861077f5b7ff3.bindTooltip(
                 `<div>
                      <b>Korien</b>
                  </div>`,
@@ -2516,13 +3639,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_4da7dc63a088589ec568bf87f4595a3f = L.circleMarker(
+            var circle_marker_cb03d91236b3c8867fa721ac5aa73254 = L.circleMarker(
                 [34.755505, 135.65335],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_ebe513ed2a524ca6339652b41b8bba08);
+            ).addTo(feature_group_42fe615a97959c8695173db7809054a7);
         
     
-            circle_marker_4da7dc63a088589ec568bf87f4595a3f.bindTooltip(
+            circle_marker_cb03d91236b3c8867fa721ac5aa73254.bindTooltip(
                 `<div>
                      <b>Neyagawakoen</b>
                  </div>`,
@@ -2532,13 +3655,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_d13880fb5d5a0e773a3817fac3e4a9ce = L.circleMarker(
+            var circle_marker_bc79c2d16e4469fd42663a3f4f31d525 = L.circleMarker(
                 [34.76397, 135.620741],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_ebe513ed2a524ca6339652b41b8bba08);
+            ).addTo(feature_group_42fe615a97959c8695173db7809054a7);
         
     
-            circle_marker_d13880fb5d5a0e773a3817fac3e4a9ce.bindTooltip(
+            circle_marker_bc79c2d16e4469fd42663a3f4f31d525.bindTooltip(
                 `<div>
                      <b>Neyagawashi</b>
                  </div>`,
@@ -2548,16 +3671,16 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            feature_group_ebe513ed2a524ca6339652b41b8bba08.addTo(map_9e31a0d066d96c22ddf85ac0dc934965);
+            feature_group_42fe615a97959c8695173db7809054a7.addTo(map_286c5ab0aa89a5677be6567d8dd348d9);
         
     
-            var feature_group_0d7a36217e6e44e5581d0aa8edc1f065 = L.featureGroup(
+            var feature_group_16906f1f37f552d540f3766409296ca3 = L.featureGroup(
                 {
 }
             );
         
     
-            var fast_marker_cluster_cffa587e406eea60183aa6a69a364271 = (function(){
+            var fast_marker_cluster_422cb37f8286d91a699ce2043020a609 = (function(){
                 var callback = 
         (function () {
             var CATEGORIES = ["\u7406\u5bb9\u6240", "\u7f8e\u5bb9\u6240", "\u30af\u30ea\u30fc\u30cb\u30f3\u30b0\u6240"];
@@ -2608,41 +3731,41 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
                     marker.addTo(cluster);
                 }
 
-                cluster.addTo(feature_group_0d7a36217e6e44e5581d0aa8edc1f065);
+                cluster.addTo(feature_group_16906f1f37f552d540f3766409296ca3);
                 return cluster;
             })();
         
     
-            fast_marker_cluster_cffa587e406eea60183aa6a69a364271.addTo(feature_group_0d7a36217e6e44e5581d0aa8edc1f065);
+            fast_marker_cluster_422cb37f8286d91a699ce2043020a609.addTo(feature_group_16906f1f37f552d540f3766409296ca3);
         
     
-            feature_group_0d7a36217e6e44e5581d0aa8edc1f065.addTo(map_9e31a0d066d96c22ddf85ac0dc934965);
+            feature_group_16906f1f37f552d540f3766409296ca3.addTo(map_286c5ab0aa89a5677be6567d8dd348d9);
         
     
-            var layer_control_6f92c72862923a641eee9930bb8b5845_layers = {
+            var layer_control_e1dc8e7be02e3e7f982a963fa37689da_layers = {
                 base_layers : {
-                    "Business" : tile_layer_bf8e2f478db38f58cd441062c5beb927,
-                    "Travel" : open_basemap_71aa79cb7db0a621a1389e49cb024409,
+                    "Business" : tile_layer_8d9b1b1a0d83b910ac202555866cc274,
+                    "Travel" : open_basemap_1c3c946e1ae0f592d76b1594f73277f4,
                 },
                 overlays :  {
-                    "Commercial Density (Within Station Proximity)" : heat_map_11ce654ce23285e493ea0603e70262e2,
-                    "Commercial Density (All Neyagawa Businesses)" : heat_map_7f2e158cd1dd1c0bd8a8149f7a089cf2,
-                    "Concentric Ring 1: 0-0.1 mi" : feature_group_5367dc3bdf26df70cc6eb07c6c39495e,
-                    "Concentric Ring 2: 0.1-0.2 mi" : feature_group_b1e1fad6cd3a6bdbc06db55841e08b2b,
-                    "Concentric Ring 3: 0.2-0.3 mi" : feature_group_6bb7d97de163ac03dc4003883d880241,
-                    "Concentric Ring 4: 0.3-0.6 mi" : feature_group_d8baf6c7ca0489ae788d1f7bcd1a688d,
-                    "\u003cb\u003eBusinesses: Personal services (443)\u003c/b\u003e" : feature_group_0d7a36217e6e44e5581d0aa8edc1f065,
+                    "Commercial Density (Within Station Proximity)" : heat_map_17137646d7c674ed687b9887ec762ed9,
+                    "Commercial Density (All Neyagawa Businesses)" : heat_map_afa3137462c717b88449eab37ca10b56,
+                    "Concentric Ring 1: 0-0.1 mi" : feature_group_32864aaaee0af4a0db2739190db38899,
+                    "Concentric Ring 2: 0.1-0.2 mi" : feature_group_8df952c098dc575e2e18c62de89435eb,
+                    "Concentric Ring 3: 0.2-0.3 mi" : feature_group_351cb1f06c15d77ea1ca5b5b9eadb2d0,
+                    "Concentric Ring 4: 0.3-0.6 mi" : feature_group_153c96c734fcbcf592b3cf9e0a795e84,
+                    "\u003cb\u003eBusinesses: Personal services (443)\u003c/b\u003e" : feature_group_16906f1f37f552d540f3766409296ca3,
                 },
             };
-            let layer_control_6f92c72862923a641eee9930bb8b5845 = L.control.layers(
-                layer_control_6f92c72862923a641eee9930bb8b5845_layers.base_layers,
-                layer_control_6f92c72862923a641eee9930bb8b5845_layers.overlays,
+            let layer_control_e1dc8e7be02e3e7f982a963fa37689da = L.control.layers(
+                layer_control_e1dc8e7be02e3e7f982a963fa37689da_layers.base_layers,
+                layer_control_e1dc8e7be02e3e7f982a963fa37689da_layers.overlays,
                 {
   "position": "topleft",
   "collapsed": true,
   "autoZIndex": true,
 }
-            ).addTo(map_9e31a0d066d96c22ddf85ac0dc934965);
+            ).addTo(map_286c5ab0aa89a5677be6567d8dd348d9);
 
         
 </script>
