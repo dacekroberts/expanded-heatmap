@@ -251,4 +251,12 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/480416234": "'公園(ゲートボール場)'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/5642846221": "'第二回卒業生記念'",
+}

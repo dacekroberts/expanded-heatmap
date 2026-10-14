@@ -212,4 +212,19 @@ PLACE_REVIEWED = {
     "Musée Sabatier d'Espeyran": "a public museum run by the metropolis (tourism=gallery, wikidata); its official name is the hôtel particulier it occupies; tags read 2026-10-13",
     "Rue de l'École de Pharmacie": "a public street named for a building or institution on it, not a business (pedestrian class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "node/2131164709": "'Association des Projets de Bienfaisance Islamique en France'",
+    "way/76169444": "'Église évangélique de Pentecôte'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/532679205": "'Maison diocésaine Villa Maguelone'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/13087054901": "'Observatoire'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/9354168315": "'Vieille porte'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/1205422498": "'Lez': the river Lez a second time; way/146376980 (Le Lez) is the same river with the article",
+}

@@ -88,4 +88,69 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Rua Sâmia Carla": "a residential street; 'cafe' is a surname in its other name; tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A station row that is no working passenger station (reader's drop; owner, 2026-10-13)
+    "way/727761853": "'FTL - Pátio Aracapé'",
+    "way/446935983": "'Estação de Monguba'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "node/6416376621": "'Igreja Adventista do 7° dia'",
+    "way/543806720": "'Igreja Adventista do 7° dia'",
+    "node/4496129029": "'Igreja Adventista do Sétimo Dia Movimento de Reforma'",
+    "way/1123925274": "'Igreja dos Santos dos Últimos Dias'",
+    "node/4476080648": "'Igreja Batista Independente'",
+    "node/4495031627": "'Igreja Presbiteriana Renovada'",
+    "node/6387149526": "'Igreja Batista de Sétimo dia'",
+    "way/588818682": "'Igreja do Evangelho Pleno'",
+    "way/436927651": "'Igreja de Cristo no Brasil'",
+    "way/358213535": "'Igreja de Deus no Brasil'",
+    "way/377731871": "'Igreja Bola de Neve'",
+    "way/715650244": "'Igreja Verbo da Vida'",
+    "way/626527275": "'Sara Nossa Terra'",
+    "way/549606836": "'Videira'",
+    "node/6852345795": "'Igreja da Videira'",
+    "way/762392031": "'Racionalismo Cristão'",
+    "node/6777943032": "'Missão Evangélica Pentecostal do Brasil'",
+    "way/1108285128": "'Missão Evangélica Pentacostial do Brasil'",
+    "node/5258136927": "'Assembleia De Deus Templo Central'",
+    "node/11077009782": "'Assembleia de Deus Templo Central'",
+    "node/10169822782": "'Assembléia de Deus Templo Central'",
+    "node/4464954390": "'Assembléia de Deus Templo Central'",
+    "node/4493490220": "'Assembléia de Deus Templo Central'",
+    "way/658749872": "'Assembléia de Deus Templo Central'",
+    "node/10600099403": "'Assembéia de Deus Templo Central'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/11435681134": "'Centro de Umbanda'",
+    "way/683454161": "'Congregação pentecosteal'",
+    "way/243918639": "'Altar'",
+    "node/4464369963": "'Estátuas'",
+    "node/4238442170": "'Cruzeiro'",
+    "way/1264357030": "'Campo de pouso'",
+    "way/1408797230": "'Pista skate'",
+    "way/719536291": "'Society'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "node/4495743938": "'Mitra Arquidiocesana de Fortaleza'",
+    "way/553291804": "'Centro Pastoral PIO XII'",
+    # An exhibit or object kept on another's entry or article (reader's drop; owner, 2026-10-13)
+    "way/563470715": "'Trator'",
+    "node/6393748959": "'Vagão de Carga'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/6411508241": "'Placa de inauguração da praça Bosque dos Ferroviaros'",
+    "relation/9089271": "'Area de Convivencia - Bloco 804'",
+    "way/552219993": "'Area de Convivencia - Engenharia Civil'",
+    "relation/9089245": "'Area de Convivencia - Engenharia Eletrica'",
+    "node/13189039371": "'MUDANDO REFLORESTAR'",
+    "way/686480774": "'Praça da paróquia'",
+    "way/721488428": "'Praça na Parangaba'",
+    "way/719519028": "'Praça no Demócrito Rocha'",
+    # Unsure in the read, dropped by the estate ruling, a facility of an estate named for a block or run by the estate itself (owner, 2026-10-13)
+    "way/1288617799": "'Parque Jardim Alvorada'",
+    "way/1288617518": "'Área verde do Jardim Alvorada'",
+    "way/723568022": "'Praça II - Jathaí'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/14039871939": "'Torre da Vida': the same tower as way/1543028408 (Monumento Torre da Vida), 0 m apart",
+    "way/499578851": "'Praça do João XXIII': the same square as way/720109743 (Praca Joao XXIII), 0 m apart",
+    "node/9776212032": "'Igreja Deus é Amor | Paupina (Anexo)': the same hall as way/1097099286 (Deus e Amor Paupina), 44 m apart",
+}
