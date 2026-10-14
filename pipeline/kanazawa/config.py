@@ -283,4 +283,24 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "県庁駐車場前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/1536515963": "'イベント広場'",
+    "way/1536515951": "'南広場'",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/1536515962": "'青空広場'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/2144056697": "'泉が丘おあしす広場': same park as way/298242764 泉が丘オアシス広場, 8 m away, kana spelling differs only",
+    "node/2144059157": "'高尾第３児童公園': same park as way/388842987 高尾第三児童公園, 11 m away, numeral form differs only",
+    "node/2144055896": "'尾山町小公園': same spot as way/876156452 尾山小公園 (0 m); one object, two rows; the city import's spelling may be the right one, so the caller may prefer to drop the way instead",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name.
+PLACE_KEPT = {
+    "node/2146147848": "'ひがし茶屋街', the Higashi Chaya district (tourism=attraction, no Wikidata tag); found only as a junction name before (owner, 2026-10-13)",
+    "node/10792965205": "'近江町市場', Omicho Market (amenity=marketplace, no Wikidata tag) (owner, 2026-10-13)",
+    "node/6201257217": "'鼓門', the Tsuzumi-mon gate of Kanazawa Station (tourism=attraction, no Wikidata tag) (owner, 2026-10-13)",
+}

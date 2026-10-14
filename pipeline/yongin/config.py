@@ -134,4 +134,41 @@ PLACE_REVIEWED = {
     "현대아파트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
     "흥덕이마트사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/9482998435": "'기흥': second row of one interchange: node/5909960761 기흥 (Korail) is 71 m away under the same name; one row is enough, either may stay",
+    "node/13798001801": "'Everland': a bare node about 250 m from way/357422240 에버랜드 리조트 (tourism=theme_park, wikidata): the same resort a second time, in English only",
+    "node/9794297971": "'왕산리 지석묘': the same dolmen as way/1436358372 용인왕산리지석묘 (leisure=park), 11 m away; either row may be the one kept",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/471691655": "'2단지놀이터'",
+    "way/904021385": "'래미안로스트밸리'",
+    "way/904021389": "'래미안머쉬룸쉘터'",
+    "way/968361433": "'래미안쉼터'",
+    "way/904021382": "'래미안이스트파크 놀이공원'",
+    "way/470123538": "'현대아이파크 놀이터'",
+    "way/733446332": "'현대홈타운 공원'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/4691753606": "'단지 조각상'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/469116739": "'롤러장'",
+    "way/474014871": "'생태공원'",
+    "way/468927442": "'생태학습장'",
+    "way/469265257": "'잔디광장'",
+    "way/1187795605": "'조각광장'",
+    "way/825154285": "'분수광장'",
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "way/1106333819": "'청덕성당(2023년 8월 예정)'",
+    # Closed, not built or gone (reader's drop; owner, 2026-10-13)
+    "node/13202156336": "'한국불교 태고종 보배사'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/1280789266": "'예수그리스도후기성도교회'",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name.
+PLACE_KEPT = {
+    "node/8895910517": "'호암미술관', the Ho-Am Art Museum (tourism=museum, no Wikidata tag) (owner, 2026-10-13)",
+    "way/456148873": "'백남준아트센터', the Nam June Paik Art Center (tourism=museum, no Wikidata tag) (owner, 2026-10-13)",
+}

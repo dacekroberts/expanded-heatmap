@@ -206,4 +206,27 @@ PLACE_REVIEWED = {
     "Magasin-CNAC": "a public contemporary art centre (tourism=museum, Wikipedia); 'Magasin' is its name, a former warehouse; tags read 2026-10-13",
     "Rue de l'Ancienne Brasserie": "a public street named for a building or institution on it, not a business (unclassified class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/2789187972": "'Ancre découverte à l'emplacement de l'ancien Port de Gières'",
+    "node/13872353101": "'Vestiges de la cimenterie'",
+    "way/307654356": "'Station basse'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/13397926130": "'déversoir'",
+    "way/1233835483": "'Roseraie'",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "way/1049543036": "'Schneider Electric'",
+    "way/591815322": "'Château de la Baume'",
+    # A home, or a private person's or family's own name (names withheld) (reader's drop; owner, 2026-10-13)
+    "node/13890994424": "name withheld",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/10015781530": "'La tourelle de l'hôtel rabot': an information board 16 m from node/1968301345 Tourelle de la Maison Rabot, which carries the same wikidata",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/43661595": "'Église Adventiste du Septième Jour'",
+    "way/35141933": "'Église évangélique assemblée de Dieu'",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/220148832": "'Parvis Central'",
+}
