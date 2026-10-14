@@ -1,3 +1,39 @@
+### 2026-10-13 - The last rule commits merged (1a0fedba), VELTINS-Arena kept, the 32 maps rendered once; the browser checks not run (branch search-final)
+
+- **search-rules-8 merged at 1a0fedba** (the landmark patch a4718e28 and
+  the owner's brand and shop rulings), merge commit 1675cbf2, no conflict.
+  `place_index.py --selftest`: 339 of 339.
+- **Rebuilt: the five cities the commits change here**, matching the rules
+  lane's measure (part9_landmarks.md): Berlin +3 (Humboldt-Universität's
+  site relation, the Amerika-Gedenkbibliothek, the Marheineke Markthalle),
+  Bergen +1 (Fløibanen's lower station), Stockholm +1 (Åhléns), Zurich two
+  other names (Riesbach "Kreis 8", Wiedikon "Kreis 3"). The extract-run
+  cities the report lists under this branch were left alone.
+- **Gelsenkirchen's VELTINS-Arena (way/147192563) kept by id** (owner,
+  2026-10-13: brand ruling; no sight tag, so the rule passes over it): a
+  landmark row beside its tram stop, Gelsenkirchen 1,829 to 1,830.
+- **Twin round:** no id new to a `place_ids.json` bears a dropped object's
+  name.
+- **The 32 maps rendered once**, one gated job at a time, CRLF taken out,
+  committed as 965217fe. `drift_check.py --render-only` on the 32: zero
+  drift (the churn it leaves checked out again). `check_place_index_drift`
+  on the 32: every index is what the code builds.
+- **Checks.** `check_place_search.py`: none of the 32 named; 17 live cities
+  fail rule A (stale index URL: the integration commit rebuilt their indexes
+  without a render). `check_render_current.py`: the 19 live searched maps
+  stale against the merged search script; none of the 32.
+  `check_place_scope.py`: OK, 51 searched cities; rule D of
+  search-scope-check passes all 32, Bremen and the five other cities with
+  their reasons. `check_provenance.py`: all recorded. `check_all.py`: 69 of
+  73, the other failures being the 17 live maps, the 19 stale renders,
+  `check_place_unopened.py` (225, unchanged) and `check_macro_facts.py`
+  (Mexico City (Regional) 407,628 against 427,121 in the shared data). None
+  is this group's.
+- **Not run: `check_map_search.js` and `check_map_attribution.js`.** Both
+  load the maps in a browser, and the maps load Leaflet, jQuery and
+  Bootstrap from public CDNs; this session runs with no network. They need a
+  session that may use the network, or a local copy of those libraries.
+
 ### 2026-10-13 - The owner's two calls on the screen: Bremen's reach reason recorded, the 13 denomination-like rows dropped (branch search-final)
 
 - **The owner, in chat (relayed by Cleanup): "(1) Bremen: record a reach
