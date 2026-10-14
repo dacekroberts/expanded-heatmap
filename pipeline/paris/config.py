@@ -378,7 +378,6 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Hôtel de Castries": "a listed hôtel particulier that houses a ministry (historic=manor, building=government, Wikipedia), in on an article of its own against its office tag (the owner's ruling of 2026-10-13); tags read 2026-10-13",
     "Hôtel de Matignon": "the Prime Minister's offices and residence, a hôtel particulier (historic=manor, office=government, Wikipedia), in on an article of its own against its office tag (the owner's ruling of 2026-10-13); tags read 2026-10-13",
-    "BIU Santé Pharmacie": "a university library, the pharmacy faculty's",
     "Faculté de Pharmacie de Paris": "a university faculty",
     "Cabinet d'Histoire (Hôtel de Magny)": "a museum pavilion of the Jardin des Plantes in a hôtel particulier",
     "Conservatoire Hector Berlioz": "a municipal conservatory; its other name is the hôtel particulier it occupies",
