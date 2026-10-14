@@ -293,9 +293,5 @@ PLACE_DROPPED = {
     "way/356779834": "a glitched name, street word glued to the name",
     # Held rows settled by the existing rules in three lanes and the owner's
     # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
-    "node/11459460481": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
-    "node/11459460482": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
-    "node/11459460483": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
-    "node/11459460484": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
     "way/343528767": "A row that is only the site's own name is dropped when minor ways alone carry it (owner 2026-10-13, fifteen answers 9); held rows settled 2026-10-13",
 }
