@@ -178,5 +178,20 @@
  {"label": "a language below the floor is measured", "old": "        return _langs(t, local) | {a for a in also if t.get(f\"name:{a}\")}", "new": "        return _langs(t, local)"},
  {"label": "a library needs an article of its own", "old": "    (\"amenity\", \"library\", \"library\"),      # rule 39, libraries", "new": ""},
  {"label": "the lookup is asked of the listed kinds only", "old": "        if tags.get(key) == value:\n            return kind", "new": "        if tags.get(key):\n            return kind"},
- {"label": "an article under the object's own name is its own for public art", "old": "        if needs and verdict == \"not\" and _titled_by_name({**seen_tags, \"name\": names[0]}):", "new": "        if False:"}
+ {"label": "an article under the object's own name is its own for public art", "old": "        if needs and verdict == \"not\" and _titled_by_name({**seen_tags, \"name\": names[0]}):", "new": "        if False:"},
+ {"label": "a place of worship named only by its denomination is dropped", "old": "if t.get(\"amenity\") == \"place_of_worship\" and names and worship_only(names[0], local):", "new": "if False:"},
+ {"label": "the worship rule reads places of worship only", "old": "if t.get(\"amenity\") == \"place_of_worship\" and names and worship_only(names[0], local):", "new": "if names and worship_only(names[0], local):"},
+ {"label": "an article of its own keeps a place of worship", "old": "            elif own:\n                kept.append(\"worship_type\")", "new": "            elif False:\n                kept.append(\"worship_type\")"},
+ {"label": "an id in PLACE_KEPT keeps a place of worship", "old": "            if oid in kept_ids:\n                kept.append(\"by_id\")\n            elif own:", "new": "            if False:\n                kept.append(\"by_id\")\n            elif own:"},
+ {"label": "a second hall-type word keeps a place of worship", "old": "re.compile(f\"{rest}*(?:{pattern(halls)}{rest}*)?\"), joiners)", "new": "re.compile(f\"{rest}*(?:{pattern(halls)}{rest}*)*\"), joiners)"},
+ {"label": "a denomination is read as its mappers spell it", "old": "WORSHIP_RESPELL = {\"en\": (", "new": "WORSHIP_RESPELL = {\"xx\": ("},
+ {"label": "a hall type is a listed phrase", "old": "\"centre\", \"center\", \"cathedral\", \"parish\", \"citadel\", \"kingdom hall\", \"gospel hall\",", "new": "\"centre\", \"center\", \"cathedral\", \"parish\", \"citadel\", \"gospel hall\","},
+ {"label": "a word of a phrase is not listed alone", "old": "\"jehovahs witnesses\", \"salvation army\", \"church of god\", \"church of christ\",", "new": "\"jehovahs witnesses\", \"salvation army\", \"church of god\", \"church of christ\", \"christ\","},
+ {"label": "the worship lists are per language", "old": "    codes = tuple(dict.fromkeys((\"en\", *local)))\n    if codes not in _WORSHIP_PATTERNS:", "new": "    codes = tuple(WORSHIP_HALLS)\n    if codes not in _WORSHIP_PATTERNS:"},
+ {"label": "a station closed to the public is no row", "old": "STATION_PRIVATE_ACCESS = (\"private\",)", "new": "STATION_PRIVATE_ACCESS = ()"},
+ {"label": "access=no on a station is not read", "old": "STATION_PRIVATE_ACCESS = (\"private\",)", "new": "STATION_PRIVATE_ACCESS = (\"private\", \"no\")"},
+ {"label": "a map station is never dropped as closed to the public", "old": "if not closed and t.get(\"access\") in STATION_PRIVATE_ACCESS and fold_name(names[0]) not in drawn:", "new": "if not closed and t.get(\"access\") in STATION_PRIVATE_ACCESS:"},
+ {"label": "two map stations sharing an entry stay two rows", "old": "    if len(names) < 2:\n        return [members]", "new": "    if True:\n        return [members]"},
+ {"label": "a complex splits only at names the map draws", "old": "    names = sorted({fold_name(r[3]) for r in members} & set(drawn))", "new": "    names = sorted({fold_name(r[3]) for r in members})"},
+ {"label": "a row under no map name joins the nearest map station", "old": "            parts[near].append(r)", "new": "            parts[names[0]].append(r)"}
 ]

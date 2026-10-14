@@ -74,7 +74,7 @@ read from Overpass. Seattle: 59 ways of six streets.
 | A stop-area relation beside its station's own row | `public_transport=stop_area` on a relation groups a station's parts; it stays where no other station row is within `OUTLINE_BESIDE_M`, bears its name within `OUTLINE_SAME_M` or shares its Wikidata entry (Washington's two streetcar stops) | merges | 2026-10-13 (second batch) |
 | A bus station that lists a rail mode | `amenity=bus_station` with no railway tag, whatever `light_rail=` or `train=` says | tagged pass | 2026-10-13 (second batch) |
 | A station's outline beside the station's own row | a way or relation tagged `public_transport=station` with no railway tag, within `OUTLINE_BESIDE_M` of a rail-tagged station row or `OUTLINE_SAME_M` of one of its name; one further off stays | merges | 2026-10-13 (second batch) |
-| A second row for one transfer complex | `COMPLEX_MERGE_M`: station rows sharing one Wikidata entry are one row, the others' names its aliases | merges | 2026-10-13 (second batch) |
+| A second row for one transfer complex | `COMPLEX_MERGE_M`: station rows sharing one Wikidata entry are one row, the others' names its aliases; never two names the map draws (`complex_parts`, the fifth pass) | merges | 2026-10-13 (second batch) |
 | A station with an end date written with stray characters ("=1959") | `_past` sets the characters aside; `station_closed` | tagged pass | 2026-10-13 (second batch) |
 
 ## Neighborhoods (places)
@@ -166,6 +166,28 @@ Danish, Norwegian or Swedish city (`LEAK_SET_ASIDE`); a glued street name passes
 word in a suffix language; a second language below the 90% floor is declared in
 `config.PLACE_LANGUAGES_ALSO`; `config.PLACE_STATION_STRIP` takes an ending off station names.
 Swedish "-gård" stays a street ending on every way (candidate 37, pulled by the owner).
+
+## The fifth pass (2026-10-13, branch search-rules-5)
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A place of worship named only by its denomination or hall type ("Kingdom Hall of Jehovah's Witnesses", "Methodist Church", "Gurdwara") | `worship_only`: every word a listed denomination word or phrase, a hall-type word or a joiner (`WORSHIP_DENOMINATIONS`, `WORSHIP_HALLS`, `WORSHIP_JOINERS`, per language; `WORSHIP_RESPELL` for a denomination as its mappers spell it), with one hall-type word at most; amenity=place_of_worship only, the leading name only | `landmark_drop` | landmark |
+| A station closed to the public | `STATION_PRIVATE_ACCESS`: access=private on a station object (Washington's Capitol subway, a railway's training stations in Tokyo); access=no is not read, since a public halt in Marseille carries it | tagged pass | station |
+
+**Kept against those rules:** a place of worship whose name holds any other word (a saint, a
+place, a street, an ordinal: "First Baptist Church"; a second hall-type word: "Temple Baptist
+Church"), one with a Wikipedia article of its own, and one named by id in `config.PLACE_KEPT`;
+a station the map draws, whatever its access tag (the station guard).
+
+**Two stations of the map are never one row (a fault mended, not a class left out):** the
+transfer-complex merge (`COMPLEX_MERGE_M`) folded Boston's Boylston into Park Street, since
+OpenStreetMap gives both nodes one Wikidata entry. A complex whose rows bear two or more
+names the map draws is split at those names (`complex_parts`); a row under any other name
+joins the nearest. Distance is not the test.
+
+**Not mended:** Boston's Green Street station is indexed as "Green" because that is its
+`name` in OpenStreetMap (relation 20304842); no rule strips a street word from a station
+name, and a name is not corrected here.
 
 ## Considered and not built as rules
 

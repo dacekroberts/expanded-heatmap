@@ -1677,6 +1677,119 @@ def _unaccent(s):
 
 _BARE_FOLDED = {c: {_unaccent(w) for w in ws} for c, ws in BARE_TYPE_NAMES.items()
                 if c not in ("ja", "ko", "zh")}
+
+
+# A PLACE OF WORSHIP NAMED ONLY BY ITS DENOMINATION OR HALL TYPE (owner,
+# 2026-10-13: "1 shared rule"; the fifth pass). "Kingdom Hall of Jehovah's
+# Witnesses", "Methodist Church", "Gurdwara" describe and do not name: 77 such
+# rows were confirmed by hand in the 33 wave 1 cities
+# (data/_search_rollout/wave1_flag_check), 73 of which this reads. Asked of
+# amenity=place_of_worship landmarks only, of the leading name only, never of
+# a station, a place or a street. The name is bare when EVERY word of it is a
+# listed denomination word or phrase, a hall-type word or a joiner, in
+# English or a language of the city, and it holds a denomination and at most
+# one hall-type word, or one hall-type word and nothing else. Any other word
+# keeps the row: a saint, a place, a street, an ordinal ("First Baptist
+# Church" is how that church is known), a word such as "Christ" or "Trinity"
+# outside a listed phrase, and a second hall-type word ("Temple Baptist
+# Church", London's "Temple Church"). Kept against it: an object with a
+# Wikipedia article of its own, and an id in config.PLACE_KEPT.
+# Words are listed as _worship_fold folds a name: lower case, Latin accents
+# and apostrophes set aside, punctuation read as a space. A phrase is listed
+# where one of its words would be too wide alone ("kingdom", "christ",
+# "army", "universal").
+# Measured on the 19 live cities, 2026-10-13: 563 rows leave (Sao Paulo 232,
+# London 106, Seattle 37, Tokyo 37, Chicago 34); the report is
+# data/_place_rules_2026-10-13/batch5/changed_rows.md. A language other than
+# English holds only words read under a name of this class in a cache (a live
+# city's, or wave 1's hand-confirmed rows); measure a new word on every built
+# city of its language first.
+WORSHIP_DENOMINATIONS = {
+    "en": ("methodist", "baptist", "catholic", "anglican", "lutheran", "presbyterian", "pentecostal",
+           "evangelical", "orthodox", "apostolic", "adventist", "episcopal", "congregational",
+           "congregationalist", "unitarian", "mormon", "quaker", "quakers", "friends", "mennonite",
+           "nazarene", "wesleyan", "reformed", "reform", "protestant", "christian", "buddhist", "hindu",
+           "sikh", "muslim", "islamic", "jewish", "scientology", "spiritualist", "united", "uniting",
+           "roman", "rc", "lds", "greek", "russian", "romanian", "ukrainian", "polish", "serbian",
+           "jehovahs witnesses", "salvation army", "church of god", "church of christ",
+           "church of jesus christ of latter day saints", "latter day saints", "new apostolic",
+           "seventh day adventist", "seventh day adventists", "christian science",
+           "church of scientology", "society of friends", "church of england", "church of scotland",
+           "church of the nazarene", "united church of canada", "united church of christ"),
+    "fr": ("catholiques", "romaines", "protestante", "evangelique", "baptiste", "antoiniste",
+           "temoins de jehovah", "adventiste du 7e jour",
+           "eglise de jesus christ des saints des derniers jours"),
+    "es": ("evangelica", "testigos de jehova", "iglesia de jesucristo de los santos de los ultimos dias",
+           "iglesia universal del reino de dios"),
+    "pt": ("batista", "metodista", "adventista", "presbiteriana", "evangelica", "pentecostal",
+           "testemunhas de jeova", "igreja de jesus cristo dos santos dos ultimos dias",
+           "congregacao crista no brasil", "congregacao crista do brasil", "universal do reino de deus",
+           "assembleia de deus", "adventista do setimo dia", "mundial do poder de deus",
+           "evangelho quadrangular", "internacional da graca de deus", "deus e amor"),
+    "cs": ("svedkove jehovovi",),
+    "ko": ("여호와의 증인", "여호와의증인", "하나님의 교회", "하나님의교회", "세계복음선교협회"),
+    "ja": ("エホバの証人", "創価学会", "天理教", "幸福の科学"),
+}
+WORSHIP_HALLS = {
+    "en": ("church", "chapel", "temple", "mosque", "masjid", "synagogue", "gurdwara", "mandir", "hall",
+           "centre", "center", "cathedral", "parish", "citadel", "kingdom hall", "gospel hall",
+           "meeting house", "meetinghouse"),
+    "fr": ("eglise", "temple", "synagogue", "paroisses", "salle du royaume"),
+    "es": ("iglesia", "sinagoga", "salon del reino", "casa de oracion"),
+    "pt": ("igreja", "salao do reino"),
+    "cs": ("sal kralovstvi",),
+    "ko": ("왕국회관",),
+    "ja": ("王国会館",),
+}
+WORSHIP_JOINERS = {"en": ("of", "the", "and", "for"), "fr": ("de", "des", "du", "la", "le", "les", "et"),
+                   "es": ("de", "del", "la", "el", "los", "las", "y"),
+                   "pt": ("de", "do", "da", "dos", "das", "e", "a", "o"), "ja": ("の",)}
+# A denomination spelt as its mappers spell it, read as its listed phrase
+# (wave 1: "Jehova's Witnesses", "Jehovahs Witness", "Jehovah's Wittnesses",
+# "Jehovah's Withesses", each on a Kingdom Hall).
+WORSHIP_RESPELL = {"en": ((re.compile(r"\bjehovah?s? wit{1,2}[nh]ess(?:es)?\b"), "jehovahs witnesses"),)}
+_WORSHIP_PATTERNS = {}
+
+
+def _worship_fold(name):
+    low = unicodedata.normalize("NFKC", name).lower()
+    if not _CJK_WORD.search(low):
+        low = _unaccent(low)
+    low = re.sub(r"['’ʼ`]", "", low)
+    return " ".join(re.sub(r"[^\w]+", " ", low, flags=re.UNICODE).replace("_", " ").split())
+
+
+def worship_only(name, local):
+    """True when `name` is only denomination words, hall-type words and
+    joiners of English or a local language (WORSHIP_DENOMINATIONS,
+    WORSHIP_HALLS): a denomination with one hall-type word at most, or one
+    hall-type word alone."""
+    codes = tuple(dict.fromkeys(("en", *local)))
+    if codes not in _WORSHIP_PATTERNS:
+        def words(table):
+            return {_worship_fold(w) for c in codes for w in table.get(c, ())}
+
+        def pattern(entries):
+            # A CJK or Hangul entry needs no space after it; a Latin one ends
+            # at a space or the name's end. Longest first, so a phrase is
+            # read whole before its words.
+            return "(?:" + "|".join(re.escape(w) + (r"\s*" if _CJK_WORD.search(w) else r"(?:\s+|$)")
+                                    for w in sorted(entries, key=lambda w: (-len(w), w))) + ")"
+        halls, joiners = words(WORSHIP_HALLS), words(WORSHIP_JOINERS)
+        rest = pattern(words(WORSHIP_DENOMINATIONS) | joiners)
+        _WORSHIP_PATTERNS[codes] = (
+            # Denominations and joiners around one hall-type word at most.
+            re.compile(f"{rest}*(?:{pattern(halls)}{rest}*)?"), joiners)
+    whole, joiners = _WORSHIP_PATTERNS[codes]
+    low = _worship_fold(name)
+    for c in codes:
+        for spelt, phrase in WORSHIP_RESPELL.get(c, ()):
+            low = spelt.sub(phrase, low)
+    if not low or all(w in joiners for w in low.split()):
+        return False
+    # Every parse of `whole` that holds no denomination is a hall-type word
+    # among joiners, which is bare too.
+    return whole.fullmatch(low) is not None
 # A numbered block of a housing estate, mapped as a place: Mexico City's
 # "Grupo 12", "Manzana 82" (batch 3, 2026-10-11). The whole name, places only.
 NUMBERED_BLOCK = {"es": re.compile(r"(grupo|manzana|edificio)\s+\w{1,4}", re.I),
@@ -2114,6 +2227,18 @@ def lifecycle(tags, retrieved, place=False):
 # disused, abandoned, razed or demolished prefix on railway or
 # public_transport, disused=yes or abandoned=yes (2 rows on the 19).
 STATION_CLOSED_PREFIXES = ("disused", "abandoned", "razed", "demolished")
+# A STATION CLOSED TO THE PUBLIC GETS NO ROW (owner, 2026-10-13: "3 shared
+# rule"; the fifth pass): access=private on a station object. Washington's
+# Capitol subway (Hart, Rayburn, Dirksen, Russell and two "U.S. Capitol": 6
+# objects in wave 1). On the 19 live cities it takes 2 rows, both in Tokyo:
+# 大田 and 志茂田, the practice stations of a railway's training centre
+# (usage=training). NARROWED from the ruling's "private or no": access=no is
+# NOT read. The one station row that carries it on the 19 is a public
+# national-rail halt (Marseille's Sainte-Marthe-en-Provence, access=no on its
+# building node); the four other objects so tagged, private or no, are bus
+# stations and depots that were no rows already. A station the map draws is
+# never dropped by this (the station guard). Re-measure before adding a value.
+STATION_PRIVATE_ACCESS = ("private",)
 
 
 def station_closed(tags, retrieved):
@@ -2409,7 +2534,8 @@ SHARED_REGISTER_MIN = 3
 # (NOT_RAIL's amenity) with no railway tag is no rail station whatever rail
 # mode it lists. On the 19: 5 stop areas, 91 outlines, 215 rows merged into
 # their complex (Tokyo 88, Seoul 45, Barcelona 34), 1 bus station. In wave 1:
-# 15, 6, 59 (New York 36) and 6.
+# 15, 6, 59 (New York 36) and 6. Two names the map draws are never merged
+# (complex_parts, the fifth pass).
 OUTLINE_BESIDE_M = 150
 OUTLINE_SAME_M = 400
 COMPLEX_MERGE_M = 600
@@ -2499,6 +2625,33 @@ def _station_core(name):
     key = fold_name(name)
     return next((key[:-len(end)] for end in map(fold_name, STATION_NAME_ENDS)
                  if key.endswith(end) and len(key) > len(end)), key)
+
+
+# TWO STATIONS OF THE MAP ARE NEVER ONE ROW (owner, 2026-10-13, the fifth
+# pass; a fault found in Boston, wave 1). Boylston's node carries Park
+# Street's Wikidata entry, so the complex merge folded Boylston, 350 m off,
+# into Park Street as an alias and Boylston had no row. A complex whose rows
+# bear two or more names the map draws (map_stations, folded) is split at
+# those names: each drawn name keeps a row, and a row under any other name
+# joins the nearest of them. With one drawn name or none the complex merges
+# as before. Distance is NOT the test: Barcelona's "Barcelona-Passeig de
+# Gràcia" is its metro station's own rail hall at 357 m, Boylston another
+# station at 350 m. On the 19 live cities it undoes 2 of the 210 merges:
+# London's Monument beside Bank (354 m) and Barcelona's Provença beside
+# Diagonal (191 m). Needs STATIONS_CSV on the machine, as the guard does.
+def complex_parts(members, drawn):
+    """`members` (station rows of one Wikidata entry, chained within
+    COMPLEX_MERGE_M) split into the groups that merge: one group, unless two
+    or more of their folded names are in `drawn`."""
+    names = sorted({fold_name(r[3]) for r in members} & set(drawn))
+    if len(names) < 2:
+        return [members]
+    parts = {n: [r for r in members if fold_name(r[3]) == n] for n in names}
+    for r in members:
+        if fold_name(r[3]) not in parts:
+            near = min(names, key=lambda n: (min(_dist_m((r[1], r[2]), (o[1], o[2])) for o in parts[n]), n))
+            parts[near].append(r)
+    return [parts[n] for n in names]
 
 
 def street_never(name):
@@ -3229,6 +3382,17 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             kept.append("bare_type")
         names = names[:1] + [n for n in names[1:] if not bare_type(n, local, rt)] if kept else \
             [n for n in names if not bare_type(n, local, rt)]
+        # NAMED ONLY BY ITS DENOMINATION OR HALL TYPE (worship_only; owner,
+        # 2026-10-13, the fifth pass). Kept by id, or on an article of its
+        # own, whatever the article's title: London's Friends Meeting House
+        # and its synagogues stand under articles named as they are.
+        if t.get("amenity") == "place_of_worship" and names and worship_only(names[0], local):
+            if oid in kept_ids:
+                kept.append("by_id")
+            elif own:
+                kept.append("worship_type")
+            else:
+                return "worship_type", names
         if _exhibit(t) or (t.get("historic") in EXHIBIT_HISTORIC and not own_item(t)) or (
                 t.get("historic") in RAIL_EXHIBITS and not (t.get("tourism") or _titled_by_name(t))):
             return "exhibit", names
@@ -3462,6 +3626,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             elif log is not None:
                 if stripped and landmark_drop(seen_tags, names, oid, own)[0] is None:
                     note(f"{person}_no_own_article", "drop", oid, names[0], stripped, seen_tags)
+                elif reason == "worship_type":
+                    note("worship_type", "drop", oid, names[0], "named only by its denomination or hall type", t)
                 elif verdict == "undecided" and reason in ("bare_type", "minor_historic"):
                     note("keep_undecided", "left out", oid, names[0], f"{reason}: {why}", t)
                 elif own and reason == "residential" and _home_signs(t, names, local) == ["access"]:
@@ -3581,6 +3747,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             if not closed and (t.get("passenger") == "no" or t.get("public_transport") == "no") \
                     and fold_name(names[0]) not in drawn:
                 closed = "passenger=no" if t.get("passenger") == "no" else "public_transport=no"
+            # CLOSED TO THE PUBLIC, NO STATION ROW (STATION_PRIVATE_ACCESS;
+            # owner, 2026-10-13, the fifth pass). A station the map draws
+            # stays (the guard).
+            if not closed and t.get("access") in STATION_PRIVATE_ACCESS and fold_name(names[0]) not in drawn:
+                closed = f"access={t['access']}"
             ride = station_ride(t)
             no_rail = not (t.get("railway") or t.get("station") or any(t.get(k) == "yes" for k in RAIL_MODES))
             skip = (("closed", closed) if closed else ("ride", ride) if ride
@@ -3953,7 +4124,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     for wd in sorted(by_item):
         items = [r for r in by_item[wd] if id(r) not in gone]
         for group in _clusters([(r[1], r[2]) for r in items], COMPLEX_MERGE_M):
-            merge([items[i] for i in group], "complex")
+            parts = complex_parts([items[i] for i in group], drawn)
+            for part in parts:
+                if len(part) > 1:
+                    merge(part, "complex")
+                if len(parts) > 1:
+                    note("complex_kept_apart", "kept", part[0][7], part[0][3],
+                         f"{wd} is shared with another station of the map", part[0][9])
     if gone:
         rows[:] = [r for r in rows if id(r) not in gone]
     # A SITE OR BOUNDARY RELATION THAT REPEATS ANOTHER ROW (the third list, 9).
@@ -4359,6 +4536,24 @@ def _selftest():
     node(47.6494, -122.31, name="Sanctuary", railway="halt")
     node(47.6496, -122.31, name="Parkland", railway="halt", network="Metro")
     node(47.6498, -122.31, name="Barn", railway="halt")
+    # --- The fifth pass (2026-10-13).
+    node(47.7300, -122.33, name="Kingdom Hall of Jehovah's Witnesses", amenity="place_of_worship")
+    node(47.7310, -122.33, name="Methodist Church", amenity="place_of_worship")
+    node(47.7320, -122.33, name="Gurdwara", amenity="place_of_worship")
+    node(47.7330, -122.33, name="First Baptist Church", amenity="place_of_worship")
+    node(47.7340, -122.33, name="St Agnes Catholic Church", amenity="place_of_worship")
+    node(47.7350, -122.33, name="Temple Baptist Church", amenity="place_of_worship")
+    node(47.7360, -122.33, name="Friends Meeting House", amenity="place_of_worship",
+         wikipedia="en:Friends Meeting House, Testville")
+    witnesses = node(47.7370, -122.33, name="Jehovah's Witnesses", amenity="place_of_worship")
+    node(47.7380, -122.33, name="Baptist Church", historic="building", wikidata="Q950")
+    node(47.6440, -122.31, name="Methodist Church", railway="halt", amenity="place_of_worship")
+    node(47.6430, -122.31, name="Senate Halt", railway="station", access="private")
+    node(47.6420, -122.31, name="Members Halt", railway="station", access="private")
+    node(47.6410, -122.31, name="Fenced Halt", railway="halt", access="no")
+    node(47.8960, -122.31, name="Park Row", railway="station", wikidata="Q960")
+    node(47.8962, -122.31, name="Park Row Concourse", railway="station", wikidata="Q960")
+    node(47.8990, -122.31, name="Boyle Square", railway="station", wikidata="Q960")
     colonia = next(ids)
     target[0].append({"type": "way", "id": colonia, "center": {"lat": 47.6575, "lon": -122.32},
                       "tags": {"name": "Colonia Real", "place": "neighbourhood", "landuse": "residential"}})
@@ -4421,13 +4616,14 @@ def _selftest():
 
     log = []
     index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log,
-                          map_stations=["Barn", "Works Halt"],
+                          map_stations=["Barn", "Works Halt", "Members Halt", "Park Row", "Boyle Square"],
                           articles={"Q920": ["enwiki"], "Q921": ["enwiki"], "Q922": [], "Q923": ["frwiki"],
                                     "Q924": None},
                           closed_for_works={f"node/{works}", f"node/{gone_id}"})
     worded, worded_report = build(els, city="Testville", retrieved="2026-10-10", local=("en",),
                       closed_for_works={f"node/{works}", f"node/{gone_id}"}, way_words=("place",),
-                      kept={f"node/{dam}", f"node/{green}", f"way/{colonia}"}, keep_interchanges=True,
+                      kept={f"node/{dam}", f"node/{green}", f"way/{colonia}", f"node/{witnesses}"},
+                      keep_interchanges=True,
                       keep_named_private=True,
                       station_strip=(" Tram",))
     worded_rows = {(KINDS[r[0]], r[3]) for r in worded["rows"]}
@@ -4658,6 +4854,46 @@ def _selftest():
         ("a station of the map under a bare type word stays", ("station", "Barn") in rows),
         ("an estate area kept by id stays", ("place", "Colonia Real") not in rows
          and ("place", "Colonia Real") in worded_rows),
+        # --- The fifth pass (2026-10-13).
+        ("a place of worship named by its hall type and denomination is no row",
+         ("landmark", "Kingdom Hall of Jehovah's Witnesses") not in rows),
+        ("a place of worship named by its denomination and one hall word is no row",
+         ("landmark", "Methodist Church") not in rows),
+        ("a place of worship named by one hall-type word is no row", ("landmark", "Gurdwara") not in rows),
+        ("an ordinal keeps a place of worship", ("landmark", "First Baptist Church") in rows),
+        ("a saint keeps a place of worship", ("landmark", "St Agnes Catholic Church") in rows),
+        ("a second hall-type word keeps a place of worship", ("landmark", "Temple Baptist Church") in rows),
+        ("a place of worship with an article of its own stays", ("landmark", "Friends Meeting House") in rows),
+        ("a place of worship kept by id stays", ("landmark", "Jehovah's Witnesses") not in rows
+         and ("landmark", "Jehovah's Witnesses") in worded_rows),
+        ("the worship rule reads places of worship only", ("landmark", "Baptist Church") in rows),
+        ("a station is never read by the worship rule", ("station", "Methodist Church") in rows),
+        ("worship_only: a denomination as its mappers spell it",
+         worship_only("Kingdom Hall of Jehovah's Wittnesses", ()) and worship_only("Jehovahs Witness", ())
+         and not worship_only("Jehovah Shalom Church", ())),
+        ("worship_only: a word outside a listed phrase keeps a name",
+         not worship_only("Christ Church", ()) and not worship_only("Temple Church", ())
+         and worship_only("Church of Christ", ()) and worship_only("The Salvation Army", ())),
+        ("worship_only: a city's languages are read, and no other",
+         worship_only("Salle du Royaume des Témoins de Jéhovah", ("fr",))
+         and not worship_only("Salle du Royaume des Témoins de Jéhovah", ("pt",))
+         and not worship_only("Église Saint-Paul", ("fr",)) and worship_only("Igreja Batista", ("pt",))
+         and worship_only("創価学会", ("ja",)) and worship_only("여호와의증인 왕국회관", ("ko",))
+         and not worship_only("순복음교회", ("ko",))),
+        ("a station closed to the public is no row", ("station", "Senate Halt") not in rows),
+        ("a station of the map tagged access=private stays (the station guard)", ("station", "Members Halt") in rows
+         and ("station", "Members Halt") not in worded_rows),
+        ("access=no on a station is not read", ("station", "Fenced Halt") in rows),
+        ("two stations of the map that share an entry are two rows", count[("station", "Park Row")] == 1
+         and count[("station", "Boyle Square")] == 1
+         and "Boyle Square" not in alias.get(("station", "Park Row"), "")),
+        ("a row under no map name joins the nearest map station of its complex",
+         ("station", "Park Row Concourse") not in rows
+         and "Park Row Concourse" in alias.get(("station", "Park Row"), "")
+         and "Park Row Concourse" not in alias.get(("station", "Boyle Square"), "")),
+        ("with no map station named, a complex is one row",
+         sum((k, n) in worded_rows for k, n in (("station", "Park Row"), ("station", "Park Row Concourse"),
+                                                ("station", "Boyle Square"))) == 1),
         # Lines reach the search box from the map, never from the index: no
         # kind holds one, so no index rule can drop a line by its name.
         ("the index holds no kind for a transit line", "line" not in KINDS and "route" not in KINDS),
