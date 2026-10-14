@@ -1,6 +1,6 @@
 {
   "index": "app/static/places/brussels.json",
-  "places": 4688,
+  "places": 4652,
   "data_retrieved": "2026-10-08",
   "languages": {
     "local": [
@@ -8,9 +8,9 @@
       "nl"
     ],
     "coverage": {
-      "en": 0.025,
+      "en": 0.023,
       "fr": 1.0,
-      "nl": 0.922
+      "nl": 0.926
     },
     "list_share": 0.5,
     "listed": [
