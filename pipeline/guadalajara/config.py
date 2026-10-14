@@ -221,6 +221,9 @@ GUADALAJARA_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
 PLACE_AREA = "(id:3605605820,3605606276,3605606517,3605606660)"
+# Why the index reaches more than 25 km past the map's stations: read by rule D of
+# scripts/check_place_scope.py once that rule lands. Re-measure with --reach if PLACE_AREA changes.
+PLACE_SCOPE_REACH_REASON = ("2026-10-13: the far corners of Zapopan and Tlajomulco are part of an area of four municipalities, 31 km past the nearest station (owner)")
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
@@ -337,6 +340,19 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1486776393": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1486759337": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1486772557": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Stock plaza names with no place in them (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1486759298": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Parks named only by a type word (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/283158316": "a park named only by a type word is dropped (the follow-up to ruling 19; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Same-named objects a drop above made a row (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/825218312": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it, under the same class and ruling (finding 53; owner 2026-10-13, the flag read's verdicts)",
@@ -1460,4 +1476,10 @@ PLACE_DROPPED = {
     "way/148901928": "a street name ending in a house number is an address, dropped by id (owner 2026-10-13, seven rulings no. 2); held rows settled 2026-10-13",
     "way/151679080": "a code beside a type word is dropped (CODED_TYPE; 14 answers no. 4, planning-code parks); held rows settled 2026-10-13",
     "way/1492272252": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); the same-named twin of way/1492272251, a row once that id was dropped; held rows settled 2026-10-13",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "relation/11634328": "'Palacio de Gobierno', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "node/4341257743": "'Museo Panteón de Belén', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }

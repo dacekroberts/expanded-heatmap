@@ -250,3 +250,10 @@ PLACE_DROPPED = {
     "way/632236534": "A wrong object's name is a glitch and goes by id (owner 2026-10-11); held rows settled 2026-10-13",
     "way/754072344": "Station corridors and tunnels are no streets (owner 2026-10-13, language calls 8: Riga's station tunnels); held rows settled 2026-10-13",
 }
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/1464178616": "'Mur des Réformateurs', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "node/3436729151": "'Patek Philippe Museum', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/87603849": "'Maison Tavel', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

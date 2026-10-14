@@ -153,7 +153,6 @@ PLACE_RULED_KEPT = {
     # Held rows kept by the existing rules in three lanes and the owner's
     # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
     # A home, family or person row is listed by id alone.
-    "node/3911158753": "'Most, nádraží', a drawn or network station is never dropped for its name (owner 2026-10-13, station guard)",
     "node/4223957714": "'Lounická kopec', a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
 }
 PLACE_REVIEWED = {}
@@ -181,4 +180,9 @@ PLACE_QUIET_STATIONS = {
                        "owner, 2026-10-13",
     "Záluží, čerpací stanice": "nearest index row 1,308 m, nearest indexed street line 2,707 m; "
                                "owner, 2026-10-13",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/50164668": "'Oblastní muzeum a galerie', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }

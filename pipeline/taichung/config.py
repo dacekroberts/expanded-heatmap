@@ -121,6 +121,9 @@ CITY_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
 PLACE_AREA = "(id:3602921154)"
+# Why the index reaches more than 25 km past the map's stations: read by rule D of
+# scripts/check_place_scope.py once that rule lands. Re-measure with --reach if PLACE_AREA changes.
+PLACE_SCOPE_REACH_REASON = ("2026-10-13: Taichung's own boundary runs east through Heping District to Nanhu Mountain, 78 km past the nearest station (owner)")
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("zh",)
@@ -179,6 +182,26 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/14111447402": "twin of a dropped row: bare type word (flag pass) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/14111447404": "twin of a dropped row: bare type word (flag pass) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/355264471": "twin of a dropped row: bare type word (flag pass) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/1529078483": "peak named only by a height: rule fault class (still applied by id) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/2503802481": "peak named only by a height: rule fault class (still applied by id) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/757871190": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1122944225": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "relation/20964791": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/12342946147": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/280168181": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/953990971": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/637358826": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/733819888": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Stock plaza names with no place in them (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/544377823": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "node/3222991417": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
@@ -677,4 +700,9 @@ PLACE_DROPPED = {
     "way/60444893": "motorway ramps and interchange labels are dropped (14 answers #2; street_never); held rows settled 2026-10-13",
     "way/60444894": "motorway ramps and interchange labels are dropped (14 answers #2; street_never); held rows settled 2026-10-13",
     "node/2571584094": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); the same-named twin of node/2571583892, a row once that id was dropped; held rows settled 2026-10-13",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/560332944": "'審計新村', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }

@@ -375,6 +375,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/6477346696": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Religious offices, associations and education halls tagged a place of worship (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "node/6478103985": "a religious office, association or education hall tagged a place of worship is dropped (sixteen rulings 1, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
@@ -501,4 +504,16 @@ PLACE_DROPPED = {
     "node/6478595004": "a religious office, education hall or residence tagged a place of worship, no article of its own (owner, 2026-10-13)",
     "node/8154773321": "a religious office, education hall or residence tagged a place of worship, no article of its own (owner, 2026-10-13)",
     "way/858485720": "duplicates of one object are one row (owner 2026-10-13, six answers no. 6; ROW_MERGE_M, NEAR_DUP_M); the same-named twin of way/858485719, a row once that id was dropped; held rows settled 2026-10-13",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "node/5603043145": "'関門橋', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/660855879": "'旦過市場', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/1043377596": "'TOTOミュージアム', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "node/7467253086": "'官営八幡製鐵所旧事務所', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/742371374": "'千仏鍾乳洞', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/566364371": "'響灘緑地（グリーンパーク）', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/1123882028": "'北九州市立小倉城庭園', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "node/2959854421": "'門司港レトロハイマート展望室', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }

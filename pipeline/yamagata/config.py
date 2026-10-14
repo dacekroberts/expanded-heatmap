@@ -316,6 +316,19 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/864044933": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # A deity's title alone, and halls named only for what they enshrine (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/6916014275": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/770789545": "hall named only for what it enshrines: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/866491798": "deity's title alone: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/368084323": "park named by category and number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/7626256229": "part of one temple: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/7626256250": "part of one temple: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     "way/106604427": "an organization's name standing in for the hall's own name (owner, 2026-10-13)",
     "way/967771539": "an organization's name standing in for the hall's own name (owner, 2026-10-13)",
     "node/8527320952": "a second node for one district name (owner, 2026-10-13)",
@@ -343,4 +356,11 @@ PLACE_DROPPED = {
 PLACE_QUIET_STATIONS = {
     "Omoshiroyama-Kogen": "nearest index row 2,146 m, nearest indexed street line 1,439 m; "
                           "owner, 2026-10-13",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "node/4662997790": "'蔵王ロープウェイ', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "node/6077829986": "'七日町御殿堰', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "node/2433847387": "'山形市野草園', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }

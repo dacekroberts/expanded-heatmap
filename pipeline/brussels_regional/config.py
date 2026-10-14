@@ -493,3 +493,8 @@ PLACE_DROPPED = {
     "way/33903762": "A code beside a path type on minor ways is dropped (owner 2026-10-13, German answers 3; third pass PATH_CODE); held rows settled 2026-10-13",
     "way/1227013799": "A code beside a path type on minor ways is dropped (owner 2026-10-13, German answers 3; third pass PATH_CODE); held rows settled 2026-10-13",
 }
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/1026048575": "'Les Halles de Schaerbeek', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

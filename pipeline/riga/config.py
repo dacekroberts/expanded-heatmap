@@ -315,3 +315,9 @@ PLACE_DROPPED = {
     "node/9101832640": "a numbered microdistrict whose mapper doubts the name (owner, 2026-10-13)",
     "node/9101832607": "a numbered microdistrict whose mapper doubts the name (owner, 2026-10-13)",
 }
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/638498822": "'Latvijas Okupācijas muzejs', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/627730712": "'Rīgas Motormuzejs', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

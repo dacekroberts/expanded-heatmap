@@ -500,3 +500,8 @@ PLACE_DROPPED = {
     "way/35577641": "a description standing in for a name is dropped by id (settled read call; wave 1 precedent); held rows settled 2026-10-13",
     "way/1364242067": "a description standing in for a name is dropped by id (settled read call; wave 1 precedent); held rows settled 2026-10-13",
 }
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/41530300": "'Feskekörka', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

@@ -134,6 +134,11 @@ PLACE_REVIEWED = {name: _JUNCTION for name in (
 # customers-only service roads, candidate 1 the play-park and plaza rows
 # (docs/decisions_drafts/search-final.md, "Rule candidates").
 PLACE_DROPPED = {
+    # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/504442482": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/498970617": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1172335015": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/470162156": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
@@ -217,4 +222,15 @@ PLACE_DROPPED = {
     "way/946752298": "an access ramp, named by a description",
     "way/946752302": "an access ramp, named by a description",
     "way/586284995": "an access ramp, named by a description",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/503210073": "'양림동 펭귄마을', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/469896846": "'국립광주박물관', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/471090813": "'전일빌딩245', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/485038971": "'광주공원', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/498970618": "'광주예술의전당', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/398110503": "'국립광주과학관', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/255636226": "'광주패밀리랜드', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }

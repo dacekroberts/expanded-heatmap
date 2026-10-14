@@ -290,6 +290,13 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/6940314211": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/749348757": "bare type-word park: bare type-word parks (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # A second row for one object within 300 m (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "relation/2705872": "duplicates of one object are one row: a place row on the landmark of its name (owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     "node/2988661746": "a ride inside an amusement park (owner, 2026-10-13)",
     "node/2988582415": "a ride inside an amusement park (owner, 2026-10-13)",
     "node/2988582414": "a ride inside an amusement park (owner, 2026-10-13)",

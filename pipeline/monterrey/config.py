@@ -315,6 +315,9 @@ PLACE_REVIEWED = {
 # the estate rule would drop them. The rows appear once PLACE_KEPT reaches
 # that rule (docs/decisions_drafts/search-final.md).
 PLACE_KEPT = {
+    "way/532336753": "'Museo del Acero Horno 3', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/115515939": "'Museo del Noreste (MUNE)', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "node/1304896220": "'Museo del Palacio', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
     "way/158750071": "'Pedregal La Silla', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
     "way/158890877": "'Lomas de Satélite', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
     "way/158890879": "'Villas de La Hacienda', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",

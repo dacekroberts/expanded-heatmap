@@ -698,3 +698,8 @@ PLACE_DROPPED = {
     "way/775774702": "a minor-way street named by a description or a bare type or way word is dropped (street_description; six answers #3); lanes named for their mode and generic sidewalk names are dropped (14 answers #3); held rows settled 2026-10-13",
     "way/1416604366": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); held rows settled 2026-10-13",
 }
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/130039228": "'Centrale Montemartini', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

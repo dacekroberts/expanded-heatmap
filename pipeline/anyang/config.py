@@ -162,6 +162,9 @@ _EXHIBIT = "a Railroad Museum exhibit whose article is its class's or kind's, no
 _MALL = "a corridor of an underground shopping mall, named for the mall"
 _NO_NAME = "a description standing in for a name"
 PLACE_DROPPED = {
+    # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1287595059": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Codes and numbers beside a type word (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/580706448": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
@@ -182,4 +185,9 @@ PLACE_DROPPED = {
         837760800, 837760801, 837760802, 837760805, 837760806, 837760808, 837760809, 837760810,
         837760812, 837760813, 837760814, 837760815, 837760816, 837760817, 837760818, 843067493,
         844174049, 844174050, 844174051)},
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/156206585": "'의왕조류생태과학관', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }

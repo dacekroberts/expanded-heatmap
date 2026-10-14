@@ -266,6 +266,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # A second row for one object within 300 m (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/7598544728": "duplicates of one object are one row: a place row on the landmark of its name (owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     "way/326495496": "an address number standing in for a name",
     "way/326495497": "an address number standing in for a name",
     "way/1246474482": "a motorway interchange label, not a street (owner, 2026-10-13)",

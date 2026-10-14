@@ -71,6 +71,9 @@ COLLAPSE_MAX_SPREAD_M = 400
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
 PLACE_AREA = "(id:3600421151)"
+# Why the index reaches more than 25 km past the map's stations: read by rule D of
+# scripts/check_place_scope.py once that rule lands. Re-measure with --reach if PLACE_AREA changes.
+PLACE_SCOPE_REACH_REASON = ("2026-10-13: the Federal District is the one unit there is, with no municipalities, and its far southeast is 59 km past the nearest station (owner)")
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("pt",)
@@ -116,6 +119,74 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/443826908": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/13905468336": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Parks and squares named only by a category and a number or a block code (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/487087050": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1443780673": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/766506455": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/257755976": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760955": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/555009120": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/443823818": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/443823812": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/4308196490": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/910531802": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/682715761": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760961": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1158342979": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/234502262": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1363753690": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/548641831": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/548641804": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/549813142": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/548641795": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/552423742": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/556621353": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "relation/9589171": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/663705681": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/684243949": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371557": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371547": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371535": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371534": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371520": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371509": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371503": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560371492": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1546571618": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760989": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560761001": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560761005": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/663708733": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560761008": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/663708709": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/663708702": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760948": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/554761487": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760980": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760978": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/561840625": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760975": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760969": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760965": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/560760951": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/554966104": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/752826484": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/689833716": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1351266707": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/766506454": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/13905468335": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/554093644": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/910532397": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Stock plaza names with no place in them (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/382495425": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/730841316": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/557389731": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Places of worship named only by a denomination, a body or a hall type (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/548613897": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",

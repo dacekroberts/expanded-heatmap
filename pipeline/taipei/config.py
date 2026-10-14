@@ -144,6 +144,9 @@ CITY_BBOX = {"lat_min": 24.60, "lat_max": 25.35, "lon_min": 121.25, "lon_max": 1
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
 PLACE_AREA = "(id:3601293250,3601527220)"
+# Why the index reaches more than 25 km past the map's stations: read by rule D of
+# scripts/check_place_scope.py once that rule lands. Re-measure with --reach if PLACE_AREA changes.
+PLACE_SCOPE_REACH_REASON = ("2026-10-13: New Taipei's east cape in Gongliao District is part of an area of two municipalities, 39 km past the nearest station (owner)")
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("zh",)
@@ -161,7 +164,6 @@ PLACE_RULED_KEPT = {
     "way/258410880": "'Mother of God', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
     "way/609748545": "'San Jose Gardens', a park tied to a housing complex only by its name stays (second batch question g); only an estate operator tag drops one (third list rule 3)",
     "node/12560885425": "'The Hope', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
-    "way/547156822": "'圖書館', a library needs an article of its own, asked of Wikidata (fourth pass, owner 2026-10-13); kept on an article of the object's own (keep beats drop, owner 2026-10-13 #1)",
     "relation/14045849": "'總圖書館', kept on an article of the object's own (keep beats drop, owner 2026-10-13 #1)",
     "node/13910151024": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
     "node/3469549088": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
@@ -201,6 +203,95 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1557518367": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/14090875202": "bare deity shrine: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/14090875301": "bare deity shrine: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/5090242218": "deity's title alone: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1031523816": "deity's title alone: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1470381555": "deity's title alone: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/13766747167": "deity's title alone: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1073097277": "deity's title alone: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/4996517576": "bare deity shrine: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/3037008405": "bare deity shrine: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/377243840": "part of one temple: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/844581938": "part of one temple: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/266250092": "part of one temple: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/588985660": "part of one temple: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1190803540": "part of one temple: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/556426478": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/183865342": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/183869414": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/461391425": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/183865341": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/369327859": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/291718439": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/570570370": "bare type-word park: bare type-word parks (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/625882211": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1226872265": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/780485783": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/669542740": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1545482750": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/9670443309": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1021598023": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/630887950": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/631732141": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Parks and squares named only by a category and a number or a block code (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1372611060": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/689503074": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/302356299": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/703266024": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/263590700": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/557380021": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/981499285": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/832076994": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/292695220": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1456620800": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/265561499": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/558258112": "a park or square named only by a category and a number is dropped (ruling 1; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/540064992": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/3656220549": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/230834598": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/340104576": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/445127788": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/445130025": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/4802569135": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/449379846": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/313973291": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/827758933": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # A deity's title alone, and halls named only for what they enshrine (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/2347362268": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/5517618175": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/280173393": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/7241244385": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/272808823": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/420672821": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/6861032305": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/971275678": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/5110491027": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1387417852": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/2111807697": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/6562642601": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/420672826": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/6622179953": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/420672828": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/6844106820": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/10628286054": "a deity's title alone or a hall named only for what it enshrines is dropped (ruling 3; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Stock plaza names with no place in them (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/541490930": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1008806026": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/366269952": "a stock plaza name with no place in it is dropped (ruling 5 and its follow-up; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Parks named only by a type word (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/232951684": "a park named only by a type word is dropped (the follow-up to ruling 19; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Same-named objects a drop above made a row (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/232979855": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it, under the same class and ruling (finding 53; owner 2026-10-13, the flag read's verdicts)",
