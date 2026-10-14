@@ -195,4 +195,17 @@ PLACE_REVIEWED = {
     "Rue de la Brasserie Montplaisir": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
     "Rue de la Clinique": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/741347915": "'Terril'",
+    "node/2521016462": "'Terril'",
+    "way/238965968": "'Salle paroissiale'",
+    # A home, or a private person's or family's own name (names withheld) (reader's drop; owner, 2026-10-13)
+    "way/64298431": "name withheld",
+    "node/8669771941": "name withheld",
+    # Closed, not built or gone (reader's drop; owner, 2026-10-13)
+    "way/795037394": "'Ligne 140A'",
+}

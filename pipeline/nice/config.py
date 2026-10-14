@@ -203,4 +203,39 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Rue de l'Hôtel des Postes": "a public street named for a building or institution on it, not a business (tertiary class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/6261860788": "'Grand Arénas (dir CADAM/St Isidore)': one tram stop as three rows 100 to 145 m apart, each with the mapper's direction note in the name; the stop needs one row",
+    "node/6261860785": "'Grand Arénas (dir aéroport)': as above",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/141316195": "'JW'",
+    "way/139138100": "'Calvary Chapel'",
+    "node/1327949579": "'Église Néo Apostolique'",
+    "way/144390480": "'Église adventiste du Septième Jour'",
+    "node/13376754372": "'Église de Scientologie'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/141276024": "'Évêché de Nice'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/1214617353": "'clocher de l'église'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/923675822": "'Cour de récréation'",
+    "way/923675828": "'Snack'",
+    # Unsure in the read, dropped by ruling 11, a private beach concession tagged only a beach (owner, 2026-10-13)
+    "way/487779952": "'Bambou Plage'",
+    "way/487779950": "'Cocoon Beach'",
+    "way/487779969": "'Beau Rivage'",
+    "way/487779961": "'Bella Nissa'",
+    "way/487779963": "'Blue Beach'",
+    "way/487779967": "'Galion Plage'",
+    "way/487779959": "'La Vela'",
+    "way/487779941": "'Les Canailles'",
+    "way/487779956": "'Li Rateta'",
+    "way/487779965": "'Lido Plage'",
+    "way/487779971": "'Opera Plage'",
+    "way/487779966": "'Ruhl Plage'",
+    "way/487779964": "'Sporting Plage'",
+    "relation/16442029": "'Plage Castel'",
+}

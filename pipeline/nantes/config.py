@@ -207,4 +207,53 @@ PLACE_REVIEWED = {
     "Impasse de l'Hôtel Dieu": "a public street named for a building or institution on it, not a business (pedestrian class; batch 2b precedent, _named_street); tags read 2026-10-13",
     "Rue de la Brasserie": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/1668802937": "'Blason de la Ville de Nantes'",
+    "node/3215235158": "'Blason de la Ville de Nantes'",
+    "node/3456696812": "'Blason de la Ville de Nantes'",
+    "node/4827209008": "'Blason de la Ville de Nantes'",
+    "node/4831316493": "'Blason de la Ville de Nantes'",
+    "node/4157692941": "'Blason de la ville de Nantes'",
+    "node/4188327277": "'Blason de la ville de Nantes'",
+    "node/4202691051": "'Blason de la ville de Nantes'",
+    "node/3524434451": "'Blason de la ville de Nantes'",
+    "node/3424769959": "'Niveau maximal de la crue de 1872'",
+    "node/4547027388": "'Niveau maximal de la crue de 1872'",
+    "node/4547028689": "'Niveau maximal de la crue de 1872'",
+    "node/5445380637": "'Niveau maximal de la crue de 1910'",
+    "node/13525821068": "name withheld",
+    "node/4875012189": "'Le cours Saint-André de 1762 à nos jours'",
+    "way/1120224034": "'Station Bottière Pin-Sec (Temporaire)'",
+    # A grave or plaque named for the person, under that person's article (ruling 14) (reader's drop; owner, 2026-10-13)
+    "node/3210489724": "'Charles Edouard La Jaille (Comte de)'",
+    "node/3267496205": "'Jean Alexis Morin'",
+    "node/4339110000": "'Louis Babin-Chevaye'",
+    "node/4337499527": "'Pierre Garnier'",
+    "node/4339110003": "'Thomas Dobrée fils'",
+    "node/4339110004": "'Thomas Dobrée père'",
+    "node/3266223169": "'Théodore Dubigeon'",
+    "node/4164140453": "'Plaque à Pascal Laporte'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/1246341162": "'City stade'",
+    "node/1571474031": "'Lavoir'",
+    "node/11587098616": "'banc'",
+    "way/1550347885": "'Orangerie'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "node/11273035383": "'Maison paroissiale'",
+    "node/11273035384": "'Salles paroissiales'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/83123325": "'Église Adventiste du 7ème Jour'",
+    "way/83941459": "'Église Néo Apostolique'",
+    # Unsure in the read, dropped by ruling 15, a moored houseboat tagged a historic ship (owner, 2026-10-13)
+    "way/84098271": "'Bateau Lavoir'",
+    "way/577602855": "'L'Alcyon'",
+    "way/496943490": "'Morgenster'",
+    "way/580263682": "'Océan'",
+    "way/577602831": "'Président Marchal'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/1204341725": "'Château de la Tour': the castle itself has a landmark row 22 m away (Château de La Tour, node/1571474013); the locality is the same building",
+}
