@@ -250,4 +250,51 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "鴨池サンハイツ前": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/kagoshima.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/305279356": "'創価学会鹿児島文化会館': a religious body, the city and a hall type (文化会館); no name of its own. Same class as the Soka Gakkai halls of Gifu, Amagasaki and Higashiyamato",
+    "way/1546001625": "'日本キリスト教団': the denomination alone as the whole name; the congregation's name sits in the branch tag, not in the name",
+    "node/6205504922": "'立正佼成会': a religious body alone as the whole name",
+    "way/1057559532": "'真如苑鹿児島支部': a religious body and \"Kagoshima branch\" (支部); no name of its own",
+    # Unsure rows a ruling drops: a branch temple's neighbourhood preaching halls named body, district and branch office (ruling 20) (owner, 2026-10-13)
+    "node/3277801558": "'西本願寺荒田出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277792494": "'西本願寺鴨池出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277839261": "'西本願寺鹿児島別院上町出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277878691": "'西本願寺鹿児島別院伊敷出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277923925": "'西本願寺鹿児島別院吉田出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277897516": "'西本願寺鹿児島別院吉野出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277851281": "'西本願寺鹿児島別院和岡出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277874448": "'西本願寺鹿児島別院城北出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277883361": "'西本願寺鹿児島別院城西出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277804932": "'西本願寺鹿児島別院宇宿出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277893913": "'西本願寺鹿児島別院小山田出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277910363": "'西本願寺鹿児島別院川上出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277914430": "'西本願寺鹿児島別院本名出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277896539": "'西本願寺鹿児島別院東俣出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277832338": "'西本願寺鹿児島別院武出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "way/1530982119": "'西本願寺鹿児島別院清南出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277889147": "'西本願寺鹿児島別院犬迫出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "way/1044602684": "'西本願寺鹿児島別院田上出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277888779": "'西本願寺鹿児島別院皆与志出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277817661": "'西本願寺鹿児島別院紫原出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277882361": "'西本願寺鹿児島別院草牟田出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    "node/3277883874": "'西本願寺鹿児島別院西田出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/12824978404": "'石造の水位計': \"stone water gauge\": a description of a find on an excavated site, no name",
+    "node/12824978410": "'角形井戸': \"square well\": a description of a find on the same excavated site, no name",
+    "node/3226870302": "'ライオン像': \"lion statue\": the subject and a type word, no name; tagged a monument, artwork_subject=lion",
+    # A bare type word (owner, 2026-10-13)
+    "way/1566481859": "'入口プロムナード': \"entrance promenade\": a zone of a park mapped as place=square with no other tag",
+    "way/1566481860": "'入口広場': \"entrance plaza\": a zone of a park mapped as place=square with no other tag",
+    "way/1559292981": "'創作広場': \"creative plaza\": a zone of 加治屋まちの杜公園 (which has its own row) mapped as place=square",
+    "way/1562532094": "'緑陰広場': \"shade plaza\": a zone beside 天文館公園 mapped as place=square with no other tag",
+    "way/1562532096": "'まちかど広場': \"street-corner plaza\": a zone 38 m from 天文館公園's row, place=square with no other tag",
+    # A second row of one object (owner, 2026-10-13)
+    "relation/13918246": "'緑ケ丘町': the district's boundary relation beside its own node 緑ヶ丘町 (node/2504565462), 190 m off, one Wikidata entry and one article; the names differ only by ケ and ヶ, so the merge did not fold them",
+    # Not in the reader's file: a national road's planned sea-crossing section drawn as a street (the sea-crossing ruling) (owner, 2026-10-13)
+    "way/561255584": "'国道58号(海上区間）': a national road's planned sea-crossing section drawn as a street",
+    "way/733832500": "'国道224号(海上区間）': a national road's planned sea-crossing section drawn as a street",
+}

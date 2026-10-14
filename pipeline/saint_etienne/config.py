@@ -197,4 +197,11 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/saint_etienne.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/63256442": "'L'Église de Jésus-Christ des Saints des Derniers Jours': a church body alone as the whole name. The rule lists this body, but the name leads with the article \"L'\" and so passes: a fault of the match, not a new class",
+    "way/63314647": "'Plymouth Brethren Christian Church': a church body alone as the whole name, in English in a French city; the French alias (Église Chrétienne des Frères de Plymouth) is the body alone too",
+}

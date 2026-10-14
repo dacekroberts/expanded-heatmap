@@ -236,4 +236,26 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/uji.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/564004647": "'内宮': \"inner shrine\", a type word alone; a building of 神明神社, 35 m from that shrine's own row (way/497477998)",
+    "way/564004645": "'外宮': \"outer shrine\", a type word alone; a building of 神明神社, 24 m from that shrine's own row",
+    "way/564004646": "'末社': \"subsidiary shrine\", a type word alone; a building of 神明神社, 45 m from that shrine's own row",
+    "node/6326573686": "'忠魂碑': \"monument to the loyal dead\", the type word for a war memorial with no place or unit (the rule has 表忠碑 and 戦没記念碑, not 忠魂碑)",
+    "way/447272988": "'斎堂': \"refectory\", a hall type alone; a building of 萬福寺, 65 m from the temple's own row (way/638624925)",
+    "way/447272989": "'開山堂': \"founder's hall\", a hall type alone; a building of 萬福寺, 75 m from the temple's own row",
+    "way/497574263": "'陸上競技場': \"athletics stadium\", a type word alone; leisure=stadium with no other tag (it lies in 山城総合運動公園, which has its own row)",
+    # A second row of one object (owner, 2026-10-13)
+    "way/177819883": "'萬福寺三門': the main gate of 萬福寺, 85 m from the temple's own row; the name is that row's name and a gate word",
+    "way/177819837": "'萬福寺総門': the outer gate of 萬福寺, 155 m from the temple's own row; the name is that row's name and a gate word",
+    # A number or code beside a type word (owner, 2026-10-13)
+    "way/497324137": "'第三公園': \"park no. 3\": an ordinal and a type with no district in the name",
+    # Unsure rows a ruling drops: a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m (ruling 4) (owner, 2026-10-13)
+    "way/446588801": "'大雄寶殿': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+    "way/446588803": "'天王殿': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/6442946307": "'聖観音菩薩': a hall named only for what it enshrines, or a deity's title alone",
+}

@@ -277,4 +277,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/higashiosaka.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A glitched name (owner, 2026-10-13)
+    "node/1422997436": "'カソリック布施教会「': a stray opening bracket 「 closes the name (an import artefact); the name is never repaired",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/1300772823": "'創価学会 東大阪文化会館': a religious body, the city and a hall type (文化会館); no name of its own",
+    "way/971040000": "'創価学会 河内平和会館': a religious body, the district and a hall type (平和会館); no name of its own",
+    # A business (owner, 2026-10-13)
+    "node/10239542000": "'大熊葬儀社': a funeral company (葬儀社) tagged a place of worship, service_times=葬儀; the name leads with a family name",
+    # A bare type word (owner, 2026-10-13)
+    "node/3625264491": "'一之鳥居': \"first torii\", a type word alone with no shrine named; a gate tagged a place of worship (the rule has 鳥居, not the numbered form)",
+    "way/136557894": "'多目的球技広場': \"multi-purpose ball-game ground\", a type phrase alone; the ground's real name (トライスタジアム) is only the alias. The rule has 多目的広場, not this",
+    # A school's sports ground tagged a park (owner, 2026-10-13)
+    "way/1274094038": "'かわち野高校　グラウンド': a high school's sports ground tagged leisure=park, operator = the school; a facility of a school, not a public park",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/6115494900": "'天鈿女命': a hall named only for what it enshrines, or a deity's title alone",
+}

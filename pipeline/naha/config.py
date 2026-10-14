@@ -342,4 +342,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/naha.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/541585695": "'パーフェクトリバティー教団': a religious body alone as the whole name (the rule lists the body as \"pl教団\" only, so the spelled-out form passes)",
+    "way/557048875": "'真如苑': a religious body alone as the whole name",
+    # A second row of one object (owner, 2026-10-13)
+    "node/13375201200": "'Fukushuen - Fukushuen Garden': an English-named node 35 m from the garden's own row 福州園 (way/53579264), which already carries \"Fukushuen Garden\" as its alias",
+    # A bare type word (owner, 2026-10-13)
+    "node/9576878109": "'ヒヌカン': \"hinukan\" (hearth god): the type word for a kind of worship spot every Okinawan village has, with no place in the name",
+    "node/9502876321": "'ヒヌカン (火の神)': the same type word with its Japanese gloss in brackets; the description tag calls it \"one of the district's worship spots\". 13 km from nothing of its name: a second village's hinukan",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/9516469432": "'天主大御神': a hall named only for what it enshrines, or a deity's title alone",
+    "node/10299810348": "'天龍大御神': a hall named only for what it enshrines, or a deity's title alone",
+    "node/9516468198": "'天祖子あまみ人前 天珥東大主御世': a hall named only for what it enshrines, or a deity's title alone",
+    # Not in the reader's file: a national road's planned sea-crossing section drawn as a street (the sea-crossing ruling) (owner, 2026-10-13)
+    "way/1036812787": "'国道390号（海上区間）': a national road's planned sea-crossing section drawn as a street",
+}
