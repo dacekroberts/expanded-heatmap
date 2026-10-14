@@ -328,6 +328,9 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/9662847845": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
     # Places of worship named by a body, left for the rules and still rows (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/230206208": "a place of worship named only by its denomination, body or hall type is dropped (four rulings 1; sixteen rulings 2; left for the rules and still a row, owner 2026-10-13)",

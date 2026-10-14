@@ -1,3 +1,22 @@
+### 2026-10-13 - The owner's two calls on the screen: Bremen's reach reason recorded, the 13 denomination-like rows dropped (branch search-final)
+
+- **The owner, in chat (relayed by Cleanup): "(1) Bremen: record a reach
+  reason, do not cut the exclave. (2) Drop all 13".**
+- **Bremen:** `PLACE_SCOPE_REACH_REASON` written after `PLACE_AREA`: the
+  city's own Überseehafen port enclave in Bremerhaven, kept by ruling
+  (German answers 7). Rule D of search-scope-check passes it on this tree:
+  53.9 km, kept with the reason. The area is unchanged.
+- **Dropped by id, each matched to its cached name: the 13 rows the forward
+  helper left borderline**, now under the class of a place of worship named
+  only by a denomination, a body or a chain: Berlin's three "Neuapostolische
+  Kirche" and two "Adventkapelle"; Copenhagen's "Jesu Kristi Kirke", two
+  "Katolsk-Apostolsk Kirke" and "Adventkirken"; Brussels' "Deus é Amor";
+  Cluj-Napoca's "Biserica Reformată Prezbiteriană"; Aarhus' "Islamisk
+  Kulturcenter" and Bremen's "Islamisches Kulturzentrum".
+- **Six cities rebuilt through the gate** (Aarhus, Berlin, Bremen, Brussels
+  (Regional), Cluj-Napoca, Copenhagen); the twin round found no
+  same-named object promoted. No network request, nothing rendered.
+
 ### 2026-10-13 - The pattern screen of the final group: 465 ids dropped, 46 kept by id, the station rules merged; the owner's rulings on the helpers' classes (branch search-final)
 
 - **A screen for the new classes instead of a full read (owner).** One main

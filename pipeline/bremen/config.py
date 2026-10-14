@@ -238,6 +238,9 @@ BREMEN_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
 PLACE_AREA = "(id:3600062559)"
+# Why the index reaches more than 25 km past the map's stations: read by rule D of
+# scripts/check_place_scope.py once that rule lands. Re-measure with --reach if PLACE_AREA changes.
+PLACE_SCOPE_REACH_REASON = ("2026-10-13: the city's own Überseehafen port enclave in Bremerhaven, kept by ruling (German answers 7) (owner)")
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("de",)
@@ -285,6 +288,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/3380247432": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/24620412": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

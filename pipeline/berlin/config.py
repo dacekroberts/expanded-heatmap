@@ -283,6 +283,13 @@ PLACE_REVIEWED = {
 PLACE_DROPPED = {
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/79406037": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/176530169": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/291590070": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/48357784": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/780482312": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/1127998800": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).

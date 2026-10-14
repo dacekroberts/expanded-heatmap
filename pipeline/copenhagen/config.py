@@ -387,6 +387,12 @@ PLACE_REVIEWED = {}
 PLACE_DROPPED = {
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1043641224": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/159634422": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/162185393": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/9604826453": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/26274768": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).

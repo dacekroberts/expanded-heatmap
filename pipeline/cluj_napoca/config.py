@@ -254,6 +254,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/5257876595": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
     "way/276967051": "a denomination as the whole name; the real name is in alt_name and no rule repairs a name (owner, 2026-10-13)",
     "way/1427758602": "a type phrase as the whole name (owner, 2026-10-13)",
     "way/1145050481": "a type phrase as the whole name (owner, 2026-10-13)",
