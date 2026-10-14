@@ -2,6 +2,34 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope becomes the first landing slice's branch; renders thinned to one a map (Cleanup agent, nothing pushed)
+
+- **Owner (relayed by Cleanup, 2026-10-13):** `tram-rescope` carries the
+  first landing slice (the 17 live searched cities, Mexico City, Prague,
+  Milan, and Toronto's rescoped map); the search script is final at
+  7c3cb2a4. Then "thin the re-render": each map is rendered once, when its
+  index is final.
+- **Merged:** search-integration c56c8fb5 (26eaad38), no conflict; selftest
+  311 of 311; `check_place_index_drift.py` names all 20 indexes OK.
+- **No render was started for the 17 live cities or Mexico City**: the
+  change of plan arrived before the pool ran. Rendered so far, both on the
+  final search script: Milan (8 s wall with the gate's start, peak 0.20 GB,
+  6.4 MB, 45,999 points) and Prague (15 s, 0.52 GB, 3.3 MB, 21,462 points).
+  Prague's index is due to change with the station rules, so its map will be
+  rendered once more; Milan's is expected to stand.
+- **On the two rendered maps:** `check_map_search.js` finds 193 of 193 and
+  196 of 196 stations and 22 of 22 and 13 of 13 lines.
+  `check_map_attribution.js` (its body, run in the browser pane from a
+  temporary static server on 127.0.0.1, stopped and its launch entry
+  removed): no problem at 1280x650 and 1280x812 on both, nor at 375x812 on
+  Milan; the credit is clear at five of five points and the legend clamp is
+  in force. Only two maps exist to test, not three.
+- `check_render_current.py`: 18 maps stale (the 17 and Mexico City), as
+  expected until their one render; Toronto is not among them.
+- **Size against master:** Milan 5,312,979 to 6,445,039 bytes; Prague
+  2,268,788 to 3,292,656. Both carry the tram rescope as well as the search
+  block, so they do not measure the search block alone.
+
 ### 2026-10-13 - Place search script: a dotted abbreviation in a name is found by its word; Milan rendered again and Prague rendered as the second trial (Cleanup agent, nothing pushed)
 
 - **Owner (relayed by Cleanup, 2026-10-13):** build the fix reported in the
