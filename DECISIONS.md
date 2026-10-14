@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**141 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**142 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -78,6 +78,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search, the sixth rule pass: the pilot readers' classes, built from the sixteen rulings](#2026-10-13---place-search-the-sixth-rule-pass-the-pilot-readers-classes-built-from-the-sixteen-rulings)
 - [Place search, the sixth pass: two owner rulings on its report (El Polvorín, named convents)](#2026-10-13---place-search-the-sixth-pass-two-owner-rulings-on-its-report-el-polvorín-named-convents)
 - [The heavy-job cap is eight for the search rollout; wave 1 rebuilt on the final rules (owner)](#2026-10-13---the-heavy-job-cap-is-eight-for-the-search-rollout-wave-1-rebuilt-on-the-final-rules-owner)
+- [Place search: the extract run's full reads, the rulings on them and the rule faults they found (owner)](#2026-10-13---place-search-the-extract-runs-full-reads-the-rulings-on-them-and-the-rule-faults-they-found-owner)
 
 **2026-10-12**
 
@@ -6574,3 +6575,99 @@ japan-city template:
   searched city's caches before any rebuild. `PLACE_STATION_STRIP` was
   tested and not set: it does not return the seven and renames eleven
   other stations.
+
+### 2026-10-13 - Place search: the extract run's full reads, the rulings on them and the rule faults they found (owner)
+
+- **The reads.** 24 reader lanes read every station, landmark and place row
+  of the 146 extract-run cities by eye against the tags (junctions and
+  streets not read): 137,106 rows, 2,270 drops, 1,666 left undecided. The
+  drop rate is 1.7%, against 2.1% on the five pilot reads before the sixth
+  rule pass. Verdict files, lane reports and the brief are in
+  `data/_search_rollout/reads_rules56/`.
+- **21 class rulings on the undecided rows ("all recommendations
+  approved"),** written out in `_rulings.md` there. Dropped by id: parks
+  named only by a category and an inventory number; a religious body's
+  meeting hall or branch; a hall named only for what it enshrines and a
+  deity's title alone (a shrine or temple named for a deity stays); a part
+  of one shrine or temple where the shrine has a row within about 300 m
+  (where it has none the main hall stays as the only way to find it); stock
+  plaza names with no place in them; a zoo's enclosures; all but one row of
+  a bay labeled many times; Nice's private beach concessions; station sites
+  of a closed railway; graves under the buried person's article; moored
+  houseboats; Kagoshima's preaching halls; all but one row of Belo
+  Horizonte's disused cableway; estate facilities named for a block or
+  "inside the estate"; sea-crossing road sections. Kept: parks named for a
+  housing district with a plain park word; Sakai's public plazas on private
+  land; Palma's farmhouse localities; Antwerp's synagogues; neighbourhoods
+  that may be development names; real names with a translation glued on;
+  Incheon airport's airside stops; compass-point and generic official park
+  names.
+- **Applied by four lanes, configs only** (`search-rollout`, `apply_A.md`
+  to `apply_D.md`): 2,366 reader drops, 397 undecided rows dropped under
+  the rulings, 7 other drops, 28 reader drops left out (a named convent, a
+  row with its own article, a glued-on translation). Every id was matched
+  to its row's name before writing; none mismatched.
+- **Fourteen follow-up rulings the same evening,** where the lanes read a
+  ruling differently or a reader's drop met a ruling: Yokohama's three
+  convents stay; Higashiyamato's garrison and airfield rows both stay (two
+  names, one site); Caen's "Hotel de Ville" stays dropped; parks named only
+  by a type word (waterside park, sports park) stay dropped, unlike the
+  compass and "central" names; Fortaleza's seven same-named Assembleia de
+  Deus rows stay dropped; Kakogawa's named sub-shrines and the numbered
+  pilgrimage stops stay; five rows with their own article that duplicate a
+  row that stays are dropped; Nagasaki's Tojin Yashiki Kannon hall is kept
+  by id against ruling 3; seven estate facilities with no park word stay
+  dropped; **ruling 5 covers every plaza name with no place in it** (lane
+  D's 21 left-in rows dropped, so all lanes follow one reading); Matsudo's
+  koshin stone is kept for its own Wikidata entry; Le Mans's "Jardin
+  Public" is kept as an official name; Olomouc's district row stays dropped
+  on the Prague precedent. Sapporo's ropeway base station is kept by id so
+  both ends are findable ("keep base by id").
+- **Famous places with no row are kept by id** where the cached map data
+  holds them (24 ids: Tokyo Disneyland and DisneySea, Kanazawa's Higashi
+  Chaya, Omicho Market and Tsuzumi Gate, Yokohama's Osanbashi and Nippon
+  Maru, and others the lane reports name). The cause is a missing Wikidata
+  or Wikipedia tag. Places never fetched at all (Yokohama Landmark Tower,
+  Sapporo Dome, Erasmusbrug, Casa Rosada, Dogo Onsen, Mito's Kodokan) wait
+  for a wider fetch after the landing.
+- **The keep list could not do that, so it was changed.** `PLACE_KEPT`
+  only spared a row from some drop tests; an object in no landmark class (a
+  ferry terminal, a marketplace, a bridge node) got no row. It now admits a
+  row at the end of the build, a kept station included, and only
+  `PLACE_DROPPED` outranks it (`search-integration`, 73f025df). A dropped
+  id was confirmed to remove a station row and a street row; a street drop
+  is per way, so a street of many ways survives one dropped way.
+- **Rule faults the reads found, mended in the shared rules** rather than
+  by id (`search-integration`, eb9aafce and 73f025df; reach in
+  `data/_search_rollout/live_rules56/faults_reach.md`): a square merged
+  into a street lost its name (of 43 listed, 28 return as rows and 15 as
+  alternate names; an earlier statement to the owner that every merged
+  square stayed findable was wrong); a web address as a name; a stop's
+  platform indexed as a street; boroughs folded into town halls (Prague's
+  18 return); one stop indexed once per platform or direction; stations of
+  different names folded on a shared Wikidata entry (Toyama, Nagasaki,
+  Kobe, Kagoshima, Tama, Kanazawa); a railway line or a school indexed as a
+  station; freight terminals and former-site names; closed and planned
+  suffixes; peaks named only by a height; a bus stop as a landmark. Not
+  built: a plural in the home test (it would take Boston's Smith Court
+  Residences and two more), and joining stops by a trailing platform number
+  (it would join "Terminal 1" and "Terminal 2").
+- **Dropping by id has a side effect, "twins":** a same-named object
+  beside a dropped one can take the row's place. The final group's lane
+  found 34 (Taipei 30) and dropped them under the same classes. Every
+  rebuild after id drops now runs rounds until none appears.
+- **Mendoza indexed its whole province:** `PLACE_AREA` named the province's
+  relation. Fixed to the city department (relation 2204157) under a new
+  cache name. `check_place_scope.py` passed it; the owner approved closing
+  that hole (fail an index that reaches more than 25 km past the stations
+  without a recorded reason).
+- **A station diagnosis found two faults still open** when this was
+  written: the guard that spares a station the map draws compares the
+  romanised map name with the local row name, so it matches nothing in 102
+  of the 146 cities; and 17 Montpellier line 5 stops the map draws have no
+  row for a stray construction tag. Both are being built with their reach
+  measured first (`station_diagnosis.md`).
+- **Wave 1 and the final group get no full read for the new classes**
+  (owner: "skip full reads"): the classes are mostly Japanese and Korean
+  and those groups are mostly American and European. A pattern screen for
+  the classes runs after their rebuilds instead.
