@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**135 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**136 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -72,6 +72,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the outside model's flags measured against the tags on wave 1; four rulings (owner)](#2026-10-13---place-search-the-outside-models-flags-measured-against-the-tags-on-wave-1-four-rulings-owner)
 - [Place search: the seven rulings applied on the final group, three departures approved (owner)](#2026-10-13---place-search-the-seven-rulings-applied-on-the-final-group-three-departures-approved-owner)
 - [Place search: the pilot reads and the held rows; sixteen rulings (owner)](#2026-10-13---place-search-the-pilot-reads-and-the-held-rows-sixteen-rulings-owner)
+- [Place search: the outside model fails the one-in-twenty line, so the rest of the extract run is read in full; the fifth rule pass (owner)](#2026-10-13---place-search-the-outside-model-fails-the-one-in-twenty-line-so-the-rest-of-the-extract-run-is-read-in-full-the-fifth-rule-pass-owner)
 
 **2026-10-12**
 
@@ -6390,3 +6391,47 @@ japan-city template:
   classes, so one more rule pass built from these reads comes before any
   further reading; the outside model's scores against the five reads
   decide how much reading is left.
+
+### 2026-10-13 - Place search: the outside model fails the one-in-twenty line, so the rest of the extract run is read in full; the fifth rule pass (owner)
+
+- **Scored against the five full reads** (names present at both commits):
+  of the readers' 267 drops the model flagged 179 (67%); of its 857 flags
+  the readers dropped 179 (21%). By the readers' class: description 101 of
+  128, home 25 of 32, glitched 10 of 11, business 13 of 26, duplicate 4 of
+  17, worship by denomination 1 of 8. By kind it misses about one landmark
+  drop in three, one place drop in two, four station drops in five. The
+  line agreed for trusting it was one miss in twenty: every kind fails.
+  Its first reads cost about 22 dollars (wave 1 4.05, the 151 cities 13.51,
+  the final group 4.84; deepseek-flash, off-peak).
+- **Recommended, and the owner: "yes to all".** The other 146 cities of the
+  extract run get a full Claude read of every row that is not a street,
+  AFTER the sixth rule pass lands, so readers meet fewer class rows; each
+  reader is handed its city's flag file as a second opinion. The five
+  pilot reads took 4 to 8 minutes and about 900,000 tokens together, on
+  cities three times the average size. The model's proposed tighter rubric
+  is for later use; the 151 are not re-run on it.
+- **The fifth rule pass, built and measured on the 19 live cities**
+  (`search-rules-5`, 1e0312eb, in memory): worship named only by a
+  denomination, a hall type or a church chain takes 563 rows (Sao Paulo
+  232, London 106); a station tagged private takes 2 (Tokyo's training
+  stations; the Capitol subway in Washington), narrowed from "no access",
+  which marks a public halt in Marseille; a station complex splits where
+  two of its names are map stations, which returns London's Monument and
+  Barcelona's Provenca as well as Boston's Boylston. Boston's "Green" is
+  the map's own name for that object, not a rule's doing. The sixth pass
+  is built on the same branch from the pilot's classes.
+- **Small reversals, each recommended and approved:** University Towne
+  Center (San Diego) and Fort (Edinburgh) restored on wave 1, a district
+  name being the worse thing to lose, and its 33 rows still undecided stay
+  in; Cluj-Napoca's "Micro 1" to "Micro 4" restored, as Riga's numbered
+  microdistricts; Daegu's junction restored under its glitched name, its
+  only row.
+- **The extract run's 334 names carrying a leak word** were 156 landmarks,
+  130 junctions, 36 streets and 12 stations, not streets as Cleanup had
+  told the owner: 325 kept and reviewed (Korean and Japanese junction
+  names, French "Hotel de" listed buildings), 9 dropped. Check E's noise on
+  those two classes is fixed in the sixth pass. 52 stations not yet open
+  joined the watch file (`search-rollout`, 8bc50c19).
+- **The final group's held rows are applied** (`search-final`, fa610fa1):
+  730 ids dropped in 27 cities, 931 keeps recorded, 256,955 rows to
+  256,360; 61 left for the rules, 41 undecided left in.
