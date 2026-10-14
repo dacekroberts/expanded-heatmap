@@ -192,3 +192,164 @@ entry first; it is the specification.
 - Reads: top model for stations, places and landmarks; Sonnet for the street
   screen (place-search-city skill, step 5).
 - Transit-globe's messages go to its main-checkout session now.
+
+## State after the last place-search landing (2026-10-13, night)
+
+**HOLD until Sunday 2026-10-18, 12:05.** Place search is on all 237 maps, pushed in one push at master 3e16745d (2026-10-13, about 23:52 by the remote-tracking reflog; pre-push `check_all.py` 73 of 73). The owner said to hold after the last landing, and the queue below is tabled for that week (usage ran out). The scheduled task `place-search-post-landing` fires at that time and starts it; it is enabled and set for 2026-10-18 12:05. Until then: no new build, no rule change, no push. Only a removal request (honored at once) or the owner's own word moves anything.
+
+---
+
+- **master = 3e16745d**, pushed on the owner's go. The remote master before it was e0138000, so the push also carried d6effbef (heavy-job cap to eight) and 42c2feb8 (the extract run's decisions). App reboot: started by the owner right after the push; a live check is the owner's.
+- **Every slice carries the shared rules of `search-rules-8`** (station commits 8d45eae5 and 0321cbb0, landmark patch a4718e28, brand and shop rulings 1a0fedba). Every slice passed deploy-verify in the app, and `check_map_search.js` found every drawn station and line on all 237 maps.
+
+| Order | Slice | Branch head | Cities | Landing commit | Pushed maps rendered by it |
+|---|---|---|---|---|---|
+| 1 | Wave 1 | search-wave1 07bb58b9 | 34 indexes (33 English-language cities and Toronto's search) | 5e5b5f37 | 34 (Toronto's pushed map is this render, streetcars included) |
+| 2 | First slice | tram-rescope 94506837 | the 17 cities searched before, Mexico City (Regional), Prague, Milan | 9736df8b | 20 |
+| 3 | Final group | search-final e26eef10 (worktree `xenodochial-sammet-fdb8c0`) | 32 | 77103203 | 32, re-rendered on the merged tree |
+| 4 | Extract run | search-rollout 08c8c3a0 | 151 | 3e16745d | 151, re-rendered on the merged tree |
+
+- **The tram rescope landed with the push:** Toronto (eight streetcar lines; 108 to 174 stations, 8,749 to 11,803 storefronts in rings), Milan (17 tram lines; 193 stations drawn, 41,510 to 45,999 in rings), Prague (28 tram routes; 196 stations drawn, 17,528 to 21,462 in rings), Mexico City (Regional) (Cablebús, Mexicable, Tlalnepantla de Baz; 407,628 to 427,121 storefronts, 149,980 to 175,939 in rings). Barcelona's page says why its trams are not drawn. Its dated re-checks are item E below.
+- **What went out after the push** (tick each, with the time; drafts and final texts in `data/_search_rollout/notes_drafts/`):
+  - [x] (sent 2026-10-14, just after midnight) Visuals and Analytics: the downstream note (`downstream_visuals_analytics.final.md`; `python scripts/downstream_changes.py 1b5f4df8 origin/master` output pasted in), with the four rescoped cities marked for review. "Last noted" in `docs/session_roles.md` is now 3e16745d.
+  - [x] (sent, to the session "Transit-globe phase 1") transit-globe main-checkout session: the search handoff and "rollout complete" (`transit_globe_search_handoff.final.md`). It says the indexes are final and that the start of the app's own search build is the owner's call; the message itself does not end that hold.
+  - [x] (sent with the downstream note) Visuals: the motion opener's search-name re-check (`motion_opener_recheck.final.md`); all five names hold on 3e16745d, and Mexico City's figures changed.
+- **Open on the landed master, for the week of 2026-10-18:** check H has no known gap left (`KNOWN_GAPS` is empty; Mexico City's closed with its rebuild over Tlalnepantla de Baz). `app/ring_shares.json` is current: every map_blob matches its pushed `heatmap.html`, and in_ring changed for the four rescoped cities only. No check failed or was skipped at the push. The deploy-verify checks of the app pages ran per slice before landing; a live check after the reboot is the owner's.
+- **Heavy-job cap:** already back to four on master (`MAX_JOBS = 4` in `scripts/heavy_job.py` at 3e16745d), so that part of A3 is done; the queue's "at most eight" line no longer applies.
+- **Worktrees now finished, for item A3 (none removed tonight):** `tram-rescope`, `search-wave1`, `xenodochial-sammet-fdb8c0`, `search-rollout`, `search-rules-8` and the other search lanes. Unlink each `data` junction with `cmd /c rmdir` first.
+
+### Next week's queue (a full copy of `data/_search_rollout/post_landing_queue.md` as of 2026-10-13 23:52, owner-approved)
+
+#### Place search: work queued for after the last landing
+
+Owner, 2026-10-13: hold after the last landing; these items are tabled for
+the week of 2026-10-18 (usage ran out). Queued to start Sunday 2026-10-18,
+12:05. Nothing here is approved to push: each item that changes `app/` or a
+rule comes to the owner with a recommendation first.
+
+Before starting: read `git log origin/master` to see which slices landed
+(first slice, wave 1, final group, extract run). A slice that did NOT land
+is finished first, in that order, each on the owner's go.
+
+##### Lanes (who does what; Cleanup coordinates and keeps every merge and push)
+
+Start A at once. Run lanes 1 to 5 in parallel as subagents, each in its own
+worktree and branch off the landed master, each prompt forbidding network
+use and any email address or personal data in a request. Lane 6 waits for
+the owner. At most eight heavy jobs through `scripts/heavy_job.py` until
+the cap goes back to four at the end of A.
+
+| Lane | Branch | Items | Output |
+|---|---|---|---|
+| Cleanup (this session) | worktree-cleanup | all of A; folds drafts; brings B to the owner in one batch | pushes on the owner's go |
+| 1 Station rows | search-stations-2 | C: one stop in several rows (Berlin, Brussels Regional, Geneva, Cluj, Gelsenkirchen, Barcelona, Taipei, Tokyo Ryogoku) | reach measured, a rules commit, a fold check by a second agent |
+| 2 Search script | search-script-2 | C: "Station not on this map" beside a pin, fused "str.", kanji numerals and variant pairs, Czech dotted abbreviations, the check that reads index rows | one script commit, browser-confirmed; all maps re-render ONCE after lanes 1 to 3 land |
+| 3 Landmark rules | search-landmarks-2 | C: branch tag on worship rows, Porto Alegre numbered squares, entry equal to the operator's, the way-geometry twin test in shared code | reach measured, a rules commit |
+| 4 Candidate lists | none (read-only) | B: the A/B/C/D sights list for the cities with no sights file; the borderline rows of wave 1 and the final group gathered into ONE table by class | two files for the owner, a recommendation per row |
+| 5 Tram re-checks | none (read-only until a fault) | E, each on or after its date | a line in the handoff note per city |
+| 6 Wider fetch | search-fetch-2 | D, only after the owner approves the source and the query plan (Overpass: one query per mirror; the owner prefers the extract route) | new cache files under new names, then rebuild |
+
+Order of landing next week: lane 3, lane 1, lane 2, then the single render
+pass and one deploy-verify per group of cities, then lane 6 if approved.
+
+**LANDED 2026-10-13 ~23:30: all four slices in ONE push, master 3e16745d
+(check_all 73/73). Done the same night: heavy-job cap back to four; notes
+to Visuals, Analytics, transit-globe and the motion opener (check the
+handoff note for what was sent); retrospective drafted
+(`notes_drafts/retrospective.md`, see A2). Left in A: item 1 (scope check),
+item 3 except the cap and the retrospective.**
+
+##### A. Close out the landing
+1. Land the scope check (branch `search-scope-check`, 45f8480d): 25 km reach
+   limit with the recorded `PLACE_SCOPE_REACH_REASON` strings.
+2. Notes to Visuals and Analytics (`scripts/downstream_changes.py`); the
+   transit-globe search handoff (main-checkout session); the motion opener's
+   search-name re-check. The owner moved the notes and the handoff to the
+   night of 2026-10-13, right after the last landing, so those sessions have
+   the information: check the handoff note for whether they went, and send
+   only what is still owed.
+3. Housekeeping: remove finished worktrees (unlink each `data` junction with
+   `cmd /c rmdir` first, then `git worktree remove`) and branch-only data
+   folders; heavy-job cap back to four; repo-size check; phone test;
+   retrospectives; update the Cleanup handoff note and memory.
+
+##### A2. Retrospective lessons (proposals, owner first)
+Eleven lessons in `data/_search_rollout/notes_drafts/retrospective.md`, each
+naming where it should live. Bring them to the owner as one batch; the
+twin test in shared code and the kept-id check fit lane 3, the offline
+browser checks lane 2.
+
+Also: a deploy-verify run on 2026-10-13 sent Streamlit's anonymous usage
+metrics to webhooks.fivetran.com (no personal data) because the launcher
+did not read `.streamlit/config.toml`. Proposal: set
+`browser.gatherUsageStats = false` in `.streamlit/config.toml` and have
+the deploy-verify agent always pass the flag.
+
+##### B. Owner calls still open (each has a recommendation in the named file)
+- Wave 1 borderline rows: `data/_search_rollout/wave1_rules56/helper_applied.md`.
+- Final group borderline rows: `final_rules56/screen_helper/*.tsv` (borderline),
+  and the 312 helper borderlines in `final_rules56/pattern_screen_borderline.tsv`
+  (by class in `pattern_screen.md`: body halls 60, plaza names 35, one object
+  labeled many times 33, near-duplicates 24).
+- Keep list group D, 20 rows: `keep_candidates_wave1_final.tsv`.
+- Sights named only in helper reports (14 wave 1 cities Minneapolis to
+  Tucson, most final-group cities): build the same A/B/C/D list for them.
+- Goteborg Kemigarden and Brasilia Galeria dos Estados (bare park outlines
+  under a dropped name).
+- Rows admitted by the brand/shop rule (1a0fedba) that sit close to a chain
+  branch, let in on 2026-10-13 for a second look: Harvey Nichols (London;
+  its article is the company's), Ahlens (Stockholm flagship), Legoland
+  Discovery Center (Tokyo), and Tokyo's デハ268号 (a preserved railcar
+  under its class's article) and 新宿眼科画廊 (a dealer's gallery; the
+  2026-10-11 precedent counts it as the business). Detail: `search-rules-8` worktree,
+  `data/_search_rollout/reads_rules56/part9_landmarks.md`.
+- Historic houses held out by the home rule (Lougheed, Rutherford, Dalmeny,
+  Fort Pitt Block House): keep by id or not.
+
+##### C. Rule work (measure reach first, then recommend)
+- Kept-id admission refuses a kept id as `same_name_near` against a row an
+  earlier rule already removed: Chicago's Pullman Administration Building
+  (way/210701534, in `PLACE_KEPT`) has no row. Fix in
+  `pipeline/place_index.py` (lane 3), rebuild Chicago, confirm the row.
+- Stations: one stop in several rows that the map draws as one point. Berlin
+  55 sets (S, U, tram), Brussels Regional 17, Geneva 14 (bracketed platform
+  letters), Cluj 10 (Nord/Sud), Gelsenkirchen 2, Barcelona-Placa Catalunya
+  and Espanya, Taipei's three spellings, Tokyo Toei Ryogoku folded into JR's
+  row 417 m away. File: `final_rules56/station_pairs.md`. Also Sacramento's
+  Dos Rios: drawn, no station row within 300 m (nearest 1,047 m).
+- Search script: an index station row within 150 m of a drawn pin shown as
+  "Station not on this map" (Berlin 42, Toronto 40, Marseille 3); fused
+  "str." for Strasse. Confirm in a browser first.
+  File: `tram_rules56/drawn_without_row.md`.
+- Search script: kanji numeral before chome and four variant character
+  pairs (34 stations in 9 cities). File:
+  `extract_rules56/drawn_cjk_without_row.md`.
+- `check_map_search.js` never looks at index station rows: add a test that does.
+- Czech trailing-dot abbreviations ("sv.", "ul.").
+- Link radius of an index stop to the nearest drawn pin: Philadelphia's
+  "Girard Avenue & 5th Street" opens "Girard Av & 7th St", 243 m away
+  (deploy-verify, 2026-10-13). New York: "86 St", "Canal St", "Fulton St"
+  stations rank past a phone's four results (warnings).
+- Worship rows named by a denomination with the real name in a `branch` tag
+  (22 in the final group): read the branch tag.
+- Porto Alegre's about 60 "Praca N" squares.
+- National Archives (Washington): entry equal to `operator:wikidata`
+  defeats the own-article test; six more government buildings of that shape.
+- Twin test in every lane must place ways from cached nodes (63% of dropped
+  ids could not be placed by the first script).
+
+##### D. Wider fetch (a source question: owner first)
+Famous places not in the caches at all: Chrysler Building, Yokohama
+Landmark Tower, Sapporo Dome, Erasmusbrug, Casa Rosada, Dogo Onsen,
+European Parliament, Mito's Kodokan, Albert Dock, West Edmonton Mall,
+Glasgow Necropolis, Tidal Basin, Copenhagen's Little Mermaid, Rome's
+Colonna Traiana, Guadalajara's Templo Expiatorio, Brasilia's Palacio do
+Planalto and Itamaraty, Stockholm's Kaknastornet, Ostermalms saluhall and
+Hagaparken, Taipei's arena (小巨蛋); cemeteries (`landuse=cemetery`: Glasnevin,
+Greyfriars); nine drawn stations with no rail object nearby (Takamatsu 5,
+Aomori, Suita, Nagasaki, Tokyo Shibaura-futo); Paris Chateau de Vincennes;
+and the "not in the cache" lists in the helpers' reports.
+
+##### E. Dated tram re-checks
+Milan from 2026-10-19; Prague after 2026-10-26; Toronto after 2026-10-31;
+Rome after 2026-11-23.

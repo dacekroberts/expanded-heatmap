@@ -287,7 +287,7 @@ and **Analytics** (`.claude/worktrees/analytics`, private analysis in
   `python scripts/downstream_changes.py <the last noted master> origin/master`.
   The last noted master is the commit in the line below, which Cleanup
   updates after each note. A removal request carried out is noted at once.
-  **Last noted: 76e6b645 (2026-10-08; both sessions rebuilt past 5507a4cb, nothing downstream since).**
+  **Last noted: 3e16745d (2026-10-13; the place-search rollout and the tram rescope of Toronto, Milan, Prague and Mexico City).**
   If it prints anything but "nothing downstream", it sends that output,
   unchanged, to both sessions ("Expanded Heatmap Visuals" and "Expanded
   Heatmap Analytics", found with ListAgents), with one line on WHY the
