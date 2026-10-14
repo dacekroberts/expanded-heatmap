@@ -242,6 +242,46 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("de",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "Am Wendeplatz": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+    "Verteilerkreis Utbremen": "Named roundabouts stay, read from the junction tag (owner 2026-10-13)",
+    "Fährzufahrt": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+    "Cäcilienweg I": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Cäcilienweg II": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Eisenbahnerweg I": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Eisenbahnerweg II": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Ontarioweg I": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Ontarioweg II": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Paradiesweg I": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Paradiesweg II": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Wetternweg II": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Im Suhrfelde I": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Im Suhrfelde II": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Im Suhrfelde III": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Im Suhrfelde IV": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Im Suhrfelde V": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Im Suhrfelde VI": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Im Suhrfelde Va": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Turmkamp I": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Turmkamp II": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Turmkamp III": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Turmkamp IV": "A real lane name with a number or letter stays (owner 2026-10-13, six answers 2)",
+    "Am Kraftwerk": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Schalthausstraße": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Klärwerkstraße": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Am Umspannwerk": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Am Gaswerk": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Am Oslebshauser Pumpwerk": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Am Weser-Terminal": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Am Stückgutterminal": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
@@ -370,4 +410,23 @@ PLACE_DROPPED = {
     "way/52305354": "a description standing in for a name",
     "way/1167734273": "a description standing in for a name",
     "way/26840946": "a description standing in for a name",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/4217903": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/4217905": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/4217906": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/4217907": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/23188607": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/26143592": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/26143593": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/196872844": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/209462181": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/209462182": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/303554884": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/303554887": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/303554888": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/341028669": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/371282645": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/371282646": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/377564012": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
 }

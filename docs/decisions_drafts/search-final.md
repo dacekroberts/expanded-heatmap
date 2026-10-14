@@ -1,3 +1,72 @@
+### 2026-10-13 - The held rows settled in three lanes and the owner's ten rulings applied: 730 ids dropped, 931 keeps recorded, 61 rows left for the rule pass (branch search-final)
+
+- **The input.** Three read-only lanes settled the held rows of
+  `search-final-held-remaining.md` by the existing rules (1,699 rows in the
+  lane files: 657 drop, 884 keep, 117 in new classes, 41 unsure), and the
+  owner ruled on the new classes and the conflicts: "all approved"
+  (Cleanup's entry "the pilot reads and the held rows; sixteen rulings").
+  Applied by a follow-up session; counts, lists and flags are in
+  `docs/decisions_drafts/search-final-held-applied.md`.
+- **Dropped by id: 730 ids in 27 cities**, for 598 lane rows: 479 places by
+  their own id and 119 street names by every way that bears the name. Each
+  entry's reason is the lane's own rule text. The new classes the owner
+  dropped: Taoyuan's 33 planning width codes on public streets, Taipei's 16
+  pocket parks under a city programme's name, 10 religious offices, halls
+  and residences tagged a place of worship (none carries an article), Oslo's
+  8 historic route relations, Florence's 4 and Bucharest's 1 venue halls,
+  Copenhagen's 2 prison chapels, Goteborg's 2 underwater wrecks, and Riga's
+  2 Ziepniekkalns microdistricts.
+- **Kept and recorded: 931 records in `PLACE_RULED_KEPT`, 29 cities.** Every
+  keep verdict is recorded, since every lane row was one a reader held; a
+  home, family or person row by id alone, with no name. With them the 39
+  new-class rows the owner kept (23 Taiwanese peaks carrying a village's
+  name, 7 Riga microdistricts, 9 Stockholm parks named for a city block).
+- **Two rulings reverse lane drops, 8 rows.** Ruling 7: the two homes tagged
+  an attraction with an article of their own stay (Bergen way/431495717,
+  Brussels way/241553744). Ruling 8: six same-named parks the lanes dropped
+  as a second drawing just past the 300 m merge are two rows (Kitakyushu 3,
+  Geneva, Guadalajara, Taoyuan 1 each).
+- **Left for the shared rules, not dropped by id: 61 rows.** 51 places of
+  worship named only by a denomination, a hall type or a church chain, and
+  10 facilities of an estate tagged a park or a square. Written with a
+  reason to `left_for_rules.tsv` beside the lane files.
+- **Bare type words: all 217 live ones went by id.** They were to be left
+  where the lane's note says the shared rule should have caught the word; no
+  note says so, so the fallback applied. `bare_type_applied_by_id.tsv` lists
+  them, so the rule pass can use them and retire the ids a list word makes
+  redundant. 53 more (Taichung's bare shrine words) were no rows already.
+- **Six twins.** Dropping a row made a same-named object beside it a row in
+  six cases the lanes did not list (Bucharest 3, Guadalajara, Kitakyushu and
+  Taichung 1 each), found by comparing `place_ids.json` before and after;
+  each was dropped with its twin and the four cities rebuilt again.
+- **Not applied.** Two Brasilia address strings are alt_names of ways whose
+  own name is another street, so no way id drops them. 66 drop rows had no
+  row of their own already. 41 unsure rows stay in the index, listed.
+- **29 configs changed, 29 indexes rebuilt, no network request.** Rows:
+  256,955 to 256,360. The largest: Taichung 23,613 to 23,508; Brasilia
+  14,762 to 14,699; Guadalajara 27,488 to 27,434; Taoyuan 23,447 to 23,402;
+  Monterrey 23,487 to 23,451. Odense and Zurich changed in records only.
+  Every dropped id and street name is gone, every recorded keep is a row,
+  and no name gained a row, checked against the index of a48922bb.
+- **`check_place_search.py`:** 32 problems, rule A on each of the 32 cities
+  (an index no map uses yet), nothing else.
+
+Findings for Cleanup:
+
+53. **A drop by id can promote a twin.** Where two objects of one name merge
+    into one row, dropping the row's id leaves the other as the row. A check
+    after any by-id drop (ids new to `place_ids.json`) finds them; the lanes
+    could not see it from the tags.
+54. **The lane notes do not say which bare type words a list is missing**, so
+    the "leave it for the rule" test had nothing to read. A lane brief that
+    asks for the word and its language in a column would let the next
+    application leave them.
+55. **Applied as the lanes have it, and worth a second look:** Cluj-Napoca's
+    "Micro 1" to "Micro 4" against the Riga ruling, Bucharest node/672149975
+    (the monastery's own spelling is no row now), Rome node/1619249491 on
+    tags alone. `docs/place_search_exclusions.md` owes rows for the seven
+    classes dropped by id for the first time; not written on this branch.
+
 ### 2026-10-13 - The owner's seven rulings on the held rows applied; Guadalajara's address-number names checked and dropped; what stays held (branch search-final)
 
 - **The owner, to seven calls put by the Cleanup session on its

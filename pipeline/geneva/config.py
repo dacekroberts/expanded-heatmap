@@ -175,6 +175,35 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "relation/1301860": "'Hôtel de Ville', A bare type word is kept on a Wikipedia article of the object's own (owner 2026-10-13, keep beats drop)",
+    "way/1554778805": "'Friche de l'étang', A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "way/118190141": "'Parc des Molliers', same-named parks more than 300 m apart are two rows (owner, 2026-10-13)",
+    "way/85344453": "'Morillon-Parc', A park tied to a housing complex, a company or a neighbour only by its name stays (owner 2026-10-13, second batch g; parks named only as an intersection stay)",
+    "Esplanade Théodelinde (Esplanade Théodore-de-Bèze)": "Two real names in one stay as written (owner 2026-10-13, second batch d; fourteen answers 12; candidate 23, no rule)",
+    "way/40022875": "'Parc Eglantyne-Jebb (Parc des Acacias)', Two real names in one stay as written (owner 2026-10-13, second batch d; fourteen answers 12; candidate 23, no rule)",
+    "way/77945334": "'Place Beatriz-Consuelo (Place Charles-Sturm)', Two real names in one stay as written (owner 2026-10-13, second batch d; fourteen answers 12; candidate 23, no rule)",
+    "way/894896702": "'Le Lièvre et la Truite', A title is not a type (owner 2026-10-12)",
+    "Ch. de la Parouse": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "La Promenade": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+    "Route Blau": "A named private street is kept, a code-named one dropped (owner 2026-10-13, fourteen answers 8; PRIVATE_STREET_LEAD 2026-10-11)",
+    "Allée Paul": "A named private street is kept, a code-named one dropped (owner 2026-10-13, fourteen answers 8; PRIVATE_STREET_LEAD 2026-10-11)",
+    "Chemin Charles Baudouin": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Chemin François Joulet": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Allée du Vieil Orme": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Avenue Jules Crosnier": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Promenade Louise Boulaz": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Chemin des Longues Rasses": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Chemin J. Philibert de Sauvage": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Place Jean-HERIDIER": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+}
 PLACE_REVIEWED = {
     "Chemin de l'Auberge": "a tertiary road, a real street name; the read of 2026-10-13",
 }
@@ -210,4 +239,14 @@ PLACE_DROPPED = {
     "way/409257973": "a direction label on a roundabout part",
     "way/408267999": "a direction label on a roundabout part",
     "way/26180222": "a direction label glued to the name",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "node/1917475456": "A bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; a Wikidata entry alone does not keep it, keep-against-drop ruling 5); held rows settled 2026-10-13",
+    "way/85233022": "A bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; a Wikidata entry alone does not keep it, keep-against-drop ruling 5); held rows settled 2026-10-13",
+    "node/2184046195": "A bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; a Wikidata entry alone does not keep it, keep-against-drop ruling 5); held rows settled 2026-10-13",
+    "way/1191912503": "A bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; a Wikidata entry alone does not keep it, keep-against-drop ruling 5); held rows settled 2026-10-13",
+    "way/1191912502": "A bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; a Wikidata entry alone does not keep it, keep-against-drop ruling 5); held rows settled 2026-10-13",
+    "node/9629273704": "Duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M 2026-10-08 and 2026-10-13; six answers 6: second nodes of one district dropped); held rows settled 2026-10-13",
+    "way/632236534": "A wrong object's name is a glitch and goes by id (owner 2026-10-11); held rows settled 2026-10-13",
+    "way/754072344": "Station corridors and tunnels are no streets (owner 2026-10-13, language calls 8: Riga's station tunnels); held rows settled 2026-10-13",
 }

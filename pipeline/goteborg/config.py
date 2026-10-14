@@ -308,6 +308,31 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("sv",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "way/798501733": "'Park Lagmansgatan', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "node/7683661890": "admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "node/1834210643": "'Bergslagsunrnan', a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
+    "node/7096292172": "'Berglärkan', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "node/7713526547": "'Bällskär', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "node/7096293809": "'Snäckeberget', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "Campingvägen": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Stora Holm Övningsväg": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Kvarternästaregången": "a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
+    "Kvartermästaregången": "a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
+    "Blå stråket": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Gula stråket": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Röda stråket": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Vita stråket": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Bruna stråket": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Gröna stråket": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
@@ -464,4 +489,14 @@ PLACE_DROPPED = {
     "way/1116504807": "an English lane label, not a street name",
     "way/1363663886": "an English lane label, not a street name",
     "way/214791424": "a numbered quay of a port",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "relation/10753258": "a pool, club, pitch or office tagged a park is dropped by id (settled read call; third list no. 15); held rows settled 2026-10-13",
+    "way/173692111": "a garden that is not notable is dropped (leisure=garden rule, 2026-10-07); held rows settled 2026-10-13",
+    "way/52564823": "a home is kept only when open to visit or on an article of its own (home rule 2026-10-08; 15 answers no. 2); held rows settled 2026-10-13",
+    "relation/10523765": "a code beside a type word is dropped (CODED_TYPE; 14 answers no. 4, planning-code parks); held rows settled 2026-10-13",
+    "node/6612200789": "an underwater wreck (owner, 2026-10-13)",
+    "node/12569811096": "an underwater wreck (owner, 2026-10-13)",
+    "way/35577641": "a description standing in for a name is dropped by id (settled read call; wave 1 precedent); held rows settled 2026-10-13",
+    "way/1364242067": "a description standing in for a name is dropped by id (settled read call; wave 1 precedent); held rows settled 2026-10-13",
 }

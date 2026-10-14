@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kitakyushu.json",
-  "places": 3608,
+  "places": 3587,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.489,
+      "en": 0.491,
       "ja": 1.0
     },
     "list_share": 0.5,

@@ -316,6 +316,62 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "way/1355886300": "'YASKAWAの森', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "way/1124048009": "'勝山公園', same-named parks more than 300 m apart are two rows (owner, 2026-10-13)",
+    "way/1055572497": "'東田大通公園', same-named parks more than 300 m apart are two rows (owner, 2026-10-13)",
+    "way/675806191": "'皇后崎公園', same-named parks more than 300 m apart are two rows (owner, 2026-10-13)",
+    "way/799127854": "'UR紅梅団地公園', Kitakyushu's estate parks are kept (14 answers no. 7)",
+    "way/1368221978": "'養福寺団地公園', Kitakyushu's estate parks are kept (14 answers no. 7)",
+    "way/695629583": "'大蔵ビレッジ公園', Kitakyushu's estate parks are kept (14 answers no. 7)",
+    "node/8487503656": "'城野団地', housing estates tagged as places are kept in the nine built cities (14 answers no. 6)",
+    "node/8487541633": "'徳力団地', housing estates tagged as places are kept in the nine built cities (14 answers no. 6)",
+    "way/354371264": "'九州共立大学（経済学部）', a glitched name on the object's only row stays: no clean twin, no name repair (finding 52, Onga River)",
+    "way/354371263": "'九州国際大学（国際関係学部）', a glitched name on the object's only row stays: no clean twin, no name repair (finding 52, Onga River)",
+    "way/354371265": "'九州栄養福祉大学（食物栄養学部）', a glitched name on the object's only row stays: no clean twin, no name repair (finding 52, Onga River)",
+    "way/353920879": "'北九州市立大学（経済学部）', a glitched name on the object's only row stays: no clean twin, no name repair (finding 52, Onga River)",
+    "way/400529643": "'朽網臨空公園グラウンド', a glitched name on the object's only row stays: no clean twin, no name repair (finding 52, Onga River)",
+    "way/559461625": "'堺町町公園', a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
+    "way/698515616": "'上本町ー丁目公園', a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
+    "羽衣町大蔵1号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "元城町西川頭町1号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野10号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野11号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野12号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野19号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野20号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野21号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野22号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野23号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野24号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野25号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野26号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野28号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野31号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野34号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野3号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野4号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野7号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野8号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道浅野9号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道空港北町1号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道空港北町2号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道空港北町3号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "市道空港北町4号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "町道空港南町1号線": "Kitakyushu's official municipal road codes are kept (14 answers no. 10)",
+    "都市計画道路 汐井町牧山海岸線": "the description and bare-type street rules never take a street with a way of residential class or above (street_description)",
+    "公園横通り": "the description and bare-type street rules never take a street with a way of residential class or above (street_description)",
+    "牡牛座の道": "the description and bare-type street rules never take a street with a way of residential class or above (street_description)",
+    "297号鱒淵八幡東自転車道線": "a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
+    "way/59967203": "'遠賀川 (Onga River)', a glitched name on the object's only row stays: no clean twin, no name repair (finding 52, Onga River)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
@@ -418,4 +474,28 @@ PLACE_DROPPED = {
     "way/1106143887": "an address block number standing in for a name",
     "way/598240333": "a glitched name (stray digit after the route code)",
     "way/598240334": "a glitched name (stray digit after the route code)",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "node/8154773325": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/8154773326": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/8154773328": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/8154773329": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/13387851891": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/4851161947": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/6189795868": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/9019685341": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/5487115878": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "way/815056105": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/5487115873": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/5487115874": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "node/6562374173": "bare type word or type phrase as the whole name is dropped (BARE_TYPE_NAMES; owner 2026-10-11, 2026-10-13); held rows settled 2026-10-13",
+    "way/858485719": "duplicates of one object are one row (owner 2026-10-13, six answers no. 6; ROW_MERGE_M, NEAR_DUP_M); held rows settled 2026-10-13",
+    "node/8487541618": "duplicates of one object are one row (owner 2026-10-13, six answers no. 6; ROW_MERGE_M, NEAR_DUP_M); held rows settled 2026-10-13",
+    "node/12805153973": "duplicates of one object are one row (owner 2026-10-13, six answers no. 6; ROW_MERGE_M, NEAR_DUP_M); held rows settled 2026-10-13",
+    "node/8487460500": "duplicates of one object are one row (owner 2026-10-13, six answers no. 6; ROW_MERGE_M, NEAR_DUP_M); held rows settled 2026-10-13",
+    "way/824602430": "a home is kept only when open to visit or on an article of its own (home rule 2026-10-08; 15 answers no. 2); held rows settled 2026-10-13",
+    "way/1147748611": "a pool, club, pitch or office tagged a park is dropped by id (settled read call; third list no. 15); held rows settled 2026-10-13",
+    "node/6478595004": "a religious office, education hall or residence tagged a place of worship, no article of its own (owner, 2026-10-13)",
+    "node/8154773321": "a religious office, education hall or residence tagged a place of worship, no article of its own (owner, 2026-10-13)",
+    "way/858485720": "duplicates of one object are one row (owner 2026-10-13, six answers no. 6; ROW_MERGE_M, NEAR_DUP_M); the same-named twin of way/858485719, a row once that id was dropped; held rows settled 2026-10-13",
 }

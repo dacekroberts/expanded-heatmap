@@ -296,6 +296,23 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/8527285074": "'古館', one node of each district name is kept (six answers #6)",
+    "node/8527285075": "'柏倉', one node of each district name is kept (six answers #6)",
+    "node/8527285073": "'漆山', one node of each district name is kept (six answers #6)",
+    "node/8527285071": "'門伝', one node of each district name is kept (six answers #6)",
+    "node/6829402553": "'漆山学校跡地', a 'former' or 'site of' word in a name is not read as gone; lifecycle is read from tags, narrowly (third list 11, narrow version); a historic site needs no article (NOTABLE_ONLY covers tourism, amenity, aeroway only; SKIP_HISTORIC does not list this kind)",
+    "way/961850702": "'漆山住宅第3児童遊園', a park tied to a housing complex only by its name stays (second batch question g); only an estate operator tag drops one (third list rule 3)",
+    "node/5009018621": "places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
+    "way/864544188": "'山形ビックウィング', a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13); kept on an article of the object's own (keep beats drop, owner 2026-10-13 #1)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
@@ -312,6 +329,12 @@ PLACE_DROPPED = {
     "way/909125618": "a duplicate row: the same shrine is a row under its plain name at the same spot",
     "way/909125582": "a duplicate row: the same shrine is a row under its fuller name at the same spot",
     "node/8527320825": "a glitched name: the characters contradict the object's own reading, which is the neighbouring quarter's",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/909125601": "bare type word or type phrase as the whole name, no article of its own (BARE_TYPE_NAMES; owner 2026-10-11; seven rulings #4, 2026-10-13); held rows settled 2026-10-13",
+    "way/864856166": "bare type word or type phrase as the whole name, no article of its own (BARE_TYPE_NAMES; owner 2026-10-11; seven rulings #4, 2026-10-13); held rows settled 2026-10-13",
+    "way/863287415": "an office or other non-worship building tagged a place of worship is dropped (settled call of the Anyang and Gwangju reads, search-final 2026-10-13); held rows settled 2026-10-13",
+    "way/1303179351": "a park tag on a pool, club, office or other non-park is a by-id drop (third list candidate 15, narrow version); held rows settled 2026-10-13",
 }
 # QUIET STATION (owner, 2026-10-13): inside the search area, 1,071 m from its
 # edge, with nothing indexable within 1 km (the station, a river whose row

@@ -148,6 +148,49 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("zh",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/10765935716": "'Bread of Life Gospel Center in Wanjin', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
+    "node/13676653520": "'Cihu Temple', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
+    "way/258410880": "'Mother of God', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
+    "way/609748545": "'San Jose Gardens', a park tied to a housing complex only by its name stays (second batch question g); only an estate operator tag drops one (third list rule 3)",
+    "node/12560885425": "'The Hope', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
+    "way/547156822": "'圖書館', a library needs an article of its own, asked of Wikidata (fourth pass, owner 2026-10-13); kept on an article of the object's own (keep beats drop, owner 2026-10-13 #1)",
+    "relation/14045849": "'總圖書館', kept on an article of the object's own (keep beats drop, owner 2026-10-13 #1)",
+    "node/13910151024": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/3469549088": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/3469549077": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "way/720784454": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/8949301520": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/2561560085": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/3838071714": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/3510522309": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/9960814446": "housing estates tagged as places are kept in the nine built cities (14 answers #6, 2026-10-13)",
+    "node/7737699447": "a gazetteer place name is a place row (PLACE_VALUES)",
+    "node/3076882985": "'清城隍廟舊址', statues, monuments and public memorials stay without an article (personal names ruling #2, 2026-10-13; monuments not held to the notable rule); a 'former' or 'site of' word in a name is not read as gone; lifecycle is read from tags, narrowly (third list 11, narrow version)",
+    "node/3263490568": "'清臺灣巡撫衙門舊址', statues, monuments and public memorials stay without an article (personal names ruling #2, 2026-10-13; monuments not held to the notable rule); a 'former' or 'site of' word in a name is not read as gone; lifecycle is read from tags, narrowly (third list 11, narrow version)",
+    "node/5173474719": "'臺北府城西門（寶成門）原址', a historic site needs no article (NOTABLE_ONLY covers tourism, amenity, aeroway only; SKIP_HISTORIC does not list this kind); a 'former' or 'site of' word in a name is not read as gone; lifecycle is read from tags, narrowly (third list 11, narrow version)",
+    "way/555513380": "'臺北機廠縫紉工場舊址', a historic site needs no article (NOTABLE_ONLY covers tourism, amenity, aeroway only; SKIP_HISTORIC does not list this kind); a 'former' or 'site of' word in a name is not read as gone; lifecycle is read from tags, narrowly (third list 11, narrow version)",
+    "node/5369856038": "statues, monuments and public memorials stay without an article (personal names ruling #2, 2026-10-13; monuments not held to the notable rule)",
+    "node/6467705352": "statues, monuments and public memorials stay without an article (personal names ruling #2, 2026-10-13; monuments not held to the notable rule)",
+    "node/12050521547": "'和平門', a named signal is a junction row (2026-10-08)",
+    "node/7099544554": "'永福聖媽宮', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
+    "node/4498833449": "'廣慈/奉天宮', a drawn station is never dropped for its name; the map draws it (owner 2026-10-13)",
+    "景平路92巷 (單號)": "a glitched name on a street's only row is not dropped (Onga River, seven rulings entry; no name repair)",
+    "竹林路119巷25弄 (單號)": "a glitched name on a street's only row is not dropped (Onga River, seven rulings entry; no name repair)",
+    "松　街": "a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13)",
+    "梅　街": "a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13)",
+    "竹　街": "a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13)",
+    "兒三新街": "a site's or utility's road with a street word is kept (15 answers #9; six answers #4)",
+    "柑樹路": "the private-street rule needs every way private; one of three is not",
+    "翡翠路": "the private-street rule needs every way private; one of two is not",
+}
 PLACE_REVIEWED = {
     "公司田溪": "a stream with its own article (waterway=river); 公司 is part of the old place name",
     "淡水公司田溪橋遺蹟": "the remains of a bridge over that stream, with its own article",
@@ -1345,4 +1388,42 @@ PLACE_DROPPED = {
     "way/1086751422": "a bare type word",
     "way/1086751428": "a bare type word",
     "way/804860160": "a bare type word",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "node/12818359278": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "node/12818376871": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); bare type word or type phrase as the whole name, no article of its own (BARE_TYPE_NAMES; owner 2026-10-11; seven rulings #4, 2026-10-13); held rows settled 2026-10-13",
+    "way/880457847": "campus lawns and courts go, by id (wave 1 lettered list, owner 2026-10-13; Goteborg campus yards, 15 answers #1); held rows settled 2026-10-13",
+    "way/251664074": "an organization's name standing in for the hall's own is dropped (seven rulings #7, Yamagata); a place of worship named only by its denomination or hall type is dropped (15 answers #6; four rulings #1, 2026-10-13); held rows settled 2026-10-13",
+    "node/11911124799": "an organization's name standing in for the hall's own is dropped (seven rulings #7, Yamagata); a place of worship named only by its denomination or hall type is dropped (15 answers #6; four rulings #1, 2026-10-13); held rows settled 2026-10-13",
+    "way/282430402": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/376122039": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/390780633": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/396410878": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/435677316": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/491719320": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/586287506": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/232563663": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/197316117": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/419824448": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/427777826": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/434899244": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/1268985781": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/420571826": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/209575978": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "way/296208076": "a city programme's name on a pocket park, naming no one park (owner, 2026-10-13)",
+    "node/7737699442": "bare type word or type phrase as the whole name, no article of its own (BARE_TYPE_NAMES; owner 2026-10-11; seven rulings #4, 2026-10-13); held rows settled 2026-10-13",
+    "node/3506376839": "family compounds with no article are dropped in the Taiwanese cities (14 answers #5); held rows settled 2026-10-13",
+    "node/3586391846": "family compounds with no article are dropped in the Taiwanese cities (14 answers #5); held rows settled 2026-10-13",
+    "node/3586391871": "family compounds with no article are dropped in the Taiwanese cities (14 answers #5); held rows settled 2026-10-13",
+    "node/3506376866": "family compounds with no article are dropped in the Taiwanese cities (14 answers #5); held rows settled 2026-10-13",
+    "way/336858254": "a grave is kept only on a Wikipedia article of its own (personal names ruling #2, 2026-10-13); held rows settled 2026-10-13",
+    "node/1726117679": "a ride is no station (station_ride; rides dropped by id, 15 answers #4); held rows settled 2026-10-13",
+    "node/1726116984": "a ride is no station (station_ride; rides dropped by id, 15 answers #4); held rows settled 2026-10-13",
+    "way/249508487": "a street name that is an address string is dropped where a clean row carries the street (seven rulings #2; Brussels doubles with a clean row, nine-cities read); held rows settled 2026-10-13",
+    "way/963971392": "a street name that is an address string is dropped where a clean row carries the street (seven rulings #2; Brussels doubles with a clean row, nine-cities read); held rows settled 2026-10-13",
+    "way/443229187": "a street name that is an address string is dropped where a clean row carries the street (seven rulings #2; Brussels doubles with a clean row, nine-cities read); held rows settled 2026-10-13",
+    "way/517604663": "a street name that is an address string is dropped where a clean row carries the street (seven rulings #2; Brussels doubles with a clean row, nine-cities read); held rows settled 2026-10-13",
+    "way/317152075": "a street name that is an address string is dropped where a clean row carries the street (seven rulings #2; Brussels doubles with a clean row, nine-cities read); held rows settled 2026-10-13",
+    "way/317152079": "a street name that is an address string is dropped where a clean row carries the street (seven rulings #2; Brussels doubles with a clean row, nine-cities read); held rows settled 2026-10-13",
+    "way/484678999": "a street name that is an address string is dropped where a clean row carries the street (seven rulings #2; Brussels doubles with a clean row, nine-cities read); held rows settled 2026-10-13",
 }

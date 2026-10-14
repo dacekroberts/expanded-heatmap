@@ -160,9 +160,25 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("lv",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "Zirgu sala": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
     "relation/21138818": "a duplicate row; the suburb node with the article keeps the name",
     "way/305603891": "a former-use description standing in for a name",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "node/13458819823": "duplicates of one object are one row (owner 2026-10-13, six answers no. 6; ROW_MERGE_M, NEAR_DUP_M); held rows settled 2026-10-13",
+    "way/305602687": "a home is kept only when open to visit or on an article of its own (home rule 2026-10-08; 15 answers no. 2); held rows settled 2026-10-13",
+    "way/225089402": "a home is kept only when open to visit or on an article of its own (home rule 2026-10-08; 15 answers no. 2); held rows settled 2026-10-13",
+    "way/88674645": "a home is kept only when open to visit or on an article of its own (home rule 2026-10-08; 15 answers no. 2); held rows settled 2026-10-13",
 }

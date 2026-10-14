@@ -156,6 +156,32 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("da",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/11291844293": "admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "way/190246768": "admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "way/153974860": "admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "way/619756408": "'Galleri Galschiøt', an article of the object's own outweighs a business or private-operator sign (keep beats drop, 2026-10-13)",
+    "node/7216857415": "'Adskilte', a monument is not held to the article rule and nothing in its tags says artwork (measured 2026-10-11, not applied)",
+    "node/9129919110": "'Forn Siðrs Runesten', a statue, bust or public memorial is kept, on its subject's article or none (personal-names ruling; seven rulings no. 3)",
+    "way/146056535": "'Dalum Klosterkirke', a named place of worship needs no article; its name is no denomination or hall type alone (NOTABLE_ONLY exception)",
+    "way/681478283": "'Sønderparken', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "node/7164850197": "'Odinstårnet (model)', a statue, bust or public memorial is kept, on its subject's article or none (personal-names ruling; seven rulings no. 3)",
+    "Cortex Park": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Cortex Park Vest": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Servicebyen": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Campusvej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Hospitalsringen": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Søndre Hospitalsvej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Vestre Hospitalsvej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Helikoptervej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {

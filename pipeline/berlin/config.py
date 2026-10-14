@@ -236,6 +236,46 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("de",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "Bergstr.": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Carl-Langbecker-Str.": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Goten-Str.": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Gottfried-Funeck-Weg (Wuhlesteg)": "Two real names in one stay as written (owner 2026-10-13, second batch d; fourteen answers 12; candidate 23, no rule)",
+    "Autobahnzubringer Dresden": "A road's own name on its mainline ways is no ramp (owner 2026-10-13, seven rulings 6: Monterrey's avenue names)",
+    "Charitéplatz": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Bonhoefferweg": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "DGZ-Ring": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Bachsaiblingstraße": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Belgienstraße": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Am Güterbahnhof Halensee": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Gewerbegebiet zum Wasserwerk": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Altes Gaswerk Mariendorf": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Gewerbehof": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Am Cleantech Business Park": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Fresienweg": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Dalienweg": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Ädikulanische Treppe": "A minor way is kept with an entry or article of its own (2026-10-07)",
+    "Andersen Weg": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Frau Holle Weg": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Lagerweg": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Platz A": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+    "Platz E": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+    "Parksiedlung Spruch": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Metropolitan Park": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Kitaweg": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Kantinenweg": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Niebüllerweg (Parkstraße)": "Two real names in one stay as written (owner 2026-10-13, second batch d; fourteen answers 12; candidate 23, no rule)",
+    "Pankeweg (Panke-Trail)": "Two real names in one stay as written (owner 2026-10-13, second batch d; fourteen answers 12; candidate 23, no rule)",
+    "Stadtring Berlin": "A road's own name on its mainline ways is no ramp (owner 2026-10-13, seven rulings 6: Monterrey's avenue names)",
+    "Sachsendammsteg": "Named bridges and tunnels stay as street rows (owner 2026-10-13, fourteen answers 1; fifteen answers 11)",
+}
 PLACE_REVIEWED = {
     "Shakespeare Company Berlin": "a theatre, not a firm (owner, 2026-10-13)",
 }
@@ -760,4 +800,17 @@ PLACE_DROPPED = {
     "way/119163856": "a private path (description=Privatweg), a code beside a type",
     "way/112089234": "private railway property by its own description",
     "way/137501607": "stray quotation marks in the name",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/292526612": "A glitched double of a street that has a clean row is dropped (owner 2026-10-11: no glitched name goes live; the reads of 2026-10-13: Brussels' 25 slash-joined doubles); held rows settled 2026-10-13",
+    "way/292526613": "A glitched double of a street that has a clean row is dropped (owner 2026-10-11: no glitched name goes live; the reads of 2026-10-13: Brussels' 25 slash-joined doubles); held rows settled 2026-10-13",
+    "way/292532846": "A glitched double of a street that has a clean row is dropped (owner 2026-10-11: no glitched name goes live; the reads of 2026-10-13: Brussels' 25 slash-joined doubles); held rows settled 2026-10-13",
+    "way/292532858": "A glitched double of a street that has a clean row is dropped (owner 2026-10-11: no glitched name goes live; the reads of 2026-10-13: Brussels' 25 slash-joined doubles); held rows settled 2026-10-13",
+    "way/859443410": "A glitched double of a street that has a clean row is dropped (owner 2026-10-11: no glitched name goes live; the reads of 2026-10-13: Brussels' 25 slash-joined doubles); held rows settled 2026-10-13",
+    "way/859443414": "A glitched double of a street that has a clean row is dropped (owner 2026-10-11: no glitched name goes live; the reads of 2026-10-13: Brussels' 25 slash-joined doubles); held rows settled 2026-10-13",
+    "way/231630781": "A minor-way street named by a description or a generic type word is dropped (street_description, owner 2026-10-13; six answers 3); held rows settled 2026-10-13",
+    "way/270064414": "A minor-way street named by a description or a generic type word is dropped (street_description, owner 2026-10-13; six answers 3); held rows settled 2026-10-13",
+    "way/35569049": "A minor-way street named by a description or a generic type word is dropped (street_description, owner 2026-10-13; six answers 3); held rows settled 2026-10-13",
+    "way/217003511": "A code beside a path type on minor ways is dropped (owner 2026-10-13, German answers 3; third pass PATH_CODE); held rows settled 2026-10-13",
+    "way/217003512": "A code beside a path type on minor ways is dropped (owner 2026-10-13, German answers 3; third pass PATH_CODE); held rows settled 2026-10-13",
 }

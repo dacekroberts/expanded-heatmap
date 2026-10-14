@@ -150,6 +150,11 @@ PLACE_FOLD = None
 # PLACE_REVIEWED, which check E holds to names carrying a leak word.
 PLACE_RULED_KEPT = {
     "Přehradni cesta": "a misspelled street is still that street (owner, 2026-10-13)",
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/3911158753": "'Most, nádraží', a drawn or network station is never dropped for its name (owner 2026-10-13, station guard)",
+    "node/4223957714": "'Lounická kopec', a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
 }
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
@@ -160,6 +165,9 @@ PLACE_DROPPED = {
     "relation/1266525": "a whole name that is only a type word (castle); the object itself has an article (owner, 2026-10-13)",
     "node/13894102732": "a bare quarter node doubling the district boundary row that already carries this short name (owner, 2026-10-13)",
     "node/13158629883": "a vanished object: a station closed in 1970, its site now under the lake",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/1467701572": "a description standing in for a name is dropped by id (settled read call; wave 1 precedent); held rows settled 2026-10-13",
 }
 # QUIET STATIONS (owner, 2026-10-13): stops inside the search area with
 # nothing indexable within 1 km, so the coverage rule skips them. All three

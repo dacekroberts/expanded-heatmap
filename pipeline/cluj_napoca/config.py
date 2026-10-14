@@ -223,6 +223,34 @@ PLACE_LANGUAGES_ALSO = ("hu",)
 # Tram stops are mapped with the mode glued on; the index takes it off.
 PLACE_STATION_STRIP = (" Tram",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "way/469783140": "'La Barieră', A park tied to a housing complex, a company or a neighbour only by its name stays (owner 2026-10-13, second batch g; parks named only as an intersection stay)",
+    "way/1548857318": "'Parc Platinia', A park tied to a housing complex, a company or a neighbour only by its name stays (owner 2026-10-13, second batch g; parks named only as an intersection stay)",
+    "way/275141007": "'Fosta \"Casină Română\"', A landmark that stands, ruined, abandoned or under a former-use name, stays (owner 2026-10-13: keep all standing abandoned landmarks; third list 11: former in a name is not read as gone)",
+    "way/247586801": "'Fostul Sediu al Băncii \"Economu\"', A landmark that stands, ruined, abandoned or under a former-use name, stays (owner 2026-10-13: keep all standing abandoned landmarks; third list 11: former in a name is not read as gone)",
+    "node/12236485011": "A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "node/3462446035": "A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "node/12297324584": "'Sigla CUG', Statues, busts and public memorials stay, and monuments are not held to the notable rule (owner 2026-10-13, personal names 2; 2026-10-11 answer 5, measured and put back)",
+    "way/247586363": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "way/202393357": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "way/278311108": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "way/237819797": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "node/13607820451": "A place of worship under a name of its own needs no article (NOTABLE_ONLY 2026-10-07; Anyang 2026-10-13: where the tags show worship or cannot tell, it stays)",
+    "node/2018383621": "'Clujana h', A station of a rail network is not dropped for its name (station guard, owner 2026-10-13)",
+    "Strada Tetarom": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Strada Tehnofrig": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Strada Căminele Hașdeu": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Rozelor": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Constantin Brâncoveanu": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Nadasel": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
@@ -263,4 +291,11 @@ PLACE_DROPPED = {
     "way/1550723831": "a name that says the bridge is temporary",
     "way/1550723832": "a name that says the bridge is temporary",
     "way/356779834": "a glitched name, street word glued to the name",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "node/11459460481": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
+    "node/11459460482": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
+    "node/11459460483": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
+    "node/11459460484": "A code beside a type word is no name (owner 2026-10-12, CODED_TYPE; fourteen answers 4 for planning codes); held rows settled 2026-10-13",
+    "way/343528767": "A row that is only the site's own name is dropped when minor ways alone carry it (owner 2026-10-13, fifteen answers 9); held rows settled 2026-10-13",
 }

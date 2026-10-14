@@ -200,6 +200,34 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("lv",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/4246679918": "'Jews in Latvia', kept on an article of the object's own (keep beats drop, owner 2026-10-13 #1); a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13)",
+    "node/12396517747": "'Vecanniņmuižas parks', a 'former' or 'site of' word in a name is not read as gone; lifecycle is read from tags, narrowly (third list 11, narrow version)",
+    "node/12747897646": "'Baznīcas kalns - viduslaiku kapsēta', two real names in one stay as written (second batch question d; candidate 23); a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13)",
+    "way/1356244089": "'Pulksteņkalniņš - viduslaiku nocietinājums', two real names in one stay as written (second batch question d; candidate 23); a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13)",
+    "node/6691122172": "'Bukultu viduslaiku pils atrašanās vieta', a 'former' or 'site of' word in a name is not read as gone; lifecycle is read from tags, narrowly (third list 11, narrow version); kept on an article of the object's own (keep beats drop, owner 2026-10-13 #1)",
+    "way/626848700": "'Skanstes parks', rows of one name stay two rows beyond 300 m (ROW_MERGE_M); the any-distance merge needs one shared Wikidata entry (candidate 40)",
+    "node/6770550136": "'Imanta-1', a numbered microdistrict of a large housing district is kept (owner, 2026-10-13)",
+    "node/6770550135": "'Imanta-2', a numbered microdistrict of a large housing district is kept (owner, 2026-10-13)",
+    "node/6770550134": "'Imanta-3', a numbered microdistrict of a large housing district is kept (owner, 2026-10-13)",
+    "node/6770550133": "'Imanta-4', a numbered microdistrict of a large housing district is kept (owner, 2026-10-13)",
+    "node/6770550132": "'Imanta-5', a numbered microdistrict of a large housing district is kept (owner, 2026-10-13)",
+    "node/6770550130": "'Zolitūde-1', a numbered microdistrict of a large housing district is kept (owner, 2026-10-13)",
+    "node/6770550131": "'Zolitūde-2', a numbered microdistrict of a large housing district is kept (owner, 2026-10-13)",
+    "way/163191479": "landmarks that stand but are abandoned stay (owner 2026-10-13); a historic site needs no article (NOTABLE_ONLY covers tourism, amenity, aeroway only; SKIP_HISTORIC does not list this kind)",
+    "way/115743544": "a historic site needs no article (NOTABLE_ONLY covers tourism, amenity, aeroway only; SKIP_HISTORIC does not list this kind)",
+    "way/978142879": "'Lomonosova atpūtas telpa', parks need no article; a street name beside a type word is a park's name",
+    "way/84918404": "'Volejbola skolas stadions', a stadium needs no article; the name is one school's stadium",
+    "Kundziņsalas 5. šķērslīnija": "a real lane name with a number stays (six answers #2); series-number names kept (seven rulings #6)",
+    "Pievedceļš Salaspils memoriālam": "the description rule never takes a street with a way of residential class or above (street_description; 15 answers #9)",
+}
 PLACE_REVIEWED = {
     "Farmācijas muzejs": "a museum (owner, 2026-10-13)",
 }
@@ -254,4 +282,27 @@ PLACE_DROPPED = {
     "way/497142193": "a route description with a border crossing, not a street name",
     "way/37883948": "a description naming two settlements, not a street name",
     "way/1127997765": "two street names glued with a slash",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/727263469": "bare type word or type phrase as the whole name, no article of its own (BARE_TYPE_NAMES; owner 2026-10-11; seven rulings #4, 2026-10-13); held rows settled 2026-10-13",
+    "node/7603970478": "a business with nothing else is dropped; a place named for a business (LEAK rule, 2026-10-08); held rows settled 2026-10-13",
+    "node/9370631775": "a housing or commercial development mapped as a place is dropped (four rulings #2, 2026-10-13); a business with nothing else is dropped; a place named for a business (LEAK rule, 2026-10-08); held rows settled 2026-10-13",
+    "node/6816178758": "a housing or commercial development mapped as a place is dropped (four rulings #2, 2026-10-13); a business with nothing else is dropped; a place named for a business (LEAK rule, 2026-10-08); held rows settled 2026-10-13",
+    "node/12400605612": "a housing or commercial development mapped as a place is dropped (four rulings #2, 2026-10-13); held rows settled 2026-10-13",
+    "node/10047464343": "an office or other non-worship building tagged a place of worship is dropped (settled call of the Anyang and Gwangju reads, search-final 2026-10-13); held rows settled 2026-10-13",
+    "node/9328762367": "an office or other non-worship building tagged a place of worship is dropped (settled call of the Anyang and Gwangju reads, search-final 2026-10-13); a business with nothing else is dropped; a place named for a business (LEAK rule, 2026-10-08); held rows settled 2026-10-13",
+    "node/5927173333": "bare type word or type phrase as the whole name, no article of its own (BARE_TYPE_NAMES; owner 2026-10-11; seven rulings #4, 2026-10-13); held rows settled 2026-10-13",
+    "node/4511175500": "a code beside a type word is no name (CODED_TYPE, owner 2026-10-12; Ostia plot codes, 15 answers #8); held rows settled 2026-10-13",
+    "node/4511175501": "a code beside a type word is no name (CODED_TYPE, owner 2026-10-12; Ostia plot codes, 15 answers #8); held rows settled 2026-10-13",
+    "way/787911922": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "way/787911921": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "node/11755686174": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "node/8917645244": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "node/12747913176": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "node/12747922749": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); held rows settled 2026-10-13",
+    "way/1228651128": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); held rows settled 2026-10-13",
+    "node/12444122113": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); held rows settled 2026-10-13",
+    "way/768745536": "a housing or commercial development mapped as a place is dropped (four rulings #2, 2026-10-13); held rows settled 2026-10-13",
+    "node/9101832640": "a numbered microdistrict whose mapper doubts the name (owner, 2026-10-13)",
+    "node/9101832607": "a numbered microdistrict whose mapper doubts the name (owner, 2026-10-13)",
 }
