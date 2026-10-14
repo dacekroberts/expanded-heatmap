@@ -1,3 +1,59 @@
+### 2026-10-13 - The final group rebuilt on the integrated rules: 263,696 to 263,691 rows, 新富 a station row again, no twin (branch search-final)
+
+- **`git merge --no-ff 73f025df` (search-integration), merge commit
+  e3a993f3, no conflict.** `place_index.py --selftest`: 311 of 311. The
+  post-merge hook rewrote `app/macro_facts.json` with the shared data's
+  Mexico City count again; restored and not committed, as before.
+- **Taoyuan 新富 (node/4268315018) written to `PLACE_KEPT` (owner,
+  2026-10-13) and a station row again**: the log reads `station_closed:
+  access=private`, then `kept_by_id_admitted`. Florence node/573615484 is
+  untouched.
+- **All 32 indexes rebuilt, two gated runs at a time, no network request.**
+  23 changed byte for byte, 16 of them in rows. 36 rows left, 31 returned.
+  31 second stop positions folded into their stop's row (Brussels 12,
+  Bucharest 8, Berlin 6); 23 station rows returned where two names shared
+  one Wikidata entry (Berlin 19); 33 street rows gained the folded
+  square's spelling as another name; Geneva's "Place Favre" platform
+  footways are no street row; two more Brasilia halls named by type; a
+  Taichung bus stop is no junction row; Rome's "Acilia Sud" is a place row
+  again.
+- **`PLACE_KEPT` admitting a row brought back one more:** Monterrey's
+  colonia "Privado Villalta" (way/158894389), kept by the colonias ruling
+  and no row until now. Its name carries the leak word "privado", so check
+  E asked for a review: one `PLACE_REVIEWED` entry written, citing that
+  ruling.
+- **No twin round was needed.** No id new to a `place_ids.json` bears the
+  cached name of an object in its city's `PLACE_DROPPED`, and no dropped id
+  is a row.
+- **`check_place_search.py` (the merged version): 49 problems by city.**
+  Rule A on the 32 cities of this group (no map yet) and on 17 live cities
+  whose indexes the integration commit rebuilt without a render (not this
+  group's). Two rule E failures are left for the owner, below.
+
+For the owner:
+
+1. **Berlin's Ostkreuz is five station rows under the railway's operating
+   names** ("Berlin Ostkreuz (Ostbahn)", "(Ringbahn-F)", "(Stadtbahn-F)",
+   "Ostkreuz (Ringbahn)" and the row that was there); "Westkreuz
+   (Stadtbahn)" and "Nikolassee (Wannseebahn)" are the same class.
+   Recommended: a bracketed line suffix is set aside before two station
+   names are compared, so these fold as before. The tradeoff: a rule
+   change on shared code; a drop by id of six nodes would do it for Berlin
+   alone.
+2. **`PLACE_RULED_KEPT` names two objects that are no row** (the merged
+   check's new test). Most node/3911158753 ("Most, nádraží") is a stop
+   position inside the row of node/270050069, same name: recommended,
+   remove the record. Taipei way/547156822 ("圖書館") was recorded as kept
+   on an article of its own and the bare-type rule took it at d759ff13:
+   recommended, remove the record, since the name cannot say which library
+   it is; the other way is `PLACE_KEPT`.
+3. **Berlin's large stations are two rows each** (Alexanderplatz and
+   "Berlin Alexanderplatz", twelve more). The rule as written; listed, no
+   change recommended.
+
+Report: `data/_search_rollout/final_rules56/final_rebuild.md`, lists under
+`final_rebuild/` beside it.
+
 ### 2026-10-13 - The owner's rulings on the flag read applied: 387 ids dropped in 18 cities, 12 of the 13 left-for-rules rows with them (branch search-final)
 
 - **The owner, relayed by the Cleanup session: "all approved".** Drop the

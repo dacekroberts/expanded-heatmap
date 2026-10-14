@@ -184,6 +184,11 @@ PLACE_REVIEWED = {
     "機場旅館": "a metro station (A14a Airport Hotel), railway=station with its own article; the read of 2026-10-13",
     "南非航空公司空難紀念碑": "a memorial to an air crash, with its own article; the airline's name is in the memorial's name",
 }
+# Kept by id against a rule (owner, 2026-10-13; docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "node/4268315018": "'新富' (Xinfu), a halt of the national network with an article of its own; its access=private "
+                       "tag reads as closed to the public and the station is open (owner, 2026-10-13)",
+}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
     # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;

@@ -307,6 +307,8 @@ PLACE_RULED_KEPT = {
 }
 PLACE_REVIEWED = {
     "Calle Hotel Río": "a real street name (owner, 2026-10-13)",
+    "Privado Villalta": "a colonia of the municipal Plano de Colonias, kept by id in PLACE_KEPT (owner, 2026-10-13); "
+                        "a neighborhood's name, no private street",
 }
 
 # Colonias drawn as areas on residential land, kept by id (owner, 2026-10-13):
