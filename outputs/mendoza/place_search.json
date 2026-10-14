@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/mendoza.json",
-  "places": 39392,
+  "places": 2653,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "es"
     ],
     "coverage": {
-      "en": 0.0,
+      "en": 0.001,
       "es": 1.0
     },
     "list_share": 0.5,
@@ -18,8 +18,8 @@
   "stations_not_open": [],
   "area": [
     {
-      "osm": "relation/153540",
-      "name": "Mendoza",
+      "osm": "relation/2204157",
+      "name": "Departamento Capital",
       "stations": 7
     }
   ]

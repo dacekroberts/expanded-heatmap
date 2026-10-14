@@ -135,17 +135,23 @@ MENDOZA_BBOX = {
 
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
-PLACE_AREA = "(id:3600153540)"
-PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
-PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+# The searched area is relation 2204157, Departamento Capital (admin_level 5):
+# the department that holds all seven stations of the map and the boundary its
+# businesses are cut to (data/mendoza/raw/osm_place_area_lookup_2026-10-13.json,
+# read from the Argentina extract). The scaffold had set relation 153540, the
+# province of the same name (admin_level 4); the caches of that area stay on
+# disk under the unversioned names, and the province's outline is kept as
+# osm_place_outline_v1_province_2026-10-13.json
+# (docs/decisions_drafts/search-rollout.md, 2026-10-13).
+PLACE_AREA = "(id:3602204157)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_v2_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_v2_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
 # Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
 # places, each with why; scripts/check_place_search.py fails on any other.
 # Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
-PLACE_REVIEWED = {
-    "Hotel Termas del Sosneado": "a hotel's ruins (historic=hotel, ruins=yes, Wikipedia), not a business; tags read 2026-10-13",
-    "Ruinas Hotel Puente del Inca": "a hotel's ruins (historic=ruins, ruins=hotel), not a business; tags read 2026-10-13",
-    "Viejo Hotel Cacheuta": "a hotel's ruins (historic=ruins), not a business; tags read 2026-10-13",
-}
+# The three hotel ruins reviewed on 2026-10-13 lay in the province, outside the
+# department; none is a row since the area was corrected.
+PLACE_REVIEWED = {}
 PLACE_DROPPED = {}
