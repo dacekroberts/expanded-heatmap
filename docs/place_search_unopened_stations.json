@@ -783,17 +783,6 @@
    "noted": "2026-10-13"
   },
   {
-   "city": "manchester",
-   "line": null,
-   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
-   "name": "Crumpsall",
-   "osm": "node/7007839003",
-   "tag": "construction:public_transport=stop_position",
-   "open_namesake_in_index": true,
-   "cache": "2026-10-12",
-   "noted": "2026-10-13"
-  },
-  {
    "city": "birmingham",
    "line": null,
    "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
