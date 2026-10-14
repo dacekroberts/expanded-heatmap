@@ -22,6 +22,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import (  # noqa: E402
     load_geojson_line_shapes,
     load_line_shapes,
@@ -102,6 +103,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=comune_geometry(),
+        place_index_url=place_index.index_url("milan"),
     )
 
 
