@@ -420,7 +420,10 @@ if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     b = gpd.read_file(config.CITY_BOUNDARY_ZIP)
     b = b.set_crs(config.CRS_GEOGRAPHIC) if b.crs is None else b.to_crs(config.CRS_GEOGRAPHIC)
-    built = config.DATA_PROCESSED / "stations.csv"   # the rapid-transit set as master built it
+    # DRY RUN ONLY, AND STALE SINCE THE LANDING: stations.csv now holds the
+    # streetcar stations too, so this feeds them back in as rapid transit.
+    # Step 1 passes the rapid-transit set itself and is the figure to trust.
+    built = config.DATA_PROCESSED / "stations.csv"
     res = build(pd.read_csv(built), b.to_crs(config.CRS_PROJECTED).union_all())
     print(f"\n{res['counts']}\nattached: {res['attached']}")
     print(res["stations"].to_string())

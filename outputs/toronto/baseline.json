@@ -5,10 +5,15 @@
   "geocoded_rows": 18215,
   "platforms": 234,
   "stations_collapsed": 110,
+  "stations_drawn": 174,
   "stations_in_city": 108,
   "storefront_rows": 19414,
   "storefronts": 18215,
   "storefronts_food_service": 13414,
   "storefronts_personal_services": 4042,
-  "storefronts_retail": 759
+  "storefronts_retail": 759,
+  "streetcar_places": 237,
+  "streetcar_places_at_rapid_stations": 15,
+  "streetcar_stations_new": 66,
+  "streetcar_stops_thinned": 156
 }

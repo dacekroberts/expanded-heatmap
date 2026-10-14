@@ -14,10 +14,9 @@ OUTPUTS = ROOT / "outputs" / "toronto"
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
-# TRAM RESCOPE BRANCH ONLY: stations.csv is written under processed/tram/ so
-# the shared data folder's built file stays as master reads it. At landing,
-# drop "tram" here and in STREETCAR_SHAPES_JSON and re-run steps 1 and 4.
-STATIONS_CSV = DATA_PROCESSED / "tram" / "stations.csv"
+# Rapid-transit stations and streetcar stations together since the tram
+# rescope (owner 2026-10-13).
+STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 BUSINESSES_GEOCODED_CSV = DATA_PROCESSED / "businesses_geocoded.csv"
 
@@ -273,7 +272,7 @@ STREETCAR_THIN_SPACING_MILES = 0.5
 STREETCAR_MAX_HEADWAY_MIN = 15.0
 
 # Step 1 writes the line shapes it chose here; step 4 reads them.
-STREETCAR_SHAPES_JSON = DATA_PROCESSED / "tram" / "streetcar_shapes.json"
+STREETCAR_SHAPES_JSON = DATA_PROCESSED / "streetcar_shapes.json"
 
 # PLATFORM-TO-STATION COLLAPSE, AND THIS CITY IS WHY THE PROJECT DISTRUSTS
 # STATION COUNTS AT ALL.
