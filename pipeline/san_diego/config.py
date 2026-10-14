@@ -769,6 +769,5 @@ PLACE_DROPPED = {
     "node/14131530332": "'Scripps Ranch Business Park', a business park or centre mapped as a neighbourhood, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
     "node/14131530331": "'Scripps Ranch Technology Park', a business park or centre mapped as a neighbourhood, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
     "node/14095801948": "'Spectrum Center', a business park or centre mapped as a quarter, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
-    "node/14130466440": "'University Towne Center', a business park or centre mapped as a quarter, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
     "node/13513291492": "'Uptown Medical Complex', a business park or centre mapped as a quarter, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
 }
