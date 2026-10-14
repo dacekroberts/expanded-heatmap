@@ -2,6 +2,91 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: master merged in; place search rebuilt for Mexico City and Prague and built for Milan (Cleanup agent, nothing pushed, no map rendered)
+
+- **Merge.** `origin/master` (e0138000) into `tram-rescope`, 788ae80c. No
+  conflict: both configs merged by git, each side's settings kept.
+  `app/ring_shares.json` regenerated. The four cities then showed zero drift
+  with the index step left out (the scratch wrapper of the entry below).
+  `check_macro_facts.py` passes; Mexico City (Regional) reads 427,121.
+- **Mexico City (adb4c5c1).** `PLACE_AREA` gains Tlalnepantla de Baz
+  (relation 5606521; 4 drawn stations). The six-area caches read earlier the
+  same day from the held extract (mexico-261012, data 2026-10-12T20:21:35Z)
+  were adopted by copy under new names, `osm_places_2026-10-13.json` and
+  `osm_places_extra_2026-10-13.json`, and recorded in provenance by the
+  extract route's own recorder; the script's kept-cache area check passes.
+  The five-area outline is kept as
+  `osm_place_outline_v1_five_areas_2026-10-12.json`. No refetch.
+  - **Judgment call: the Wikidata cache was copied to
+    `wikidata_articles_2026-10-13.json` before the lookup**, since the cache
+    name follows the place cache's and a fresh name would have asked every
+    id again. One request, one new id.
+  - Rows 61,199 to 67,345 (streets 55,682 to 61,711, places 2,986 to 3,023,
+    landmarks 2,290 to 2,391, stations 240 to 219, junction 1). The index
+    was last built before the rule passes of 2026-10-13, so the change
+    mixes the area and the rules.
+  - Check H passes on its own; `KNOWN_GAPS` is empty again. San Isidro is a
+    Mexicable terminal, so it is no station row by rule; it is covered by
+    the places around it and found from the map's own station list.
+  - 223 non-street rows are new to the cache (182 landmarks, 39 places, 2
+    stations). Seven dropped by id under the bare-type and description
+    rulings of 2026-10-11 (Glorieta, Explanada, obelisco, CANCHAS
+    DEPORTIVAS with two spaces, Parque Para Perros, Parque con fuente, Area
+    Comun/Canchas de Basquetball). Two street names reviewed for the leak
+    word "s.a." (Avenida A.N.D.S.A. and its alternate Calle 2 de Abril).
+  - **For the owner, 14 rows** in `data/_search_rollout/tram_rules56/mexico_city.tsv`
+    (verdict unsure), each with a recommendation.
+- **Prague (ef1e64eb).** Rebuilt from the caches of 2026-10-08 on the 196
+  stations; no request. Rows 10,790 to 10,435. Check H passes: no tram stop
+  is without an indexed place within 1 km, and no quiet station is listed.
+  Station rows are OpenStreetMap's (431 to 429, two merges), not the map's
+  196: the map's stations reach the box from the map itself.
+  - Every departure is a landed rule of 2026-10-13: 292 works of public art
+    with no article, 36 boundary relations repeating another row's entry,
+    11 libraries, 5 street ways as landmarks, 4 halls named by denomination,
+    4 segment merges, 3 private living streets, the city's own boundary.
+  - **For the owner: 18 boroughs now have no row under their own name**
+    (Praha 1, 3, 4, 7, 9, 10, 14, 16, 18, 20, 22 and seven "Praha-X"). The
+    row that keeps each one's Wikidata entry is its TOWN HALL, a landmark,
+    not a place node. Recommendation: the site-relation rule should fold a
+    boundary only into a place row; a rule change, so the protocol's.
+- **Milan (e1ed8d65).** No built Italian city gave an admin level, so the
+  area lookup left it for a person. **Judgment call, by the scope rule: the
+  Comune di Milano, relation 44915 (admin_level 8)**, the boundary the
+  businesses are cut to; all 193 stations sit in it. One extract download
+  (nord-ovest-261013, 593 MB), no Overpass request, two Wikidata requests
+  for 64 ids.
+  - 6,149 rows: 4,378 streets, 996 landmarks, 482 stations, 293 places;
+    8,798 intersections. Italian 100%. Check H passes.
+  - **Judgment call: 527 ways dropped by id as stop platforms.** Milan draws
+    stop platforms as `highway=footway` with `public_transport=platform`,
+    named for the stop ("V.le Sarca Via Chiese"), and the street pass read
+    372 such names as streets. A platform is no street by the first row of
+    the exclusions record; the rule reads `highway=platform` only. Prague
+    has 20 such names, Mexico City none; other cities were not measured.
+    Recommendation: a rule on the platform tag, which would replace the
+    list.
+  - Also by id: three descriptions, ten places of worship named only by
+    their body or denomination (the Italian list does not hold them), one
+    locality named as a person's house. "Albergo diurno Venezia" reviewed
+    as a place.
+  - Street coverage 84.0% of named-way names after the platform drop
+    (91.1% before); the names left out are footways (514, the platforms
+    among them), platforms (134), service roads (92).
+  - The eye read: the `place-read` agent read all 1,006 landmark and 295
+    place rows line by line; the caller read the 482 station rows; streets
+    were screened by pattern, not read. 102 rows are with the owner in
+    `data/_search_rollout/tram_rules56/milan.tsv`: 33 "Casa X" historic
+    buildings (no Italian house lead in the lists), 26 farmsteads and mills
+    tagged places, 4 tram stops closed in 1978, 14 second rows, others.
+  - **Owed before Milan's map is rendered:** `map_common.LANG_WORDS` has no
+    Italian entry on this branch (the matcher words are on another branch).
+  - The scaffold set `search='milan'` on the page; the bullet is the
+    template's. No other page text is needed (flag for review time).
+- **Checks.** `check_all.py`: one failure, `check_place_search.py` rule A for
+  the three maps not rendered since their index step. Scope check OK (20
+  cities), index drift OK, provenance names the three OK.
+
 ### 2026-10-13 - Tram rescope: landing preparation, the four cities back on their normal processed paths (Cleanup, nothing pushed)
 
 - **Owner, 2026-10-13:** approved starting the landing preparation. Done on
