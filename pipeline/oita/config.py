@@ -375,4 +375,6 @@ PLACE_DROPPED = {
     # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
     # a row dropped by id; each dropped under the class of the row it replaced.
     "relation/12991158": "'史跡公園': the twin of way/496712027; bare type: dropped in the full read (owner, 2026-10-13)",
+    # A national road's planned sea-crossing section drawn as a street (the sea-crossing ruling; owner, 2026-10-13)
+    "way/683627211": "'国道197号（海上区間）': highway=planned, access=no: no road to find",
 }

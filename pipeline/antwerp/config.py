@@ -264,4 +264,9 @@ PLACE_DROPPED = {
     "node/2202086566": "'deSingel': the other direction of one tram stop, 196 m from node/2202086562 (full read, duplicate)",
     # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
     "way/996504876": "'Chinatown': same thing as the place row Van Wesenbekestraat (relation/16884611, alt Chinatown), 7 m away, same wikidata Q2932425 (full read, duplicate)",
+    # Twins of a dropped duplicate (owner, 2026-10-13): a stop node and a platform node of the premetro
+    # station Groenplaats (node/12095480888, the row that stays), promoted when node/1635630580 and
+    # node/2207804046 were dropped; the same class, a second row of one object.
+    "node/1635630608": "'Groenplaats': the twin of node/1635630580; duplicate: dropped in the full read",
+    "node/2207804047": "'Groenplaats': the twin of node/2207804046; duplicate: dropped in the full read",
 }
