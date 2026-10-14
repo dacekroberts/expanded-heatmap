@@ -268,6 +268,24 @@ whose stop has its own row); a variant character among stations of one entry (Ta
 beside 臺北); a leading line letter ("S Friedrichstraße"); angle brackets (押上〈スカイツリー前〉);
 Houston's Central Station, three platform rows where the map draws two names.
 
+## Landmarks with an article of their own and no row (2026-10-13, branch search-rules-8)
+
+Two rule faults mended (owner confirmed, 2026-10-13). Reach:
+`data/_search_rollout/reads_rules56/part9_landmarks.md`; causes:
+`data/_search_rollout/live_rules56/landmark_faults.md`.
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A landmark that stands on its subject's article or entry | `_SUBJECT_KEYS`; the subject key is NOT read when the article's title, a bracketed or comma qualifier set aside, is one of the object's names (`article_names_object`), never on a grave or a plaque | `own_article` | landmark |
+| A site or boundary relation that repeats another row's entry more than 300 m off | `SITE_RELATION_TYPES`, `ROW_MERGE_M`; under ANOTHER name than that row, the relation keeps its own row when its article is named for it, and otherwise its name becomes an alternate of the row it folds into | merges | landmark, place |
+
+**Returned by these:** Chicago's Victory Monument and Pullman National Historical Park; university
+sites in London, Berlin, Birmingham, Manchester, Newcastle and Nottingham; Brno's, Prague's,
+Ostrava's and Plzeň's boroughs with an article under the borough's name ("Brno-Bystrc",
+"Praha-Troja"); Kyoto's 醍醐寺. With the park's row back its entry is on three rows in Chicago, and
+the shared-entry rule (`SHARED_WIKIDATA_MIN`) takes the Pullman Administration Building
+(way/210701534), kept by id on the owner's word.
+
 ## Considered and not built as rules
 
 Castles (a web check is owed), coded names the rule misses and zoo contents

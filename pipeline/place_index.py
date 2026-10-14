@@ -2232,6 +2232,23 @@ MODEL_EXHIBITS = {"aircraft", "tank", "cannon", "missile", "rocket", "vehicle"}
 RAIL_EXHIBITS = {"locomotive", "railway_car"}
 
 
+# AN ARTICLE NAMED FOR THE OBJECT IS THE OBJECT'S (a fault mended,
+# 2026-10-13: Chicago's Victory Monument, way/1361248798, carries its own
+# entry as subject:wikidata too, was read as standing on its subject's and
+# had no row). The article's title, a bracketed or comma qualifier set aside
+# ("Victory Monument (Chicago)", "General Post Office, Dublin"), is one of
+# the object's names. Never on a grave or a plaque, which is named for its
+# subject (own_article). Measured on 211 cities: 36 landmarks dropped by the
+# subject-entry test, 5 of them under an article of their own name.
+_TITLE_QUALIFIER = re.compile(r"\s*(?:\([^)]*\)|,.*)$")
+
+
+def article_names_object(wp, names):
+    title = article_title(wp or "")
+    keys = {fold_name(title), fold_name(_TITLE_QUALIFIER.sub("", title))} - {""}
+    return any(fold_name(n) in keys for n in names if n)
+
+
 def _titled_by_name(tags):
     title = fold_name(article_title(tags.get("wikipedia") or ""))
     return bool(title) and title == fold_name(tags.get("name") or "")
@@ -2429,7 +2446,12 @@ def own_article(tags, names, shared=False):
     if "#" in wp:
         return "not", "a section of another article"
     wd = (tags.get("wikidata") or "").strip()
+    # A subject tag that repeats the object's own article or entry says
+    # nothing when the article is named for the object (article_names_object).
+    named = not grave_or_plaque(tags) and article_names_object(wp, names)
     for key in _SUBJECT_KEYS:
+        if key == "subject" and named:
+            continue
         if (tags.get(f"{key}:wikipedia") or "").strip() == wp:
             return "not", f"the article is its {key}'s ({key}:wikipedia)"
         if wd and wd in [v.strip() for v in (tags.get(f"{key}:wikidata") or "").split(";")]:
@@ -4920,6 +4942,24 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             other = next((o for o in items if o is not r and not site_relation(o)
                           and (KINDS[r[0]] != "place" or KINDS[o[0]] == "place")
                           and _dist_m((r[1], r[2]), (o[1], o[2])) > ROW_MERGE_M), None)
+            # THE RELATION'S NAME IS NOT LOST (a fault mended, 2026-10-13:
+            # Chicago's Pullman National Historical Park was folded into the
+            # Pullman Administration Building, which carries the park's
+            # entry, and the park's name found nothing). Under another name
+            # than the row it repeats, a relation with an article named for
+            # it keeps its own row; any other leaves its name as an
+            # alternate on that row. Measured on 211 cities: 93 folds, 65
+            # under another name, 48 of them with the name found nowhere
+            # (23 keep a row, 25 become alternates).
+            if other is not None and fold_name(other[3]) != fold_name(r[3]):
+                if article_names_object(r[9].get("wikipedia"), [r[3]]):
+                    note("site_relation_kept", "kept", r[7], r[3], "an article named for it, under another name", r[9])
+                    other = None
+                else:
+                    alias = [a for a in other[4].split("|") if a]
+                    if r[3] != other[3] and r[3] not in alias:
+                        other[4] = "|".join(alias + [r[3]])
+                        report["site_relation_name_kept_as_alternate"] += 1
             if other is not None:
                 gone.add(id(r))
                 report[KINDS[r[0]]] -= 1
@@ -5295,6 +5335,22 @@ def _selftest():
     node(47.7720, -122.32, name="Old 99", tourism="attraction", locomotive__type="steam", wikidata="Q904",
          wikipedia="en:Old 99")
     node(47.7000, -122.325, name="City College", amenity="college", wikidata="Q905")
+    # A site relation under another name than the row that carries its entry.
+    node(47.3700, -122.325, name="Mill Works Office", historic="building", wikidata="Q981",
+         wikipedia="en:Mill Works Historic Park")
+    rel(47.3740, -122.325, name="Mill Works Historic Park", type="site", historic="yes", wikidata="Q981",
+        wikipedia="en:Mill Works Historic Park")
+    node(47.3600, -122.325, name="Canal Museum", tourism="museum", wikidata="Q982")
+    rel(47.3640, -122.325, name="Canal Museum Grounds", type="site", tourism="museum", wikidata="Q982")
+    # Public art whose article another tag than subject repeats: the public
+    # art rule's own test still keeps it (the break on that test needs it).
+    node(47.3300, -122.325, name="Sun Dial", tourism="artwork", wikipedia="en:Sun Dial",
+         name__etymology__wikipedia="en:Sun Dial")
+    # A subject tag that repeats the object's own entry.
+    node(47.3500, -122.325, name="Peace Monument", historic="memorial", memorial="war_memorial", wikidata="Q983",
+         subject__wikidata="Q983", wikipedia="en:Peace Monument (Testville)")
+    node(47.3400, -122.325, name="Fire Memorial", historic="memorial", memorial="war_memorial", wikidata="Q984",
+         subject__wikidata="Q984", wikipedia="en:Great Fire of Testville")
     # A borough's boundary and its town hall share one entry: two rows.
     rel(47.7700, -122.345, name="Ward Nine", place="suburb", boundary="administrative", wikidata="Q970")
     node(47.7600, -122.345, name="Ward Nine Town Hall", amenity="townhall", wikidata="Q970")
@@ -6019,6 +6075,21 @@ def _selftest():
          and ("landmark", "Old 99") in rows),
         ("a site relation repeating a row's entry far off is no row", count[("landmark", "City College")] == 1),
         ("a site relation on its object stays", ("landmark", "Art School Grounds") in rows),
+        ("a site relation with an article named for it keeps its row beside a member of another name",
+         ("landmark", "Mill Works Historic Park") in rows and ("landmark", "Mill Works Office") in rows),
+        ("a site relation under another name leaves its name as an alternate of the row it repeats",
+         ("landmark", "Canal Museum Grounds") not in rows
+         and "Canal Museum Grounds" in alias.get(("landmark", "Canal Museum"), "")),
+        ("a subject tag that repeats the object's own entry does not take a landmark named by its article",
+         ("landmark", "Peace Monument") in rows),
+        ("a landmark under its subject's article and entry is still no row", ("landmark", "Fire Memorial") not in rows),
+        ("public art under an article of its own name stays, whatever other tag repeats the article",
+         ("landmark", "Sun Dial") in rows),
+        ("article_names_object: a bracketed or comma qualifier is set aside, another title is not the name",
+         article_names_object("en:Victory Monument (Chicago)", ["Victory Monument"])
+         and article_names_object("en:General Post Office, Dublin", ["General Post Office"])
+         and not article_names_object("en:Haymarket affair", ["Haymarket Memorial"])
+         and not article_names_object("", ["Anything"])),
         ("tram stops of one name 200 m apart are one row", count[("station", "Quay Stop")] == 1),
         ("a direction note in brackets does not part a stop's platforms",
          count[("station", "Harbour (dir North)")] + count[("station", "Harbour (dir South)")] == 0

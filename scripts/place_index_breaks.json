@@ -273,5 +273,8 @@
  {"label": "two names the map draws stay two rows among one core", "old": "        if len({fold_name(r[3]) for r in parts[n]} & set(drawn)) > 1:", "new": "        if False:"},
  {"label": "a row folded on its core takes the short name", "old": "                        if best != keep[3]:", "new": "                        if False:"},
  {"label": "a note in brackets goes where the map draws the rest", "old": "                        if bare and fold_name(bare) in drawn:", "new": "                        if False:"},
- {"label": "a kept id is a station only by its railway tag", "old": "            kind = (\"station\" if t.get(\"railway\") in (\"station\", \"halt\", \"tram_stop\")", "new": "            kind = (\"station\" if (t.get(\"railway\") or t.get(\"public_transport\"))"}
+ {"label": "a kept id is a station only by its railway tag", "old": "            kind = (\"station\" if t.get(\"railway\") in (\"station\", \"halt\", \"tram_stop\")", "new": "            kind = (\"station\" if (t.get(\"railway\") or t.get(\"public_transport\"))"},
+ {"label": "a subject tag repeating the object's own entry is not read under an article of its name", "old": "named = not grave_or_plaque(tags) and article_names_object(wp, names)", "new": "named = False"},
+ {"label": "a site relation with an article named for it keeps its row", "old": "if article_names_object(r[9].get(\"wikipedia\"), [r[3]]):", "new": "if False:"},
+ {"label": "a folded site relation leaves its name as an alternate", "old": "other[4] = \"|\".join(alias + [r[3]])", "new": "pass"}
 ]
