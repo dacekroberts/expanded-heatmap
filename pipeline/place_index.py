@@ -3480,6 +3480,28 @@ def _commercial(tags):
 # 2026-10-13; landmark_drop): a private operator and an office tag, nothing
 # else. operator:type=business or commercial is not among them.
 KEPT_COMMERCIAL_REASONS = {"office", "operator:type=private"}
+# A SIGHT'S BRAND OR SHOP TAG (owner, 2026-10-13, relayed by Cleanup): an
+# article of the object's own (the same "own" as above) outweighs a brand
+# tag where the object also carries a tourism, historic or heritage tag
+# (Dublin's General Post Office, Hong Kong Disneyland, the Peak Tram), and a
+# shop tag on such a sight or on a market hall (Harrods, El Ateneo Grand
+# Splendid, Galerías Pacífico, Feskekörka). Lodging and food stay out: their
+# signs (tourism=hotel and the like, a food amenity, cuisine, craft) are
+# never outweighed. An ordinary shop with an article stays out (no sight
+# tag), and so does one under a chain's or a brand's article (not its own:
+# own_article, an article another object carries or the brand's own).
+# Measured: data/_search_rollout/reads_rules56/part9_landmarks.md, the
+# second heading.
+SIGHT_MARKET_AMENITIES = {"marketplace"}
+
+
+def _sight(tags, market=False):
+    """A tourism, historic or heritage tag; with `market`, a market hall's
+    amenity too."""
+    return bool(tags.get("tourism") or tags.get("historic") not in (None, "no") or tags.get("heritage")
+                or (market and tags.get("amenity") in SIGHT_MARKET_AMENITIES))
+
+
 # What a rule's record keeps of an object's tags (build()'s `log`).
 _LOG_KEYS = {"wikidata", "wikipedia", "heritage", "ref:nrhp", "historic", "tourism", "amenity", "building",
              "leisure", "landuse", "access", "memorial", "cemetery", "tomb", "place", "railway",
@@ -4003,8 +4025,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # private operator or an office tag (115 measured: private
             # universities and museums, parliaments, town halls). A brand, a
             # shop or a lodging tag still keeps a row out (the Panama Hotel
-            # precedent: the building, never the business).
-            if not (own and set(why) <= KEPT_COMMERCIAL_REASONS):
+            # precedent: the building, never the business), except a
+            # sight's brand or shop tag (_sight; owner, 2026-10-13).
+            allowed = set(KEPT_COMMERCIAL_REASONS)
+            if _sight(t):
+                allowed.add("brand")
+            if _sight(t, market=True):
+                allowed.add("shop")
+            if not (own and set(why) <= allowed):
                 return "commercial", names
             kept.append("commercial")
         # A PARK AN APARTMENT ESTATE RUNS (the third list, 2026-10-13): a
@@ -5195,6 +5223,19 @@ def _selftest():
     node(47.7000, -122.32, name="Hill College", amenity="college", operator__type="private",
          wikipedia="en:Hill College")
     node(47.7005, -122.32, name="Brand Museum", tourism="museum", brand="Brand", wikipedia="en:Brand Museum")
+    # A sight's brand or shop tag (owner, 2026-10-13): a brand with no sight
+    # tag; a shop sight; a market hall; an ordinary shop; a shop sight under
+    # a chain's article two objects carry; a hotel and a cafe on sights.
+    node(47.3000, -122.28, name="Brand College", amenity="college", brand="Brand", wikipedia="en:Brand College")
+    node(47.3010, -122.28, name="Old Arcade", tourism="attraction", shop="mall", wikipedia="en:Old Arcade")
+    node(47.3020, -122.28, name="Fish Hall", amenity="marketplace", shop="seafood", wikipedia="en:Fish Hall")
+    node(47.3030, -122.28, name="Corner Books", shop="books", wikipedia="en:Corner Books")
+    node(47.3040, -122.28, name="Chain Gallery North", tourism="attraction", shop="gift", wikipedia="en:Chain Gallery")
+    node(47.3150, -122.28, name="Chain Gallery South", tourism="attraction", shop="gift", wikipedia="en:Chain Gallery")
+    node(47.3060, -122.28, name="Grand Old Hotel", tourism="hotel", historic="building", brand="Grand",
+         wikipedia="en:Grand Old Hotel")
+    node(47.3070, -122.28, name="Cocoa Museum", tourism="museum", amenity="cafe", shop="deli",
+         wikipedia="en:Cocoa Museum")
     node(47.7010, -122.32, name="Fenced Library", amenity="library", access="private",
          wikipedia="en:Fenced Library")
     node(47.7015, -122.32, name="Fenced Garden", leisure="garden", access="private", wikidata="Q8",
@@ -5742,7 +5783,17 @@ def _selftest():
         ("a bare type word under the type's article is no row", ("landmark", "Fountain") not in rows),
         ("a bare type word under a shared article is no row", ("landmark", "Sundial") not in rows),
         ("a private operator with its own article is a row", ("landmark", "Hill College") in rows),
-        ("a brand with its own article is no row", ("landmark", "Brand Museum") not in rows),
+        # Was "a brand with its own article is no row"; turned round by the
+        # owner's ruling of 2026-10-13 (a sight's brand tag).
+        ("a brand beside a tourism tag is outweighed by an article of its own", ("landmark", "Brand Museum") in rows),
+        ("a brand with no sight tag still keeps a row out", ("landmark", "Brand College") not in rows),
+        ("a shop tag on a sight is outweighed by an article of its own", ("landmark", "Old Arcade") in rows),
+        ("a shop tag on a market hall is outweighed by an article of its own", ("landmark", "Fish Hall") in rows),
+        ("an ordinary shop with an article stays out", ("landmark", "Corner Books") not in rows),
+        ("a shop sight under an article another object carries stays out",
+         not any(n.startswith("Chain Gallery") for _, n in rows)),
+        ("a hotel stays out with an article, a historic tag and a brand", ("landmark", "Grand Old Hotel") not in rows),
+        ("a cafe stays out on a sight with an article", ("landmark", "Cocoa Museum") not in rows),
         ("private access on a library with its own article is a row", ("landmark", "Fenced Library") in rows),
         ("private access on a garden stays a home's", ("landmark", "Fenced Garden") not in rows),
         ("private access on a palace stays a home's", ("landmark", "Fenced Palace") not in rows),

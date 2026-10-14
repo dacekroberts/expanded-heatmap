@@ -278,6 +278,7 @@ Two rule faults mended (owner confirmed, 2026-10-13). Reach:
 |---|---|---|---|
 | A landmark that stands on its subject's article or entry | `_SUBJECT_KEYS`; the subject key is NOT read when the article's title, a bracketed or comma qualifier set aside, is one of the object's names (`article_names_object`), never on a grave or a plaque | `own_article` | landmark |
 | A site or boundary relation that repeats another row's entry more than 300 m off | `SITE_RELATION_TYPES`, `ROW_MERGE_M`; under ANOTHER name than that row, the relation keeps its own row when its article is named for it, and otherwise its name becomes an alternate of the row it folds into | merges | landmark, place |
+| A business: a brand or a shop tag (owner's rulings, 2026-10-13) | `COMMERCIAL_KEYS`; an article of the object's own now outweighs a brand tag beside a tourism, historic or heritage tag, and a shop tag on such a sight or on a market hall (`_sight`, `SIGHT_MARKET_AMENITIES`); lodging, food, cuisine and craft signs are never outweighed, and an ordinary shop with an article stays out | `landmark_drop` | landmark |
 
 **Returned by these:** Chicago's Victory Monument and Pullman National Historical Park; university
 sites in London, Berlin, Birmingham, Manchester, Newcastle and Nottingham; Brno's, Prague's,
