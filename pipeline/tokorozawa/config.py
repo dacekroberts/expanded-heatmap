@@ -232,4 +232,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/tokorozawa.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "node/2393360978": "'お稲荷様': \"the Inari\" with an honorific, a way of saying \"a fox shrine\", not a shrine's name",
+    "node/2393393283": "'供養塔': \"memorial tower\", the object's type; tagged a monument",
+    "node/4170681289": "'供養塔': \"memorial tower\", the object's type; tagged a place of worship",
+    "node/2393360082": "'六地蔵': \"six Jizo statues\", the object's type; tagged a place of worship",
+    "node/2314747043": "'水子地蔵': \"Jizo for unborn children\", the object's type; tagged a place of worship",
+    "node/2178020861": "'道路元標': \"road origin marker\", the object's type with no town named",
+    # A second row of one object (owner, 2026-10-13)
+    "node/3121532604": "'所沢みくに教会': a node 46 m from the church building of the same name with its denomination in front (way/1485717920)",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "way/1464595457": "'創価学会所沢平和会館': a religious body's meeting hall or branch tagged a place of worship",
+    # Unsure rows a ruling drops: a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m (ruling 4) (owner, 2026-10-13)
+    "way/1482709050": "'奥の院 門': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+    "way/1464876463": "'金乗院山門(仁王門)': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+}

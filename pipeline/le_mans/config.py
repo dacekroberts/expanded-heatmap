@@ -202,4 +202,11 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Haute Venelle - Clinique du Pré": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/le_mans.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/97466680": "'Jardin Public': \"public garden\", the type words alone, no place named",
+    "node/11456218305": "'Meule': \"millstone\", the object's type (historic=millstone), no name of its own",
+}

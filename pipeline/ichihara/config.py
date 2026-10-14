@@ -251,4 +251,10 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/ichihara.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A glitched name (owner, 2026-10-13)
+    "way/1126821182": "'姉崎駅前2号': a truncated name: \"Anesaki station front No. 2\" with the word park missing; its neighbours are 姉崎駅西口1号公園 and 姉崎西口第2号公園",
+}
