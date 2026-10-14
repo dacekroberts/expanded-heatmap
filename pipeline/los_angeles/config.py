@@ -748,4 +748,5 @@ PLACE_KEPT = {
     # A place of worship kept against the denomination rule (worship_only;
     # owner, 2026-10-13: "keep all four by id").
     "node/358828101": "'The Church of Jesus Christ of Latter-day Saints', the Wilshire Ward chapel (alt_name=Wilshire Ward, wikidata=Q8022900, an entry of its own and no wikipedia tag): a known building under its denomination's name (owner, 2026-10-13)",
+    "way/438331516": "'The Queen Mary', one of the city's best-known sights, in the cache with no row (tourism=hotel, historic=ship, wikidata=Q752939; held out as a hotel): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
 }

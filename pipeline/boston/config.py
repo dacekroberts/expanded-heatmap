@@ -319,4 +319,11 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "node/358283788": "'Our Lady of Lourdes Parish Center', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
     "way/862891605": "'Shoppers Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/817356487": "'Childrens Park', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
+    "node/368984899": "'Chelsea River', a bay node beside the river's own row: one river labelled twice (owner, 2026-10-13, on the pattern screen's open calls: ruling 9)",
+    # The pattern screen of 2026-10-13, twin round of the owner's rulings: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/1429125836": "'Childrens Park', a park named only by a type word; the second way of the name, beside way/817356487 (owner, 2026-10-13, on the pattern screen's open calls; twin round)",
 }

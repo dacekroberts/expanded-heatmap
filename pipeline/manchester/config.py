@@ -384,6 +384,9 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "way/557643019": "'Assembly Hall of Jehovah's Witnesses', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     "node/286960803": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/257808358": "'School Field', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

@@ -299,6 +299,9 @@ PLACE_DROPPED = {
     "way/1323935108": "'NE Lion Guard', description: compass code beside a type: one of a bridge's four lions, by id (flag check, 2026-10-13)",
     "way/1323935109": "'NW Lion Guard', description: compass code beside a type: one of a bridge's four lions, by id (flag check, 2026-10-13)",
     "way/264219626": "'Southwood off-leash area 2', description: type and a number: 'off-leash area 2'; CODED_TYPE could take 'off-leash area N' (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/469601882": "'The Atrium', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
 }
 
 # Famous places kept by id: in the cache, passed over by the rules (place_index,

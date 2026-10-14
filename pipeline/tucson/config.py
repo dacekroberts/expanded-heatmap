@@ -213,4 +213,8 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "way/34228242": "'Tucson LDS Institute of Religion', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/32929786": "'The Main Mall', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    "way/50619003": "'The Main Mall', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
 }

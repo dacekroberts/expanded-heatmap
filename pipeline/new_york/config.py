@@ -745,10 +745,6 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "way/225190636": "'Playground 103', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
     "way/765274333": "'Playground 11', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
-    "way/389592778": "'Playground 115', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
-    "way/185148215": "'Playground 286', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
-    "way/1539568479": "'Playground 80', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
-    "way/1013201642": "'Plaza 67', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
     "way/280354485": "'Queens Assembly Hall of Jehovahs Witnesses', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     "way/249973243": "'Saint Thomas Parish House', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
     "node/8265113845": "'Campus Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",

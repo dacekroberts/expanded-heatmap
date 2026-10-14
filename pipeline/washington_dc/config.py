@@ -470,11 +470,12 @@ PLACE_DROPPED = {
     "way/59246906": "'Square 80', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
     "node/358958281": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     "node/358960851": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    # Owner, 2026-10-13: one work under two rows; the way stays.
+    "node/358960331": "'Three Servicemen Statue', a duplicate of The Three Soldiers (way/895985388), which stays: one work, one Wikidata entry, 270 m apart (owner, 2026-10-13); it was kept by id before",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,
 # PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
 # cannot admit; DECISIONS.md of that date lists the works left out.
 PLACE_KEPT = {
-    "node/358960331": "'Three Servicemen Statue', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
 }

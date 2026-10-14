@@ -551,4 +551,7 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "node/14183595174": "'Alumni Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/174506099": "'Municipal Park', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
 }

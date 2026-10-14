@@ -232,4 +232,7 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "way/639573159": "'The Little Park', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
     "way/1312713051": "'Carp RIver', a second river row under a mistyped name beside the river's own row (owner, 2026-10-13, ruling 9 and the glitched-name call; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/548432118": "'Linear Park', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
 }

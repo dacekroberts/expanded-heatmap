@@ -298,6 +298,12 @@ PLACE_DROPPED = {
     "way/723572376": "'Student Life Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
     "way/625071581": "'Amegy Tower Park', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
     "way/624788476": "'Penwell Tower Park', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/672986509": "'Bear Branch Pool', a subdivision's pool tagged a park (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
+    "way/672940015": "'Sherwood Trals Pool', a subdivision's pool tagged a park (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
+    "way/665973718": "'Southwest Crossing Community Pool', a subdivision's pool tagged a park (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
+    "way/672198879": "'Elm Grove Community Center & Pool Complex', a subdivision's pool tagged a park (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,
