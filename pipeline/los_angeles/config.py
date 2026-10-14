@@ -266,10 +266,7 @@ PLACE_FOLD = None
 # to settle unsure rows by the existing rules). None carries a leak word,
 # so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
 #   node/4773740642 '1100 Wilshire': tourism=attraction with a Wikidata entry and no home tag
-#   way/563505217 'Common Grounds': leisure=park with no operator tag: a park tied to an estate only by name stays
-#   way/484279014 'Kinesthetics': leisure=park with no operator tag: a park tied to an estate only by name stays
-#   way/562954916 'The Lounge': leisure=park with no operator tag: a park tied to an estate only by name stays
-#   way/562958436 'The Pointe': leisure=park with no operator tag: a park tied to an estate only by name stays
+#   way/414615365 'Villa Aurora': an article of its own in three languages (Wikidata lookup, 2026-10-13) and an institution's website on the object: a cultural monument, no private home by its tags
 PLACE_REVIEWED = {
     "Fire Station No. 30, Engine Company No. 30": "a registered historic fire station with its own article",
     "Hotel Rosslyn": "a historic building with its own article, not a trading hotel",
@@ -727,6 +724,13 @@ PLACE_DROPPED = {
     "node/13649941155": "'Upper East Side', studio backlot set tagged a locality: inside a private studio lot, by id (flag check, 2026-10-13)",
     "way/1198465035": "'Ventana at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
     "way/919002011": "'Westcliffe at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/467345451": "'Botanical Garden', a bare type word; its Wikidata entry has an article and is also on way/158612447 'Rainforest', so the article is the whole garden's, not this section's own (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    "way/1210099591": "'American Gold Star Manor', a seniors' housing complex mapped as a neighbourhood, no Wikidata entry (owner, 2026-10-13)",
+    "node/12624561131": "'San Fernando Gardens', a public housing project mapped as a neighbourhood, no Wikidata entry (owner, 2026-10-13)",
+    "way/563505217": "'Common Grounds', an amenity space of one housing development tagged leisure=park: facilities of an apartment estate tagged a park are dropped (owner, 2026-10-13)",
+    "way/484279014": "'Kinesthetics', an amenity space of one housing development tagged leisure=park: facilities of an apartment estate tagged a park are dropped (owner, 2026-10-13)",
+    "way/562954916": "'The Lounge', an amenity space of one housing development tagged leisure=park: facilities of an apartment estate tagged a park are dropped (owner, 2026-10-13)",
+    "way/562958436": "'The Pointe', an amenity space of one housing development tagged leisure=park: facilities of an apartment estate tagged a park are dropped (owner, 2026-10-13)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

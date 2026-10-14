@@ -162,6 +162,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (wave 1's unsure rows, settled on a one-off
+# Wikidata lookup and the existing rules; owner, 2026-10-13). None carries
+# a leak word, so check E takes no PLACE_REVIEWED entry; the reason is kept here.
+#   way/727430398 'Anglican Mortuary Chapel (derelict)': a standing derelict chapel with a Wikidata entry of its own (no article; lookup 2026-10-13): a standing abandoned landmark stays whatever its article
 PLACE_REVIEWED = {
     "Store Street": "an ordinary residential street",
 }
@@ -262,4 +266,6 @@ PLACE_DROPPED = {
     "way/1280945292": "'ampitheatre', description: leisure=park; lowercase bare type word (flag check, 2026-10-13)",
     "way/1280945293": "'ampitheatre', description: leisure=park; lowercase bare type word (flag check, 2026-10-13)",
     "way/276258656": "'Church Dene footpath', description: a place name and a type word (flag check, 2026-10-13)",
+    "node/9661326717": "'Dial Cottage (George Stevensons Listed Home)', named a home by its own name, no Wikidata entry and no tourism tag: a home is kept only when open to visit or tagged an attraction (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    "node/467128730": "'Lizard House', place=locality; name ends 'House'; no other tag (a house mapped as a locality, as Nottingham's Wiverton Hall) (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
 }

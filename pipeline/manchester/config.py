@@ -379,6 +379,7 @@ PLACE_DROPPED = {
     "way/601214274": "'Sale Model Flying Club', private facility: leisure=park; name is a model flying club's (a club's field tagged a park) (flag check, 2026-10-13)",
     "way/486642351": "'Whittaker Lane Grass Patch', description: leisure=park; grass=mown; name ends \"Grass Patch\" (flag check, 2026-10-13)",
     "node/14085210191": "'Hill Top Mews', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/1222568239": "'North Lodge', a listed lodge under a position word and a type word; its Wikidata entry has no article and no tag marks it open to visit: a home (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

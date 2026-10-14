@@ -141,6 +141,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (wave 1's unsure rows, settled on a one-off
+# Wikidata lookup and the existing rules; owner, 2026-10-13). None carries
+# a leak word, so check E takes no PLACE_REVIEWED entry; the reason is kept here.
+#   way/178206517 'Balgray Tower': historic=castle with an article of its own (Wikidata lookup, 2026-10-13): a landmark people look for
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
     "node/5595785628": "'Sandyhills Parish Church Manse', a manse tagged a place of worship: a minister's residence",

@@ -200,4 +200,5 @@ PLACE_DROPPED = {
     "node/5002102714": "'Birth Chamber', description: historic=room; description says a room in the castle (a room inside a building) (flag check, 2026-10-13)",
     "way/37616520": "'Former Lime Kilns', description: historic=ruins; name is \"Former\" and a type (flag check, 2026-10-13)",
     "way/1474280377": "'Frederick Douglass', a mural kept only on its subject's Wikidata entry (owner, 2026-10-13)",
+    "node/9974532573": "'Fort', place=neighbourhood; a bare type word with no Wikidata entry: a bare word stays only on an article of its own (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
 }

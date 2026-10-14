@@ -404,4 +404,5 @@ PLACE_DROPPED = {
     "way/614250085": "'Goodwin Park & Benches', glitch: stray words glued to the name: '& Benches' after the park's name, by id; not repaired (flag check, 2026-10-13)",
     "node/11940488893": "'Heritage Mall', business: former shopping mall: a demolished mall, by id (flag check, 2026-10-13)",
     "way/521942121": "'Rehwinkel Parsonage', home: clergy residence with an entry and no home tag: a parsonage; 'parsonage' is not in HOME_NAME (flag check, 2026-10-13)",
+    "way/322971597": "'Oblats Maison Provinciale', a religious residence (amenity=monastery); its Wikidata entry is the heritage register's and has no article: a home (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
 }
