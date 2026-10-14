@@ -269,4 +269,7 @@ PLACE_DROPPED = {
     # node/2207804046 were dropped; the same class, a second row of one object.
     "node/1635630608": "'Groenplaats': the twin of node/1635630580; duplicate: dropped in the full read",
     "node/2207804047": "'Groenplaats': the twin of node/2207804046; duplicate: dropped in the full read",
+    # Twin round 1 after the station rules (owner, 2026-10-13): a same-named neighbouring object
+    # promoted into the place of a row dropped by id; each under the class of the row it replaced.
+    "node/2610365437": "'Groenplaats': the twin of node/1635630580; duplicate: dropped in the full read (owner, 2026-10-13)",
 }

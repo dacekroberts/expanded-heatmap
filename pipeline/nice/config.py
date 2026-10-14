@@ -207,9 +207,6 @@ PLACE_REVIEWED = {
 # index (rule passes 5 and 6), each id read with its cached name and its index
 # row; grouped by the reader's class.
 PLACE_DROPPED = {
-    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
-    "node/6261860788": "'Grand Arénas (dir CADAM/St Isidore)': one tram stop as three rows 100 to 145 m apart, each with the mapper's direction note in the name; the stop needs one row",
-    "node/6261860785": "'Grand Arénas (dir aéroport)': as above",
     # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
     "way/141316195": "'JW'",
     "way/139138100": "'Calvary Chapel'",
