@@ -39,6 +39,7 @@ protocol in the `place-search-city` skill.
 | A minor-way street named by a description, a bare type or way word, or a type and a code | `street_description`, `STREET_DESCRIPTIONS`; never a street with a way of residential class or above | street pass | 2026-10-13 |
 | A pedestrian area as a street | `area=yes` is skipped; with an article of its own it is a landmark | street pass, `square_areas` | 2026-10-08, 2026-10-13 |
 | A way whose highway tag lists a skipped value beside another (`platform;bus_stop`) | each value of the tag is read against `SKIP_HIGHWAY`, under whatever name | street pass | 2026-10-13 (second batch) |
+| A stop's platform drawn as a footway or any other highway value | `public_transport=platform` or `railway=platform` on the way | street pass | 2026-10-13 (a fault mended) |
 | A street private on every way, where some ways are alleys | `PRIVATE_STREET_SERVICES`: a private `service=alley` way is read as a private residential one | street pass | 2026-10-13 (second batch) |
 | An interchange, a ramp, a name ending "Drwy" | `street_never`, whatever the ways (interchange names are kept in a city whose config sets `PLACE_KEEP_INTERCHANGES`: Hong Kong); a name ending "Ramp", "Ramp On" or "Ramp Of" on ramp-class ways only (`RAMP_NAME`, `RAMP_HIGHWAYS`); a circular junction whose every way is a motorway's | street pass | 2026-10-13 (second batch) |
 | An HOV or managed-lane label | `MANAGED_LANE`, on a street whose every way is a motorway's | street pass | 2026-10-13 (second batch) |
@@ -120,7 +121,7 @@ read from Overpass. Seattle: 59 ways of six streets.
 
 | Left out | Rule | Where | Decided |
 |---|---|---|---|
-| A name that is no name: a placeholder, an error value, a number alone, contact details | `JUNK_NAMES`, `JUNK_MARKS`, `_CONTACT` | `junk_name`, check F | 2026-10-08 |
+| A name that is no name: a placeholder, an error value, a number alone, contact details, a web address | `JUNK_NAMES`, `JUNK_MARKS`, `_CONTACT`, `_WEB_ADDRESS` | `junk_name`, check F | 2026-10-08, 2026-10-13 |
 | A name in a third script, where a local name exists | `_local_first`; never repaired | `_names` | 2026-10-11 |
 | A junction named by a number | `junction_numbered` | tagged pass | 2026-10-08 |
 
@@ -200,7 +201,7 @@ and the held rows; sixteen rulings"), items 1, 2, 7 and 9 and the faults fixed w
 | A church named only by its chain or body (ruling 2) | the fifth pass's rule with `WORSHIP_BODIES` and wider lists (Portuguese, Spanish, Dutch, Japanese, Chinese, Latvian); only joiners and one hall-type word may follow a body's name; a nationality is listed only inside a denomination's name | `worship_only` | landmark |
 | A religious office, education hall or residence tagged a place of worship (ruling 1) | `worship_office`: `WORSHIP_OFFICE_HEADS` (the name's head), `WORSHIP_OFFICE_WORDS` (a whole word; a CJK word anywhere); an English word is not read in a name that holds CJK | `landmark_drop` | landmark |
 | A facility of an apartment estate or a mall tagged a park, a playground or a square (ruling 7) | `estate_facility`: the operator names a condominium, a residents' body, an estate's management or a mall (`ESTATE_FACILITY_OPERATOR`); the operator heads the name and a facility word closes it; an estate's brand and a facility word (`ESTATE_BRANDS`, `ESTATE_FACILITY_ENDS`); a name that says "inside" | `landmark_drop` | landmark |
-| A park named as a square, beside a street row of its name (ruling 9) | `square_led`, `SQUARE_HEADS`, within `SQUARE_DUP_M`; against streets only | duplicate pass | landmark |
+| A park named as a square, beside a street row of its name (ruling 9) | `square_led`, `SQUARE_HEADS`, within `SQUARE_DUP_M`; against streets only, and only a street row that bears the park's leading name, joiners set aside (`SQUARE_JOINERS`); the park's spelling stays as an alternate name on the street row (a fault mended, 2026-10-13) | duplicate pass | landmark |
 | A station with operational_status=closed; a freight station by its name | `station_out_of_service`, `STATION_FREIGHT_WORDS` | tagged pass | station |
 | A station entrance or a ticket gate tagged a station | `STATION_ENTRANCES`: no row beside a station row of its name within `OUTLINE_SAME_M`, and none at all unless the map draws its name | merges | station |
 | A bus rapid transit station kept on its network tag | `BUS_NETWORK`: a bus network's tag is no rail sign for a station object with no railway tag | merges | station |

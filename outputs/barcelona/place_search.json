@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/barcelona.json",
-  "places": 17027,
+  "places": 16796,
   "data_retrieved": "2026-10-08",
   "languages": {
     "local": [
       "ca"
     ],
     "coverage": {
-      "en": 0.005,
+      "en": 0.004,
       "ca": 1.0
     },
     "list_share": 0.5,
