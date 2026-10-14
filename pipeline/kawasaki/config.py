@@ -306,4 +306,9 @@ PLACE_DROPPED = {
     "way/914292643": "'神明神社': same shrine as 川中島神明神社 node/8493404205, 18 m away; keep the fuller name",
     # Not in the reader's file: one bay labeled twice: the row with the Wikidata entry nearest the city centre stays (ruling 9) (owner, 2026-10-13)
     "relation/13904308": "'東京湾': one bay labeled twice: the row with the Wikidata entry nearest the city centre stays",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "node/4336656694": "'草っぱら広場': a plaza or park-zone name with no place in it",
+    "node/7030805695": "'見晴らし広場': a plaza or park-zone name with no place in it",
+    "node/4336652829": "'遠見の広場': a plaza or park-zone name with no place in it",
+    "way/1197280950": "'花のふれあいゾーン': a plaza or park-zone name with no place in it",
 }

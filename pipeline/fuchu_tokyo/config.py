@@ -242,4 +242,6 @@ PLACE_DROPPED = {
     "node/1420785095": "'東京農工大学（農学部）': second row of 東京農工大学 (way/75035101, same wikidata) 222 m away, with the faculty in brackets",
     # Unsure rows a ruling drops: a facility of an estate, named inside the estate or run by its owners' body (the estate ruling) (owner, 2026-10-13)
     "way/723155649": "'第七西府町住宅内公園': a facility of an estate, named inside the estate or run by its owners' body",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "way/902837726": "'花の広場': a plaza or park-zone name with no place in it",
 }

@@ -281,6 +281,8 @@ PLACE_DROPPED = {
     "node/8423867177": "'子ども列車のりば': \"children's train boarding point\": a park ride, 0 public service",
     # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
     "node/5307973546": "'みんなの広場': a stock plaza or rest-area name with no place in it",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "node/5294876877": "'湧水広場': a plaza or park-zone name with no place in it",
 }
 # Kept by the owner's word against the bare-type rule (place_index, PLACE_KEPT;
 # owner, 2026-10-13), the id read with its cached name

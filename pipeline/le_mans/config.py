@@ -207,6 +207,5 @@ PLACE_REVIEWED = {
 # id read with its cached name; grouped by class.
 PLACE_DROPPED = {
     # A bare type word (owner, 2026-10-13)
-    "way/97466680": "'Jardin Public': \"public garden\", the type words alone, no place named",
     "node/11456218305": "'Meule': \"millstone\", the object's type (historic=millstone), no name of its own",
 }

@@ -250,4 +250,9 @@ PLACE_DROPPED = {
     "node/14130201174": "'貝取４': \"Kaidori 4\" label, 210 m from 貝取四丁目's own row (node/8726986626)",
     "node/14133181208": "'鶴巻五丁目': 鶴牧五丁目 written with the wrong character (巻), 230 m from the district's own row (node/8726976712)",
     "node/14156511467": "'唐木田三丁目': a second 唐木田三丁目 node with no readings, 430 m from the district's own row (node/8726986645): outside the 300 m merge",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "node/14199402196": "'こどもテラス': a plaza or park-zone name with no place in it",
+    "node/14199402174": "'大池前テラス': a plaza or park-zone name with no place in it",
+    "node/14057713809": "'お花見広場': a plaza or park-zone name with no place in it",
+    "node/14063321225": "'ヤエザクラの原っぱ': a plaza or park-zone name with no place in it",
 }

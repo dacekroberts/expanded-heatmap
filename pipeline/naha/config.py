@@ -360,4 +360,6 @@ PLACE_DROPPED = {
     "node/9516468198": "'天祖子あまみ人前 天珥東大主御世': a hall named only for what it enshrines, or a deity's title alone",
     # Not in the reader's file: a national road's planned sea-crossing section drawn as a street (the sea-crossing ruling) (owner, 2026-10-13)
     "way/1036812787": "'国道390号（海上区間）': a national road's planned sea-crossing section drawn as a street",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "node/9518401937": "'民芸広場': a plaza or park-zone name with no place in it",
 }

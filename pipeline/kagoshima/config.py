@@ -297,4 +297,10 @@ PLACE_DROPPED = {
     # Not in the reader's file: a national road's planned sea-crossing section drawn as a street (the sea-crossing ruling) (owner, 2026-10-13)
     "way/561255584": "'国道58号(海上区間）': a national road's planned sea-crossing section drawn as a street",
     "way/733832500": "'国道224号(海上区間）': a national road's planned sea-crossing section drawn as a street",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "way/1559292983": "'ふれあいの庭': a plaza or park-zone name with no place in it",
+    "way/1559292980": "'緑のプロムナード': a plaza or park-zone name with no place in it",
+    "way/1559292982": "'花のプロムナード': a plaza or park-zone name with no place in it",
+    "way/1559292984": "'育みの並木': a plaza or park-zone name with no place in it",
+    "way/122886545": "'市民広場': a plaza or park-zone name with no place in it",
 }

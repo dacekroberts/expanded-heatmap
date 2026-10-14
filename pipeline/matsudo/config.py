@@ -288,8 +288,8 @@ PLACE_DROPPED = {
     # A number or code beside a type word (owner, 2026-10-13)
     "way/1567615843": "'スポーツ広場A': \"sports ground A\": a type and a letter, a field of 東部スポーツパーク (which has its own row)",
     "way/471812809": "'スポーツ広場B': \"sports ground B\": a type and a letter, as スポーツ広場A",
-    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
-    "node/1347504017": "'青面金剛': a hall named only for what it enshrines, or a deity's title alone",
     # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
     "way/707988142": "'つどいの広場': a stock plaza or rest-area name with no place in it",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "way/707988143": "'みどりの里': a plaza or park-zone name with no place in it",
 }

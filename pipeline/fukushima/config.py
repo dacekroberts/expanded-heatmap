@@ -370,4 +370,9 @@ PLACE_DROPPED = {
     "way/734026595": "'イベント広場': a stock plaza or rest-area name with no place in it",
     # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
     "node/5305596851": "'お稲荷様': a hall named only for what it enshrines, or a deity's title alone",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "way/1566652681": "'山頂広場': a plaza or park-zone name with no place in it",
+    "node/8428655629": "'巨石広場': a plaza or park-zone name with no place in it",
+    "way/243546133": "'木陰広場': a plaza or park-zone name with no place in it",
+    "way/550336321": "'冒険の森': a plaza or park-zone name with no place in it",
 }
