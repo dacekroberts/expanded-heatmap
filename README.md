@@ -1,5 +1,7 @@
 # Storefronts Near Transit
 
+![Storefronts Near Transit: a world map with one dot for each city on the site](docs/assets/readme-header.png)
+
 *(The repository is `expanded-heatmap`; the site is called Storefronts Near
 Transit. A standing rule is that this project is never named after a city.)*
 

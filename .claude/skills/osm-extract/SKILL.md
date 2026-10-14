@@ -32,7 +32,7 @@ Two files, and the split is the point:
 | The query is cut by an area and returns thousands of elements (every named street of a city) | A light query: a handful of objects by id, `out tags` on a few relations |
 | Several cities share one region (one download, many reads) | One small city in a region whose file is several hundred MB, asked once |
 | The mirrors are refusing, queueing or serving old data | The data must be minutes fresh: an extract is a daily file |
-| The run must make no Overpass request (an unattended queue beside another one) | The area's smallest covering region is country-sized (over `--max-mb`) |
+| The run must make no Overpass request (an unattended queue beside another one) | The area's smallest covering region is country-sized (over `--max-mb`) AND no set of at most four smaller regions covers it (see "An area that crosses a region border") |
 
 An extract costs a download of 100 to 700 MB for the regions measured, 10 to
 80 s of reading and 0.9 to 2.5 GB of memory. An Overpass place fetch costs no
@@ -69,6 +69,19 @@ case that also shows what the broken rule would have answered.
    exact half in the 8th decimal; plain rounding printed 121 of Tbilisi's 772
    center latitudes one last digit off, and the offset form matched all 772,
    then all of Seattle's, Brussels' and Kyoto's without further change.
+
+**One named departure from rule 1, off by default: shared borders.**
+`osm_extract.query(..., shared_borders=[union names])` also admits, into the
+unions named, an element that fails every single-boundary test and passes
+rule 3 against the boundaries taken together (their union, holes kept): a
+street along the border two included municipalities share. The outer edge of
+the whole area, a border with an area that is not included and the edge of a
+hole nothing included fills all stay out. Overpass does not return these
+elements, so an answer made with the option on is NOT the Overpass answer:
+`query()` lists each admitted element with the boundaries it lies between
+under `"shared_border"`, and a caller must record and disclose them. One
+boundary admits nothing by construction. Prove a query with the option OFF
+(the proof below), then measure what the option adds as its own step.
 
 **Order is not reproduced, and is not meant to be.** Overpass's `qt` order
 follows its own disk layout. `osm_extract.query` returns nodes, ways and
@@ -127,7 +140,9 @@ no evidence, only a parser that did not complain.
 2. Download each region's extract of THAT date:
    `python pipeline/osm_extract.py download <region-id> --dated <YYMMDD>`.
 3. Build beside the real caches, never over them:
-   `python scripts/heavy_job.py run --label <city>-place-extract --session <you> --wait 30 -- python pipeline/place_extract_fetch.py <city> --pbf <file> --out <dir>`.
+   `python scripts/heavy_job.py run --label <city>-place-extract --session <you> --wait 30 -- python pipeline/place_extract_fetch.py <city> --pbf <file> --out <dir> --overpass-exact`
+   (without `--overpass-exact` the shared-border streets come too, and the
+   comparison shows each as "only extract").
 4. `python scripts/place_extract_compare.py <city> <dir>`. Section A is the
    tie-break count (same elements, two orders); section B is every row that
    differs because an element differs.
@@ -146,6 +161,80 @@ no evidence, only a parser that did not complain.
 bbox, `around`, a recursion, a case flag or a POSIX character class: a
 statement it cannot represent stops the caller. Teach it the statement and
 prove it; never skip the line.
+
+## An area that crosses a region border
+
+Built 2026-10-13 (owner's ruling of that day: read the few small regions as
+one, do not download the country). Region polygons follow coasts and state
+lines loosely, so a city on a border river or an estuary often has a sliver
+of its boundary outside its own region. Three cases, told apart by the
+server's index (`osm_extract.beyond`):
+
+| The part of the area outside the region | What happens |
+|---|---|
+| lies in ANOTHER region of the index | that region joins the set, however small the part (`choose_regions`) |
+| lies in NO other region (open sea) and is at most 1% of the area (`OVERFLOW_MAX_SHARE`) | accepted as water-side overflow: printed, and recorded in the cache's source line and `_extract.stats.overflow` |
+| lies in no other region and is larger, or a boundary does not close from the files read | the run stops |
+
+**A set is chosen only when one region will not do.** One region is taken
+when it covers the area and either nothing else meets the area or its file
+is under `--max-mb`. Otherwise `choose_regions` takes the smallest set by
+total bytes, at most four regions (`SET_MAX_REGIONS`), each under the cap.
+Sizes come from HEAD requests, two a region, and no file is downloaded to
+learn its size. The run says which set and why.
+
+**A set is one snapshot.** `download_set` takes every file at ONE date: the
+date most of the set is already held at, so a set is completed with the
+fewest downloads (`--dated`, which the server keeps for several days). A set
+whose files state different data timestamps is refused (`set_timestamp`,
+bound 0 s): every file of one daily run carries the same timestamp to the
+second (23 files measured, two runs), and across two runs an object moved
+over the cut can be in NEITHER file, which no comparison can see.
+
+**Every id is taken once** (`osm_extract._Once`). An extract keeps whole
+every way and relation crossing its cut, so the files overlap. Equal copies:
+the first is kept. A copy holding fewer of its nodes' positions: the fuller
+one is kept. Two full copies that differ: the read STOPS and names the
+object and both files. Files of one snapshot cannot differ, so no copy is
+taken on a guess. A boundary whose member ways lie in different files is
+assembled from all of them.
+
+**Memory is more than the largest file's alone**, though the files are read
+in turn: 1.6 GB for pennsylvania with new-jersey against 1.05 GB for
+pennsylvania alone, and 2.1 GB for south-korea with north-korea after a
+first try in the same process against 0.97 GB alone. Declare the sum to the
+gate. Why the first file's memory is not given back was not looked into.
+
+**When the region was chosen from the stations** (no outline cache yet) the
+area is not known until the boundary is read. A run that then finds the
+area reaching into another region stops with `AreaPastRegion`; the command
+line chooses again from the area it has just read, once, and takes the set.
+The cost is the two light passes of the first try.
+
+Measured 2026-10-13, extracts of 2026-10-12T20:21:35Z:
+
+| City | Chosen from | Regions read | Outside the first region | Result |
+|---|---|---|---|---|
+| Philadelphia | its outline cache | us/new-jersey (164 MB) + us/pennsylvania (349 MB); us-northeast is 1,804 MB | 0.0002% of the area, in new-jersey | 27,683 street ways, 3,420 tagged, 458 extra; 122 objects in both files, all equal; outline identical to Overpass's (168 members with geometry); 347 s with both downloads, 1.6 GB |
+| Washington D.C. | its outline cache | us/district-of-columbia alone (21 MB) | nothing | one region, as before; byte-equal to the caches the unchanged code wrote |
+| Gimpo | its 9 stations, then the area as read | north-korea (93 MB) + south-korea (289 MB); asia is 15,613 MB | 0.04 km2, 0.014% of the area, in north-korea | 4,904 street ways, 422 tagged, 136 extra; 21 objects in both files, all equal; first try 10.7 s, 115 s in all with one download, 2.1 GB |
+| Incheon | its 79 stations, then the area as read | the same two files, both held | 8.82 km2, 0.089% of the area, in north-korea | 15,971 street ways, 2,508 tagged, 529 extra; 98 objects in both files, all equal; first try 26.9 s, 125 s in all, 2.1 GB |
+
+**The second file can add nothing, and is still required.** In all three
+cities the answer from the first region ALONE (scope checks off) is the
+set's answer byte for byte: Philadelphia's 180,929 + 458 elements, Gimpo's
+79,912 + 136, Incheon's 142,748 + 529. The part in the neighbour's polygon
+is river or estuary. That is known only after reading both, so it is not a
+reason to skip the set; it IS a reason to expect the same of the next
+border-river city.
+
+**Not proven against Overpass.** None of the three cities had an Overpass
+place cache on disk, and no Overpass request was made. What was compared:
+Philadelphia's outline with Overpass's outline cache (identical), each set
+with its first region alone (identical), and D.C. with the unchanged code's
+caches (identical). The five rules are unchanged, so the four-city proof
+above still stands for them; a set against an Overpass answer of the same
+day is still owed.
 
 ## The download server's conduct rules
 
@@ -175,7 +264,13 @@ written usage policy. Its "Download responsibly!" request is the policy, and
 - **A boundary can close while the data behind it is missing.** An area
   reaching past the region's edge is refused (`check_region`, against the
   index polygon), and a boundary whose ring is cut is refused by
-  `boundary_polygon`. Use the next larger region; do not stitch two files.
+  `boundary_polygon`. The answer is the set of regions that together cover
+  the area ("An area that crosses a region border"), chosen by the module:
+  never two files of different dates, and never a hand-made merge.
+- **A kept cache is held to the current area.** With no `--force`, a cache
+  on disk whose provenance (or own query) names another area than
+  `config.PLACE_AREA` stops the run, naming both. A cache that records no
+  area is kept with a warning.
 - **A relation that runs past the region's edge has members the extract
   lacks.** Its center is then the middle of what is there. `query` counts
   these (`relations_with_absent_members`) and says so; a river or a long
@@ -193,7 +288,9 @@ written usage policy. Its "Download responsibly!" request is the policy, and
   named by id.
 - **The lookup cannot answer for a relation cut at the region's edge**: the
   country, usually the state. It lists them (`not_whole`) rather than
-  guessing. A city whose own municipality is cut needs the larger region.
+  guessing. A city whose stations span two regions is read from the set of
+  regions holding them (the same choice as the fetch), and a relation cut at
+  one file's edge is then whole.
 - **Freshness is the extract's own timestamp**, read from its header, never
   the file's date on disk. The place caches refuse one older than 7 days.
 - **Overpass's areas are older than its data.** Its answers carry
@@ -207,9 +304,20 @@ written usage policy. Its "Download responsibly!" request is the policy, and
 ## In this project
 
 - A city's caches: `python pipeline/place_extract_fetch.py <city>` (the
-  region is chosen, held or downloaded for it; `--pbf` names a file). It
-  writes only the caches that are missing; `--force` replaces. It takes no
-  Overpass mirror lock and makes no Overpass request.
+  region, or the set of regions, is chosen, held or downloaded for it;
+  `--pbf` names a file, and given more than once names a set). The same
+  command serves a multi-region city: nothing extra is passed. It writes
+  only the caches that are missing; `--force` replaces. It takes no Overpass
+  mirror lock and makes no Overpass request.
+- **Shared-border streets are ON for a city's caches**
+  (`place_extract_fetch.SHARED_BORDER_UNIONS = ("streets",)`): the main
+  cache's `_extract.shared_border` block names every way admitted and the
+  two municipalities it lies between, and the provenance entry's `how`
+  repeats the count. Measured 2026-10-13 (the drafts entry "Shared-border
+  streets" has every city): Seattle 59 ways, giving 1 street row added, 2
+  extended, 2 fragments of one street joined and 22 intersections added; a
+  one-municipality city 0. `--overpass-exact` gives the Overpass answer. A
+  city fetched by `place_index_fetch.py` has none of these ways.
 - A plan's empty search areas: `python scripts/place_search_area_lookup.py
   <plan.json> --source extract`.
 - Both are registered in `scripts/check_all.py` by their selftests, and

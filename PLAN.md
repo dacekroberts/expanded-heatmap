@@ -31,6 +31,27 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 ## Now
 
+- [ ] **Before the search rollout's big review lands: a check that every
+  drawn station and line is found by the search box on every searched map**
+  (owner, 2026-10-13, "bare minimum"; DECISIONS.md of that date). A browser
+  script beside `scripts/check_map_view.js`, run over all maps at the sweep.
+  **Built 2026-10-13: `scripts/check_map_search.js`** (the page's own
+  matcher, drawn names read from the markers and the legend). The 19 live
+  maps pass: 2,746 stations and 226 lines, all found. Still owed: the run
+  over every searched map after the big review's render, and the spellings
+  it does not test (an exact drawn name nearly always finds itself):
+  abbreviations, romanized forms, one half of a two-language name; the
+  final group's 201 names (`docs/decisions_drafts/search-final.md`, finding
+  47) are the list to try.
+- [ ] **After the search rollout's big review lands: publish a search
+  retrospective, and a partial transit-layer retrospective from what is
+  known** (owner, 2026-10-13: both features were built recently, so the
+  record is fresh). In the form of the `docs/*_retrospective.md` files.
+  "Publish" is the owner's word; where each goes (docs only, or a public
+  piece) is asked when the drafts exist. Sources for search: the
+  `place-search-city`, `place-street-lines` and `osm-extract` skills, the
+  decisions entries of 2026-10-07 to 2026-10-13, the night run's report in
+  `data/_search_rollout/`.
 - [ ] **From the portfolio review (owner, 2026-10-11; DECISIONS, that day),
   in order:**
   - [~] Phase 2 runs with no weekly usage stop; one usage check-in with the

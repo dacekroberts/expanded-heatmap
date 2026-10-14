@@ -540,3 +540,17 @@ PLACE_DROPPED = {
     "way/1418500626": "a park's name with a stray leading accent mark and a misspelling (glitched; the outside name net, 2026-10-12)",
     "way/639768197": "'Jeugos infantiles', the type words 'juegos infantiles' misspelled",
 }
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "node/11875045317": "the Angel de la Independencia, its Wikidata entry has no article in any language (owner, 2026-10-13)",
+}
+
+# A named private street stays (place_index, PLACE_KEEP_NAMED_PRIVATE_STREETS;
+# owner, 2026-10-13: "yes", reversing "drop as ruled" for this city). The
+# private-residential rule took 2,020 streets here (1,946 names: Calle 561,
+# Cerrada 506, Privada 504), the grids of gated neighborhoods, as in
+# Guadalajara and Monterrey. A code beside a type word still goes.
+PLACE_KEEP_NAMED_PRIVATE_STREETS = True

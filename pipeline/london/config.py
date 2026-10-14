@@ -373,3 +373,12 @@ PLACE_DROPPED = {
     "node/6343767873": "a boundary stone under the name of the common it once marked: a wrong object",
     "way/1340893634": "'Canada Gardens - Play Area', a play area named by its location and type",
 }
+# Kept by the owner's word against the bare-type rule (place_index, PLACE_KEPT;
+# owner, 2026-10-13: "keep by name"): the Greenway is a named linear park, and
+# "greenway" stays a bare type word for every other object and city.
+PLACE_KEPT = {
+    "way/120317147": "'Greenway', a named linear park (owner, 2026-10-13)",
+    "relation/17674520": "'Greenway', a named linear park (owner, 2026-10-13)",
+    # Public art kept against the article rule (owner, 2026-10-13).
+    "node/343354107": "'The Burghers Of Calais', its Wikidata entry has no article in any language (owner, 2026-10-13)",
+}

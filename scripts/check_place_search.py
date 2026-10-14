@@ -80,14 +80,37 @@ if hasattr(sys.stdout, "reconfigure"):
 # H: a city whose index is known not to reach its whole map, with the date
 # and the reason. A dated defect, not a pass; an entry whose city has no gap
 # left fails, so the list only shrinks.
-# Empty since Mexico City's index was rebuilt for its regional map, 2026-10-12.
-KNOWN_GAPS = {}
+# Emptied when Mexico City's index was rebuilt for its regional map, 2026-10-12.
+# Mexico City again, 2026-10-13 (owner): the tram rescope's steps were re-run
+# ahead of its landing, so the shared processed stations hold San Isidro
+# (Tlalnepantla de Baz), which the landed index's area does not reach. Leaves
+# with the big review, when the rescope and an index over the wider area land
+# together (the caches are in data/mexico_city/raw/place_wide_2026-10-13/).
+KNOWN_GAPS = {
+    "mexico_city": "2026-10-13: the tram rescope's stations are on disk before its landing; "
+                   "San Isidro is outside the landed index's area",
+}
 
 
-def check_coverage(slug, index, stations, known=None):
-    """H for one city: problems, given its index and its map's stations."""
+def quiet_of(slug):
+    """config.PLACE_QUIET_STATIONS of a city, {} when it has none."""
+    try:
+        return getattr(importlib.import_module(f"pipeline.{slug}.config"), "PLACE_QUIET_STATIONS", {})
+    except ImportError:
+        return {}
+
+
+def check_coverage(slug, index, stations, known=None, lines=None, quiet=None):
+    """H for one city: problems, given its index, its map's stations and
+    its streets' polylines (place_index.decode_lines), which cover a station
+    a long street runs past though the street's one row point is far off."""
     known = KNOWN_GAPS if known is None else known
-    bare = place_index.uncovered_stations(index["rows"], stations)
+    bare = place_index.uncovered_stations(index["rows"], stations, lines=lines)
+    # A station the city lists as quiet is accounted for; a listed one that
+    # is covered after all, or is not on the map, fails by name.
+    bare, wrong = place_index.quiet_stations(quiet_of(slug) if quiet is None else quiet, stations, bare)
+    if wrong:
+        return [f"H: {w}" for w in wrong]
     if bare and slug not in known:
         return [f"H: {len(bare)} map station(s) with no indexed place within {place_index.COVER_KM:g} km "
                 f"({', '.join(bare[:6])}): config.PLACE_AREA does not cover the whole map"]
@@ -263,7 +286,13 @@ def check_leaks(slug, index, reviewed=None):
     hits = place_index.leak_hits(index, index.get("languages", {}).get("local", []))
     problems = [f"E: {name!r} carries {word!r}: drop it by a rule in place_index.py, or review it "
                 f"in config.PLACE_REVIEWED with why it is a place" for name, word in hits if name not in reviewed]
-    hit_names = {name for name, _ in hits}
+    # A review is stale when its name carries no leak word at all. One whose
+    # row the test no longer fires on (a junction, a French mansion, a street
+    # under an allowed word: place_index.leak_hits, the sixth pass,
+    # 2026-10-13) is no longer needed and is no failure: it is left to be
+    # removed by hand.
+    hit_names = {name for name, _ in place_index.leak_hits(
+        index, index.get("languages", {}).get("local", []), exempt=False)}
     problems += [f"E: PLACE_REVIEWED names {name!r}, which no longer carries a leak word: remove it"
                  for name in reviewed if name not in hit_names]
     return problems
@@ -362,7 +391,10 @@ def main():
         if stations is None:
             unread.append(slug)
         else:
-            p += check_coverage(slug, index, stations)
+            stpath = place_index.streets_path(slug)
+            lines = (place_index.decode_lines(json.loads(stpath.read_text(encoding="utf-8")).get("lines", []))
+                     if stpath.exists() else None)
+            p += check_coverage(slug, index, stations, lines=lines)
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
         if BULLET in page.read_text(encoding="utf-8"):
             problems.setdefault(page.name, []).append(
@@ -424,6 +456,11 @@ def selftest():
         ("a reviewed ruin", [[0, 1, 2, "愛宕山ホテル跡", "", 0]], {"愛宕山ホテル跡": "a ruin"}, 0),
         ("a stale review", [[0, 1, 2, "三条通", "", 0]], {"愛宕山ホテル跡": "a ruin"}, 1),
         ("an English alias", [[0, 1, 2, "某", "Sunrise Apartments", 0]], {}, 1),
+        # The sixth pass (2026-10-13): a junction row is not listed, and a
+        # review of one is no longer needed without being stale.
+        ("a junction named for a hotel", [[1, 1, 2, "リッチモンドホテル前", "", 0]], {}, 0),
+        ("a review the test no longer needs", [[1, 1, 2, "リッチモンドホテル前", "", 0]],
+         {"リッチモンドホテル前": "a signed junction"}, 0),
     ]
     for label, rows, reviewed, want in leak_cases:
         got = len(check_leaks("x", dict(base, languages=ja, rows=rows), reviewed))
@@ -450,15 +487,34 @@ def selftest():
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     near = [[2, 10.001, 20.001, "a street", "", 0]]
+    far = [[2, 10.045, 20.0, "a long road", "", 0]]
+
+    def road(dlon):
+        return [(9.95, 20.0 + dlon), (10.05, 20.0 + dlon)]
     cover_cases = [
         ("a station with a place beside it", near, [("A", 10.0, 20.0)], {}, 0),
         ("a station past the index's edge", near, [("A", 10.0, 20.0), ("B", 10.3, 20.0)], {}, 1),
         ("only another station nearby is no cover", [[0, 10.0, 20.0, "A", "", 0]], [("A", 10.0, 20.0)], {}, 1),
         ("a known gap is reported, not failed", near, [("B", 10.3, 20.0)], {"x": "dated"}, 0),
         ("a known gap that has closed", near, [("A", 10.0, 20.0)], {"x": "dated"}, 1),
+        # A road 10 km long whose row point is 5 km off passes 100 m from the
+        # station (Ottawa's Bowesville); the same road 2 km away is no cover.
+        ("a long street passing the station, its point far off", far, [("A", 10.0, 20.0)], {}, 0, [road(0.001)]),
+        ("a long street 2 km from the station", far, [("A", 10.0, 20.0)], {}, 1, [road(0.02)]),
+        ("no street lines given: the row points decide", far, [("A", 10.0, 20.0)], {}, 1, None),
     ]
-    for label, rows, stations, known, want in cover_cases:
-        got = len(check_coverage("x", dict(base, rows=rows), stations, known))
+    for label, rows, stations, known, want, *rest in cover_cases:
+        got = len(check_coverage("x", dict(base, rows=rows), stations, known, lines=rest[0] if rest else None))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    quiet_cases = [
+        ("a quiet station, listed", near, [("A", 10.0, 20.0), ("B", 10.3, 20.0)], {"B": "why"}, 0),
+        ("a quiet station listed, another uncovered", near, [("B", 10.3, 20.0), ("C", 10.6, 20.0)], {"B": "why"}, 1),
+        ("a listed station that is covered", near, [("A", 10.0, 20.0)], {"A": "why"}, 1),
+        ("a listed station that is not on the map", near, [("A", 10.0, 20.0)], {"Z": "why"}, 1),
+    ]
+    for label, rows, stations, quiet, want in quiet_cases:
+        got = len(check_coverage("x", dict(base, rows=rows), stations, {}, quiet=quiet))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     current = "function getIndex(u) { window.parent.location.pathname; fetch(abs(u), opt) }"
@@ -485,7 +541,7 @@ def selftest():
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     total = (len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
-             + len(cover_cases) + len(path_cases) + len(street_cases))
+             + len(cover_cases) + len(quiet_cases) + len(path_cases) + len(street_cases))
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 
