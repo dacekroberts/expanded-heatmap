@@ -271,4 +271,39 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/kawasaki.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A freight station (owner, 2026-10-13)
+    "node/9216709063": "'川崎貨物': JR Freight terminal (its article is 川崎貨物駅); no operator or passenger tag in the cache, so the freight status is read from the name and article title, not a tag",
+    "node/7729930331": "'千鳥町': operator is the Kanagawa Rinkai Railway, a freight-only line; no passenger service",
+    "node/7729930380": "'浮島町': operator is the Kanagawa Rinkai Railway, a freight-only line; no passenger service",
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/551222081": "'パークシティ溝の口プレイロット': play lot of the Park City Mizonokuchi apartment estate, tagged a park",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/3362872076": "'みくじ納め所': a fortune-slip return point inside Kawasaki Daishi, a function label not a name",
+    "node/3362873495": "'納入札殿': an amulet-return hall inside Kawasaki Daishi, a function label not a name",
+    "node/13677351964": "'住吉高校　体育館一階　ピロティ': a spot under a school gym (piloti, ground floor), tagged place=square",
+    # A bare type word (owner, 2026-10-13)
+    "way/329396776": "'水屋': the temple's water-purification pavilion, type word only",
+    "way/469804217": "'鐘楼堂': bell tower hall, type word only",
+    "node/8189334376": "'六字名号碑': a stele named for its inscription type only",
+    "way/1085479844": "'ちびっこ広場': kids' plaza, type word only",
+    "way/48437056": "'緑の広場': green plaza, generic; 145 m from あさおふれあいの広場",
+    "way/129616882": "'緑道公園': greenway park, type words only",
+    "node/4332348161": "'自然観察広場': nature observation plaza, a sub-area label inside a larger park, node tagged park",
+    "node/4332355254": "'花木広場': flowering-tree plaza, a sub-area label inside a larger park, node tagged park",
+    "node/4401928612": "'湿生植物園': wetland plant garden, a sub-area label inside a larger park, node tagged park",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "way/977137134": "'観音堂': a hall named only for what it enshrines, or a deity's title alone",
+    # A glitched name (owner, 2026-10-13)
+    "node/9929169489": "'十に神社創建三〇〇年記念の碑': に typed for 二 in the shrine's name; an anniversary stele beside 十二神社, which has its own row",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/14007236874": "'幸福の科学': named only by the religious body (Happy Science); the wikidata is the body's, not this hall's",
+    # A second row of one object (owner, 2026-10-13)
+    "node/4839894446": "'浄土宗教安寺': same temple as 教安寺 way/278492512 (wikidata), 52 m away, with the sect glued on",
+    "way/914292643": "'神明神社': same shrine as 川中島神明神社 node/8493404205, 18 m away; keep the fuller name",
+    # Not in the reader's file: one bay labeled twice: the row with the Wikidata entry nearest the city centre stays (ruling 9) (owner, 2026-10-13)
+    "relation/13904308": "'東京湾': one bay labeled twice: the row with the Wikidata entry nearest the city centre stays",
+}

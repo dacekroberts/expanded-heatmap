@@ -198,4 +198,17 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/matsumoto.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A glitched name (owner, 2026-10-13)
+    "node/10781534710": "'ｖ': a single stray letter as the name of a peak",
+    # A bare type word (owner, 2026-10-13)
+    "node/12705583085": "'ピクニック広場': picnic plaza, type words only; a sub-area node tagged a park, operator the prefecture",
+    # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
+    "node/12697321693": "'ふれあい広場': a stock plaza or rest-area name with no place in it",
+    "node/12705616062": "'親しみ広場': a stock plaza or rest-area name with no place in it",
+    "way/691453526": "'いこいの広場': a stock plaza or rest-area name with no place in it",
+    "way/553893486": "'憩いの広場': a stock plaza or rest-area name with no place in it",
+}

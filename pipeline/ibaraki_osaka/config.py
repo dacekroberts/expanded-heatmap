@@ -255,4 +255,18 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/ibaraki_osaka.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A business (owner, 2026-10-13)
+    "node/10696582156": "'フットサルステージ ノア': a commercial futsal court tagged a stadium; no wikidata",
+    # A religious office (owner, 2026-10-13)
+    "node/5293337122": "'末日聖徒イエス・キリスト教会 インスティテュート': a Latter-day Saints institute (an education hall) tagged a place of worship",
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/1378907577": "'西福井府営住宅円形広場': the round plaza of a prefectural housing estate (府営住宅) tagged a park",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/1064477888": "'里山エリア': a zone label of a university campus (\"satoyama area\"), operator the university",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/13447248787": "'弥勒堂': a hall named only for what it enshrines, or a deity's title alone",
+}

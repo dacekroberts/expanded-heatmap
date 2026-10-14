@@ -317,4 +317,39 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/morioka.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A business (owner, 2026-10-13)
+    "node/7168094085": "'リサージュラビモア': reads as a wedding venue's chapel tagged a place of worship with no religion tag; the venue is inferred from the name, not read from a tag",
+    # A religious office (owner, 2026-10-13)
+    "way/708168346": "'岩手県神社庁': the prefectural shrine association's office (神社庁) tagged a place of worship",
+    "node/12037342295": "'天理教　岩手教務支庁': a Tenrikyo diocesan administration office (教務支庁) tagged a place of worship",
+    # A glitched name (owner, 2026-10-13)
+    "way/708212491": "'交通安全祈願電': 電 typed for 殿; a traffic-safety prayer hall inside a shrine precinct, a function label, no religion tag",
+    # A bare type word (owner, 2026-10-13)
+    "way/706921145": "'社宝殿': shrine treasure hall, type word only, an outbuilding tagged a place of worship",
+    "way/708212496": "'神輿殿': portable-shrine store, type word only, an outbuilding tagged a place of worship",
+    "way/51806168": "'陸上競技場': \"athletics stadium\", type word only; it stands in 岩手県営運動公園, which has its own row",
+    "way/708739814": "'北広場': \"north plaza\", a direction and a type word, tagged a park",
+    "way/708739815": "'南広場': \"south plaza\", a direction and a type word, tagged a park",
+    "way/558400124": "'緑の広場': green plaza, generic",
+    # A second row of one object (owner, 2026-10-13)
+    "way/708184865": "'住吉神社 神楽殿': the kagura hall of 住吉神社 way/708184864, 28 m away; an outbuilding with its own row",
+    "way/708184869": "'住吉神社手水舎': the purification basin of 住吉神社 way/708184864, 26 m away; an outbuilding with its own row",
+    "way/708212495": "'岩手護国神社手水舎': the purification basin of 岩手護国神社 way/706913532, 62 m away",
+    "way/708200590": "'川留稲荷神社神楽殿': the kagura hall of 川留稲荷神社 way/708200588, 24 m away",
+    "way/708487897": "'浅岸薬師神社神楽殿': the kagura hall of 浅岸薬師神社 way/708487894, 48 m away",
+    "way/708212492": "'盛岡八幡宮手水舎': the purification basin of 盛岡八幡宮 way/706913531, 122 m away",
+    "way/708212494": "'盛岡八幡宮神楽殿': the kagura hall of 盛岡八幡宮 way/706913531, 126 m away",
+    "way/708167091": "'盛岡天満宮 神楽殿': the kagura hall of 盛岡天満宮 way/708167090, 48 m away",
+    "way/708496297": "'金刀比羅神社神楽殿': the kagura hall of 金刀比羅神社 way/708496296, 14 m away",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/3015683333": "'官衙建物展示室': an exhibit room of the Shiwa castle site (\"government building exhibit room\"), a function label",
+    # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
+    "way/209804223": "'ふれあい広場': a stock plaza or rest-area name with no place in it",
+    "way/709148724": "'いこいの広場': a stock plaza or rest-area name with no place in it",
+    # Unsure rows a ruling drops: a park named only by a category and a lot or inventory number (ruling 1) (owner, 2026-10-13)
+    "way/708756290": "'第一幼児公園': a park named only by a category and a lot or inventory number",
+}

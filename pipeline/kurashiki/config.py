@@ -368,4 +368,47 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "ホテル　ラ・レインボー(廃墟)": "a hotel's ruins (historic=ruins; the name itself says ruin), not a business (the Kyoto and Seattle precedents); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/kurashiki.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A business (owner, 2026-10-13)
+    "way/353640321": "'ホテル　ラ・レインボー(廃墟)': an abandoned hotel's ruin with a mapper's annotation (廃墟) in the name; access=no, no wikidata",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/9914297802": "'パーフェクトリバティー教団': named only by the religious body (PL Kyodan), no place or hall name",
+    "way/629594525": "'立正佼成会': named only by the religious body (Rissho Kosei-kai), no place or hall name",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "way/658655776": "'創価学会倉敷文化会館': a religious body's meeting hall or branch tagged a place of worship",
+    "way/567646087": "'創価学会玉島会館': a religious body's meeting hall or branch tagged a place of worship",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/13743983761": "'第1古墳': \"tumulus no. 1\" with no group name, a number standing in for a name",
+    "node/13743983762": "'第2古墳': \"tumulus no. 2\" with no group name, a number standing in for a name",
+    "node/12111594458": "'花木広場　南東入口': an entrance of a park sub-area (\"south-east entrance\") tagged a park",
+    # A bare type word (owner, 2026-10-13)
+    "node/12111594457": "'花木広場': flowering-tree plaza, a sub-area label, node tagged park",
+    # A second row of one object (owner, 2026-10-13)
+    "node/12111594451": "'水島緑地公園　川崎地区': same green space as 水島緑地　川崎地区 relation/9709497, 30 m away",
+    "way/276244456": "'大原美術館 本館': the main building of 大原美術館 way/616920786, 38 m away, carrying the same wikidata (Q2977589)",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "way/896829102": "'お大師堂': a hall named only for what it enshrines, or a deity's title alone",
+    "node/6982142092": "'不動堂': a hall named only for what it enshrines, or a deity's title alone",
+    "way/625957174": "'薬師堂': a hall named only for what it enshrines, or a deity's title alone",
+    # Unsure rows a ruling drops: a park named only by a category and a lot or inventory number (ruling 1) (owner, 2026-10-13)
+    "way/595677775": "'5-6緑地': a park named only by a category and a lot or inventory number",
+    "way/691221111": "'5‐10緑地': a park named only by a category and a lot or inventory number",
+    "way/595677770": "'5‐5緑地': a park named only by a category and a lot or inventory number",
+    "way/658258697": "'１２－１号緑地': a park named only by a category and a lot or inventory number",
+    # Unsure rows a ruling drops: station sites of a closed railway (ruling 13) (owner, 2026-10-13)
+    "node/10925537890": "'下津井電鉄茶屋町駅機回し線跡': station sites of a closed railway",
+    "node/10925537891": "'下津井電鉄茶屋町駅駅跡': station sites of a closed railway",
+    "node/11099114897": "'下津井電鉄 琴海駅跡': station sites of a closed railway",
+    "node/10923517356": "'下津井電鉄児島小川駅跡': station sites of a closed railway",
+    "node/10923520942": "'下津井電鉄児島駅跡(初代)': station sites of a closed railway",
+    "node/10923520943": "'下津井電鉄児島駅跡(路線短縮後)': station sites of a closed railway",
+    "node/10910005013": "'下津井電鉄天城駅跡': station sites of a closed railway",
+    "node/10910005011": "'下津井電鉄林駅跡': station sites of a closed railway",
+    "node/10923517353": "'下津井電鉄柳田駅跡': station sites of a closed railway",
+    "node/10923509147": "'下津井電鉄福田駅跡': station sites of a closed railway",
+    "node/10923517317": "'下津井電鉄稗田駅跡': station sites of a closed railway",
+    "way/1175516454": "'下津井電鉄藤戸駅ホーム跡': station sites of a closed railway",
+}
