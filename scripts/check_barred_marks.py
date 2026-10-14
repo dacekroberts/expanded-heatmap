@@ -17,8 +17,11 @@ Rendered surfaces, all of them:
     fetch record, which the page reads for dates only (`PRODUCER_ONLY`).
 
 Another city's map is not scanned: its business names are the businesses' own,
-and "irigo" inside a restaurant's name is not the network's brand. A mark is
-matched as a whole word, case-insensitively.
+and "irigo" inside a restaurant's name is not the network's brand. Another
+city's place index (app/static/places/) is not scanned either, for the same
+reason: its street names are the streets' own (Mendoza's "Barrio Irigo
+Giorgiani", found 2026-10-13 by the search rollout). A mark is matched as a
+whole word, case-insensitively.
 """
 import ast
 import re
@@ -60,9 +63,17 @@ def rendered_docs(root=ROOT):
     return sorted(d for d in docs if d.is_file())
 
 
+def other_citys_index(path, root, slug):
+    """True for a place index, street file or crossing file of a city other
+    than `slug`: names from OpenStreetMap, the places' own."""
+    places = root / "app" / "static" / "places"
+    return places in path.parents and path.stem != slug
+
+
 def surfaces(root, slug):
     files = [p for p in (root / "app").rglob("*")
-             if p.is_file() and p.suffix in TEXT_SUFFIXES and "__pycache__" not in p.parts]
+             if p.is_file() and p.suffix in TEXT_SUFFIXES and "__pycache__" not in p.parts
+             and not other_citys_index(p, root, slug)]
     files += rendered_docs(root)
     out_dir = root / "outputs" / slug
     if out_dir.is_dir():
@@ -105,6 +116,13 @@ def selftest():
         (hits("Amirigo pizzeria", ("Irigo",)), []),             # inside a word: not the mark
         (hits("# feed publisher IRIGO, never shown", ("Irigo",), python=True), []),
         (hits('x = "Irigo"  # shown', ("Irigo",), python=True), [(1, 'x = "Irigo"  # shown')]),
+    ]
+    r = Path("/repo")
+    cases += [
+        (other_citys_index(r / "app/static/places/mendoza.json", r, "angers"), True),
+        (other_citys_index(r / "app/static/places/streets/mendoza.json", r, "angers"), True),
+        (other_citys_index(r / "app/static/places/angers.json", r, "angers"), False),
+        (other_citys_index(r / "app/cities.py", r, "angers"), False),
     ]
     bad = [i for i, (got, want) in enumerate(cases) if got != want]
     assert DOCS_PATH.findall('DOC = ROOT / "docs" / "excluded_categories.md"') == ["excluded_categories.md"]
