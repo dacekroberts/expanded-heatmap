@@ -6,6 +6,12 @@ Downstream inputs this branch changes: `outputs/<city>/provenance.json`,
 rendered, `outputs/<city>/heatmap.html` for the wave's cities; no city added,
 no notice, no licence row (every source is OpenStreetMap, already recorded).
 
+### 2026-10-13 - Place search wave 1: Toronto's eye read applied; 44 rows dropped by id, three names reviewed
+
+- **The 44 rows a `place-read` agent marked `drop` in Toronto's index are in `PLACE_DROPPED` by id, grouped by class with the ruling that decides each** (`data/_search_rollout/reads_rules56/toronto.tsv`, 114 rows; relayed by Cleanup). Descriptions 10, glitched names 5, homes 2, businesses 2, places of worship named only by a body 17, a religious residence 1, a vanished hall 1, duplicates 4, markers under another object's name 2. Every id was checked against its cached name before it was written. **The 70 rows marked `unsure` are untouched and with the owner**, the Baitul Wahid alias among them.
+- **Three names are in `PLACE_REVIEWED` for check E:** "Former Cherry Street Hotel" (a heritage building with an article of its own), "Pharmacy" (a Line 5 station) and "Pharmacy Avenue" (its street).
+- **Rebuilt through the job gate: 14,160 rows to 14,116**, the 44 and nothing else; none of the 44 ids is in `place_ids.json`; intersections 21,794. `check_place_search.py` fails Toronto on rule A only (not rendered). One drop to note: way/137923889 "Morgan Meighen & Associates" carries `wikipedia=en:Toronto Street Post Office` and `old_name=Toronto Street Post Office`; it goes as a tenant's name on the building, so the post office has no row under either name.
+
 ### 2026-10-13 - Place search wave 1: four places of worship kept by id, eight dropped by id, Toronto built; unrendered
 
 - **The owner kept the four possible wrong drops of the entry below by id (owner, 2026-10-13, relayed by Cleanup: "keep all four by id").** In `PLACE_KEPT`, each with its deciding tags: Los Angeles node/358828101 (the Wilshire Ward chapel, `wikidata=Q8022900`), Manchester way/31231628 (the Mount Street Friends Meeting House, `wikidata=Q26579212`), Dublin way/230568525 (the Unitarian Church on St Stephen's Green, `heritage=4`) and Sheffield way/108732648 ("Church Of Christ", `denomination=anglican`, `wikidata=Q105102971`). `PLACE_KEPT` beats the denomination rule as written (`kept_ids` is tested before the article test), so no shared code changed. Each row is back after the rebuild, by id in `place_ids.json`. The nine weaker cases stay dropped. Dublin and Sheffield gain a `PLACE_KEPT` block.

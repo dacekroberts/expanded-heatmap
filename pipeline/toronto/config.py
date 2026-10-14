@@ -335,5 +335,70 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Former Cherry Street Hotel": "a heritage building with an article of its own; the hotel is long gone and the name is the building's (eye read, 2026-10-13)",
+    "Pharmacy": "a Line 5 station named for Pharmacy Avenue (eye read, 2026-10-13)",
+    "Pharmacy Avenue": "a public street; the word is its name (eye read, 2026-10-13)",
+}
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13, ruling 1 of the sixteen:
+    # a description is no name, on any kind of row).
+    "node/1224160700": "'near dam', description: a note about the spot, not a name (leisure=park) (eye read, 2026-10-13)",
+    "node/11006264026": "'poison ivy patch', description: a hazard note mapped as a park (leisure=park) (eye read, 2026-10-13)",
+    "node/11987305484": "'poison ivy patch', description: a hazard note mapped as a park (leisure=park) (eye read, 2026-10-13)",
+    "way/1043535103": "'Recreation facilities', description: bare description of the land use (leisure=park) (eye read, 2026-10-13)",
+    "way/851813413": "'Bike park', description: type words only (two words, so the bare-type rule missed it) (leisure=park) (eye read, 2026-10-13)",
+    "node/13477377836": "'Fighter Jet', description: an exhibit named by its kind and tagged historic=monument, so the exhibit rule did not see it; 52 m from Ship Gun (historic=monument) (eye read, 2026-10-13)",
+    "node/13477390034": "'Ship Gun', description: an exhibit named by its kind and tagged historic=monument (historic=monument) (eye read, 2026-10-13)",
+    "node/1434830620": "'Masjid Mosque', description: two type words, the same word in two languages (amenity=place_of_worship; religion=muslim) (eye read, 2026-10-13)",
+    "node/7118137220": "'Sunrise propane explotion site', description: a description of an event site, access=no, misspelled (historic=ruins; access=no) (eye read, 2026-10-13)",
+    "way/991330013": "'Lower Field', description: a private school's field named by position (operator Havergal College) (leisure=park; operator=Havergal College) (eye read, 2026-10-13)",
+    # A glitched name: a web address, a cut-off or misspelt name, a registry's
+    # owner field (the settled call: no glitched name; owner, 2026-10-13, ruling 1).
+    "node/13275652357": "'https://papemosque.ca/', glitch: a web address as the name; junk_name catches emails and phone numbers but not URLs (amenity=place_of_worship; religion=muslim) (eye read, 2026-10-13)",
+    "node/13438140202": "'Jeanne Lamon Hal', glitch: truncated word (Hall); has wikidata but glitched names are never repaired (amenity=theatre; operator=Trinity-St Paul's Centre; wikidata=Q137721255) (eye read, 2026-10-13)",
+    "way/273616109": "'Turnberry South Park31', glitch: stray digits glued on (Park31) (leisure=park) (eye read, 2026-10-13)",
+    "way/70510030": "'Trustees Of St Stephens', glitch: the owning legal body's name on a church building (register import) (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "node/437992446": "'Armeniam Brotherhood Bible', glitch: truncated and misspelled (Armenian Brotherhood Bible Church) (amenity=place_of_worship; religion=christian; denomination=protestant) (eye read, 2026-10-13)",
+    # Homes with no sign of visiting (the settled call; owner, 2026-10-13, class n).
+    "node/4075560133": "'James Quinn Houses', home: heritage-listed private houses named for a person; HOME_NAME ends on house, not houses (historic=building) (eye read, 2026-10-13)",
+    "node/4075557362": "'James Quinn Row Houses', home: heritage-listed private row houses named for a person; HOME_NAME ends on house, not houses (historic=building) (eye read, 2026-10-13)",
+    # A business's own name on a building, nothing else to visit under that name
+    # (the settled call: a business is no place; owner, 2026-10-13).
+    "way/34530511": "'Medieval Times Dinner & Tournament', business: a dinner-show chain's name on the building (old_name Government Building); wikidata, no wikipedia tag (amenity=theatre; building=yes; wikidata=Q124858754; old_name=Government Building) (eye read, 2026-10-13)",
+    "way/137923889": "'Morgan Meighen & Associates', business: an investment firm's name on a historic building; the article and old_name are Toronto Street Post Office, so the row as named is the tenant (historic=yes; building=yes; wikidata=Q7826523; wikipedia=en:Toronto Street Post Office; old_name=Toronto Street Post Office) (eye read, 2026-10-13)",
+    # A place of worship named only by a denomination, a body or a chain, in a
+    # form the shared rule's lists do not hold (owner, 2026-10-13, ruling 8
+    # of the sixteen and ruling 2 of the pilot readers').
+    "way/106344256": "'Christadelphians', worship body only: a denomination's name and nothing else (amenity=place_of_worship; building=church; religion=christian; denomination=christadelphian) (eye read, 2026-10-13)",
+    "node/269537587": "'The Christadelphians', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian; denomination=christadelphian) (eye read, 2026-10-13)",
+    "way/130797701": "'Iglesia Ni Cristo', worship body only: a church body's name and nothing else; three rows of it (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "way/43810815": "'Iglesia Ni Cristo', worship body only: a church body's name and nothing else (amenity=place_of_worship; building=yes; religion=christian) (eye read, 2026-10-13)",
+    "way/70509052": "'Iglesia Ni Cristo', worship body only: a church body's name and nothing else (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "way/804686171": "'Religious Society of Friends', worship body only: a denomination's formal name; alias Quakers (amenity=place_of_worship; building=yes; religion=christian; denomination=quaker) (eye read, 2026-10-13)",
+    "node/9351319692": "'Plymouth Brethren Christian Church', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "node/13676197381": "'The Redeemed Christian Church of God', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/662147911": "'World Mission Society Church of God', worship body only: a church body's name and nothing else (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "node/9755574528": "'Community of Christ', worship body only: a denomination's name; Etobicoke Community of Christ carries a locality and stays (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "node/6491159741": "'Celestial Church of Christ', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/230123044": "'Church of God of Prophecy', worship body only: a denomination's name and nothing else (amenity=place_of_worship; building=church; religion=christian; denomination=protestant) (eye read, 2026-10-13)",
+    "node/6348392721": "'Church of God International', worship body only: a church body's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/62360416": "'Brahma Kumaris', worship body only: a movement's name and nothing else (amenity=place_of_worship; building=temple; religion=hindu) (eye read, 2026-10-13)",
+    "node/6525130537": "'Foursquare Gospel Church', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/657934800": "'Christ Embassy', worship body only: a church chain's name; Christ Embassy Scarborough carries a locality and stays (amenity=place_of_worship; building=industrial; religion=christian) (eye read, 2026-10-13)",
+    "node/13924345420": "'The Original Swaminarayan Sampraday', worship body only: a sect's name, 8 m from the temple row of the same site (amenity=place_of_worship; religion=hindu) (eye read, 2026-10-13)",
+    # A religious residence or office tagged a place of worship (owner,
+    # 2026-10-13, ruling 1 of the pilot readers').
+    "node/5813870311": "'Passionist Missionaries', religious residence or office: a religious order's house or office tagged a place of worship; no wikidata (amenity=place_of_worship; religion=christian; denomination=roman_catholic) (eye read, 2026-10-13)",
+    # A vanished thing with no article (owner, 2026-10-13, ruling 16 of the sixteen).
+    "way/164254284": "'Eglinton Ave. Gospel Hall', vanished: demolished:building=yes; note tag says the site is being redeveloped (amenity=place_of_worship; religion=christian; denomination=gospel; demolished:building=yes) (eye read, 2026-10-13)",
+    # A second object beside the row of the same thing (owner, 2026-10-13, ruling 9).
+    "node/2283661472": "'Bank of Upper Canada Building National Historic Site of Canada', duplicate: 0 m from Bank of Upper Canada Building (node/4227123357, the row with the article); this is the designation plaque (historic=monument) (eye read, 2026-10-13)",
+    "way/1416813033": "'Fort York National Historic Site', duplicate: 11 m from Fort York (way/13740577, the row with the article); the same site under its designation (historic=fort; building=no; access=yes) (eye read, 2026-10-13)",
+    "node/1593379560": "'The Power Plant Contemporary Art Gallery', duplicate: 22 m from The Power Plant (way/35893777), same wikidata Q7757923 (tourism=gallery; wikidata=Q7757923; wikipedia=en:The Power Plant) (eye read, 2026-10-13)",
+    "node/343288369": "'Anewen Greenbelt', duplicate: misspelling of Anewan Greenbelt (way/224896527), a node 1.1 km along the same greenbelt (leisure=park) (eye read, 2026-10-13)",
+    # A marker carrying the name of the street or district it stands in, not
+    # its own (the description ruling; owner, 2026-10-13, ruling 1).
+    "node/2356786701": "'Church Avenue', wrong object's name: a transit history marker carrying a street's name (historic=marker) (eye read, 2026-10-13)",
+    "node/2356786702": "'Willowdale', wrong object's name: a heritage plaque carrying the district's name; the district has its own place rows (historic=marker) (eye read, 2026-10-13)",
+}
