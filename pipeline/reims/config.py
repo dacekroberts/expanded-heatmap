@@ -255,4 +255,7 @@ PLACE_DROPPED = {
     "way/764274824": "'Murigny Simon Courbet Forestier': one landlord's 44 dwellings (description), named for its three streets (full read, home)",
     # estate marketing: dropped in the full read (owner, 2026-10-13)
     "way/751139188": "'Plein R': a developer's programme name: the description says a housing programme on a former school site, carried by a developer (full read, estate marketing)",
+    # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
+    "node/7388163831": "'Cathédrale de Reims': the cathedral again as an archaeological-site node with the cathedral's own wikidata Q206823, 40 m from Cathédrale Notre-Dame way/92294792 (full read, duplicate)",
+    "node/7073407675": "'Ancien Collège des Jésuites': the Jesuit college again as a node with the same wikidata Q2983815, 45 m from Collège des Jésuites way/629160734 (full read, duplicate)",
 }

@@ -329,7 +329,6 @@ PLACE_DROPPED = {
     "node/8689377669": "'天地神明': 天地神明, a dedication alone (deity titles alone fall under ruling 3) (unsure in the full read; ruling 3)",
     "node/8449085251": "'八天狗': 八天狗, named only for what it enshrines (unsure in the full read; ruling 3)",
     "node/8670288823": "'準提観音堂': 準提観音堂, a hall named only for the Kannon form it enshrines (my reading) (unsure in the full read; ruling 3)",
-    "way/723763765": "'観音堂': 観音堂, listed in the ruling (the Tojin Yashiki hall; flagged in the report) (unsure in the full read; ruling 3)",
     # unsure in the full read, dropped by ruling 9: one bay or sea labeled many times, one row stays (owner, 2026-10-13)
     "node/5461068827": "'長崎港': 長崎港 labeled again; the harbour's own relation/9381185 stays (unsure in the full read; ruling 9)",
     "node/5461085980": "'長崎港': 長崎港 labeled again; the harbour's own relation/9381185 stays (unsure in the full read; ruling 9)",

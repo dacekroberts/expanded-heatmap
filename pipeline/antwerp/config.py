@@ -262,4 +262,6 @@ PLACE_DROPPED = {
     "node/616349961": "'Ringlaan': the other direction of one tram stop, 197 m from node/616349950 (full read, duplicate)",
     "node/660416299": "'Sporthal': the other direction of one tram stop, 153 m from node/660414460 (full read, duplicate)",
     "node/2202086566": "'deSingel': the other direction of one tram stop, 196 m from node/2202086562 (full read, duplicate)",
+    # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
+    "way/996504876": "'Chinatown': same thing as the place row Van Wesenbekestraat (relation/16884611, alt Chinatown), 7 m away, same wikidata Q2932425 (full read, duplicate)",
 }

@@ -146,4 +146,6 @@ PLACE_DROPPED = {
     "node/2889084347": "'CEBB': an organisation's acronym alone (a Buddhist study centre network) (full read, worship body)",
     # religious residence: dropped in the full read (owner, 2026-10-13)
     "way/537839023": "'Congregação dos Sacerdotes do Sagrado Coração de Jesus': named only for the order of priests, no church or house name; the order's church is its own row (way/539849511) (full read, religious residence)",
+    # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
+    "node/5029162539": "'Museu do Homen do Nordeste': the museum twice, 60 m apart; this node is the misspelt one (\"Homen\"). It carries the article tags, the building way/991346779 carries the correct name (full read, duplicate)",
 }
