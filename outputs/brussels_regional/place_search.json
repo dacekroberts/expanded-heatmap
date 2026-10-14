@@ -1,6 +1,6 @@
 {
   "index": "app/static/places/brussels_regional.json",
-  "places": 14278,
+  "places": 14261,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
@@ -10,7 +10,7 @@
     "coverage": {
       "en": 0.005,
       "fr": 1.0,
-      "nl": 0.953
+      "nl": 0.954
     },
     "list_share": 0.5,
     "listed": [
