@@ -21,11 +21,9 @@ OUTPUTS = ROOT / "outputs" / "milan"
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
-# UNTIL THE TRAM RESCOPE BRANCH LANDS, step 1 writes under processed/tram/,
-# because data/ is shared with master's checkout and the station set changes
-# (owner 2026-10-13). At landing: TRAM_DIR = DATA_PROCESSED, then re-run
-# steps 1 and 3.
-TRAM_DIR = DATA_PROCESSED / "tram"
+# Metro and tram stations together since the tram rescope (owner
+# 2026-10-13). TRAM_DIR was a branch-only folder until the landing.
+TRAM_DIR = DATA_PROCESSED
 STATIONS_CSV = TRAM_DIR / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # One feature per drawn line, written by step 1 from ds539's 31

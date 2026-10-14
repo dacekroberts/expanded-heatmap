@@ -381,7 +381,10 @@ if __name__ == "__main__":
     b = gpd.GeoDataFrame.from_features(
         json.loads(config.BOUNDARY_GEOJSON.read_text(encoding="utf-8"))["features"],
         crs=config.CRS_GEOGRAPHIC)
-    built = pd.read_csv(config.DATA_PROCESSED / "stations.csv")   # the metro set as master built it
+    # DRY RUN ONLY, AND STALE SINCE THE LANDING: stations.csv now holds the
+    # tram stations too, so this feeds them back in as metro stations.
+    # Step 1 passes the metro set itself and is the figure to trust.
+    built = pd.read_csv(config.DATA_PROCESSED / "stations.csv")
     res = build(built, b.to_crs(config.CRS_PROJECTED).union_all())
     print(f"\n{res['counts']}\nattached: {res['attached']}")
     print(res["stations"].to_string())
