@@ -56,44 +56,51 @@ render_macro_map_theme()
 
 # The public name lives in components.SITE_NAME; the repository keeps its own
 # name (`expanded-heatmap`), which is a directory, not a title.
-st.title(SITE_NAME)
-st.caption("Storefront commercial density around rapid-transit stations, "
-           "city by city.")
+# The header and the opener sit in one centered column that scales with
+# the window up to HEADER_MAX_PX, so a wide window does not leave the
+# video stranded at the left (owner, 2026-10-14). Below that width the
+# column is the page's width.
+HEADER_MAX_PX = 1100
+with st.container(horizontal_alignment="center"):
+    with st.container(width=HEADER_MAX_PX):
+        st.title(SITE_NAME)
+        st.caption("Storefront commercial density around rapid-transit stations, "
+                   "city by city.")
 
-_FOLLOW_UP = (
-    'each city map has a "Global View" button, and one for its region, to come back here.'
-    if MAP_ONLY_NAV
-    else "each city page also has a switcher to jump straight to another city."
-)
-st.markdown(
-    f"""
-This project maps how densely shops, restaurants and personal services
-cluster around rapid-transit stations, one city at a time. Each city has its
-own detail map, with its own data and its own extent, rather than one shared
-map loading every city's businesses at once.
-**Click a city on the map to open its detail map**; {_FOLLOW_UP}
-"""
-)
+        _FOLLOW_UP = (
+            'each city map has a "Global View" button, and one for its region, to come back here.'
+            if MAP_ONLY_NAV
+            else "each city page also has a switcher to jump straight to another city."
+        )
+        st.markdown(
+            f"""
+        This project maps how densely shops, restaurants and personal services
+        cluster around rapid-transit stations, one city at a time. Each city has its
+        own detail map, with its own data and its own extent, rather than one shared
+        map loading every city's businesses at once.
+        **Click a city on the map to open its detail map**; {_FOLLOW_UP}
+        """
+        )
 
-# The opener film (owner, 2026-10-14; DECISIONS, that date), served from the
-# Travel view's file host, not the repository (GitHub's 100 MB cap; every
-# replaced version would stay in history). preload="none": nothing is fetched
-# from the host until Play, which the site notice's file-host sentence states.
-# Re-read that sentence (components.py, P5) before changing the preload.
-# The poster is the film's first frame, served by the app itself
-# (app/static/), so it fetches nothing from the host either. Relative, no
-# leading slash: Streamlit Cloud serves the page under /~/+/, where a
-# root-relative path returns the app's HTML instead (measured 2026-10-14).
-OPENER_VIDEO_URL = ("https://files.dacekroberts.dev/video/"
-                    "global-transit-business-atlas-opener-16-9.mp4")
-OPENER_POSTER_URL = "app/static/opener-poster.jpg"
-st.html(
-    f'<video src="{OPENER_VIDEO_URL}" poster="{OPENER_POSTER_URL}" '
-    'controls preload="none" playsinline '
-    'aria-label="Opening video" '
-    'style="display:block;width:100%;max-width:720px;aspect-ratio:16/9;'
-    'background:#000;border-radius:6px"></video>'
-)
+        # The opener film (owner, 2026-10-14; DECISIONS, that date), served from the
+        # Travel view's file host, not the repository (GitHub's 100 MB cap; every
+        # replaced version would stay in history). preload="none": nothing is fetched
+        # from the host until Play, which the site notice's file-host sentence states.
+        # Re-read that sentence (components.py, P5) before changing the preload.
+        # The poster is the film's first frame, served by the app itself
+        # (app/static/), so it fetches nothing from the host either. Relative, no
+        # leading slash: Streamlit Cloud serves the page under /~/+/, where a
+        # root-relative path returns the app's HTML instead (measured 2026-10-14).
+        OPENER_VIDEO_URL = ("https://files.dacekroberts.dev/video/"
+                            "global-transit-business-atlas-opener-16-9.mp4")
+        OPENER_POSTER_URL = "app/static/opener-poster.jpg"
+        st.html(
+            f'<video src="{OPENER_VIDEO_URL}" poster="{OPENER_POSTER_URL}" '
+            'controls preload="none" playsinline '
+            'aria-label="Opening video" '
+            'style="display:block;width:100%;aspect-ratio:16/9;'
+            'background:#000;border-radius:6px"></video>'
+        )
 
 st.subheader("Covered cities")
 
