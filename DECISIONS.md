@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**231 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-14**
+
+- [The motion opener plays on the Overview, from the file host; the file-host notice names it (owner)](#2026-10-14---the-motion-opener-plays-on-the-overview-from-the-file-host-the-file-host-notice-names-it-owner)
 
 **2026-10-13**
 
@@ -9612,3 +9616,28 @@ Report: `data/_search_rollout/final_rules56/final_rebuild.md`, lists under
 - **Held until 2026-10-18 12:05** (owner: usage ran out): every follow-up,
   in `data/_search_rollout/post_landing_queue.md` and the Cleanup handoff
   note.
+
+### 2026-10-14 - The motion opener plays on the Overview, from the file host; the file-host notice names it (owner)
+
+- **What:** the opener film (v1.0, 3:35, 1920 x 1080, silent, 69 MB) sits
+  under the Overview's intro, at most 720 px wide, with no caption or new
+  text (owner: "yes with draft and we can do now", 2026-10-14). Visuals
+  checked the cut from 108 stills; the owner approved the changes it found
+  against the brief.
+- **Where it is served:** `https://files.dacekroberts.dev/video/`, the
+  Travel view's R2 host, uploaded by the owner. Not the repository: GitHub
+  caps a file at 100 MB and every replaced version would stay in history.
+  Read from here: 200, `video/mp4`, 69,238,218 bytes, range requests 206, no
+  cookie. A plain `<video>` needs no CORS, so the host's settings are
+  unchanged.
+- **The privacy notice:** P5 promised nothing loads from that host until a
+  visitor chooses Travel. The player uses `preload="none"` (st.html, not
+  st.video, which fetches on load), and the sentence now names the video:
+  "Choosing Travel on a city map, or playing the opening video on the
+  Overview, loads files from files.dacekroberts.dev ... Nothing is loaded
+  from that address until a visitor chooses Travel or plays the video"
+  (owner's yes to the draft; "the choice" became "the Travel choice" so the
+  remembered choice still reads as Travel's). Checked in a browser: no
+  request to the host before Play; it plays after.
+- **Left over:** a copy at the bucket's root (owner to delete once this is
+  live); no poster frame yet (the player shows a dark frame until Play).

@@ -722,12 +722,13 @@ _NOTICES = [
            # only while the host sets no cookie, runs no Worker and keeps no
            # request logs; re-read docs/data_sources.md, "The Travel basemap",
            # before changing the host or its plan.
-           "Choosing Travel on a city map loads that city's map file and the map "
-           "software from files.dacekroberts.dev. This project sets no cookies "
+           # The opening-video clause: owner, 2026-10-14 (DECISIONS, that date).
+           "Choosing Travel on a city map, or playing the opening video on the "
+           "Overview, loads files from files.dacekroberts.dev. This project sets no cookies "
            "there and keeps no record of those requests. The files are delivered "
            "through Cloudflare, which processes requests under its own privacy "
            "policy. Nothing is loaded from that address until a visitor chooses "
-           "Travel; the choice is remembered on the visitor's own device, so the "
+           "Travel or plays the video; the Travel choice is remembered on the visitor's own device, so the "
            "next map opens the same way.",
            False, (), every_page=True),
     Notice(2, "City of Chicago",

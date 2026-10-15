@@ -75,6 +75,20 @@ map loading every city's businesses at once.
 """
 )
 
+# The opener film (owner, 2026-10-14; DECISIONS, that date), served from the
+# Travel view's file host, not the repository (GitHub's 100 MB cap; every
+# replaced version would stay in history). preload="none": nothing is fetched
+# from the host until Play, which the site notice's file-host sentence states.
+# Re-read that sentence (components.py, P5) before changing the preload.
+OPENER_VIDEO_URL = ("https://files.dacekroberts.dev/video/"
+                    "global-transit-business-atlas-opener-16-9.mp4")
+st.html(
+    f'<video src="{OPENER_VIDEO_URL}" controls preload="none" playsinline '
+    'aria-label="Opening video" '
+    'style="display:block;width:100%;max-width:720px;aspect-ratio:16/9;'
+    'background:#000;border-radius:6px"></video>'
+)
+
 st.subheader("Covered cities")
 
 # The map opens on ONE region and re-centres on the others, rather than fitting
