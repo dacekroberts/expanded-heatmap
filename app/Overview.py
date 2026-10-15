@@ -94,12 +94,44 @@ with st.container(horizontal_alignment="center"):
         OPENER_VIDEO_URL = ("https://files.dacekroberts.dev/video/"
                             "global-transit-business-atlas-opener-16-9.mp4")
         OPENER_POSTER_URL = "app/static/opener-poster.jpg"
+        OPENER_IDLE_JS = """<script>
+(function () {
+  var v = document.getElementById("opener-video");
+  if (!v || v.dataset.idle) return;
+  v.dataset.idle = "1";
+  var t = null;
+  function show() {
+    v.controls = true;
+    v.style.cursor = "";
+    clearTimeout(t);
+    if (!v.paused && !v.ended) t = setTimeout(hide, 2500);
+  }
+  function hide() {
+    if (v.paused || v.ended) return;
+    v.controls = false;
+    v.style.cursor = "none";
+  }
+  ["pointermove", "pointerdown", "touchstart", "keydown", "play", "pause",
+   "ended", "focus"].forEach(function (e) { v.addEventListener(e, show); });
+  v.addEventListener("pointerleave", function () {
+    clearTimeout(t);
+    if (!v.paused) t = setTimeout(hide, 800);
+  });
+})();
+</script>"""
+        # Safari on macOS keeps native controls up while playing (owner,
+        # 2026-10-14), so OPENER_IDLE_JS drops the controls attribute after
+        # 2.5 s without pointer or key activity during playback and puts it
+        # back on any movement, tap, key, pause or end.
         st.html(
-            f'<video src="{OPENER_VIDEO_URL}" poster="{OPENER_POSTER_URL}" '
+            f'<video id="opener-video" src="{OPENER_VIDEO_URL}" '
+            f'poster="{OPENER_POSTER_URL}" '
             'controls preload="none" playsinline '
             'aria-label="Opening video" '
             'style="display:block;width:100%;aspect-ratio:16/9;'
             'background:#000;border-radius:6px"></video>'
+            + OPENER_IDLE_JS,
+            unsafe_allow_javascript=True,
         )
 
 st.subheader("Covered cities")
