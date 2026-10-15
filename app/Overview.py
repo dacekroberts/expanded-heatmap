@@ -80,10 +80,14 @@ map loading every city's businesses at once.
 # replaced version would stay in history). preload="none": nothing is fetched
 # from the host until Play, which the site notice's file-host sentence states.
 # Re-read that sentence (components.py, P5) before changing the preload.
+# The poster is the film's first frame, served by the app itself
+# (app/static/), so it fetches nothing from the host either.
 OPENER_VIDEO_URL = ("https://files.dacekroberts.dev/video/"
                     "global-transit-business-atlas-opener-16-9.mp4")
+OPENER_POSTER_URL = "/app/static/opener-poster.jpg"
 st.html(
-    f'<video src="{OPENER_VIDEO_URL}" controls preload="none" playsinline '
+    f'<video src="{OPENER_VIDEO_URL}" poster="{OPENER_POSTER_URL}" '
+    'controls preload="none" playsinline '
     'aria-label="Opening video" '
     'style="display:block;width:100%;max-width:720px;aspect-ratio:16/9;'
     'background:#000;border-radius:6px"></video>'
