@@ -48,7 +48,7 @@ as a good source, not ground truth: a previous session wrote it.
   - the controls hiding after 2.5 s idle while playing (dd621ee3).
 - The owner deleted the extra root copy of the video.
 - The app was rebooted after dd621ee3, and that build was checked live.
-- Working tree clean except this file and the queue (in `data/`).
+- This file is committed on worktree-cleanup (37b81439 plus this fix), not pushed; push only on the owner's go. The queue (in `data/`) stays uncommitted by design.
 
 ## The hold
 The owner held all follow-up work until Sunday 2026-10-18 12:05 because the
