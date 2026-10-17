@@ -3310,6 +3310,174 @@ def complex_parts(members, drawn, city=""):
     return out
 
 
+# ONE DRAWN STATION, ONE ROW (search lane 1, 2026-10-16; owner's approval
+# pending). Station rows that the map draws as ONE point stay several rows
+# when they differ in mode, operator or entry (_one_railway) or in spelling:
+# Berlin's "Pankow", "S+U Pankow" and the U-Bahn's "Pankow" (55 sets), Geneva's
+# "Acacias (E)" and "(F)", Cluj's "IRIS Nord" and "IRIS Sud", Taipei's 台北 and
+# 臺北, Tokyo's three 市ケ谷. Each station row is given the drawn point nearest
+# it within DRAWN_FOLD_M (map_stations; the local names of one point are one
+# point). Rows of one point fold into one row when their names read alike
+# (_drawn_key): a closing note in brackets, a leading line letter (S, U, S+U),
+# trailing line codes (M2, U6) and a trailing station word set aside, 臺 read
+# as 台. Rows whose keys differ only by the city's name or a compass word at
+# either end (_drawn_core) fold too, but only where that core is the core of a
+# name the point is drawn under: "Barcelona-Plaça Espanya" with "Espanya",
+# "IRIS Nord" with "IRIS Sud" where the map draws "IRIS". Rows of different
+# names at one point stay apart (Toronto's streetcar stops named for the
+# cross streets around a drawn stop). Reach and the fold check:
+# data/_search_rollout/lane1_stations/ (to be written by Cleanup on landing).
+# A FOLD NEVER SPANS TWO DRAWN POINTS (the same day): Tokyo's Toei 両国 shares
+# JR 両国's Wikidata entry and was folded into JR's row 417 m off, so the
+# point the map draws for Toei had no row. Rows of a merge that are nearest
+# to two or more drawn points (each within DRAWN_FOLD_M) split by point
+# (split_by_drawn); a row near none joins the group of the nearest point.
+DRAWN_FOLD_M = PLATFORM_MERGE_M
+_LINE_PREFIX = re.compile(r"^(?:s\s*\+\s*u|s|u)\s+(?=\S)", re.I)
+_LINE_CODES = re.compile(r"(?:[\s\-]+[msu]\d{1,2})+$", re.I)
+_DRAWN_ENDS = ("bahnhof", "station", "gare", "estacio", "estacion")
+_DRAWN_CJK_ENDS = ("車站", "站", "駅", "역")
+COMPASS_WORDS = frozenset(("nord", "sud", "sued", "est", "ost", "vest", "west", "north", "south", "east",
+                           "noord", "zuid", "oost"))
+# A square word before the core, read with the city's name only: Barcelona's
+# "Barcelona-Plaça Catalunya" is the drawn "Catalunya".
+_DRAWN_SQUARE_WORDS = frozenset(("placa", "plaza", "piazza", "place", "praca"))
+_TRAILING_COMPASS = re.compile(r"(?:\s+(?:" + "|".join(sorted(COMPASS_WORDS | {"süd"})) + r"))+$", re.I)
+
+
+def _drawn_words(name):
+    base = _BRACKET_NOTE.sub("", name).strip() or name
+    base = _LINE_PREFIX.sub("", base)
+    base = _LINE_CODES.sub("", base).strip() or base
+    s = _unaccent(unicodedata.normalize("NFKC", base).casefold()).replace("ß", "ss").replace("臺", "台")
+    words = re.findall(r"\w+", s)
+    while len(words) > 1 and words[-1] in _DRAWN_ENDS:
+        words.pop()
+    if words:
+        last = words[-1]
+        for end in _DRAWN_CJK_ENDS:
+            if last.endswith(end) and len(last) > len(end):
+                words[-1] = last[:-len(end)]
+                break
+    return words
+
+
+def _drawn_key(name):
+    """Two station names of one drawn point that read alike share this key."""
+    return " ".join(_drawn_words(name))
+
+
+def _drawn_core(name, city=""):
+    """The key with the city's name and compass words taken off either end."""
+    words = _drawn_words(name)
+    city_words = _drawn_words(city) if city else []
+    if city_words and words[:len(city_words)] == city_words and len(words) > len(city_words):
+        words = words[len(city_words):]
+        if len(words) > 1 and words[0] in _DRAWN_SQUARE_WORDS:
+            words = words[1:]
+    while len(words) > 1 and words[-1] in COMPASS_WORDS:
+        words.pop()
+    while len(words) > 1 and words[0] in COMPASS_WORDS:
+        words.pop(0)
+    return " ".join(words)
+
+
+def drawn_points(map_stations):
+    """[((lat, lon), [name, ...])] of the map's drawn stations: entries of one
+    point (a local name column) are one point; a drawn name of two names
+    ("A / B") is both."""
+    points = defaultdict(list)
+    for n in map_stations:
+        if isinstance(n, str):
+            continue
+        for part in re.split(r"\s+[/|]\s+", n[0]):
+            if part.strip() and part.strip() not in points[(n[1], n[2])]:
+                points[(n[1], n[2])].append(part.strip())
+    return sorted(points.items())
+
+
+def nearest_drawn(pt, points, radius=DRAWN_FOLD_M):
+    """Index into `points` of the drawn point nearest `pt` within `radius`, or None."""
+    best, best_d = None, radius
+    for i, (p, _) in enumerate(points):
+        if abs(p[0] - pt[0]) > 0.01 or abs(p[1] - pt[1]) > 0.015:
+            continue
+        d = _dist_m(pt, p)
+        if d <= best_d:
+            best, best_d = i, d
+    return best
+
+
+def split_by_drawn(members, points):
+    """`members` (rows of one merge) as one group, or split by drawn point
+    when they are nearest to two or more (A FOLD NEVER SPANS TWO DRAWN POINTS)."""
+    near = [nearest_drawn((r[1], r[2]), points) for r in members]
+    hit = sorted({i for i in near if i is not None})
+    if len(hit) < 2:
+        return [members]
+    # Drawn points within DRAWN_FOLD_M of each other are one place drawn a
+    # pin a line (New York's Times Square, Osaka's なんば): no split there.
+    # Measured on the 237 indexes: 70 splits without this, 21 with it
+    # (lane 1, 2026-10-16).
+    head = {i: i for i in hit}
+    for c in _clusters([points[i][0] for i in hit], DRAWN_FOLD_M):
+        for k in c:
+            head[hit[k]] = hit[c[0]]
+    heads = sorted(set(head.values()))
+    if len(heads) < 2:
+        return [members]
+    groups = defaultdict(list)
+    for r, i in zip(members, near):
+        if i is None:
+            i = min(hit, key=lambda j: _dist_m((r[1], r[2]), points[j][0]))
+        groups[head[i]].append(r)
+    return [groups[i] for i in heads]
+
+
+def drawn_fold_groups(stations, points, city=""):
+    """Groups of station rows (two or more) that ONE DRAWN STATION, ONE ROW folds."""
+    by_point = defaultdict(list)
+    for r in stations:
+        i = nearest_drawn((r[1], r[2]), points)
+        if i is not None:
+            by_point[i].append(r)
+    out = []
+    for i in sorted(by_point):
+        rows = by_point[i]
+        if len(rows) < 2:
+            continue
+        drawn_cores = {_drawn_core(n, city) for n in points[i][1]} - {""}
+        parent = list(range(len(rows)))
+
+        def find(x):
+            while parent[x] != x:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
+        keys = [_drawn_key(r[3]) for r in rows]
+        cores = [_drawn_core(r[3], city) for r in rows]
+        # A compass word on one name only is another stop (the fold check,
+        # 2026-10-16: Zurich's "Bahnhof Altstetten" and "Bahnhof Altstetten
+        # Nord", 222 m); a pair of directions ("IRIS Nord", "IRIS Sud") is one.
+        compass = [bool(_drawn_words(r[3])) and _drawn_words(r[3])[-1] in COMPASS_WORDS for r in rows]
+        for a in range(len(rows)):
+            for b in range(a + 1, len(rows)):
+                # Rows more than DRAWN_FOLD_M apart join only through a row
+                # between them (the fold check: Toronto's two "Yonge Street"
+                # stops, 297 m, are two stops).
+                if _dist_m((rows[a][1], rows[a][2]), (rows[b][1], rows[b][2])) > DRAWN_FOLD_M:
+                    continue
+                if (keys[a] and keys[a] == keys[b]) or (cores[a] and cores[a] == cores[b]
+                                                         and cores[a] in drawn_cores
+                                                         and compass[a] == compass[b]):
+                    parent[find(a)] = find(b)
+        sets = defaultdict(list)
+        for a in range(len(rows)):
+            sets[find(a)].append(rows[a])
+        out += [s for _, s in sorted(sets.items()) if len(s) > 1]
+    return out
+
+
 def street_never(name):
     """The class of a street name that is no street's whatever its ways
     ("interchange", "ramp", "driveway"), else None."""
@@ -3702,6 +3870,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 kept_ids.add(f"{e['type']}/{e['id']}")
     drawn = {fold_name(n if isinstance(n, str) else n[0]) for n in map_stations}
     drawn_at = [(fold_name(n[0]), n[1], n[2]) for n in map_stations if not isinstance(n, str)]
+    points = drawn_points(map_stations)          # ONE DRAWN STATION, ONE ROW
 
     def note(cls, act, osm, name, why="", tags=None, bbox=None, ways=None):
         if log is not None:
@@ -4887,12 +5056,20 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
 
     def fold_stop(members):
         """One stop, one row (merge), under the plain name when the kept
-        name bears a direction note (_DIRECTION_NOTE, 2026-10-13)."""
-        keep = merge(members, "platform")
-        plain = _DIRECTION_NOTE.sub("", keep[3]).strip()
-        if plain and plain != keep[3]:
-            keep[4] = "|".join([keep[3]] + [a for a in keep[4].split("|") if a and a != plain])
-            keep[3] = plain
+        name bears a direction note (_DIRECTION_NOTE, 2026-10-13); never
+        across two drawn points (split_by_drawn, 2026-10-16)."""
+        parts = split_by_drawn(members, points)
+        if len(parts) > 1:
+            note("drawn_split", "kept", parts[0][0][7], parts[0][0][3],
+                 f"platform fold across {len(parts)} drawn points", parts[0][0][9])
+        for part in parts:
+            if len(part) < 2:
+                continue
+            keep = merge(part, "platform")
+            plain = _DIRECTION_NOTE.sub("", keep[3]).strip()
+            if plain and plain != keep[3]:
+                keep[4] = "|".join([keep[3]] + [a for a in keep[4].split("|") if a and a != plain])
+                keep[3] = plain
 
     # SEGMENTS BESIDE THE RELATION THAT CARRIES THE ARTICLE (a fault mended,
     # the sixth pass, 2026-10-13; SEGMENTS_MIN). Amsterdam's museum railway
@@ -5085,7 +5262,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     for wd in sorted(by_item):
         items = [r for r in by_item[wd] if id(r) not in gone]
         for group in _clusters([(r[1], r[2]) for r in items], COMPLEX_MERGE_M):
-            parts = complex_parts([items[i] for i in group], drawn, city)
+            parts = []
+            for part in complex_parts([items[i] for i in group], drawn, city):
+                subs = split_by_drawn(part, points)
+                if len(subs) > 1:
+                    note("drawn_split", "kept", part[0][7], part[0][3],
+                         f"{wd}: complex across {len(subs)} drawn points", part[0][9])
+                parts += subs
             for part in parts:
                 if len(part) > 1:
                     spelled = list(dict.fromkeys(r[3] for r in part))
@@ -5105,6 +5288,29 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 if len(parts) > 1:
                     note("complex_kept_apart", "kept", part[0][7], part[0][3],
                          f"{wd} is shared with another station of the map", part[0][9])
+    # ONE DRAWN STATION, ONE ROW (DRAWN_FOLD_M, 2026-10-16).
+    for members in drawn_fold_groups([r for r in rows if KINDS[r[0]] == "station" and id(r) not in gone],
+                                     points, city):
+        spelled = list(dict.fromkeys(r[3] for r in members))
+        keep = merge(members, "drawn")
+        best = min(spelled, key=lambda n: (fold_name(n) not in drawn, bool(_LINE_PREFIX.match(n)), len(n), n))
+        bare = _BRACKET_NOTE.sub("", best).strip()
+        if bare and bare != best and (fold_name(bare) in drawn or all(
+                _BRACKET_NOTE.sub("", n).strip() == bare for n in spelled)):
+            best = bare
+        if fold_name(best) not in drawn and len({_drawn_key(n) for n in spelled}) > 1:
+            # Rows apart by a compass word only: the name without it, which
+            # is the name the point is drawn under ("IRIS Nord", "IRIS Sud").
+            plain = _TRAILING_COMPASS.sub("", best).strip()
+            # Only where every name of the set carries a compass word: "Paris
+            # Gare du Nord" is no direction (the fold check, 2026-10-16).
+            if plain and plain != best and _drawn_core(plain, city) == _drawn_core(best, city) and all(
+                    _TRAILING_COMPASS.search(n) for n in spelled):
+                best = plain
+        if best != keep[3]:
+            keep[4] = "|".join([keep[3]] + [a for a in keep[4].split("|") if a and a != best])
+            keep[3] = best
+        note("drawn_one_row", "merge", keep[7], keep[3], " = ".join(spelled), keep[9])
     if gone:
         rows[:] = [r for r in rows if id(r) not in gone]
     # A SITE OR BOUNDARY RELATION THAT REPEATS ANOTHER ROW (the third list, 9).
