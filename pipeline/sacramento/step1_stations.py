@@ -210,7 +210,7 @@ def main():
         n_all = int(pts["lines"].str.split("/").map(lambda s: ref in s).sum())
         print(f"    {config.LINE_NAMES[ref]:<10} {n_in:>3} of {n_all:>3}")
 
-    # --- Closed for works: the suspended Green Line's own station ------------
+    # --- The Green Line's own station: the line is not drawn (config) ------
     closed = []
     for name, reason in config.CLOSED_FOR_WORKS.items():
         pos = [nodes[m["ref"]] for r in green for m in r["members"]

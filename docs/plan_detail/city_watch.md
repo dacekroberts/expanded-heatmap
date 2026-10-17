@@ -179,6 +179,13 @@ This is open work, not a record: update an item here as it moves, and send a fin
 
 ## Sacramento's Green Line
 
+- [x] **CHECKED 2026-10-16: the Green Line reopened on 2026-10-12 and runs
+  every 30 minutes on weekdays only (SacRT's timetable), short of the 15-minute
+  test, so it stays undrawn; the page's sentence and Township 9's reason say so
+  (owner's wording). Still open: list 7th & Railyards once OSM's Green
+  relations carry it, and retire `ADDED_STATIONS` (Dos Rios) once the Blue
+  relations do (neither on 2026-10-16). Re-check if SacRT's frequency changes.**
+  The original item follows.
 - [ ] **Sacramento's Green Line: add it back when SacRT reopens it (due by
   mid-October 2026; check from 2026-10-15).** Suspended since 2025-06-16;
   7th & Richards/Township 9 is listed as closed for works

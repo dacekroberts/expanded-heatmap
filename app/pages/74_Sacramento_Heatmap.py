@@ -51,9 +51,9 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-29; set as bullets 2026-10-01. The Green Line sentence follows the
-# closed-for-works rule (docs/category_rules.md, "Station scope"): name the
-# closure and when it is due back.
+# Approved by the owner 2026-09-29; set as bullets 2026-10-01. The Green Line sentence approved
+# 2026-10-16: the line reopened and runs every 30 minutes, short of the
+# 15-minute test (docs/category_rules.md, "Station scope").
 st.markdown(
     """
 **The lines**
@@ -61,10 +61,10 @@ st.markdown(
 - SacRT's **Blue Line** and **Gold Line** are drawn. Each is labeled on the map and in the legend,
   and redrawn from OpenStreetMap's route geometry in the colors OpenStreetMap records for it.
 - Both run every 15 minutes through the day and every 30 in the evening, by SacRT's timetables.
-- The **Green Line is not drawn**: SacRT suspended it in June 2025 for construction in the
-  Railyards and expects it back by mid-October 2026. Its one station of its own, 7th &
-  Richards/Township 9, is closed for works until then; its other stops are Blue or Gold stations and
-  are on the map.
+- The **Green Line is not drawn**: it runs every 30 minutes on weekdays only, by SacRT's
+  timetable, short of the 15-minute bar every drawn line meets. Its own stations, 7th &
+  Richards/Township 9 and 7th & Railyards (open since October 2026), are left off with it; its
+  other stops are Blue or Gold stations and are on the map.
 - The map covers the **City of Sacramento**. The Gold Line runs on to Rancho Cordova and Folsom,
   and both lines reach stops in unincorporated Sacramento County. Those stations are drawn on the
   line but get no ring, and are listed below.

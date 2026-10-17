@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**238 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**239 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-16**
 
@@ -30,6 +30,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: four of the nine held lane 4 rows decided (owner)](#2026-10-16---place-search-four-of-the-nine-held-lane-4-rows-decided-owner)
 - [The project closed to maintenance (owner)](#2026-10-16---the-project-closed-to-maintenance-owner)
 - [Place search: the worship branch tag on Japanese maps; Sacramento's Green Line read (owner)](#2026-10-16---place-search-the-worship-branch-tag-on-japanese-maps-sacramentos-green-line-read-owner)
+- [Sacramento: the Green Line's new wording (owner)](#2026-10-16---sacramento-the-green-lines-new-wording-owner)
 
 **2026-10-14**
 
@@ -9931,3 +9932,22 @@ The owner took Cleanup's recommendations ("All four calls as recommended").
   and passed by the deploy-verify launch (ff29d056, pushed).
 - **Corrected:** `docs/project_context.md` called Berlin Germany's only city.
   Gelsenkirchen and Bremen were built on 2026-10-07.
+
+### 2026-10-16 - Sacramento: the Green Line's new wording (owner)
+
+The owner approved the drafted sentence and reason ("Approve the Green Line
+sentence and the station-list reason as drafted").
+
+- **Page:** the Green Line is not drawn because it runs every 30 minutes on
+  weekdays only, short of the 15-minute bar every drawn line meets. Its own
+  stations, 7th & Richards/Township 9 and 7th & Railyards (open since October
+  2026), are left off with it. This replaces "suspended ... expects it back by
+  mid-October 2026".
+- **Station list:** Township 9's reason reads "Green Line only: every 30
+  minutes on weekdays (SacRT, read 2026-10-16), short of the 15-minute test".
+  `docs/excluded_categories.md` says the same.
+- **Re-run:** Sacramento's drift check changed only `excluded_stations.csv`,
+  that one reason. The map's diff was Folium's ids alone, so it was restored.
+- **Still open:** 7th & Railyards joins the list once OSM's Green relations
+  carry it, and Dos Rios's Wikidata pin retires once the Blue relations do
+  (PLAN; city_watch).

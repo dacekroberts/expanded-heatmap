@@ -83,21 +83,20 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # 05:03-17:48 then every 30 to 22:48; Gold 4 an hour at Sacramento Valley
 # Station by day, every 30 in the evening. Both clear the 15-minute test.
 #
-# ⚠ THE GREEN LINE IS NOT DRAWN: SUSPENDED since 16 June 2025 for the
-# Railyards works; trains in testing since 14 September 2026, "not available
-# for passenger boarding", reopening expected "by mid-October"
-# (sacrt.com/greenline, read 2026-09-29). Drawn as the service runs - Berlin's
-# U6 rule (owner, 2026-09-29). Its only Green-only station is recorded as
-# closed for works; the others are Blue or Gold stations and stay. A dated
-# PLAN item adds the line, the new 7th & Railyards station and its frequency
-# once SacRT's schedules list it again.
+# ⚠ THE GREEN LINE IS NOT DRAWN: it reopened on 12 October 2026 after the
+# Railyards works and runs every 30 minutes, Monday to Friday only (SacRT's
+# Green Line timetable, read 2026-10-16), short of the 15-minute test. Its
+# Green-only stations are listed with that reason; the others are Blue or Gold
+# stations and stay. 7th & Railyards (opened 15 October 2026) joins the list
+# once OSM's Green relations carry it (not yet on 2026-10-16). The dict keeps
+# its name, CLOSED_FOR_WORKS, as step 1 reads it.
 LINE_REFS = ("Blue", "Gold")
-NOT_DRAWN_REFS = {"Green": "suspended since 2025-06-16 (Railyards construction); "
-                           "reopening expected mid-October 2026"}
+NOT_DRAWN_REFS = {"Green": "every 30 minutes on weekdays only (SacRT, read 2026-10-16); "
+                           "short of the 15-minute test"}
 CLOSED_FOR_WORKS = {
     "7th & Richards/Township 9": (
-        "Green Line, closed for works (Railyards construction) since 16 June 2025, "
-        "reopening expected mid-October 2026 (SacRT)"),
+        "Green Line only: every 30 minutes on weekdays (SacRT, read 2026-10-16), "
+        "short of the 15-minute test"),
 }
 
 # ref -> the public name, with the mode word as SacRT signs it.

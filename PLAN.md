@@ -27,12 +27,6 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 ## Due now
 
-- [ ] **Sacramento's Green Line** (due from 2026-10-15). It reopened on
-  2026-10-12, and 7th & Railyards opened on 2026-10-15. SacRT's timetable
-  (read 2026-10-16): every 30 minutes, weekdays only, so it stays undrawn.
-  Left: the page's sentence and the station list's reason, drafted for the
-  owner; 7th & Railyards once OSM's Green relations carry it. city_watch,
-  "Sacramento's Green Line".
 - [ ] **Philadelphia's date re-read** (due about 2026-10-13). data_and_disclosure,
   "Published-city date fixes", item (d).
 - [ ] **Yamagata: rebuild on the newer food list** (the map is on 2026-08-31;
@@ -73,6 +67,9 @@ The full calendar is [`docs/recheck_calendar.md`](docs/recheck_calendar.md).
   Kyoto, Yokohama), one drift check each. japan, "Japanese cities onto N02-25".
 - [ ] **Osaka's Umekita to 福島 stretch** is still not drawn. japan, "Osaka's
   Umekita stretch".
+- [ ] **Sacramento, once OSM catches up:** list 7th & Railyards (Green, not
+  drawn at 30 minutes) and retire `ADDED_STATIONS` for Dos Rios. city_watch,
+  "Sacramento's Green Line".
 - [ ] **Toulouse and Rennes:** did step 1's name-level fallback fire? One
   read-only step 1 run each. city_watch, "Toulouse and Rennes".
 

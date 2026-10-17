@@ -269,8 +269,8 @@ person's own name; the rest are trade names the test cannot tell apart.
 **Stations**: the Blue and Gold Lines' 37 stations inside the city, counting
 each downtown couplet as one. 14 are outside it (8 in unincorporated
 Sacramento County, 3 in Rancho Cordova, 3 in Folsom), and 7th &
-Richards/Township 9 is closed for works while the Green Line is suspended. All
-are listed on Sacramento's page.
+Richards/Township 9 is on the Green Line alone, which runs every 30 minutes on
+weekdays and is not drawn. All are listed on Sacramento's page.
 
 ### Houston - non-store sellers by code, homes, and a person's permit shown by address
 
