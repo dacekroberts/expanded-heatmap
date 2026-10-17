@@ -3,11 +3,13 @@
 // rollout, "all drawn lines and stations are searchable (bare minimum)").
 //
 //   node scripts/check_map_search.js [<city> ...] [--json <file>]
-//                                    [--browser <exe>] [--list <n>]
+//                                    [--browser <exe>] [--list <n>] [--query <text> ...]
 //
 // No city named: every city with an index in app/static/places/. Exits 1 when
 // any drawn station or line is not found, or a searched map could not be
 // measured; 0 otherwise. A map with no search block is said so and skipped.
+// --query (repeatable) prints what the page's search() returns for that text
+// on each map, kind and name, wide-screen cap; it decides nothing.
 //
 // WHAT IT ASKS. A drawn station is typed as the map labels it (the <b> of its
 // tooltip), a drawn line as its legend row reads. Each name goes through the
@@ -66,22 +68,24 @@ const OUTPUTS = path.join(ROOT, "outputs");
 const WIDE = [1280, 900], PHONE = [375, 812];
 const LOAD_MS = 180000, INDEX_MS = 90000, CALL_MS = 600000;
 const NEEDED = ["search", "hits", "words", "isOwn", "STOP", "data"];
-const OPTIONAL = ["JUNK_Q", "caps", "STATION_COLOR"];
+let QUERIES = [];
+const OPTIONAL = ["JUNK_Q", "caps", "STATION_COLOR", "byIndex", "NEAR_M", "LINK_M"];
 
 function usage(msg) {
   if (msg) console.error(msg);
   console.error("usage: node scripts/check_map_search.js [<city> ...] [--json <file>] " +
-                "[--browser <exe>] [--list <n>]");
+                "[--browser <exe>] [--list <n>] [--query <text> ...]");
   process.exit(2);
 }
 
 function parseArgs(argv) {
-  const a = { cities: [], json: null, browser: null, list: 15 };
+  const a = { cities: [], json: null, browser: null, list: 15, queries: [] };
   for (let i = 0; i < argv.length; i++) {
     const v = argv[i];
     if (v === "--json") a.json = argv[++i] || usage("--json needs a file");
     else if (v === "--browser") a.browser = argv[++i] || usage("--browser needs a path");
     else if (v === "--list") a.list = Number(argv[++i]);
+    else if (v === "--query") a.queries.push(argv[++i] || usage("--query needs a text"));
     else if (v.startsWith("--")) usage("unknown option " + v);
     else a.cities.push(v);
   }
@@ -272,6 +276,48 @@ function measureInPage(search, hits, words, isOwn, STOP, data, JUNK_Q, STATION_C
                           rows: data.length });
 }
 
+// RUNS IN THE PAGE. The index's OWN station rows, which the drawn-name test
+// above never reaches. A row joined to a pin is not listed; one left listed
+// is labeled "Station not on this map". Fails a listed row within NEAR_M
+// (150 m where the page names none) of a drawn pin: there it is the pin's
+// own stop under another spelling. Warns where a joined row's own name,
+// typed, does not show the pin holding it. Joins farther than NEAR_M are
+// listed for reading (Philadelphia's "Girard Avenue & 5th Street" opened
+// "Girard Av & 7th St", 243 m away). A row whose name no pin within LINK_M
+// holds was dropped as a far duplicate (link() in the search block).
+function indexStationsInPage(search, data, byIndex, NEAR_M, LINK_M) {
+  var near = NEAR_M || 150, link = LINK_M || 300;
+  var pins = data.filter(function (d) { return d.kind === "mapstation"; });
+  function m(a, b) {
+    var k = Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
+    return Math.sqrt(Math.pow((a.lat - b.lat) * 110540, 2) + Math.pow((a.lon - b.lon) * 111320 * k, 2));
+  }
+  var out = { rows: 0, listed: 0, joined: 0, dropped: 0, near_listed: [], unfound: [], joined_far: [] };
+  var listed = new Set(data);
+  byIndex.forEach(function (r) {
+    if (r.kind !== "station") return;
+    out.rows += 1;
+    if (listed.has(r)) {
+      out.listed += 1;
+      var best = null, bm = Infinity;
+      pins.forEach(function (p) { var x = m(r, p); if (x < bm) { bm = x; best = p; } });
+      if (best && bm <= near) out.near_listed.push({ name: r.name, pin: best.name, m: Math.round(bm) });
+      return;
+    }
+    var holder = null, hm = Infinity;
+    pins.forEach(function (p) {
+      if (p.names.indexOf(r.name) < 0) return;
+      var x = m(r, p);
+      if (x < hm) { hm = x; holder = p; }
+    });
+    if (!holder || hm > link) { out.dropped += 1; return; }
+    out.joined += 1;
+    if (hm > near) out.joined_far.push({ name: r.name, pin: holder.name, m: Math.round(hm) });
+    if (search(r.name).indexOf(holder) < 0) out.unfound.push({ name: r.name, pin: holder.name });
+  });
+  return JSON.stringify(out);
+}
+
 // RUNS IN THE PAGE. The box itself, once a city: the name typed into the
 // input, and the pills it shows. Holds the closure's search() to what a
 // reader sees.
@@ -423,7 +469,26 @@ async function checkCity(b, origin, city) {
       out.problems.push("no drawn station or line was read from the page");
     }
 
+    // The index's own station rows (lane 2, 2026-10-16).
+    if (got.byIndex && got.byIndex.objectId) {
+      const ir = JSON.parse(await call(indexStationsInPage, ["search", "data", "byIndex", "NEAR_M", "LINK_M"].map(arg)));
+      out.index_stations = ir;
+      ir.near_listed.forEach((r) => out.problems.push("index station " + JSON.stringify(r.name) +
+        " is listed as not on this map " + r.m + " m from the drawn " + JSON.stringify(r.pin)));
+      ir.unfound.forEach((r) => out.warnings.push("index station " + JSON.stringify(r.name) +
+        " is joined to " + JSON.stringify(r.pin) + " but typing it does not show that pin"));
+    } else {
+      out.problems.push("UNMEASURED index stations: the search block has no byIndex in its closure");
+    }
+
     // The box against the closure, on the first station the closure found.
+    out.queries = {};
+    for (const q of QUERIES) {
+      out.queries[q] = JSON.parse(await call(function (search, text) {
+        return JSON.stringify(search(text).map(function (d) { return d.kind + ": " + d.name; }));
+      }, [arg("search"), { value: q }]));
+    }
+
     const first = m.stations.find((r) => r.status === "found" && r.rank <= (out.cap_wide || 1));
     if (first) {
       const pills = JSON.parse(await call(probeBoxInPage, [{ value: first.name }]));
@@ -454,6 +519,15 @@ function printCity(r, listMax) {
     ";  lines " + l.drawn + " drawn, " + l.found + " found, " + l.not_found + " not found" +
     (l.past_cap ? ", " + l.past_cap + " past the cap" : "") +
     (r.warnings.length ? ";  " + r.warnings.length + " warning(s)" : ""));
+  Object.keys(r.queries || {}).forEach((q) => console.log("    query " + JSON.stringify(q) + ": " +
+    (r.queries[q].join(" | ") || "(nothing)")));
+  const ix = r.index_stations;
+  if (ix) {
+    console.log("    index stations " + ix.rows + ": " + ix.joined + " joined (" + ix.joined_far.length +
+      " farther than 150 m), " + ix.dropped + " dropped as duplicates, " + ix.listed +
+      " listed as not on this map (" + ix.near_listed.length +
+      " near a pin)");
+  }
   const show = (label, items) => {
     items.slice(0, listMax).forEach((t) => console.log("    " + label + " " + t));
     if (items.length > listMax) console.log("    ... and " + (items.length - listMax) + " more (see --json)");
@@ -464,6 +538,7 @@ function printCity(r, listMax) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  QUERIES = args.queries;
   const cities = args.cities.length ? args.cities : searchedCities();
   if (!cities.length) usage("no searched city: app/static/places/ holds no index");
   const bad = cities.filter((c) => !/^[a-z0-9_]+$/.test(c));

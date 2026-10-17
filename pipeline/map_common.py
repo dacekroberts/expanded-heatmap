@@ -2219,6 +2219,12 @@ _JS_CJK_CLASS = _js_ranges((0x3040, 0x30FF), (0x3400, 0x4DBF), (0x4E00, 0x9FFF),
 _JS_MARKS_CLASS = _js_ranges((0x0300, 0x036F))
 STATION_LINK_M = 300
 STATION_DUP_M = 1500
+# A station row within STATION_NEAR_M of a drawn pin joins it whatever its
+# name: there it is the pin's own stop under another spelling (Berlin's
+# "Attilastr." and "Attilastrasse", Toronto's "A St at B St" and "B Street"),
+# and was listed as "Station not on this map" (lane 2, 2026-10-16;
+# data/_search_rollout/tram_rules56/drawn_without_row.md).
+STATION_NEAR_M = 150
 _PLACE_SEARCH_TEMPLATE = r"""
 <style>
     /* The two-finger notice above the open search box (Leaflet's controls
@@ -2333,7 +2339,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
             return fetch(u, opt).then(text).then(json);
         });
     }
-    var STATION_COLOR = "@@LIGHT_STATION@@", LINK_M = @@STATION_LINK_M@@, DUP_M = @@STATION_DUP_M@@;
+    var STATION_COLOR = "@@LIGHT_STATION@@", LINK_M = @@STATION_LINK_M@@, DUP_M = @@STATION_DUP_M@@,
+        NEAR_M = @@STATION_NEAR_M@@;
     var MIN_LATIN = 4, MIN_CJK = 2, RING_M = __RING_M__;
     // Suggestions at most: the map's own (pills) and other places, fewer on a
     // phone (under 480 px) to keep the list off most of the map.
@@ -2415,7 +2422,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
                     "prof": "professor", "eng": "engenheiro", "sta": "santa", "sto": "santo"}},
         cs: {join: ["a"], stop: [],
              street: ["ulice", "ul", "trida", "namesti", "nam", "nabrezi"],
-             lead: [], station: ["stanice", "nadrazi"], abbr: {}},
+             lead: [], station: ["stanice", "nadrazi"], abbr: {},
+             // dot: a NAME's abbreviation closed by a dot, and the whole words
+             // it stands for, so "svaté Anny" finds "Nemocnice u sv. Anny"
+             // (Brno). A typed abbreviation already begins its word.
+             dot: {"sv": ["svaty", "svata", "svate", "svateho", "svatemu", "svatou", "svatem"],
+                   "ul": ["ulice"], "nam": ["namesti"], "tr": ["trida"], "nabr": ["nabrezi"]}},
         nl: {join: ["en"], stop: ["de", "het"],
              street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
              lead: [], station: [], abbr: {}},
@@ -2528,13 +2540,14 @@ _PLACE_SEARCH_TEMPLATE = r"""
             w.lead.forEach(function (x) { STREET_LEAD[x] = 1; });
             w.station.forEach(function (x) { STATION_WORDS[x] = 1; });
             Object.keys(w.abbr).forEach(function (k) { ABBR[k] = w.abbr[k]; });
+            Object.keys(w.dot || {}).forEach(function (k) { DOT_WORDS[k] = w.dot[k]; });
         });
         PAIR_SPLIT = new RegExp("\\s+(?:" + joins.join("|") + ")\\s+|\\s*[&\\/@]\\s*");
     }
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
-    var UMLAUT_FOLD = false, NORDIC_FOLD = false;
+    var UMLAUT_FOLD = false, NORDIC_FOLD = false, DOT_WORDS = {};
     var renderer = null;
     var byIndex = [], crossURL = null, crossings = null, streetURL = null, streets = null;
     // THE SEARCHED AREA (owner, 2026-10-12): the index names the
@@ -2583,7 +2596,25 @@ _PLACE_SEARCH_TEMPLATE = r"""
         // Danish and Norwegian letters no mark is stripped from, written as
         // the drafted word lists write them: ae, o, aa.
         if (NORDIC_FOLD) s = s.replace(/æ/g, "ae").replace(/ø/g, "o");
+        // German "str." closing a word is "strasse" on both sides: Berlin's
+        // map writes "Attilastr.", OpenStreetMap "Attilastrasse" (41 pins).
+        // "Str." alone goes through abbr.
+        if (UMLAUT_FOLD) s = s.replace(/(\p{L}{2,})str(?![\p{L}\p{N}])/gu, "$1strasse");
+        // Four variant pairs NFKC leaves apart, and a kanji numeral before
+        // 丁目 as its digits (34 stations in 9 cities, 2026-10-13;
+        // data/_search_rollout/extract_rules56/drawn_cjk_without_row.md).
+        if (CJK.test(s)) {
+            s = s.replace(/ヶ/g, "ケ").replace(/臺/g, "台").replace(/祗/g, "祇").replace(/曾/g, "曽")
+                .replace(/([一二三四五六七八九十]+)丁目/g, function (m, k) { return kanjiNum(k) + "丁目"; });
+        }
         return s;
+    }
+    // 一 to 九十九 as digits; 十 alone is 10, 二十三 is 23.
+    function kanjiNum(k) {
+        var D = "〇一二三四五六七八九", t = k.indexOf("十");
+        function d(c) { return c ? D.indexOf(c) : 0; }
+        if (t < 0) return k.split("").map(function (c) { return D.indexOf(c); }).join("");
+        return String((t ? d(k.charAt(0)) : 1) * 10 + d(k.charAt(t + 1)));
     }
     function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
     // The searchable forms of one entry's names.
@@ -2604,6 +2635,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
             (norm(n).match(/\p{L}+(?:\.\p{L}+)+/gu) || []).forEach(function (g) {
                 var j = g.replace(/\./g, ""), k = typeof ABBR[j] === "string" ? j : g.split(".")[0];
                 if (typeof ABBR[k] === "string") toks.push(k, ABBR[k]);
+            });
+            // A word closed by a dot that the page's languages list in dot
+            // ("sv.", "ul."), also fused to the next word ("sv.Barbory").
+            (norm(n).match(/\p{L}+\./gu) || []).forEach(function (g) {
+                var k = g.slice(0, -1);
+                if (Object.prototype.hasOwnProperty.call(DOT_WORDS, k)) toks = toks.concat(DOT_WORDS[k]);
             });
             // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
             if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
@@ -2695,6 +2732,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
         }
         var rest = rows.filter(function (d) { return d.kind !== "station" || !join(d, same); });
         rest = rest.filter(function (d) { return d.kind !== "station" || !join(d, held); });
+        // A third pass joins any row within NEAR_M of a pin, whatever its
+        // name: Berlin's 42, Toronto's 40 and Marseille's 3 such rows were the
+        // pin's own stop listed beside it as not on the map (STATION_NEAR_M).
+        rest = rest.filter(function (d) {
+            return d.kind !== "station" || !join(d, function (x, s) { return metres(x, s) <= NEAR_M; });
+        });
         // Same name as a map station but too far to join: a stray duplicate in
         // OSM (Kyoto's third 山科, 900 m east of the station), dropped rather
         // than labeled as not on the map.
@@ -3376,6 +3419,7 @@ PLACE_SEARCH_SCRIPT = (
     .replace("@@LIGHT_STATION@@", LIGHT["station"])
     .replace("@@STATION_LINK_M@@", str(STATION_LINK_M))
     .replace("@@STATION_DUP_M@@", str(STATION_DUP_M))
+    .replace("@@STATION_NEAR_M@@", str(STATION_NEAR_M))
     .replace("@@CJK_CLASS@@", _JS_CJK_CLASS)
     .replace("@@MARKS_CLASS@@", _JS_MARKS_CLASS)
     .replace("@@CREDIT_BELOW@@", "true" if PLACE_CREDIT_BELOW else "false")
