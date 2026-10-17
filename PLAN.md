@@ -123,9 +123,6 @@ Recorded, not urgent; each is small unless it says otherwise.
   account's `place-search-post-landing` task (may fire 2026-10-18 12:05);
   Philadelphia's permission request, waiting on a reply (silence is not
   consent; `docs/gated_access.md` item 12).
-- [ ] **`browser.gatherUsageStats = false`** in `.streamlit/config.toml`
-  (proposed 2026-10-13: a deploy-verify run sent Streamlit's anonymous usage
-  metrics out).
 - [ ] **Search, the worship branch tag on Japanese maps:** about 110 of the
   135 rows it adds are Soka Gakkai halls; held until Tokyo and Osaka are read
   by eye.

@@ -41,3 +41,9 @@ borderColor = "#23304A"
 # on first use of their search box, so it is never embedded in a map.
 [server]
 enableStaticServing = true
+
+# No anonymous usage metrics leave the app or a local run (owner, 2026-10-16).
+# A deploy-verify run on 2026-10-13 sent them because its launcher did not
+# read this file, so every launch entry passes the flag as well.
+[browser]
+gatherUsageStats = false
