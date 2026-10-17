@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/tokyo.json",
-  "places": 19996,
+  "places": 19982,
   "data_retrieved": "2026-10-11",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.577,
+      "en": 0.576,
       "ja": 0.996
     },
     "list_share": 0.5,

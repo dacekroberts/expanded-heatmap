@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/ichikawa.json",
-  "places": 797,
+  "places": 798,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.251,
+      "en": 0.252,
       "ja": 0.991
     },
     "list_share": 0.5,
