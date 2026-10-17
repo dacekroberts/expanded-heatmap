@@ -530,7 +530,7 @@ def set_base_font():
 # directory and the git remote); this is what a reader sees. Chosen
 # 2026-09-21; a standing invariant is that the project is never named after a
 # city, which is why this describes the measurement instead.
-SITE_NAME = "Storefronts Near Transit"
+SITE_NAME = "Global Transit-Business Atlas"
 
 # Numbered 90/91, not 10/11: Streamlit sorts pages numerically, and city pages
 # take 1..n. At nine cities the next city would be page 10 - which these two

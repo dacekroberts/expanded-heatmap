@@ -25,7 +25,7 @@ from components import (  # noqa: E402
     set_base_font,
 )
 
-st.set_page_config(page_title="Cluj-Napoca Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
+st.set_page_config(page_title="Cluj-Napoca Heatmap | Global Transit-Business Atlas", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
 
 render_city_nav("Cluj-Napoca")

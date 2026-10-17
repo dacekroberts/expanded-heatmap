@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**232 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**233 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-16**
 
 - [The standard map layer stops claiming a map design; the legend follows a wrapped credit; the no-match note names businesses (owner)](#2026-10-16---the-standard-map-layer-stops-claiming-a-map-design-the-legend-follows-a-wrapped-credit-the-no-match-note-names-businesses-owner)
+- [The site is called Global Transit-Business Atlas; city page titles carry it (owner)](#2026-10-16---the-site-is-called-global-transit-business-atlas-city-page-titles-carry-it-owner)
 
 **2026-10-14**
 
@@ -9668,3 +9669,22 @@ Report: `data/_search_rollout/final_rules56/final_rebuild.md`, lists under
 - **Not rendered yet (owner):** the 237 maps re-render once, after the
   smaller changes (A1 and search lanes 1 to 3), so one render pass, one push
   and at most one reboot cover them all.
+
+### 2026-10-16 - The site is called Global Transit-Business Atlas; city page titles carry it (owner)
+
+- **The name:** "Storefronts Near Transit" (owner, 2026-09-20) becomes
+  "Global Transit-Business Atlas" (owner, 2026-10-14, via Visuals; "Index"
+  was set aside because it reads as a ranking, which the site disclaims).
+  `SITE_NAME` in `app/components.py` and the README title and alt text.
+  The four information pages already name `SITE_NAME` in their titles.
+- **City page titles** read "<City> Heatmap | Global Transit-Business
+  Atlas" (owner: "looks good"), city first so a short tab still shows the
+  city; all 237 city pages and the scaffold template. The queue's count of
+  241 was wrong: there are 237 city pages.
+- **Left as written:** the dated 2026-09-20 log and the Barcelona letter as
+  sent.
+- **Still owed:** the README header image and the GitHub social preview
+  carry the old name drawn in; Visuals' `gen_repo_images.py` reads
+  `SITE_NAME` from master, so they are redrawn after the push. The GitHub
+  About text goes to the owner to paste. The share-link preview is checked
+  live after the reboot.

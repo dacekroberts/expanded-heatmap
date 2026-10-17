@@ -31,7 +31,7 @@ from components import (  # noqa: E402
     us_dates,
 )
 
-st.set_page_config(page_title="Tokyo Heatmap", page_icon="\U0001f5fa️", layout="wide")
+st.set_page_config(page_title="Tokyo Heatmap | Global Transit-Business Atlas", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
 render_city_nav("Tokyo")

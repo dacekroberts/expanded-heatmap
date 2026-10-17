@@ -24,7 +24,7 @@ from components import (  # noqa: E402
     set_base_font,
 )
 
-st.set_page_config(page_title="New Orleans Heatmap", page_icon="\U0001f5fa️", layout="wide")
+st.set_page_config(page_title="New Orleans Heatmap | Global Transit-Business Atlas", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
 render_city_nav("New Orleans")
