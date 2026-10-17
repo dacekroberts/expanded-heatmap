@@ -596,6 +596,48 @@ LEGEND_AUTOFIT_SCRIPT = """
     // container they are gone and the width is accurate.
     requestAnimationFrame(fit);
     window.addEventListener('resize', fit);
+
+    // THE CREDIT LINE'S HEIGHT. The inline bottom offset clears a ONE-line
+    // credit (ONE_LINE, 14 px measured 2026-10-13; re-measure if the
+    // attribution's font size changes). The line wraps to two at phone width
+    // when it is long: the standard layer's "Heatmap and overlays" credit at
+    // 375 px (measured 2026-10-16: 28 px, legend 14 px short), and the search
+    // index credit after a search. So the legend is raised by whatever the
+    // line grew, re-measured whenever the line changes size (a base layer
+    // switch, the search credit, a resize). The inline offset stays the
+    // base, so check K of check_provenance.py still reads it.
+    var ONE_LINE = 14;
+    var base = legend.style.bottom;
+    function creditFit(att) {
+        var grew = Math.max(0, Math.round(att.offsetHeight) - ONE_LINE);
+        legend.style.bottom = grew ? 'calc(' + base + ' + ' + grew + 'px)' : base;
+    }
+    // The credit element seen at load is not always the one that stays, so
+    // the corner that holds it is watched and the observer re-bound to
+    // whichever credit element is current.
+    var bound = null, ro = window.ResizeObserver ? new ResizeObserver(refit) : null;
+    function refit() {
+        var att = document.querySelector('.leaflet-control-attribution');
+        if (!att) return;
+        if (att !== bound) {
+            if (ro) { if (bound) ro.unobserve(bound); ro.observe(att); }
+            bound = att;
+        }
+        creditFit(att);
+    }
+    function watchCredit() {
+        var corner = document.querySelector('.leaflet-bottom.leaflet-right');
+        // setTimeout, not requestAnimationFrame: a hidden tab runs no frames.
+        if (!corner) { setTimeout(watchCredit, 50); return; }
+        new MutationObserver(refit).observe(corner, {childList: true, subtree: true, characterData: true});
+        window.addEventListener('resize', refit);
+        refit();
+        // The line also wraps when PHONE_FIT_SCRIPT narrows the container,
+        // which no mutation reports, and a hidden tab runs no ResizeObserver.
+        setTimeout(refit, 500);
+        setTimeout(refit, 1500);
+    }
+    watchCredit();
 })();
 </script>
 """
@@ -3054,26 +3096,15 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (CREDIT_BELOW && map.attributionControl) {
                 if (!creditBelow) {
                     creditBelow = true;
-                    var creditEl = map.attributionControl.getContainer();
-                    var creditH = creditEl ? creditEl.offsetHeight : 0;
                     map.attributionControl.addAttribution(
                         'Search index <a href="https://opendatacommons.org/licenses/odbl/1-0/" ' +
                         'target="_blank" rel="noopener noreferrer">ODbL</a> (<a href="' + abs(URL) +
                         '" target="_blank" rel="noopener" download>download</a>' +
                         (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') +
                         (streetURL ? ', <a href="' + abs(streetURL) + '" target="_blank" rel="noopener" download>streets</a>' : '') + ')');
-                    // The line is taller now (two lines on a phone), and
-                    // the legend's bottom is clamped for a one-line credit
-                    // (_LEGEND_BOTTOM_CSS): it is raised by what the line
-                    // grew. Measured 2026-10-13 at a 343 px map: the line
-                    // goes from 14 to 28 px and an open legend's bottom 4 px
-                    // sat under it.
-                    var grew = creditEl ? creditEl.offsetHeight - creditH : 0;
-                    var lg = document.querySelector(".map-legend");
-                    if (lg && grew > 0) {
-                        var was = lg.style.bottom || getComputedStyle(lg).bottom;
-                        lg.style.bottom = "calc(" + was + " + " + grew + "px)";
-                    }
+                    // The line is taller now (two lines on a phone; measured
+                    // 2026-10-13 at a 343 px map: 14 to 28 px). The legend
+                    // follows it through LEGEND_AUTOFIT_SCRIPT's creditFit().
                 }
                 if (found === false || !areaName()) return;
                 c.textContent = "Search covers " + areaName() + ", outlined on the map.";
@@ -4559,8 +4590,12 @@ OSM_ATTRIBUTION = (
 # its rights tag says so instead of reserving everything.
 OWNER_NAME = "Dace Roberts"
 OWNER_CREDIT = f"Map design &copy; {OWNER_NAME}"
-# What both base layers (Business and Travel) show in the bottom line.
+# What the Travel layer (the project's own style) shows in the bottom line.
 MAP_ATTRIBUTION = OSM_ATTRIBUTION + " &middot; " + OWNER_CREDIT
+# The standard OpenStreetMap layer's cartography is OSM's own, so its credit
+# claims only the heatmap and overlays (owner, 2026-10-16, option B).
+STD_OWNER_CREDIT = f"Heatmap and overlays &copy; {OWNER_NAME}"
+STD_MAP_ATTRIBUTION = OSM_ATTRIBUTION + " &middot; " + STD_OWNER_CREDIT
 RIGHTS_META = {
     "copyright": f"Writing and design \u00a9 2026 {OWNER_NAME}. All rights reserved.",
     "dcterms.rightsHolder": OWNER_NAME,
@@ -5687,7 +5722,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # requires the target on every map.
     std_base = folium.TileLayer(
         tiles="OpenStreetMap", name="Business" if open_basemap else map_title,
-        attr=MAP_ATTRIBUTION,
+        attr=STD_MAP_ATTRIBUTION,
     ).add_to(m)
     basemap_args = dict(open_basemap or {})
     routes = tuple(basemap_args.pop("routes", ()))
