@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/osaka.json",
-  "places": 9985,
+  "places": 10010,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.451,
+      "en": 0.45,
       "ja": 0.996
     },
     "list_share": 0.5,

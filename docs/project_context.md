@@ -1040,8 +1040,8 @@ Cities built and running end to end (pipeline, map, app page):
   line codes, the full names in the legend (owner).
 
 - **Berlin** - the U-Bahn and the S-Bahn's sixteen lines, cut at the Land
-  boundary; Germany's first and only city (no other chamber or city publishes
-  premises). The register is **a chamber of commerce's membership**, IHK
+  boundary; Germany's first city (Gelsenkirchen and Bremen followed on
+  2026-10-07, on sources of their own). The register is **a chamber of commerce's membership**, IHK
   Berlin's, as points with WZ 2025 (NACE Rev. 2.1) classes: no names and no
   street addresses at all, so a dot shows its kind of business, and the crafts
   (hairdressers, laundries) belong to a different chamber, so Personal services

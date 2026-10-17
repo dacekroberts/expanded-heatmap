@@ -247,17 +247,17 @@
  "kobe": {
   "in_ring": 23804,
   "all": 27280,
-  "map_blob": "a01ac9e25bc18251aae5a06cfe955f47ded8dbd4"
+  "map_blob": "82c2ed84b6f569875f29367f5aadb32263693dd1"
  },
  "osaka": {
   "in_ring": 71690,
   "all": 73011,
-  "map_blob": "480b8b99b65606e55812785ba0a7aeefb331c42b"
+  "map_blob": "a565266ac6bdc99cd6e63f5144f5efdf7b9ee7f9"
  },
  "sapporo": {
   "in_ring": 23009,
   "all": 28688,
-  "map_blob": "3c10df295fb7d9f349feef89eb83608573f1da12"
+  "map_blob": "13f9671fea8b10445431dff8431d0744e61fddf1"
  },
  "fukuoka": {
   "in_ring": 24607,
@@ -267,12 +267,12 @@
  "kyoto": {
   "in_ring": 28008,
   "all": 32390,
-  "map_blob": "45656b467574f51d311124785da56f34562cda8d"
+  "map_blob": "9ce258960e69f0d885c39bd68f5ff7f1cfb709e9"
  },
  "tokyo": {
   "in_ring": 59811,
   "all": 61299,
-  "map_blob": "fa4859c80f7c0c43b62a797a1255c61a80b091fd"
+  "map_blob": "7e377fbc60f16aeb5befd3788cd83e0a2bfd3fc3"
  },
  "berlin": {
   "in_ring": 49394,
@@ -552,12 +552,12 @@
  "yokohama": {
   "in_ring": 6542,
   "all": 7845,
-  "map_blob": "2b10279293f9109f98529b899c51f90ef5aeeb2c"
+  "map_blob": "ed01d36f8c4e164815137e6a9942a356b2963b36"
  },
  "hiroshima": {
   "in_ring": 9139,
   "all": 13688,
-  "map_blob": "8e658356e80deb1060d4ef6ed0c75bf146fea360"
+  "map_blob": "ad57aae743477d5132040404598c2c7e26dd91ab"
  },
  "namyangju": {
   "in_ring": 10067,
@@ -672,12 +672,12 @@
  "nagasaki": {
   "in_ring": 4174,
   "all": 7269,
-  "map_blob": "fd4ad1c9dd8917dbf4e4f228eb061ded8af43f90"
+  "map_blob": "9421284cd6c50f37b1e4cf1016efc8a489c43a81"
  },
  "utsunomiya": {
   "in_ring": 3789,
   "all": 8043,
-  "map_blob": "a7718ad599a7cc38610490d56639421027f6826a"
+  "map_blob": "fc308bbe009b4ab369993546e3e39afb94bde928"
  },
  "kitakyushu": {
   "in_ring": 10577,
@@ -692,7 +692,7 @@
  "hakodate": {
   "in_ring": 331,
   "all": 1077,
-  "map_blob": "69d5334fa3f100314dc06d7af2d944e9b0f43d19"
+  "map_blob": "9da6b1c4ca0c3b4e9f4155f87e79bea22c6aef7f"
  },
  "kagoshima": {
   "in_ring": 3972,
@@ -702,12 +702,12 @@
  "okayama": {
   "in_ring": 4167,
   "all": 6570,
-  "map_blob": "1c37047ae5900c83904701da7361bd0d54a03ca1"
+  "map_blob": "4671ea4e2cc9565d73194afdeec35e3b77017852"
  },
  "kochi": {
   "in_ring": 678,
   "all": 1406,
-  "map_blob": "b1341ff9e88ec626498119931ab61d0c495cf6ad"
+  "map_blob": "0db349e6cff8ab58c6b8eee6ee8b9fefa9889497"
  },
  "seattle": {
   "in_ring": 5548,
@@ -722,7 +722,7 @@
  "kawasaki": {
   "in_ring": 9931,
   "all": 11899,
-  "map_blob": "e2997dea90848e9c94602f96e94b6bd377938ecf"
+  "map_blob": "52ef77633bd08314dff37868ba6b428a6635451c"
  },
  "yokosuka": {
   "in_ring": 3533,
@@ -737,12 +737,12 @@
  "nishinomiya": {
   "in_ring": 4935,
   "all": 5529,
-  "map_blob": "a28885cac374ae814ba3d27921c67d0772b001ab"
+  "map_blob": "326c8f8d5c6dec76e6e7bef56442b455b27fd64b"
  },
  "takamatsu": {
   "in_ring": 5611,
   "all": 7819,
-  "map_blob": "882ce4ab3c8bc0a76b61989889374f1f5b478574"
+  "map_blob": "06721de7dadf378f4bc3705f0b005c8ba51ed203"
  },
  "toyota": {
   "in_ring": 2216,
@@ -767,12 +767,12 @@
  "hamamatsu": {
   "in_ring": 1080,
   "all": 3187,
-  "map_blob": "2f32f15c3e4c936ab1d28cc8121e133231dd37c2"
+  "map_blob": "807bebd964b33bc15134b4be56fd7b53abe1b11f"
  },
  "higashiosaka": {
   "in_ring": 5220,
   "all": 5778,
-  "map_blob": "e25460acb26cf13fe946179a28c8865a246be68a"
+  "map_blob": "908fad72b4c154bf721610e9c1c23f055faca10e"
  },
  "kurume": {
   "in_ring": 1943,
@@ -782,7 +782,7 @@
  "sasebo": {
   "in_ring": 1697,
   "all": 2450,
-  "map_blob": "4327713034c84852463dad23b68cef6b73a8bd0c"
+  "map_blob": "a539a5def3edc58aa57cf9fbd117ad80b219a3f8"
  },
  "shimonoseki": {
   "in_ring": 1276,
@@ -962,7 +962,7 @@
  "kakogawa": {
   "in_ring": 2113,
   "all": 3701,
-  "map_blob": "8e013b5620c9666043f2e045ac63682fffb06aef"
+  "map_blob": "ad3cc56b21a50f7b1f893b31c6d9fc37938e26d6"
  },
  "amagasaki": {
   "in_ring": 5838,
@@ -982,7 +982,7 @@
  "fukuyama": {
   "in_ring": 2745,
   "all": 6365,
-  "map_blob": "db42cdfc3707ed13d2a00b49d0ea6fa8f0f5e851"
+  "map_blob": "700e93c03b7b9080c090a0c33093956089316fc0"
  },
  "ichinomiya": {
   "in_ring": 1890,
@@ -1007,7 +1007,7 @@
  "akita": {
   "in_ring": 1622,
   "all": 4961,
-  "map_blob": "077f34b1f9f80cbfbd7a8d95cf8d1c02a03850c9"
+  "map_blob": "f231ab6d811a682f9b86f7a077e88e5a61a8a3d0"
  },
  "oita": {
   "in_ring": 3372,
@@ -1017,7 +1017,7 @@
  "gifu": {
   "in_ring": 1844,
   "all": 6005,
-  "map_blob": "2d3823dd5133b8e16d89d3e00577a7089f95be50"
+  "map_blob": "22ee5b02d25c174392c407860ef8873e319c81f2"
  },
  "mito": {
   "in_ring": 981,
@@ -1027,7 +1027,7 @@
  "morioka": {
   "in_ring": 2303,
   "all": 4609,
-  "map_blob": "6fbcfaaea7684ee32f942f324f3887a0ecfea227"
+  "map_blob": "1d56cee7fa2492adcc750469060fe99f5d88ef02"
  },
  "ibaraki_osaka": {
   "in_ring": 506,
@@ -1087,7 +1087,7 @@
  "aomori": {
   "in_ring": 1231,
   "all": 3528,
-  "map_blob": "ad1d94d168b6a2385b6861ce0517bd23052c7cdf"
+  "map_blob": "412ea2d5c79ec2c12a79c5f7c04a3e4c956a2f88"
  },
  "matsue": {
   "in_ring": 299,
@@ -1152,7 +1152,7 @@
  "funabashi": {
   "in_ring": 1234,
   "all": 1473,
-  "map_blob": "bee685c1c132d2dab855b29a5b9c615189d108df"
+  "map_blob": "1553df23bc9f96f2d608f5d5de3f4b1fa97cec3f"
  },
  "matsudo": {
   "in_ring": 1000,

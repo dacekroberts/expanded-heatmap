@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**238 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-16**
 
@@ -29,6 +29,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the post-landing batch, fifteen calls at once (owner)](#2026-10-16---place-search-the-post-landing-batch-fifteen-calls-at-once-owner)
 - [Place search: four of the nine held lane 4 rows decided (owner)](#2026-10-16---place-search-four-of-the-nine-held-lane-4-rows-decided-owner)
 - [The project closed to maintenance (owner)](#2026-10-16---the-project-closed-to-maintenance-owner)
+- [Place search: the worship branch tag on Japanese maps; Sacramento's Green Line read (owner)](#2026-10-16---place-search-the-worship-branch-tag-on-japanese-maps-sacramentos-green-line-read-owner)
 
 **2026-10-14**
 
@@ -9890,3 +9891,43 @@ recorded as known limits where not.
   recorded (`rail_verdicts_text_pass_2026-10-17.csv`). The owner: Tramgea
   settles the 132 with its own OpenStreetMap rail; nothing more is queried
   from here. No business data went over.
+
+### 2026-10-16 - Place search: the worship branch tag on Japanese maps; Sacramento's Green Line read (owner)
+
+The owner took Cleanup's recommendations ("All four calls as recommended").
+
+- **The worship branch tag now reads on Japanese maps.** The hold of the
+  same day ("held until Tokyo and Osaka are read by eye") is lifted. The eye
+  read covered all 123 rows the tag adds, not only Tokyo's and Osaka's. They
+  sit in 25 cities: Soka Gakkai 93, Tenrikyo 15, Konkokyo 5, Happy Science 3,
+  the Latter-day Saints 3, Jehovah's Witnesses' Kingdom Halls 2, PL Kyodan 1
+  and Bentenshu 1. Each is a named building or congregation. None is a home
+  or a junk row.
+- **Four dropped by id in Tokyo** (PLACE_DROPPED): Soka Gakkai headquarters
+  annexes whose branch is a description, not a name. They are 新館 ("new
+  building", way/157415970), 本部別館 ("headquarters annex",
+  way/157415967), 本部第二別館 ("second headquarters annex",
+  way/904416031) and 総合案内センター ("general information center",
+  way/157415929). Tokyo gains 37 rows.
+- **Precedent.** The Latter-day Saints rows that are kept carry a ward or
+  branch name (東大阪ワード, 藻岩, 高松支部). Taoyuan's two rows dropped on
+  2026-10-13 were named only by the denomination. So this fits that ruling,
+  as the branch rule already did outside Japan.
+- **Code and checks.** `place_index.py` drops `"ja" not in local`. The
+  selftest case now expects the row ("a Japanese map reads the branch
+  tag"), 346 of 346. Rule breaks: 283 of 283 caught. The one stale break,
+  whose text occurred twice since the lane merges, was made unique.
+- **Re-rendered.** All 94 Japanese indexes were rebuilt; 25 changed, and
+  their maps were re-rendered.
+- **Sacramento's Green Line.** SacRT's timetable, read in the browser on
+  2026-10-16, shows it every 30 minutes, Monday to Friday, over 7 stations.
+  That fails the 15-minute test, so the line stays undrawn. OSM's rail
+  relations were fetched again to look for 7th & Railyards and Dos Rios.
+  Neither is on them yet, so the fetch was discarded unused. The page
+  sentence and the station list's reason still say "suspended"; their new
+  wording is drafted for the owner.
+- **New York's phone ranking** is left as a known fault (PLAN).
+- **`browser.gatherUsageStats = false`** is set in `.streamlit/config.toml`
+  and passed by the deploy-verify launch (ff29d056, pushed).
+- **Corrected:** `docs/project_context.md` called Berlin Germany's only city.
+  Gelsenkirchen and Bremen were built on 2026-10-07.

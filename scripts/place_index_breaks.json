@@ -267,7 +267,7 @@
  {"label": "a compass direction in brackets is a direction note", "old": "r\"|(?:north|south|east|west)bound\\s*)[)）]\\s*$\", re.I)", "new": "r\")[)）]\\s*$\", re.I)"},
  {"label": "a folded stop takes the plain name", "old": "        if plain and plain != keep[3]:", "new": "        if False:"},
  {"label": "each railway value of a mixed group folds on its own", "old": "                        if _one_railway([part[i] for i in sub]):", "new": "                        if False:"},
- {"label": "a closing note in brackets is set aside among stations of one entry", "old": "    base = _BRACKET_NOTE.sub(\"\", name).strip() or name", "new": "    base = name"},
+ {"label": "a closing note in brackets is set aside among stations of one entry", "old": "one Wikidata entry.\"\"\"\n    base = _BRACKET_NOTE.sub(\"\", name).strip() or name", "new": "one Wikidata entry.\"\"\"\n    base = name"},
  {"label": "the city's name leading a station's name is set aside among stations of one entry", "old": "        if m and _station_core(m.group(1)):", "new": "        if False:"},
  {"label": "the city's name is set aside only before a separator", "old": "]+(\\S.*)$\", base, re.I)", "new": "]*(\\S.*)$\", base, re.I)"},
  {"label": "two names the map draws stay two rows among one core", "old": "        if len({fold_name(r[3]) for r in parts[n]} & set(drawn)) > 1:", "new": "        if False:"},

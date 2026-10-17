@@ -4318,11 +4318,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         # 信濃文化会館", "The Salvation Army Bloor Central"). Measured on the
         # caches of every searched city: 146 such objects in 34 cities
         # (Tokyo 41, Osaka 26, Sapporo 10). A branch tag listing several congregations (";") is not read.
-        # Not yet on Japanese maps (owner, 2026-10-16): about 110 of the 135
-        # rows it adds are Soka Gakkai halls, held until Tokyo and Osaka are
-        # read by eye.
+        # Japanese maps too since the eye read of Tokyo and Osaka (owner,
+        # 2026-10-16): 66 rows, every one a named building; four headquarters
+        # annexes named by a description are dropped by id in Tokyo's config.
         branch = (t.get("branch") or "").strip()
-        if (t.get("amenity") == "place_of_worship" and names and branch and "ja" not in local
+        if (t.get("amenity") == "place_of_worship" and names and branch
                 and worship_only(names[0], local) and not worship_only(branch, local)
                 and ";" not in branch and not junk_name(branch) and fold_name(branch) not in fold_name(names[0])):
             names = [f"{names[0]} {branch}"] + names[1:]
@@ -6367,7 +6367,7 @@ def _selftest():
          and not NUMBERED_SQUARE.fullmatch("Praça XV de Novembro") and not NUMBERED_SQUARE.fullmatch("Praça 15 de Novembro")),
         ("a denomination name reads its branch tag", ("landmark", "The Salvation Army Lakeview Corps") in rows
          and not any(n.startswith("The Salvation Army") and n != "The Salvation Army Lakeview Corps" for _, n in rows)),
-        ("a Japanese map does not read the branch tag yet", not any("試験文化会館" in n for _, n in ja_rows)),
+        ("a Japanese map reads the branch tag", ("landmark", "創価学会 試験文化会館") in ja_rows),
         ("a station is never read by the worship rule", ("station", "Methodist Church") in rows),
         ("worship_only: a denomination as its mappers spell it",
          worship_only("Kingdom Hall of Jehovah's Wittnesses", ()) and worship_only("Jehovahs Witness", ())

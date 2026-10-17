@@ -28,9 +28,11 @@ Detail files: [japan](docs/plan_detail/japan.md),
 ## Due now
 
 - [ ] **Sacramento's Green Line** (due from 2026-10-15). It reopened on
-  2026-10-12, and 7th & Railyards opened on 2026-10-15 (SacRT). Its frequency
-  is not yet read against the 15-minute test. city_watch, "Sacramento's Green
-  Line".
+  2026-10-12, and 7th & Railyards opened on 2026-10-15. SacRT's timetable
+  (read 2026-10-16): every 30 minutes, weekdays only, so it stays undrawn.
+  Left: the page's sentence and the station list's reason, drafted for the
+  owner; 7th & Railyards once OSM's Green relations carry it. city_watch,
+  "Sacramento's Green Line".
 - [ ] **Philadelphia's date re-read** (due about 2026-10-13). data_and_disclosure,
   "Published-city date fixes", item (d).
 - [ ] **Yamagata: rebuild on the newer food list** (the map is on 2026-08-31;
@@ -111,6 +113,12 @@ Recorded, not urgent; each is small unless it says otherwise.
   model; Vancouver (Regional) clipped at 375 px; the Overview's colour
   contrast, never measured. data_and_disclosure and labels_and_macro_map,
   under those names; process_and_tooling, "Next landing follow-ups".
+- [ ] **Transit-layer gaps found by the retrospective draft (2026-10-16):** no
+  script enforces the CIE76 20 pin floor (`check_line_colours()` raises only
+  below 10); rail shape and labels have no check in the gate;
+  `docs/sub_transit_line_filters.md` lists 8 thinning cities where 13 pages
+  thin; `docs/commuter_rail_list.md` says six cities draw commuter rail and
+  bolds seven. Each to be confirmed before it is fixed.
 - [ ] **Heavy-job gate follow-ups:** Japanese drift memory, orphaned children
   in the ledger. process_and_tooling, "Heavy-job gate follow-ups".
 
@@ -123,9 +131,6 @@ Recorded, not urgent; each is small unless it says otherwise.
   account's `place-search-post-landing` task (may fire 2026-10-18 12:05);
   Philadelphia's permission request, waiting on a reply (silence is not
   consent; `docs/gated_access.md` item 12).
-- [ ] **Search, the worship branch tag on Japanese maps:** about 110 of the
-  135 rows it adds are Soka Gakkai halls; held until Tokyo and Osaka are read
-  by eye.
 - [ ] **Deferred under the feature freeze:** the phone legend fold by operator,
   the map's height on phones, a reset-view button, search tuning by feel, a
   per-city sights list for search.

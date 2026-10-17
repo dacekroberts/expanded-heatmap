@@ -569,6 +569,11 @@ PLACE_REVIEWED = {
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {
+    # The worship branch tag read on Japanese maps (owner, 2026-10-16): four Soka Gakkai headquarters annexes whose branch is a description, not a name.
+    "way/157415970": "'創価学会 新館', the headquarters' 'new building', a description standing in for a name",
+    "way/157415967": "'創価学会 本部別館', the 'headquarters annex', a description standing in for a name",
+    "way/904416031": "'創価学会 本部第二別館', the 'second headquarters annex', a description standing in for a name",
+    "way/157415929": "'創価学会 総合案内センター', the 'general information center', a description standing in for a name",
     # From the read of the landmarks and places (the place-read agent, batch 3, 2026-10-11: every name without a standard place suffix read with its tags, the rest screened by filters), each id checked against its cached name.
     "node/9706383884": "a slope-car halt whose only name is the word for a car park",
     "node/8973688424": "an architecture firm's studio name on a park node",
