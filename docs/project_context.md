@@ -122,6 +122,13 @@ the scaffold covers what it was for (see `DECISIONS.md`).
 
 ## Current state
 
+**Finished and in maintenance (owner, 2026-10-16: no more cities for now).**
+237 cities in 27 countries, every one with place search; the site is the
+Global Transit-Business Atlas. What is left is in `PLAN.md`: dated re-checks,
+data refreshes, small known faults, and calls that wait on the owner. The
+notes below are per city and per country, kept as the reference for
+maintaining each map.
+
 Cities built and running end to end (pipeline, map, app page):
 
 - **San Diego** - MTS Trolley (Blue, Orange, Green, Copper, Silver). NAICS.
