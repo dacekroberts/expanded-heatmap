@@ -161,7 +161,10 @@ one, this one is current.
 - Typed artifacts (Slides, Design, Docs) could not be edited from Teams
   (portfolio-ops' rule of 2026-10-17: HTML "before" export, a plain HTML
   checklist of exact old and new text, applied by Max or the owner). Cleanup
-  changed no artifact on Teams, so no checklist is owed from here.
+  changed no artifact on Teams, so no checklist is owed from here. **Visuals
+  owes one:** 25 edits to the canvas, the deck and the brand book, its
+  checklist at JHTgVhyNYN36qAkRcE9euS (Visuals' summary below; share the
+  checklist to Max before opening it there).
 - The owner's outside actions still open: the GitHub social preview
   (`visuals/repo/social-preview.png`) and About text.
 
@@ -169,16 +172,112 @@ one, this one is current.
 - PLAN.md "Due now" and the dated re-checks: Milan, Prague, Toronto,
   Birmingham, Philadelphia's date re-read, São Paulo's lines, the weekly
   `archive_decisions.py` run (first pass will take about three weeks).
-- Analytics' share page (Dc87nkRqv1FktunF2Qnxaq, live v7): the new
-  "Searchable places around stations" card conforms to the share rules,
-  with two conditions Cleanup gave Analytics: the OpenStreetMap credit on
-  the card, and counts framed as the index's under its rules. Recount at
-  current master first (26 cities' indexes changed after 3bfc131c). Not
-  republished until the owner says yes.
-- Analytics' cross-city Food service chart: the 21 cities without totals
-  have no Food service source at all (Bremen retail only; 8 Japanese cities
-  with no food list; 12 where the national list is too thin), so they stay
-  out by design.
+- Visuals: the typed-artifact checklist and three deletions after it (its
+  summary below). Nothing from Analytics (the share card is live, the
+  Food service chart closed at 167 cities).
+
+### Analytics' summary (GTBA Analytics, 2026-10-17, as sent)
+1. **State.** Branch analytics-handoff, HEAD 3bfc131c, clean, never pushed;
+   by standing rule it never merges into master. Behind master (2509f33a),
+   which does not matter: Analytics reads committed files through git show.
+   `data/_analysis/` is gitignored as a whole (`data/_*/`), by design, in
+   the shared data/ folder: the scripts (build_dashboard.py, build_share.py,
+   search_stats.py, map_lines.py, cross_city_share.py and others),
+   results/, register/ (swept_keys.json gained 7 keys on 2026-10-16 from
+   the Toronto sweep, keys only), artifacts/dashboard.html and share.html,
+   skill/SKILL.md and PENDING.md (current). The analysis is pinned at
+   559bf919 (storefront and map inputs identical through 2509f33a, checked
+   by decoding pins and map layers); the search stats and map lines at
+   31a2ec4a.
+2. **Artifacts changed from Teams** (both Max-owned, Teams as Editor):
+   - Dashboard https://claude.ai/artifact/5Miq5KXeo3JVZtV1rSa8Du: version 6
+     (1792223256-ce5a), published 2026-10-17 on the owner's yes; matches
+     the local artifacts/dashboard.html.
+   - Share page https://claude.ai/artifact/Dc87nkRqv1FktunF2Qnxaq: version
+     9 (1792222890-5bfe), published 2026-10-17 on the owner's yes; matches
+     the local artifacts/share.html. It carries the searchable-places card
+     and the Lines column, leaves out the 10 held cities, recomputes the
+     association over the 227 kept cities, and credits OpenStreetMap on
+     the card.
+   - The builders set the live titles, "GTBA Dashboard" and "GTBA Analysis
+     (Share-Ready)", so a rebuild keeps them. The pilot pages are retired
+     (owner, 2026-10-16): never rebuild them.
+3. **Decisions waiting on the owner: none.** The share card is done:
+   recounted at 31a2ec4a, and 2509f33a changes no outputs. The Food service
+   chart is closed at 167 cities; the other 21 have no Food service source
+   and are described as "no Food service source", never "pending".
+   Recommendation: leave the chart as it is.
+4. **For Max first.** Each artifact republish needs the owner's yes,
+   artifact by artifact: read the URL first, then publish with url. The
+   builders use fixed paths (REGISTRY points at
+   `visuals/data/restrictions.json` in the main checkout). Rerun recipe:
+   `data/_analysis/skill/SKILL.md`; rerun only after a change to pins or
+   map layers on master (a search-only change needs search_stats.py and
+   map_lines.py, then the two builders). Hard lines: correlational wording
+   only, the AI-driven acknowledgement exactly twice per page, no
+   ridership, withheld-name lists hold keys never names, analyses private
+   unless the owner says so per piece.
+
+### Visuals' summary (GTBA Visuals, 2026-10-17, as sent)
+1. **State.** Worktree `.claude/worktrees/visual`, branch visual-handoff,
+   HEAD c6221927 (a local merge of master b70d4c8c), 45 ahead and 16 behind
+   origin/master, never pushed or merged: by the owner's rule (2026-10-04)
+   it stays local and nothing from visuals lands on master.
+   - One uncommitted file, `app/ring_shares.json`: modified before the
+     session started, only map_blob hashes on all 237 entries (regenerated
+     churn), not visuals work. Recommendation: discard it with
+     `git checkout -- app/ring_shares.json`, the owner's call.
+   - Visuals work is in the main checkout's `visuals/` folder (git
+     excluded); the working folder is the session scratchpad
+     (scratchpad/work), with copies of the generators in
+     `visuals/generators/`.
+   - Child session carousels-republish (local_2278ff91), in the same
+     worktree with no branch of its own: published the carousels (v8) only,
+     no file changes, idle.
+2. **Artifacts changed from Teams.**
+   - Max-owned, shared to Teams as editor (plain HTML), all titled "Global
+     Transit-Business Atlas" now: city cards
+     https://claude.ai/artifact/SxtgpB9t2VQtAFvnZJPSfe v24; country cards
+     https://claude.ai/artifact/Bq1SVz7yEGTc2gJNUZiT1T v14; carousels
+     https://claude.ai/artifact/7L5KrkABezN4GCsWJYBCy5 v8; sampler
+     https://claude.ai/artifact/Dvtfz5BBiCchdHhmr5XHxq v17; chain page
+     https://claude.ai/artifact/EP8PivGCT8ag7AoS9d5nPX v18. The sampler and
+     chain page are dated four-city samples (2026-10-16).
+   - Multi-city views: renamed by the owner by hand, "GTBA multi-city
+     views"; its generator template carries the title now.
+   - Teams-owned: the motion film
+     https://claude.ai/artifact/AMA6fUisnkixBSwXZPj3mP (Paris search
+     outline made teal #5eead4; cfg.json v5, shared.js v22); the rename
+     checklist https://claude.ai/artifact/JHTgVhyNYN36qAkRcE9euS v2,
+     private.
+   - **Typed artifacts with a change owed:** the canvas
+     (JAfMAqXo92uWN9wCUwsBRu), the deck (GtXL6Q1sQtqBFwV29dijY7) and the
+     brand book (LipZedN2vU1GFQsbGe4s2P). 25 edits: 20 for the rename, 5
+     for Toronto's tram-rescope figures and two commit stamps. Before
+     export: `visuals/generators/before_snapshots_2026-10-17/` (51 files,
+     the live project files as of 2026-10-17). Checklist:
+     JHTgVhyNYN36qAkRcE9euS. Renamed sources:
+     `visuals/generators/pending_rename_2026-10-16/`.
+3. **Decisions waiting on the owner.**
+   - After Max applies the checklist: delete the pending_rename folder, the
+     before snapshots and the checklist, each confirmed at the time.
+     Recommendation: yes, once a Max session has compared the applied
+     edits with the checklist.
+   - `app/ring_shares.json` churn: recommendation, discard it.
+   - Drill sheet: its template is renamed; whether it was ever published
+     is unknown. Recommendation: nothing unless the owner has a link.
+4. **For Max first.**
+   - The checklist is private to Teams: share it to the Max account before
+     opening it there.
+   - A shared link returns 404 on an account until the owner opens it there
+     once while signed in; repeated 404s make the tool drop the link for
+     the session.
+   - Typed artifacts refuse publishes from the non-owning account (deploy
+     422); plain HTML can be republished by an editor on either account.
+   - Toronto's figures on Carousel 4, the Funnel board and deck slide 08
+     are real data changes, not wording: apply them exactly as listed
+     (11,803 near a station, 64.8% of 18,215, rings 28/35/19/17%).
+   - No scheduled tasks or wakeups from Visuals.
 
 ### Messages answered on Teams (no repo change)
 - Transit-globe's main session is now "Transit Globe phase 2 kickoff"
