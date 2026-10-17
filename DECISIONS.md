@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**239 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**240 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-17**
+
+- [The front page shows the Last Global Sweep (owner)](#2026-10-17---the-front-page-shows-the-last-global-sweep-owner)
 
 **2026-10-16**
 
@@ -9951,3 +9955,32 @@ sentence and the station-list reason as drafted").
 - **Still open:** 7th & Railyards joins the list once OSM's Green relations
   carry it, and Dos Rios's Wikidata pin retires once the Blue relations do
   (PLAN; city_watch).
+
+### 2026-10-17 - The front page shows the Last Global Sweep (owner)
+
+The owner asked for a dynamic "Last Global Sweep" timestamp on the front
+page. Of two definitions offered, the owner chose: "the last time every map
+was re-rendered and checked; the full run writes the stamp and the front page
+reads it". It is an exception to the feature freeze of 2026-10-08, made by
+the owner.
+
+- **The stamp.** `pipeline/drift_check.py` writes `app/global_sweep.json`
+  (date, city count, mode, the commit the run started from). It does so only
+  after a run over every city, in either mode, in which every city's steps ran
+  and every row-count baseline held. Output drift does not stop it, because a
+  re-render after a code change is meant to change the maps. A filtered run,
+  a refused city or a failed step writes nothing. The stamp is committed with
+  the maps.
+- **The front page.** `app/Overview.py` shows "Last Global Sweep: October 16,
+  2026" under the subtitle, in the site's US date style. Its help icon reads
+  "The last date all 237 city maps were re-rendered and checked together."
+  With no stamp, the page shows no line.
+- **Seeded from the record.** The first stamp is written by hand: 2026-10-16,
+  render-only, from fc6ec797. That is the render of all 237 maps that landed
+  as 559bf919, checked the same day by `check_place_search.py` and by
+  `check_map_search.js` over all 237. The next complete drift run replaces
+  it.
+- **Checked.** The writer's three cases were tested (a filtered run, a failed
+  city, a complete run). `drift_check_selftest.py` and
+  `check_deploy_imports.py` are clean. The line renders on a local lean
+  server.

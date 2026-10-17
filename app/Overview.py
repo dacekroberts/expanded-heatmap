@@ -66,6 +66,15 @@ with st.container(horizontal_alignment="center"):
         st.title(SITE_NAME)
         st.caption("Storefront commercial density around rapid-transit stations, "
                    "city by city.")
+        # The last date every map was re-rendered and checked (owner,
+        # 2026-10-16), from the stamp a complete drift run writes
+        # (pipeline/drift_check.py, write_sweep_stamp). No stamp, no line.
+        _SWEEP = Path(__file__).parent / "global_sweep.json"
+        if _SWEEP.exists():
+            _sweep = json.loads(_SWEEP.read_text(encoding="utf-8"))
+            st.caption(f"Last Global Sweep: {us_dates(_sweep['date'])}",
+                       help=f"The last date all {_sweep['cities']} city maps were "
+                            "re-rendered and checked together.")
 
         _FOLLOW_UP = (
             'each city map has a "Global View" button, and one for its region, to come back here.'

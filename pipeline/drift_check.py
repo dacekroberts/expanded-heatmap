@@ -94,6 +94,7 @@ means four geopandas datasets resident at once.
 import concurrent.futures
 import datetime
 import io
+import json
 import os
 import re
 import subprocess
@@ -271,15 +272,42 @@ def check_city(city: str, *, render_only: bool, update_baseline: bool) -> bool:
         show_processed_inputs(city)
         ran, measured = run_steps(city, only=map_steps(city))
         ok = ran and compare_outputs(city)
-        ok = check_map_step_baseline(city, measured, update=update_baseline) and ok
+        held = check_map_step_baseline(city, measured, update=update_baseline)
+        SWEPT[city] = ran and held
         print(f"  render-only: {city} took {time.monotonic() - started:.1f} s")
-        return ok
+        return held and ok
     show_raw_inputs(city)
     ran, measured = run_steps(city)
     if not ran:
+        SWEPT[city] = False
         return False
     ok = compare_outputs(city)
-    return check_baseline(city, measured, update=update_baseline) and ok
+    held = check_baseline(city, measured, update=update_baseline)
+    SWEPT[city] = held
+    return held and ok
+
+
+# THE LAST GLOBAL SWEEP (owner, 2026-10-16): the front page shows the last date
+# every map was re-rendered and checked. A run over EVERY city whose steps all
+# ran and whose row counts all held writes the stamp; output drift does not
+# stop it, because a re-render after a code change is meant to change the maps.
+# A filtered run, a refused city or a failed step writes nothing. The stamp is
+# committed with the maps it describes; app/Overview.py reads it.
+SWEPT: dict[str, bool] = {}
+SWEEP_STAMP = ROOT / "app" / "global_sweep.json"
+
+
+def write_sweep_stamp(requested, all_cities, render_only: bool) -> None:
+    if sorted(requested) != sorted(all_cities):
+        return
+    if not all(SWEPT.get(c) for c in all_cities):
+        print("SWEEP: not recorded - a city's steps failed or its row counts moved.")
+        return
+    stamp = {"date": datetime.date.today().isoformat(), "cities": len(all_cities),
+             "mode": "render-only" if render_only else "full",
+             "from_commit": git("rev-parse", "--short", "HEAD").decode().strip()}
+    SWEEP_STAMP.write_bytes((json.dumps(stamp, indent=1) + "\n").encode("utf-8"))
+    print(f"SWEEP: recorded in {SWEEP_STAMP.relative_to(ROOT)} - commit it with the maps.")
 
 
 def run_steps(city: str, only: list | None = None):
@@ -565,6 +593,7 @@ def main():
     print("Row counts are diffed against outputs/<city>/baseline.json where one "
           "exists (--update-baseline to record an intended change).")
     print("Cities with no baseline yet emit no figures - see pipeline/baseline.py.")
+    write_sweep_stamp(requested, all_cities, render_only)
     sys.exit(0 if all_clean else 1)
 
 

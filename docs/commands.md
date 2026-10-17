@@ -35,6 +35,7 @@ python scripts/commercial_use_quote_check.py VERDICTS_JSON [--selftest]   # ever
 python scripts/licence_renderings.py [--write]   # every stored licence PDF and HTML file has its plain-text rendering, hashed in docs/licenses/README.md's second table; --write makes a missing one and never replaces one; `--selftest` runs its cases
 python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 3 at most, one run per machine
 python pipeline/drift_check.py --render-only [--jobs N] # map step only, against data/<city>/processed/ as it stands; never the pre-deploy gate
+#   a run over EVERY city (either mode) whose steps all ran and whose row counts held writes app/global_sweep.json, the front page's "Last Global Sweep" date: commit it with the maps
 python scripts/drift_check_selftest.py                  # touches nothing
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims live
 python scripts/check_all.py [--list]                    # every pass/fail check, ~30s; the pre-push hook runs it
