@@ -6,14 +6,14 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**237 city pages, 4 fixed pages and the Overview; 29 rendered docs; 2 app data files.**
+**237 city pages, 4 fixed pages and the Overview; 29 rendered docs; 3 app data files.**
 
 ## The Overview (`/`)
 
 `app/Overview.py`: the macro map (every city's dot, label and tooltip from
 `app/cities.py`; the legend; the region selector), its caption arithmetic,
 the city list, and the site notices.
-Data: `app/macro_facts.json`.
+Data: `app/global_sweep.json`, `app/macro_facts.json`.
 
 ## Fixed pages
 
