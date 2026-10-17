@@ -167,9 +167,10 @@ one, this one is current.
   checklist to Max before opening it there).
 - The owner's outside actions still open: the GitHub social preview
   (`visuals/repo/social-preview.png`) and About text.
-- **The Mac's portable sessions (owner, 2026-10-17):** remove every
-  expanded-heatmap session from the Mac portable sessions, EXCEPT one,
-  an **"Expanded Heatmap Advisor"**: a session that can advise on the full
+- **The Mac's portable sessions and projects (owner, 2026-10-17):** remove
+  every expanded-heatmap session and project from the Mac portable sessions
+  and projects ("sessions/projects", the owner's correction), EXCEPT one, an
+  **"Expanded Heatmap Advisor"**: a session that can advise on the full
   scope of the project and its data, pipeline building, feature building,
   the frontend and the rest, to help assist. In the owner's words: "remove
   expanded heatmap from the mac portable sessions, EXCEPT an 'expanded
