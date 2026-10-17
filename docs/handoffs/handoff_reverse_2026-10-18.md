@@ -167,6 +167,20 @@ one, this one is current.
   checklist to Max before opening it there).
 - The owner's outside actions still open: the GitHub social preview
   (`visuals/repo/social-preview.png`) and About text.
+- **The Mac's portable sessions (owner, 2026-10-17):** remove every
+  expanded-heatmap session from the Mac portable sessions, EXCEPT one,
+  an **"Expanded Heatmap Advisor"**: a session that can advise on the full
+  scope of the project and its data, pipeline building, feature building,
+  the frontend and the rest, to help assist. In the owner's words: "remove
+  expanded heatmap from the mac portable sessions, EXCEPT an 'expanded
+  heatmap advisor' that could produce assistance about the full scope of the
+  project and its data, pipeline building, feature building, frontend, etc.
+  to help assist". Never close another project's sessions while doing this.
+  If the advisor does not exist yet, set it up before removing the rest, and
+  confirm the list with the owner first. A suggested start for its context:
+  CLAUDE.md, `docs/project_context.md`, PLAN.md, the retrospectives in
+  `docs/*_retrospective.md`, `docs/rule_history.md`, `docs/commands.md` and
+  this note.
 
 ### Waiting on the owner (from 2026-11-05)
 - PLAN.md "Due now" and the dated re-checks: Milan, Prague, Toronto,
