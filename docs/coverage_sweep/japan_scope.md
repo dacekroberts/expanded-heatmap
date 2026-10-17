@@ -111,7 +111,7 @@ The 2026-10-02 batch of 12 was briefed by four agents at about 25 minutes each. 
 
 **Build:** comparable to the current batch (a lead and 3 agents), after it lands.
 
-**What the current batch's Phase 1 already covers** (`docs/handoff_japan_batch_2026-10-02.md`):
+**What the current batch's Phase 1 already covers** (`docs/handoffs/handoff_japan_batch_2026-10-02.md`):
 
 - The **ward-less flag** covers every core city here (Takamatsu, Ōtsu, Himeji, Kurume, Yokosuka, Nishinomiya, Nara, Sasebo, Shimonoseki, Toyota, Yokkaichi, Wakayama, Higashiōsaka).
 - The **MHLW-alone shape (Okayama's) and the MHLW-plus-old-law shape (Kitakyūshū's, Utsunomiya's)** cover Chiba, Kurume, Nara, Sasebo and Shimonoseki.

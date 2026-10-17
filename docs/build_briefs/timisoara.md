@@ -481,7 +481,7 @@ Precedent first; each has a recommendation and its tradeoff.
    as R1 canteens. *Tradeoff*: a few staff canteens under other names may
    stay; dropping the sheet whole loses about 130 public buffets.
 7. **A `romania-city` skill** before the second Romanian build
-   (`docs/handoff_staging_2026-09-30.md`; the owner's per-country rule). It
+   (`docs/handoffs/handoff_staging_2026-09-30.md`; the owner's per-country rule). It
    should carry:
    - the county cut by the address's first segment;
    - multi-sheet files;

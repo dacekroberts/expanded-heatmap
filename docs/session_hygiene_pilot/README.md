@@ -43,7 +43,7 @@ Open a session in the project and give it:
 
 > Start the session hygiene pilot. Read
 > C:\Users\dacek\Documents\Portfolio\expanded-heatmap\docs\session_hygiene_pilot\handoff_<project>.md,
-> copy it into this repo as docs/handoff_session_hygiene_pilot.md, and add its
+> copy it into this repo as docs/handoffs/handoff_session_hygiene_pilot.md, and add its
 > "Block" section to CLAUDE.md as it says. Commit both. Then carry on with the
 > work I give you, following the block.
 

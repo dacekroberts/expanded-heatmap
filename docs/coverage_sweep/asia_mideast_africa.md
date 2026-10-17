@@ -213,7 +213,7 @@ more, and **every municipality with a subway, tram, monorail, AGT or Linimo
 station**. That universe sits in an untracked scratchpad
 (`C:\Users\dacek\AppData\Local\Temp\claude\...staging\dcee6a2e-515e-4cee-ba88-0643d5433468\scratchpad\japan_wave2\SCOPE.md`,
 `universe_mhlw.csv`), not in the repository. Wave 2 briefed the top tier. The
-remainder is summarised in `docs/handoff_staging_2026-09-30.md:155-175`.
+remainder is summarised in `docs/handoffs/handoff_staging_2026-09-30.md:155-175`.
 Grouped by what the tracked files say:
 
 **A. Built 20, Band A 9, Band B 5, Band R 3, discarded 3**: every city in

@@ -2407,7 +2407,7 @@ COLUMNS["belgium_favv"] = {
 
 
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
-# is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
+# is an approved fix queued for one batch (docs/handoffs/handoff_category_fixes_2026-09-29.md),
 # except the cells below, which still wait on the owner. A queued row turns stale
 # (and fails) when its fix lands: make it a loc() in the same change.
 # ---------------------------------------------------------------------------
@@ -2455,7 +2455,7 @@ COLUMNS["brussels_hub"] = {
 }
 
 AWAITING_OWNER = set()
-QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
+QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoffs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "
                                              "stockholm-catering has landed",

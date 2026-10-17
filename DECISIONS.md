@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-16**
 
@@ -28,6 +28,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The site is called Global Transit-Business Atlas; city page titles carry it (owner)](#2026-10-16---the-site-is-called-global-transit-business-atlas-city-page-titles-carry-it-owner)
 - [Place search: the post-landing batch, fifteen calls at once (owner)](#2026-10-16---place-search-the-post-landing-batch-fifteen-calls-at-once-owner)
 - [Place search: four of the nine held lane 4 rows decided (owner)](#2026-10-16---place-search-four-of-the-nine-held-lane-4-rows-decided-owner)
+- [The project closed to maintenance (owner)](#2026-10-16---the-project-closed-to-maintenance-owner)
 
 **2026-10-14**
 
@@ -9824,3 +9825,68 @@ other five as ruled").
   Three Servicemen Statue (the owner's duplicate ruling).
 - Taichung, Florence and Geneva rebuilt and re-rendered; each row checked
   by OSM id.
+
+### 2026-10-16 - The project closed to maintenance (owner)
+
+The owner: no more cities for the time being, and the project in "its
+cleanest, most refined state". Cleanup proposed eight calls and a ninth; the
+owner approved all nine, with the parked items to be fixed where doable and
+recorded as known limits where not.
+
+- **Worktrees:** 17 removed (every one but Cleanup, Analytics and Visuals,
+  the three with live sessions); none held a commit that was not on master.
+  Each worktree's `data` and `.venv-lean` junctions were unlinked first; the
+  shared data folder held 314 entries before and after.
+- **Branches:** 45 local branches deleted: 44 merged into master, plus
+  `chicago-rank-fix` (ad7aec79), whose street-type fix is on master in the
+  same form (`pipeline/map_common.py`, `streetD`). `visual-handoff` stays
+  (local only, never merged). GitHub's `worktree-cleanup` and
+  `worktree-staging` deleted, neither holding a commit not on master; only
+  `master` is left there.
+- **The main checkout** fast-forwarded from 8d870d4d to 3bfc131c. Its six
+  untracked handoff files moved to `data/_handoffs/archive_2026-10-12/`.
+- **Handoffs:** the 36 `docs/handoff_*.md` files moved to `docs/handoffs/`,
+  with a README. Live documents were repointed (34 files, comments only in
+  code). Append-only logs keep the old paths, and the README says how to read
+  them.
+- **`scripts/check_map_search.js` over all 237 maps, the run owed since the
+  2026-10-16 render:** 237 OK; 13,010 drawn stations and 1,275 lines, none
+  not found. Six ranking warnings: five in New York, where more than four
+  stations share a name and a phone's list shows four ("86 St", "Canal St",
+  "Fulton St"), and Toronto's "Bathurst" stop, joined to its pin but not
+  shown by typing its name. Recorded as known faults in `PLAN.md`; the New
+  York fix is a shared-code change and a re-render of every map, so it went
+  to the owner.
+- **Dos Rios (Sacramento), parked 2026-10-16, fixed:** OpenStreetMap now maps
+  it (way 1568594902, a light-rail station). Sacramento's two place caches
+  were fetched again under new dated names (`osm_places_2026-10-17.json`,
+  `osm_places_extra_2026-10-17.json`, from overpass-api.de) and its Wikidata
+  article cache with them. The first rebuild lost four libraries until that
+  cache was filled. The index changed by six rows each way: added Dos Rios
+  and 7th & Railyards (opened 2026-10-15, SacRT); out Rosemont (no longer a
+  place in OSM's tags) and "Turn Lane"; four streets redrawn at their ends.
+  Re-rendered; "Dos Rios" now finds the map's station. The drawn pin stays
+  at Wikidata's coordinate until the Green Line re-check reruns step 1.
+- **Sacramento's Green Line, due from 2026-10-15:** it reopened 2026-10-12,
+  and 7th & Railyards opened 2026-10-15 (SacRT's news page). SacRT's
+  timetable page did not load, so its frequency against the 15-minute test is
+  unread; it stays undrawn until then.
+- **The 21 baselines without `storefronts_food_service`** (parked as a gap)
+  are not a fault: Bremen's page is retail only and the 20 Japanese pages are
+  personal services only, so the key is absent by design.
+- **PLAN.md rewritten to the maintenance state** from a read-only triage of
+  every item (done, obsolete, open). Done items were found on master by their
+  commit or code, among them phase 2's shared-code changes, Regional-1's
+  notice, Bucharest's name repair, the per-category totals in all 237
+  baselines, the label batch and the commercial-use audit. The old plan is
+  kept verbatim in `docs/plan_done/2026-10-16.md`.
+- **CLAUDE.md** says the project is in maintenance.
+- **For Tramgea (transit-globe), at the owner's request:** the unbuilt cities
+  with rail, 430 rows from the master list
+  (`data/_handoffs/transit_globe/rail_cities_unbuilt_2026-10-16.csv`). Then,
+  on its question, a rail verdict from the recorded text for the 332 that
+  failed on business data or access: 184 pass its bar (metro, tram, light
+  rail or monorail), 15 heavy rail only (all Japanese), 1 unclear, 132 not
+  recorded (`rail_verdicts_text_pass_2026-10-17.csv`). The owner: Tramgea
+  settles the 132 with its own OpenStreetMap rail; nothing more is queried
+  from here. No business data went over.

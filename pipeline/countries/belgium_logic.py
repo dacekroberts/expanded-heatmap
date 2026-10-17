@@ -4,7 +4,7 @@
 with SEGEFA (ULiege): a field survey of summer 2024, one point per ground-floor
 commercial cell, CC BY 4.0. Read from the downloaded GeoPackage only
 (`belgium.LOGIC_GPKG`), never SPW's MapServer, whose service terms forbid
-altering served data (docs/handoff_belgium_2026-10-03.md, build traps).
+altering served data (docs/handoffs/handoff_belgium_2026-10-03.md, build traps).
 
 What the file holds, measured 2026-10-04 on the cached GeoPackage:
 

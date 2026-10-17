@@ -1797,7 +1797,7 @@ wording lands at review time.
   `brazil_cnefe.py`, `czech_nace2025.py`, `anzsic_fes.py` and
   `pipeline/countries/taiwan.py` (division 48 is Retail apart from 486 and 487,
   so 484 car retail - 全新汽車零售 in Taichung's data - is kept); the
-  approved wording and counts in `docs/handoff_exclusions_2026-09-29.md`; EC city
+  approved wording and counts in `docs/handoffs/handoff_exclusions_2026-09-29.md`; EC city
   sections; legend rows in each `heatmap.html`.
 - **Theme 12 (whole-city layer, resolved):** no city passes `all_city_heat=False`
   since 2026-09-27; DECISIONS of that date.

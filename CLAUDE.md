@@ -6,6 +6,11 @@ work, `DECISIONS.md` the append-only reasoning trail, `docs/city_master_list.md`
 the city list. **How each rule was learned is in `docs/rule_history.md`, at
 the bracketed anchor** - read it before relaxing a rule, not before obeying one.
 
+**Status (owner, 2026-10-16): no new cities for now; the project is in
+maintenance.** The work left is dated re-checks (`docs/recheck_calendar.md`),
+data refreshes and fixes to the 237 built maps. The city-building skills and
+rules below stay for the day building reopens.
+
 ## Where to start
 
 - Picking the next city -> `docs/city_master_list.md` (read counts there,

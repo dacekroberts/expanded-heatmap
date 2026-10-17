@@ -9,7 +9,7 @@ Drafted by the staging session from the repository record on 2026-10-04.
 Distilled from the four extensions that landed on 2026-10-03 (Belo Horizonte +
 Contagem, Rio + Duque de Caxias, Los Angeles + Long Beach, Vancouver (Regional)
 + Burnaby, New Westminster and Coquitlam), their deleted kit (`git show
-4c59cb02:docs/handoff_extensions_2026-10-02.md`), and the regional pages built
+4c59cb02:docs/handoffs/handoff_extensions_2026-10-02.md`), and the regional pages built
 whole (Miami, Monterrey, Seattle, Brussels). Read with `add-city`,
 `multi-source-city` and `publish-city`, which this does not replace. Rules
 marked *(inference)* are not stated in the record in so many words.

@@ -11,7 +11,7 @@ cities carry three buckets?* **Answer it once and three cities move.**
 
 ## For the owner, with the build (refreshed 2026-09-30; supersedes the sections below where they differ)
 
-**Approved before this brief (owner, 2026-09-30; `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: the calls below as recommended, and the page-text template. The measurements here confirm the facts behind each call; where one differs, it says so. Builds wait for the owner's explicit go.
+**Approved before this brief (owner, 2026-09-30; `docs/handoffs/handoff_tram_kit_2026-09-30.md`, cdee504)**: the calls below as recommended, and the page-text template. The measurements here confirm the facts behind each call; where one differs, it says so. Builds wait for the owner's explicit go.
 
 | | Proposed | Why |
 |---|---|---|

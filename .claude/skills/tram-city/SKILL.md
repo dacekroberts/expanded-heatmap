@@ -5,7 +5,7 @@ description: Build a trams-only city outside France and Czechia - the ten T1 cit
 
 # Building a trams-only city (the ten non-French, non-Czech T1 cities)
 
-Written 2026-09-30 by the tram kit session (`docs/handoff_tram_kit_2026-09-30.md`),
+Written 2026-09-30 by the tram kit session (`docs/handoffs/handoff_tram_kit_2026-09-30.md`),
 from the built trams-only and tram-heavy cities (Riga, Dublin, Aarhus and the
 French five) and the owner's calls of 2026-09-27 to 09-30. **France has
 `france-tram-city` and Czechia its own kit. These ten cities are spread over
@@ -561,7 +561,7 @@ city-sized.
 
 Proposed values are the briefs' or, where a brief is not yet written, the
 tram list's. The briefs are staging's. Where they differ, the brief wins, and
-the call list in `docs/handoff_tram_kit_2026-09-30.md` collects the owner's
+the call list in `docs/handoffs/handoff_tram_kit_2026-09-30.md` collects the owner's
 calls.
 
 | City | Template (built) | Business leg | Rail source | CRS | Traps |

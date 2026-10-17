@@ -4,7 +4,7 @@
 only. Scope approved by the owner 2026-10-01: Blackpool with Wyre. Build
 order 6 of the UK six. Builds are HELD (owner).** Run
 `python scripts/brief_check.py blackpool` before writing any code. The
-handoff is `docs/handoff_uk_six_2026-10-01.md`.
+handoff is `docs/handoffs/handoff_uk_six_2026-10-01.md`.
 
 > ✅ **Prose hold lifted (2026-10-02).** The prose pass and the skills
 > rework have landed, which Cleanup confirmed. **Builds stay HELD** until the

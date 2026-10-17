@@ -4,13 +4,13 @@
 `python scripts/brief_check.py new_orleans` before writing code. T1 on the tram
 list: trams-only maps approved by the owner on 2026-09-29. **Rings are sized by
 the owner's spacing rule and no stop is thinned** (the tram batch's binding
-decisions, `docs/handoff_tram_batch_2026-09-29.md`).
+decisions, `docs/handoffs/handoff_tram_batch_2026-09-29.md`).
 
 ---
 
 ## For the owner, with the build
 
-**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoffs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
 
 | | Proposed | Why |
 |---|---|---|

@@ -10,7 +10,7 @@ first trams-only city): read `pipeline/riga/config.py` and Riga's page first.
 
 ## For the owner, with the build
 
-**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoffs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
 
 | | Proposed | Why |
 |---|---|---|

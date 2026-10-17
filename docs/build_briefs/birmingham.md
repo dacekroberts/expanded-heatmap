@@ -6,7 +6,7 @@ Wolverhampton, built now; the Dudley branch is a dated watch item. Build
 order 2 of the UK six. Builds are HELD (owner).** Run
 `python scripts/brief_check.py birmingham` before writing any code. The
 trail: `docs/decisions_drafts/staging.md`, "The UK six approved with their
-scopes". The handoff is `docs/handoff_uk_six_2026-10-01.md`.
+scopes". The handoff is `docs/handoffs/handoff_uk_six_2026-10-01.md`.
 
 > ✅ **Prose hold lifted (2026-10-02).** The prose pass and the skills
 > rework have landed, which Cleanup confirmed. **Builds stay HELD** until the

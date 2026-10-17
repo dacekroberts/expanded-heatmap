@@ -10,8 +10,8 @@ batch 1 Seattle, Chicago, Vancouver, Sydney; 2a Montréal, Barcelona,
 Marseille, Prague, Brussels; 2b Hong Kong, Seoul, Busan, Tbilisi), updated
 2026-10-11 after batch 3 (Tokyo, London, Paris, São Paulo, Mexico City) and
 the owner's answers to 2b's nine questions. It replaces
-the recipe sections of `docs/handoff_place_search_2026-10-07.md` and
-`docs/handoff_place_search_batch2.md`; the judgment trail, with every owner
+the recipe sections of `docs/handoffs/handoff_place_search_2026-10-07.md` and
+`docs/handoffs/handoff_place_search_batch2.md`; the judgment trail, with every owner
 quote, is `DECISIONS.md` and `docs/decisions/2026-10-04.md` (the pilot's
 drafts file, folded 2026-10-12).
 Read that file's newest entries before a batch: the owner's open questions

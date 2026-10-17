@@ -10,7 +10,7 @@ builds, mainly the first US cities (2026-09-18 to 09-21) and Canada
 landing, so nothing here has been deploy-verified or seen live. The detail
 behind each figure is in `DECISIONS.md` (the tram-kit drafts, folded in on
 2026-10-01), the kit in
-`docs/handoff_tram_kit_2026-09-30.md`.
+`docs/handoffs/handoff_tram_kit_2026-09-30.md`.
 
 ## The short answer
 

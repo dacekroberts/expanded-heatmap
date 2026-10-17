@@ -49,7 +49,7 @@ This is open work, not a record: update an item here as it moves, and send a fin
 
 - [ ] **The category fix batch (owner-approved 2026-09-29).**
   `scripts/check_category_continuity.py` found 45 departures from
-  `docs/category_rules.md`; work list `docs/handoff_category_fixes_2026-09-29.md`.
+  `docs/category_rules.md`; work list `docs/handoffs/handoff_category_fixes_2026-09-29.md`.
   - Stockholm's torghandel stall waits for `stockholm-catering` to land.
 
 ## Next cross-city discrepancy audits

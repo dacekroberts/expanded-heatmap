@@ -1253,7 +1253,7 @@ São Paulo).
 - **The UK six are the minor label tier, in a UK region of their own** (owner,
   2026-10-02, "the high-density cluster rule"). London, Glasgow and Newcastle
   moved with them and stay eligible. The recipe is in
-  `docs/handoff_uk_six_2026-10-01.md`.
+  `docs/handoffs/handoff_uk_six_2026-10-01.md`.
 - **The Japanese cities after the first eight are the minor label tier, as
   France and Czechia are** (owner, 2026-10-02): each lost its pill in the
   macro views, every Japanese city moved into Japan's own views, and East Asia

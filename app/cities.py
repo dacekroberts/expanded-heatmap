@@ -3441,7 +3441,7 @@ CITIES = [
         "in_default_view": False,
         # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
         # Czechia; labelled only in the Japan view once it exists (Phase 4 of
-        # docs/handoff_japan_batch_2026-10-02.md).
+        # docs/handoffs/handoff_japan_batch_2026-10-02.md).
         "label_tier": "minor",
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
         # pinned zoom. Run `python scripts/check_macro_labels.py`,

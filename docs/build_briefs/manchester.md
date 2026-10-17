@@ -6,7 +6,7 @@ Build order 1 of the UK six. Builds are HELD (owner).** Run
 `python scripts/brief_check.py manchester` before writing any code. The
 trail: `docs/decisions_drafts/staging.md`, "The UK six approved with their
 scopes", and the master list's Band B. The handoff is
-`docs/handoff_uk_six_2026-10-01.md`.
+`docs/handoffs/handoff_uk_six_2026-10-01.md`.
 
 > ✅ **Prose hold lifted (2026-10-02).** The prose pass and the skills
 > rework have landed, which Cleanup confirmed. **Builds stay HELD** until the

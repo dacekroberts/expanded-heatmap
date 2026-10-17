@@ -9,7 +9,7 @@ one of two pilots; the other is transit-globe.
 
 ## What to do
 
-1. Copy this file into this repo as `docs/handoff_session_hygiene_pilot.md`.
+1. Copy this file into this repo as `docs/handoffs/handoff_session_hygiene_pilot.md`.
 2. Add the Block below to `CLAUDE.md` as its own section, unchanged.
 3. Commit both. Then work as usual, following the block.
 4. Each time a block rule fires (a new session suggested, a `/compact`
@@ -21,7 +21,7 @@ one of two pilots; the other is transit-globe.
 ## Block
 
 ```markdown
-## Session hygiene (pilot from 2026-10-12, see docs/handoff_session_hygiene_pilot.md)
+## Session hygiene (pilot from 2026-10-12, see docs/handoffs/handoff_session_hygiene_pilot.md)
 - Small, related tasks can share a session. At the first task boundary past about 150k of context, or when switching to unrelated work, suggest a new session.
 - Mid-task past about 200-250k of context, suggest /compact with a focus line.
 - Suggest a new session rather than /clear, so the old history stays scrollable.

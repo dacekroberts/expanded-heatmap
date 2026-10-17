@@ -3,7 +3,7 @@
 **Screened 2026-10-01 (staging, the post-review UK screen); Band B, food
 only. Scope approved by the owner 2026-10-01: the city. Build order 3 of the
 UK six. Builds are HELD (owner).** Run `python scripts/brief_check.py edinburgh`
-before writing any code. The handoff is `docs/handoff_uk_six_2026-10-01.md`.
+before writing any code. The handoff is `docs/handoffs/handoff_uk_six_2026-10-01.md`.
 
 > ✅ **Prose hold lifted (2026-10-02).** The prose pass and the skills
 > rework have landed, which Cleanup confirmed. **Builds stay HELD** until the
