@@ -134,8 +134,12 @@ Recorded, not urgent; each is small unless it says otherwise.
   Line (dark, light), measured at b5680951 with Visuals' `teal_vs_lines.py`.
   Paris is clear (36.5); no other map measured. Not a line-identity breach
   (that rule is lines against pins), but a dashed outline may read as a
-  line. Next: sweep all 237 the same way, then the owner either accepts it
-  or rules on an outline color for maps where lines come close.
+  line. **Raised by the owner as a possible global rule (2026-10-17): the
+  search outline never competes with a transit line's color**, on every map,
+  as lines already clear pins. Next: sweep all 237 the same way, then bring
+  the owner the rule's wording, its threshold and where it is enforced
+  (beside `check_line_identity.py`), and what each fix costs (one outline
+  color site-wide, or a per-map color only where lines come close).
 
 ## Waiting on the owner
 
