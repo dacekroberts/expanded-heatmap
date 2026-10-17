@@ -6662,11 +6662,13 @@ if __name__ == "__main__":
     for _stream in (sys.stdout, sys.stderr):
         if hasattr(_stream, "reconfigure"):
             _stream.reconfigure(encoding="utf-8", errors="replace")
+    # The repository root, for pipeline.* imports: the selftest's Japanese case
+    # reaches japan_register through _bare_personal.
+    sys.path.insert(0, str(Path(__file__).parent.parent))
     if sys.argv[1:] == ["--selftest"]:
         sys.exit(_selftest())
     if sys.argv[1:2] == ["--twins"] and sys.argv[2:]:
         import importlib
-        sys.path.insert(0, str(Path(__file__).parent.parent))
         found = 0
         for slug in sys.argv[2:]:
             cfg = importlib.import_module(f"pipeline.{slug}.config")
