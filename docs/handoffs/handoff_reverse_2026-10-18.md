@@ -266,6 +266,15 @@ one, this one is current.
    - `app/ring_shares.json` churn: recommendation, discard it.
    - Drill sheet: its template is renamed; whether it was ever published
      is unknown. Recommendation: nothing unless the owner has a link.
+
+   **The owner's reading (2026-10-17, to Cleanup): "The better assumption is
+   those files are from main acct."** So the uncommitted
+   `app/ring_shares.json` in the visual worktree, already modified when the
+   Teams session began, is taken as left by a Max-account session, and the
+   drill sheet as a Max artifact, if it was published. For Max: look at the
+   ring_shares change from that side before discarding it, and look for the
+   drill sheet in Max's own artifact list. If it is there, it is a typed or
+   plain page to rename like the others.
 4. **For Max first.**
    - The checklist is private to Teams: share it to the Max account before
      opening it there.
