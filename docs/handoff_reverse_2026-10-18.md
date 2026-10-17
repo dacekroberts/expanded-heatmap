@@ -61,3 +61,10 @@ None yet.
 - A0: code done 2026-10-16 (option B; legend clamp; rights tag approved).
   Render deferred (owner): one pass after A1 and lanes 1 to 3.
 - Lane 2's no-match wording: code done, rides the same render.
+- A1: committed 65351d01 (SITE_NAME, README, 237 city page titles,
+  scaffold). Owed after the push: header and social images (Visuals'
+  generator reads master), GitHub About text, share-link preview check.
+- Lanes 1, 2, 3 running as subagents on search-stations-2,
+  search-script-2, search-landmarks-2. Lane 4 done: files in
+  data/_search_rollout/lane4/ (521 borderline rows; no sights list
+  possible without a per-city sights pass).
