@@ -15,8 +15,12 @@ corrections to it go here.
 - 9db63dca, 7d28ed26, 0ac4e4bc: lanes 3, 1 and 2 merged (with the Japan
   hold on the worship branch tag, the 150 m first-word radius and the search
   control above the layer control). e5345211: search-scope-check merged.
-- Next commit: lane 4's drops and keeps, every index rebuilt, the DECISIONS
-  entry. Then one 237-map render. Nothing pushed.
+- fc6ec797: lane 4's drops and keeps, every index rebuilt, the DECISIONS
+  entry. 559bf919: all 237 maps re-rendered.
+- PUSHED 2026-10-16: origin/master dd621ee3 -> 559bf919 (73 of 73 checks);
+  the owner rebooted the app.
+- After the push (not yet pushed): the README header redrawn with the new
+  name (Visuals' generator at 559bf919).
 
 ## Artifact changes
 None yet.
@@ -72,6 +76,12 @@ None yet.
   Mexico City, already titled Global Transit-Business Atlas.
 
 ## Queue progress
+- LANDED 2026-10-16 in 559bf919: A0, A1, lanes 1 to 4, the scope check.
+- Post-push: the social preview (visuals/repo/social-preview.png) is for
+  the owner to upload on GitHub, along with the About text. The downstream
+  note for Visuals and Analytics is at data/_handoffs/downstream_2026-10-16.md.
+  Transit-globe got the boundaries answer and a senior-to-junior note
+  (data/_handoffs/transit_globe/).
 - A0: code done 2026-10-16 (option B; legend clamp; rights tag approved).
   Render deferred (owner): one pass after A1 and lanes 1 to 3.
 - Lane 2's no-match wording: code done, rides the same render.
