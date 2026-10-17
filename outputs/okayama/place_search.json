@@ -1,18 +1,17 @@
 {
   "index": "app/static/places/okayama.json",
-  "places": 2837,
+  "places": 2841,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.5,
+      "en": 0.499,
       "ja": 1.0
     },
     "list_share": 0.5,
     "listed": [
-      "English",
       "Japanese"
     ]
   },

@@ -453,8 +453,102 @@ def run(config):
               f"Run: python pipeline/place_wikidata_fetch.py {slug}")
     for k in sorted(report):
         print(f"  {k}: {report[k]:,}")
+    twins, unplaced = city_twins(config, index)
+    for oid, dname, kind, rname, d in twins:
+        print(f"  TWIN of dropped {oid} '{dname}': {kind} row '{rname}' {d} m away (drop it by id too, "
+              f"or keep it on purpose)")
+    if unplaced:
+        print(f"  twins: {len(unplaced)} dropped id(s) the cache cannot place or name: {', '.join(unplaced[:8])}")
     return index
 
+
+# TWINS OF A DROPPED ID (retrospective lesson 1; lane 3, 2026-10-16).
+# Dropping one object by id (config.PLACE_DROPPED) lets a same-named
+# neighbor that the merge had folded into it take a row of its own (Milan's
+# eight "Casa a Igloo" houses promoted one another one drop at a time).
+# dropped_twins() places every dropped id from the cache, a way from its
+# center or else the mean of its cached nodes, a relation from its center or
+# else its member ways' points, and lists each index row of the same folded
+# name within TWIN_M of it. The first lane script placed nodes only and left
+# 63% of dropped ids unplaced. Run by run() after every rebuild, and by
+# python pipeline/place_index.py --twins <city> [...].
+TWIN_M = {"place": 1500}
+TWIN_DEFAULT_M = 300
+
+
+def element_points(elements):
+    """{"type/id": (lat, lon)} for every node, way and relation in `elements`
+    that the cache lets be placed."""
+    nodes = {e["id"]: (e["lat"], e["lon"]) for e in elements if e["type"] == "node" and "lat" in e}
+    pts = {f"node/{k}": v for k, v in nodes.items()}
+
+    def mean(ps):
+        return (sum(p[0] for p in ps) / len(ps), sum(p[1] for p in ps) / len(ps)) if ps else None
+    for e in elements:
+        if e["type"] == "way":
+            c = e.get("center")
+            p = (c["lat"], c["lon"]) if c else mean([nodes[n] for n in e.get("nodes", ()) if n in nodes])
+            if p:
+                pts[f"way/{e['id']}"] = p
+    for e in elements:
+        if e["type"] == "relation":
+            c = e.get("center")
+            p = (c["lat"], c["lon"]) if c else mean([pts[f"{m['type']}/{m['ref']}"] for m in e.get("members", ())
+                                                     if f"{m['type']}/{m['ref']}" in pts])
+            if p:
+                pts[f"relation/{e['id']}"] = p
+    return pts
+
+
+def dropped_twins(elements, index, dropped, local):
+    """(twins, unplaced) for the ids in `dropped`: twins as (dropped id, its
+    name, row kind, row name, metres) for each row of index["rows"] whose
+    name or alias folds to the dropped object's name within TWIN_M; unplaced
+    as the dropped ids the cache could not place or name."""
+    dropped = set(dropped)
+    pts = element_points(elements)
+    tags_of = {f"{e['type']}/{e['id']}": e.get("tags") or {} for e in elements
+               if f"{e['type']}/{e['id']}" in dropped}
+    by_name = defaultdict(list)
+    for r in index["rows"]:
+        kind = index["kinds"][r[0]]
+        if kind == "street":
+            continue
+        for n in {r[3], *[a for a in (r[4] or "").split("|") if a]}:
+            by_name[fold_name(n)].append((kind, r))
+    name_tags = _name_tags(local)
+    twins, unplaced = [], []
+    for oid in sorted(dropped):
+        t = tags_of.get(oid, {})
+        names = _local_first(t, _names(t, name_tags), local) if t else []
+        pt = pts.get(oid)
+        if not names or not pt:
+            unplaced.append(oid)
+            continue
+        seen = set()
+        for n in names:
+            for kind, r in by_name.get(fold_name(n), ()):
+                d = _dist_m(pt, (r[1], r[2]))
+                if d <= TWIN_M.get(kind, TWIN_DEFAULT_M) and id(r) not in seen:
+                    seen.add(id(r))
+                    twins.append((oid, names[0], kind, r[3], round(d)))
+    return twins, unplaced
+
+
+def city_elements(config):
+    """The city's two place caches merged by OSM id, as build_city reads them."""
+    payload = json.loads(config.PLACE_OSM_JSON.read_text(encoding="utf-8"))
+    seen = {(e["type"], e["id"]) for e in payload["elements"]}
+    extra = json.loads(config.PLACE_OSM_EXTRA_JSON.read_text(encoding="utf-8"))["elements"]
+    return payload["elements"] + [e for e in extra if (e["type"], e["id"]) not in seen]
+
+
+def city_twins(config, index):
+    """dropped_twins() for a city's config and its built index."""
+    dropped = getattr(config, "PLACE_DROPPED", {})
+    if not dropped:
+        return [], []
+    return dropped_twins(city_elements(config), index, dropped, config.PLACE_LANGUAGES)
 
 def build_city(config):
     """(index, report) for a city's config, exactly as run() builds it, writing
@@ -1756,6 +1850,11 @@ CODED_TYPE = {
 }
 
 
+# A square named by its number alone (build()'s landmark_drop).
+NUMBERED_SQUARE = re.compile(r"(?:pra[cç]a|largo)\s+(?:n[.º°o]*\s*)?\d+[a-z]?", re.I)
+NUMBERED_SQUARE_LANGS = ("pt",)
+
+
 def coded_type(name, local):
     """True when `name` is a code beside a type word (CODED_TYPE)."""
     text = unicodedata.normalize("NFKC", name).strip()
@@ -2430,6 +2529,22 @@ def _memorial(tags):
                 or (tags.get("tourism") == "artwork" and tags.get("artwork_type") in ("statue", "bust")))
 
 
+def _building_article(tags):
+    """The tags with building:wikipedia and building:wikidata read as the
+    object's own, or None. For an object whose wikipedia and wikidata tags
+    name its operator (an agency in its own building): Washington's U.S.
+    National Archives, way/66418953, wikidata = operator:wikidata = the
+    agency, building:wikipedia = National Archives Building (lane 3,
+    2026-10-16)."""
+    bwp = (tags.get("building:wikipedia") or "").strip()
+    if not bwp or bwp == (tags.get("wikipedia") or "").strip():
+        return None
+    out = {k: v for k, v in tags.items() if not k.startswith("operator:wiki")}
+    out["wikipedia"] = bwp
+    out["wikidata"] = (tags.get("building:wikidata") or "").strip()
+    return out
+
+
 def own_article(tags, names, shared=False):
     """("own" | "not" | "undecided" | "none", why) for an object's `wikipedia`
     tag. `shared`: another object in the cache carries the same article.
@@ -2449,12 +2564,18 @@ def own_article(tags, names, shared=False):
     # A subject tag that repeats the object's own article or entry says
     # nothing when the article is named for the object (article_names_object).
     named = not grave_or_plaque(tags) and article_names_object(wp, names)
+    # An operator tag that repeats the object's entry is the institution
+    # tagged on its own building (Prague's FJFI, the Royal College of
+    # Surgeons in Ireland) when the article is named for the object (lane 3,
+    # 2026-10-16).
     for key in _SUBJECT_KEYS:
-        if key == "subject" and named:
+        if key in ("subject", "operator") and named:
             continue
         if (tags.get(f"{key}:wikipedia") or "").strip() == wp:
             return "not", f"the article is its {key}'s ({key}:wikipedia)"
         if wd and wd in [v.strip() for v in (tags.get(f"{key}:wikidata") or "").split(";")]:
+            if key == "operator" and _building_article(tags):
+                return own_article(_building_article(tags), names)
             return "not", f"the item is its {key}'s ({key}:wikidata)"
     if shared:
         return "not", "the article is shared with another object"
@@ -3659,11 +3780,22 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     seen_key = set()
     seen_near = defaultdict(list)             # (kind, name) -> (point, is_area)
 
-    def add(kind, pt, names, langs, bbox=0, area=False, osm=None, ways=None, tags=None):
+    def add(kind, pt, names, langs, bbox=0, area=False, osm=None, ways=None, tags=None, live=False):
         key = (kind, names[0], round(pt[0], 3), round(pt[1], 3))
         near = NEAR_DUP_M.get(kind)
-        if key in seen_key or (near and any(
-                (area or a) and _dist_m(p, pt) <= near for p, a in seen_near[(kind, names[0])])):
+        if live:
+            # The kept-id admission tests only rows still standing: a namesake
+            # an earlier rule removed left its key in seen_key and seen_near,
+            # which refused Chicago's Pullman Administration Building
+            # (way/210701534) as same_name_near (lane 3, 2026-10-16).
+            k = KINDS.index(kind)
+            clash = any(r[0] == k and r[3] == names[0] and (
+                (round(r[1], 3), round(r[2], 3)) == key[2:]
+                or (near and _dist_m((r[1], r[2]), pt) <= near)) for r in rows)
+        else:
+            clash = key in seen_key or (near and any(
+                (area or a) and _dist_m(p, pt) <= near for p, a in seen_near[(kind, names[0])]))
+        if clash:
             report[f"{kind}_duplicate"] += 1
             if osm:
                 note("same_name_near", "merge", osm, names[0], f"a {kind} row of that name is near", tags)
@@ -3997,6 +4129,34 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             kept.append("bare_type")
         names = names[:1] + [n for n in names[1:] if not bare_type(n, local, rt)] if kept else \
             [n for n in names if not bare_type(n, local, rt)]
+        # A SQUARE NAMED BY ITS NUMBER ALONE (lane 3, 2026-10-16): Porto
+        # Alegre's "Praça 1722", a register's provisional label until a
+        # square is named, its official_name the number in words. A landmark
+        # only: a street of that name is an address and stays. A registered
+        # object (REGISTERED_KEYS) keeps it. Measured on the caches of every
+        # searched city: 32 landmark rows leave (Porto Alegre 28, Belo
+        # Horizonte, Fortaleza, Recife, Sao Paulo, Santos the rest).
+        if (names and NUMBERED_SQUARE.fullmatch(unicodedata.normalize("NFKC", names[0]).strip())
+                and any(c in NUMBERED_SQUARE_LANGS for c in local)
+                and not any(rt.get(k) for k in REGISTERED_KEYS)):
+            if oid in kept_ids:
+                kept.append("by_id")
+            else:
+                return "numbered_square", names
+        # A DENOMINATION NAME WITH THE PLACE'S OWN NAME IN `branch` (OSM's
+        # name=brand, branch=location; lane 3, 2026-10-16): the row is named
+        # "<name> <branch>" and the worship test reads that ("創価学会
+        # 信濃文化会館", "The Salvation Army Bloor Central"). Measured on the
+        # caches of every searched city: 146 such objects in 34 cities
+        # (Tokyo 41, Osaka 26, Sapporo 10). A branch tag listing several congregations (";") is not read.
+        # Not yet on Japanese maps (owner, 2026-10-16): about 110 of the 135
+        # rows it adds are Soka Gakkai halls, held until Tokyo and Osaka are
+        # read by eye.
+        branch = (t.get("branch") or "").strip()
+        if (t.get("amenity") == "place_of_worship" and names and branch and "ja" not in local
+                and worship_only(names[0], local) and not worship_only(branch, local)
+                and ";" not in branch and not junk_name(branch) and fold_name(branch) not in fold_name(names[0])):
+            names = [f"{names[0]} {branch}"] + names[1:]
         # NAMED ONLY BY ITS DENOMINATION OR HALL TYPE (worship_only; owner,
         # 2026-10-13, the fifth pass). Kept by id, or on an article of its
         # own, whatever the article's title: London's Friends Meeting House
@@ -5050,7 +5210,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             kind = ("station" if t.get("railway") in ("station", "halt", "tram_stop")
                     else "place" if t.get("place") in PLACE_VALUES else "landmark")
             before = len(rows)
-            add(kind, pt, names, langs_of(t), area=e["type"] != "node", osm=oid, tags=dict(t))
+            add(kind, pt, names, langs_of(t), area=e["type"] != "node", osm=oid, tags=dict(t), live=True)
             if len(rows) > before:
                 report[f"{kind}_admitted_by_id"] += 1
                 note("kept_by_id_admitted", "kept", oid, names[0], f"config.PLACE_KEPT, a {kind} row", t)
@@ -5526,6 +5686,8 @@ def _selftest():
     node(47.7400, -122.33, name="Church of Christ Presbyterian", amenity="place_of_worship")
     node(47.7410, -122.33, name="Church of God", amenity="place_of_worship")
     node(47.7420, -122.33, name="Russian Baptist Church", amenity="place_of_worship")
+    node(47.7425, -122.33, name="The Salvation Army", branch="Lakeview Corps", amenity="place_of_worship")
+    node(47.7428, -122.33, name="The Salvation Army", branch="Church", amenity="place_of_worship")
     node(47.7430, -122.33, name="Greek Orthodox Church", amenity="place_of_worship")
     node(47.7440, -122.33, name="Gospel Hall", amenity="place_of_worship", wikidata="Q930")
     node(47.7450, -122.33, name="Kingdom Hall", amenity="place_of_worship", wikidata="Q931")
@@ -5598,6 +5760,12 @@ def _selftest():
     node(37.4150, 126.951, name="시험교회", amenity="place_of_worship")
     ko_rows = {(KINDS[r[0]], r[3]) for r in build(ko_els, city="시험시", retrieved="2026-10-10",
                                                   local=("ko",))[0]["rows"]}
+    ja_els = []
+    target[0] = ja_els
+    street("試験通", 35.7000, lon=139.70)
+    node(35.7010, 139.701, name="創価学会", branch="試験文化会館", amenity="place_of_worship")
+    ja_rows = {(KINDS[r[0]], r[3]) for r in build(ja_els, city="試験市", retrieved="2026-10-10",
+                                                  local=("ja",))[0]["rows"]}
     # The sixth pass (2026-10-13): a Spanish city and a French one.
     es_els = []
     target[0] = es_els
@@ -5983,6 +6151,17 @@ def _selftest():
         ("a place of worship kept by id stays", ("landmark", "Jehovah's Witnesses") not in rows
          and ("landmark", "Jehovah's Witnesses") in worded_rows),
         ("the worship rule reads places of worship only", ("landmark", "Baptist Church") in rows),
+        ("dropped_twins places a way from its cached nodes and finds its namesake row",
+         dropped_twins([{"type": "node", "id": 1, "lat": 47.0, "lon": -122.0},
+                        {"type": "node", "id": 2, "lat": 47.001, "lon": -122.0},
+                        {"type": "way", "id": 9, "nodes": [1, 2], "tags": {"name": "Casa A"}}],
+                       {"kinds": KINDS, "rows": [[KINDS.index("landmark"), 47.0012, -122.0, "Casa A", "", 0],
+                                                 [KINDS.index("landmark"), 47.1, -122.0, "Casa A", "", 0]]},
+                       {"way/9": "x"}, ())[0] == [("way/9", "Casa A", "landmark", "Casa A", 77)]),        ("a square named by its number alone", bool(NUMBERED_SQUARE.fullmatch("Praça 1722")) and bool(NUMBERED_SQUARE.fullmatch("Praça 16A"))
+         and not NUMBERED_SQUARE.fullmatch("Praça XV de Novembro") and not NUMBERED_SQUARE.fullmatch("Praça 15 de Novembro")),
+        ("a denomination name reads its branch tag", ("landmark", "The Salvation Army Lakeview Corps") in rows
+         and not any(n.startswith("The Salvation Army") and n != "The Salvation Army Lakeview Corps" for _, n in rows)),
+        ("a Japanese map does not read the branch tag yet", not any("試験文化会館" in n for _, n in ja_rows)),
         ("a station is never read by the worship rule", ("station", "Methodist Church") in rows),
         ("worship_only: a denomination as its mappers spell it",
          worship_only("Kingdom Hall of Jehovah's Wittnesses", ()) and worship_only("Jehovahs Witness", ())
@@ -6253,6 +6432,13 @@ def _selftest():
          len(quiet_stations({"Z": "why"}, [("A", 1, 1)], [])[1]) == 1),
         ("own_article: the subject's article is not the object's",
          own_article({"wikipedia": "en:X", "subject:wikipedia": "en:X"}, ["Y"])[0] == "not"),
+        ("own_article: an operator entry equal to the object's, the article named for the object",
+         own_article({"wikipedia": "cs:Fakulta X", "wikidata": "Q1", "operator:wikidata": "Q1"}, ["Fakulta X"])[0] == "own"),
+        ("own_article: an operator entry equal to the object's falls back to building:wikipedia",
+         own_article({"wikipedia": "en:Agency", "wikidata": "Q1", "operator:wikidata": "Q1",
+                      "building:wikipedia": "en:Agency Building", "building:wikidata": "Q2"}, ["U.S. Agency"])[0] == "own"),
+        ("own_article: an operator entry equal to the object's, no building article, stays not",
+         own_article({"wikipedia": "en:Agency", "wikidata": "Q1", "operator:wikidata": "Q1"}, ["Campus Y"])[0] == "not"),
         ("street_description: a local way word with a number is a name",
          street_description("Rua 1", ("pt",)) is None and street_description("Trail #2", ("en",)) is not None),
         ("lifecycle: was: and disused: are not read",
@@ -6272,4 +6458,18 @@ if __name__ == "__main__":
             _stream.reconfigure(encoding="utf-8", errors="replace")
     if sys.argv[1:] == ["--selftest"]:
         sys.exit(_selftest())
-    sys.exit("usage: python pipeline/place_index.py --selftest   (a city's index: its step2b_place_index.py)")
+    if sys.argv[1:2] == ["--twins"] and sys.argv[2:]:
+        import importlib
+        sys.path.insert(0, str(Path(__file__).parent.parent))
+        found = 0
+        for slug in sys.argv[2:]:
+            cfg = importlib.import_module(f"pipeline.{slug}.config")
+            idx = json.loads(index_path(slug).read_text(encoding="utf-8"))
+            twins, unplaced = city_twins(cfg, idx)
+            found += len(twins)
+            for oid, dname, kind, rname, d in twins:
+                print(f"{slug}\tTWIN\t{oid}\t{dname}\t{kind}\t{rname}\t{d} m")
+            for oid in unplaced:
+                print(f"{slug}\tUNPLACED\t{oid}")
+        sys.exit(1 if found else 0)
+    sys.exit("usage: python pipeline/place_index.py --selftest | --twins <city> [...]   (a city's index: its step2b_place_index.py)")
