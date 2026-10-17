@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**240 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**241 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-17**
 
 - [The front page shows the Last Global Sweep (owner)](#2026-10-17---the-front-page-shows-the-last-global-sweep-owner)
+- [Re-checks parked until 2026-11-05; Yamagata goes ahead; Philadelphia unanswered (owner)](#2026-10-17---re-checks-parked-until-2026-11-05-yamagata-goes-ahead-philadelphia-unanswered-owner)
 
 **2026-10-16**
 
@@ -9984,3 +9985,23 @@ the owner.
   city, a complete run). `drift_check_selftest.py` and
   `check_deploy_imports.py` are clean. The line renders on a local lean
   server.
+
+### 2026-10-17 - Re-checks parked until 2026-11-05; Yamagata goes ahead; Philadelphia unanswered (owner)
+
+The owner is away until 2026-11-05: "we can park the re-checks until i return
+from my trip november 5th", then "philadelphia no response, yamagata go
+ahead".
+
+- **Parked:** Philadelphia's date re-read, São Paulo's lines, the weekly
+  `archive_decisions.py` run, and the dated re-checks that fall due before
+  then: Milan (from 2026-10-19), Prague (after 2026-10-26), Toronto (after
+  2026-10-31) and Birmingham (about 2026-11-01). Each reads a timetable, a
+  list or an opening that is still there in November, so a late check finds
+  the same change. The decisions log grows by about three weeks before its
+  first archive run, which `archive_decisions.py` handles in one pass.
+- **Yamagata goes ahead now:** the rebuild on the city's newer food list.
+- **Philadelphia's permission request has had no response** as of
+  2026-10-17. Silence is not consent (`docs/gated_access.md` item 12), so
+  Philadelphia stays held off shared pieces.
+- **Not parked:** the owner's own outside actions, and any removal request,
+  which is honoured at once whenever it comes.

@@ -27,6 +27,11 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 ## Due now
 
+**Parked until the owner returns on 2026-11-05** (owner, 2026-10-17): the
+items below, except Yamagata (going ahead), and the dated re-checks due
+before then (Milan, Prague, Toronto, Birmingham) wait until then. A
+re-check that comes late finds the same change.
+
 - [ ] **Philadelphia's date re-read** (due about 2026-10-13). data_and_disclosure,
   "Published-city date fixes", item (d).
 - [ ] **Yamagata: rebuild on the newer food list** (the map is on 2026-08-31;
@@ -124,7 +129,7 @@ Recorded, not urgent; each is small unless it says otherwise.
 - [ ] **Outside actions:** upload `visuals/repo/social-preview.png` (GitHub,
   Settings, Social preview) and paste the About text; disable the Max
   account's `place-search-post-landing` task (may fire 2026-10-18 12:05);
-  Philadelphia's permission request, waiting on a reply (silence is not
+  Philadelphia's permission request, no response as of 2026-10-17 (silence is not
   consent; `docs/gated_access.md` item 12).
 - [ ] **Deferred under the feature freeze:** the phone legend fold by operator,
   the map's height on phones, a reset-view button, search tuning by feel, a
