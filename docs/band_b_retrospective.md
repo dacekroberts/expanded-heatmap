@@ -1,4 +1,4 @@
-# Band B, start to finish: twelve narrower pages from one build session
+# GTBA | Band B, start to finish: twelve narrower pages from one build session
 
 A record of the Band B build session (worktree `band-b`, 2026-09-29 to
 2026-09-30), written so the next batch of builds is cheaper. The cities' own

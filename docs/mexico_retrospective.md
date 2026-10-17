@@ -1,4 +1,4 @@
-# Mexico, start to finish: one national register, and rail that isn't GTFS
+# GTBA | Mexico, start to finish: one national register, and rail that isn't GTFS
 
 Companion to [`canada_retrospective.md`](canada_retrospective.md), written the
 same way and for the same reason: the per-city numbers live in `DECISIONS.md`,

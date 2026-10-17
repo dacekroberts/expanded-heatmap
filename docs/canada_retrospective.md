@@ -1,4 +1,4 @@
-# Canada, start to finish: what the first country profile actually cost
+# GTBA | Canada, start to finish: what the first country profile actually cost
 
 A chronological record of the 2026-09-21 Canadian screen, written so the next
 country is cheaper. The *process* generalised into

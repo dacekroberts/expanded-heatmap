@@ -110,7 +110,7 @@ Recorded, not urgent; each is small unless it says otherwise.
   model; Vancouver (Regional) clipped at 375 px; the Overview's colour
   contrast, never measured. data_and_disclosure and labels_and_macro_map,
   under those names; process_and_tooling, "Next landing follow-ups".
-- [ ] **Transit-layer gaps found by the retrospective draft (2026-10-16):** no
+- [ ] **Transit-layer gaps found by the transit-layer retrospective (2026-10-16):** no
   script enforces the CIE76 20 pin floor (`check_line_colours()` raises only
   below 10); rail shape and labels have no check in the gate;
   `docs/sub_transit_line_filters.md` lists 8 thinning cities where 13 pages
@@ -121,8 +121,6 @@ Recorded, not urgent; each is small unless it says otherwise.
 
 ## Waiting on the owner
 
-- [ ] **Retrospectives:** four drafts (place search, the transit layer, East
-  Asia, the project as a whole); where each goes is asked when they exist.
 - [ ] **Outside actions:** upload `visuals/repo/social-preview.png` (GitHub,
   Settings, Social preview) and paste the About text; disable the Max
   account's `place-search-post-landing` task (may fire 2026-10-18 12:05);

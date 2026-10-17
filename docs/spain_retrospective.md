@@ -1,4 +1,4 @@
-# Spain, start to finish: two cities that shared a country and almost nothing else
+# GTBA | Spain, start to finish: two cities that shared a country and almost nothing else
 
 Companion to [`canada_retrospective.md`](canada_retrospective.md) and
 [`mexico_retrospective.md`](mexico_retrospective.md). Per-city numbers are in

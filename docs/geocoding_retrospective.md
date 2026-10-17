@@ -1,4 +1,4 @@
-# Geocoding retrospective — Brazil and Taiwan, written to prepare Japan
+# GTBA | Geocoding retrospective — Brazil and Taiwan, written to prepare Japan
 
 **Written 2026-09-23**, the day both countries left the band this project
 called *"geocoding at national scale"*. The evidence is in

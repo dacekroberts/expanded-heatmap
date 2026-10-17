@@ -1,4 +1,4 @@
-# Addendum: the full arc, from the 25-city screen
+# GTBA | Addendum: the full arc, from the 25-city screen
 
 The first retrospective (`us_build_retrospective.md`) was written by the
 session that built Washington D.C., and it shows: it covers the last session in

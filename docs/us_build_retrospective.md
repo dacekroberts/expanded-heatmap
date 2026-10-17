@@ -1,4 +1,4 @@
-# Retrospective: the US build, nine cities to first deploy
+# GTBA | Retrospective: the US build, nine cities to first deploy
 
 Written 2026-09-21, at the point where nine US cities are built, the site is
 live, and the next city is Vancouver — the first outside the US.
