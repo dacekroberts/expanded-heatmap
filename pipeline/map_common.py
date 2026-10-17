@@ -3171,7 +3171,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (!data) { note("Loading places…"); return; }
             // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
             // nothing, as no index holds one (place_index.junk_name).
-            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(false); return; }
+            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name. Businesses are not searchable."); credit(false); return; }
             shown = gated ? early : search(input.value);
             if (!gated && needCrossings(input.value, shown)) {
                 // Shown again when the intersections arrive, or as it stands
@@ -3180,7 +3180,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 if (!shown.length) { note("Loading intersections…"); return; }
             }
             if (!shown.length) {
-                note("No street, station or place by that name");
+                note("No street, station or place by that name. Businesses are not searchable.");
                 // The owner's wording (2026-10-12).
                 if (area) note("Search covers the outlined area only. Zoom out to see it.");
                 credit(false);
@@ -4599,16 +4599,18 @@ STD_MAP_ATTRIBUTION = OSM_ATTRIBUTION + " &middot; " + STD_OWNER_CREDIT
 RIGHTS_META = {
     "copyright": f"Writing and design \u00a9 2026 {OWNER_NAME}. All rights reserved.",
     "dcterms.rightsHolder": OWNER_NAME,
-    "dcterms.rights": (f"Map design and text \u00a9 2026 {OWNER_NAME}, all rights reserved. Code: MIT "
-                       "License. Business, transit and basemap data remain under their publishers' "
-                       "terms; see the site's Required Notices page."),
+    "dcterms.rights": (f"Heatmap, overlays, Travel basemap style and text \u00a9 2026 {OWNER_NAME}, "
+                       "all rights reserved. Code: MIT License. Business, transit and basemap data, "
+                       "and the standard OpenStreetMap layer's cartography, remain under their "
+                       "publishers' terms; see the site's Required Notices page."),
 }
 RIGHTS_META_BY_CITY = {
     "fukui": {
-        "dcterms.rights": (f"Map design and text \u00a9 2026 {OWNER_NAME}. This map's output is offered "
-                           "under CC BY-SA 4.0, as Fukui City's license for its source lists requires. "
-                           "Code: MIT License. Business, transit and basemap data remain under their "
-                           "publishers' terms; see the site's Required Notices page."),
+        "dcterms.rights": (f"Heatmap, overlays, Travel basemap style and text \u00a9 2026 {OWNER_NAME}. "
+                           "This map's output is offered under CC BY-SA 4.0, as Fukui City's license "
+                           "for its source lists requires. Code: MIT License. Business, transit and "
+                           "basemap data, and the standard OpenStreetMap layer's cartography, remain "
+                           "under their publishers' terms; see the site's Required Notices page."),
         "copyright": f"Writing and design \u00a9 2026 {OWNER_NAME}. This map's output: CC BY-SA 4.0.",
     },
 }

@@ -7,7 +7,11 @@ corrections to it go here.
 
 ## Commits
 - 37b81439, 581155e4: the forward handoff (written on Max). Not pushed.
-- This file (local commit). Not pushed.
+- b3ca4b08: this file. Not pushed.
+- b5d35b81: A0 credit (option B) and the legend clamp for a wrapped credit.
+  Not pushed.
+- Next commit: the rights-tag wording, the no-match note, the DECISIONS
+  entry. Not pushed. No map re-rendered yet.
 
 ## Artifact changes
 None yet.
@@ -26,6 +30,10 @@ None yet.
 - The owned opener artifact (AMA6fUisnkixBSwXZPj3mP, Teams) is edited only
   on the owner's ask; snapshot `snapshot-atlas-opener-2026-10-16.zip`.
 - Usage limit on Teams lifted until 4 pm 2026-10-17 (memory updated).
+- A0 option B: standard layer "Heatmap and overlays (c) Dace Roberts",
+  Travel keeps "Map design"; keep that wording, fix the legend clamp
+  instead; rights-tag wording approved.
+- Renders and reboots wait until the smaller changes are in: one pass.
 - A misdirected transit-globe pricing message was withdrawn; nothing from
   it is recorded.
 
@@ -50,4 +58,6 @@ None yet.
   Mexico City, already titled Global Transit-Business Atlas.
 
 ## Queue progress
-- A0: started 2026-10-16 (read-only review).
+- A0: code done 2026-10-16 (option B; legend clamp; rights tag approved).
+  Render deferred (owner): one pass after A1 and lanes 1 to 3.
+- Lane 2's no-match wording: code done, rides the same render.

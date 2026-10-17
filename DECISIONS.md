@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**231 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**232 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-16**
+
+- [The standard map layer stops claiming a map design; the legend follows a wrapped credit; the no-match note names businesses (owner)](#2026-10-16---the-standard-map-layer-stops-claiming-a-map-design-the-legend-follows-a-wrapped-credit-the-no-match-note-names-businesses-owner)
 
 **2026-10-14**
 
@@ -9641,3 +9645,26 @@ Report: `data/_search_rollout/final_rules56/final_rebuild.md`, lists under
   request to the host before Play; it plays after.
 - **Left over:** a copy at the bucket's root (owner to delete once this is
   live); no poster frame yet (the player shows a dark frame until Play).
+
+### 2026-10-16 - The standard map layer stops claiming a map design; the legend follows a wrapped credit; the no-match note names businesses (owner)
+
+- **The credit (A0, owner's option B):** the Business view's tiles are
+  OpenStreetMap's own cartography, so its credit line now reads "Heatmap and
+  overlays (c) Dace Roberts" after the OSM credit. Travel, the project's own
+  style, keeps "Map design (c) Dace Roberts". Leaflet shows the active base
+  layer's credit; checked in a browser both ways on Angers.
+- **The rights tag:** "Map design and text" became "Heatmap, overlays,
+  Travel basemap style and text", and the standard layer's cartography is
+  named as staying under its publishers' terms (owner approved the wording;
+  Fukui keeps its CC BY-SA sentence).
+- **The legend:** the longer credit wraps to two lines at 375 px, which put
+  the clamped legend 14 px short. The owner kept the wording and asked for
+  the clamp to allow a wrapped line: LEGEND_AUTOFIT_SCRIPT now raises the
+  legend by what the line grew, on layer switches, the search credit and
+  resizes (the search script's one-off raise is folded into it). Measured
+  on Angers at 375x812, 768x1024 and 1000x650: credit clear, clamp in force.
+- **The no-match note** now reads "No street, station or place by that
+  name. Businesses are not searchable." (wording approved 2026-10-14).
+- **Not rendered yet (owner):** the 237 maps re-render once, after the
+  smaller changes (A1 and search lanes 1 to 3), so one render pass, one push
+  and at most one reboot cover them all.
