@@ -28,14 +28,18 @@ Detail files: [japan](docs/plan_detail/japan.md),
 ## Due now
 
 **Parked until the owner returns on 2026-11-05** (owner, 2026-10-17): the
-items below, except Yamagata (going ahead), and the dated re-checks due
+items below, Yamagata included, and the dated re-checks due
 before then (Milan, Prague, Toronto, Birmingham) wait until then. A
 re-check that comes late finds the same change.
 
 - [ ] **Philadelphia's date re-read** (due about 2026-10-13). data_and_disclosure,
   "Published-city date fixes", item (d).
-- [ ] **Yamagata: rebuild on the newer food list** (the map is on 2026-08-31;
-  the city replaces its file monthly). city_watch, "Yamagata: the September
+- [ ] **Yamagata: rebuild on the October edition** (the list to 2026-10-31,
+  due on the city's page about 2026-11-10). The September edition was tried
+  and kept off: it dropped about 75 restaurant permits that expired
+  2026-09-30 before their renewals reached it (DECISIONS.md, 2026-10-17,
+  "Yamagata stays on the August list"). Before rebuilding, check that the
+  edition carries those renewals. city_watch, "Yamagata: the September
   food list".
 - [ ] **São Paulo's Linha 6-Laranja** stays out until full service, and
   Linha 17 per `docs/recheck_calendar.md`.

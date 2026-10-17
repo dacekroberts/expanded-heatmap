@@ -210,3 +210,10 @@ This is open work, not a record: update an item here as it moves, and send a fin
   config, page, notice and docs rows re-measured, the privacy check and the
   drift baseline again. MHLW's file is re-pulled with it, so both lists
   carry one month.
+- **2026-10-17: the September edition was tried and kept off** (owner). It
+  dropped about 75 restaurant permits that expired 2026-09-30 before their
+  renewals reached it. **Next: the October edition after 2026-11-05**, once
+  it carries those renewals. Correction to the steps above: `--force` writes
+  under config's CURRENT file name, so change config's names first (MHLW's
+  too, with a date), then fetch without `--force`. DECISIONS.md, "Yamagata
+  stays on the August list".

@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**241 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**242 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-17**
 
 - [The front page shows the Last Global Sweep (owner)](#2026-10-17---the-front-page-shows-the-last-global-sweep-owner)
 - [Re-checks parked until 2026-11-05; Yamagata goes ahead; Philadelphia unanswered (owner)](#2026-10-17---re-checks-parked-until-2026-11-05-yamagata-goes-ahead-philadelphia-unanswered-owner)
+- [Yamagata stays on the August list; the September edition lags its renewals (owner)](#2026-10-17---yamagata-stays-on-the-august-list-the-september-edition-lags-its-renewals-owner)
 
 **2026-10-16**
 
@@ -10005,3 +10006,49 @@ ahead".
   Philadelphia stays held off shared pieces.
 - **Not parked:** the owner's own outside actions, and any removal request,
   which is honoured at once whenever it comes.
+
+### 2026-10-17 - Yamagata stays on the August list; the September edition lags its renewals (owner)
+
+The refresh the owner approved earlier the same day was built and then held
+back before it was committed. The owner chose to keep the August list: "Keep
+Yamagata on the August list: revert the refresh and park it until the
+October edition after I return November 5th."
+
+- **What was built.** The city's terms PDF was unchanged (Last-Modified
+  2021-09-29, the date read on 2026-10-07), and the page still declares CC BY
+  4.0. Two files were fetched under new names, so the Step 0 files stay as
+  they were: `062014_syokuhin_list_20260930.csv` (3,562 permits in term on
+  2026-09-30) and `06201_food_business_all_2026-10-17.csv` (MHLW, newest
+  grant 2026-09-29). Storefronts went from 3,280 to 3,249, and the ring share
+  from 34.0% to 32.2%. The privacy check was clean (0 operators' own names
+  shown).
+- **Why it was held.** Food service pins within the rings fell by 72 (822 to
+  750), all around Yamagata Station. 76 of the August list's permits expired
+  on 2026-09-30: 69 old-law restaurant permits, 7 new-law ones and 3 others.
+  Only 2 of them reappear in the September list by name and address. The
+  list holds 13 permits granted in September, while MHLW's file holds 146 for
+  the city. MHLW shows a new permit granted in August or September 2026 for
+  30 of the 78 named premises, and MHLW lists only premises that agreed to
+  publication. So the September list lags its renewals; it does not show the
+  restaurants closing. Shipping it would have taken live restaurants off the
+  map.
+- **Reverted.** The working changes were checked out. Steps 1 to 3 re-ran on
+  the August files, and the drift check showed zero drift against the
+  committed map. The two new files stay in `data/yamagata/raw/` under their
+  dated names, unused.
+- **Next.** Parked until the owner returns on 2026-11-05, then built on the
+  October edition (the list to 2026-10-31, due about 2026-11-10), after
+  checking that it carries the September renewals. The figures to change are
+  the ones this attempt changed: the config comments, the page (date, about
+  280 prefecture-wide restaurant permits, the ring share), notice 213's
+  catalogue title and its "in term" date, `app/cities.py`'s placement and
+  date fields, and `docs/excluded_categories.md`. The generated files
+  (`ring_rules.md`, `macro_facts.json`, `ring_shares.json`) come from
+  `regen_generated.py`.
+- **Noted for that rebuild.** `fetch_sources.py city --force` writes the new
+  month's list under the file name in config. So config's file names change
+  first, and the fetch then runs without --force. The MHLW file also needs a
+  dated name, because its own name never changes. The new figure
+  `names_lost_character` (25 on the September list, 28 damaged names in the
+  August file) is not yet in the baseline. Those names already show as their
+  permit type on the live map.
