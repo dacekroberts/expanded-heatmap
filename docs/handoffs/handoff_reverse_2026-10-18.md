@@ -97,3 +97,107 @@ None yet.
   and Osaka first), the per-city sights pass, the nine held lane 4 rows (four decided 2026-10-16: DECISIONS).
 - Still owed: lane 5 tram re-checks on their dates; agent worktrees to
   remove after the merge (owner approved).
+
+## Hand-back to Max (2026-10-17, Cleanup on Teams)
+
+The owner asked for this once Cleanup, Visuals and Analytics were all idle;
+all three were (Visuals' child session `carousels-republish` too). The
+sections above are history as of 2026-10-16; where they disagree with this
+one, this one is current.
+
+### State
+- **origin/master = 2509f33a**, every Cleanup commit pushed, the cleanup
+  worktree clean. 73 of 73 pre-push checks on the last push.
+- The owner rebooted the app after a6ff41fa (the Last Global Sweep). Every
+  later push was docs only: no reboot owed.
+- Worktrees left: cleanup, analytics, visual. GitHub has only master.
+- **The owner is away until 2026-11-05.** Nothing is due before then.
+
+### Pushed since 559bf919
+- b70d4c8c README header with the new name. 3bfc131c four held lane 4 rows
+  decided. df61e14d Sacramento's Dos Rios in place search.
+- 5b8aecb1, c3685e16: the close-out to maintenance (PLAN rewritten to
+  maintenance, handoffs moved to `docs/handoffs/`, CLAUDE.md and
+  project_context status).
+- ff29d056: Streamlit usage metrics off (config.toml and deploy-verify).
+- 5a439ff7, 567d91fc: the worship branch tag lifted on Japanese maps (25
+  maps re-rendered, 4 Tokyo drops); the place_index selftest path fix.
+- 156cd4d4: Sacramento's Green Line (every 30 minutes, not drawn).
+- a6ff41fa, 3ab4c506: "Last Global Sweep" on the front page, read from
+  `app/global_sweep.json`, written only by a complete drift run.
+- 31a2ec4a: four retrospectives committed (project, place search, transit
+  layer, East Asia); all 13 retrospective titles start "GTBA | ".
+- b3081848, b5680951: re-checks parked to 2026-11-05; Yamagata kept on its
+  August list.
+- bc296750, f5e7853e, 2509f33a: the search-outline teal, ruled exempt from
+  line colour rules (the middle commit misread the owner and is withdrawn
+  by the last).
+
+### Owner's calls since 2026-10-16 (each in DECISIONS.md)
+- No more cities; the project is in maintenance; the nine wind-down calls.
+- New York's phone search ranking stays a known fault.
+- The worship branch tag lifted on Japanese maps; Sacramento's Green Line
+  wording approved; usage metrics off.
+- Last Global Sweep: "the last time every map was re-rendered and checked;
+  the full run writes the stamp and the front page reads it".
+- Retrospectives committed with "GTBA |" titles.
+- Re-checks parked until 2026-11-05.
+- **Yamagata stays on the August list.** The September edition dropped
+  about 75 restaurant permits that expired 2026-09-30 before their renewals
+  reached it. Next: the October edition (about 2026-11-10), after checking
+  it carries those renewals. `fetch_sources.py --force` writes under
+  config's current file name: change config's names first.
+- **Philadelphia's permission request: no response** as of 2026-10-17; it
+  stays held.
+- **The search-area outline is not a transit line**: the line colour rules
+  do not bind it; Seoul's outline stays.
+
+### For Max to do
+- **Disable or delete the scheduled task `place-search-post-landing`.** It
+  may fire 2026-10-18 12:05. Max could not be reached, so two notes stand
+  it down meanwhile: `data/_search_rollout/CANCELLED_place-search-post-landing.md`
+  and a banner on `data/_search_rollout/post_landing_queue.md` (gitignored,
+  shared data). Delete both once the task is gone.
+- Typed artifacts (Slides, Design, Docs) could not be edited from Teams
+  (portfolio-ops' rule of 2026-10-17: HTML "before" export, a plain HTML
+  checklist of exact old and new text, applied by Max or the owner). Cleanup
+  changed no artifact on Teams, so no checklist is owed from here.
+- The owner's outside actions still open: the GitHub social preview
+  (`visuals/repo/social-preview.png`) and About text.
+
+### Waiting on the owner (from 2026-11-05)
+- PLAN.md "Due now" and the dated re-checks: Milan, Prague, Toronto,
+  Birmingham, Philadelphia's date re-read, São Paulo's lines, the weekly
+  `archive_decisions.py` run (first pass will take about three weeks).
+- Analytics' share page (Dc87nkRqv1FktunF2Qnxaq, live v7): the new
+  "Searchable places around stations" card conforms to the share rules,
+  with two conditions Cleanup gave Analytics: the OpenStreetMap credit on
+  the card, and counts framed as the index's under its rules. Recount at
+  current master first (26 cities' indexes changed after 3bfc131c). Not
+  republished until the owner says yes.
+- Analytics' cross-city Food service chart: the 21 cities without totals
+  have no Food service source at all (Bremen retail only; 8 Japanese cities
+  with no food list; 12 where the national list is too thin), so they stay
+  out by design.
+
+### Messages answered on Teams (no repo change)
+- Transit-globe's main session is now "Transit Globe phase 2 kickoff"
+  (local_2e91dca6); earlier ones are retired. Answered on 2026-10-17:
+  assigned line colours, Kyoto station lists, per-country rules. The rail
+  handoff for it is in `data/_handoffs/transit_globe/`
+  (`rail_cities_unbuilt_2026-10-16.*`, `rail_verdicts_text_pass_2026-10-17.*`).
+- Visuals: told the Seoul outline ruling. Analytics: answered the Food
+  service and share card questions.
+
+### Corrections to the sections above
+- "Parked" there is settled: Dos Rios fixed in search (df61e14d); New
+  York's ranking is a known fault in PLAN; the worship branch tag is lifted.
+  The agent worktrees were removed.
+- "The scheduled task fires on Teams: FALSE" still holds; the Max copy is
+  handled above.
+
+### Memory written on Teams
+Notes in the project memory (shared on this machine): Teams artifact
+editing and the typed-artifact checklist rule; the maintenance state
+(retrospectives landed, away to 2026-11-05, the cancelled task); the new
+transit-globe contact.
