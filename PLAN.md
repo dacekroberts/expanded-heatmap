@@ -127,19 +127,6 @@ Recorded, not urgent; each is small unless it says otherwise.
   bolds seven. Each to be confirmed before it is fixed.
 - [ ] **Heavy-job gate follow-ups:** Japanese drift memory, orphaned children
   in the ledger. process_and_tooling, "Heavy-job gate follow-ups".
-- [ ] **The search-area outline's teal near line colors (Visuals, 2026-10-17;
-  parked to 2026-11-05):** `.hm-search-area` draws in the accent (#0d9488
-  light, #5eead4 dark, `pipeline/theme.py`). On Seoul it sits CIE76 12.6 from
-  the Gyeongchun Line (light) and 17.7 and 18.5 from the Gyeongui-Jungang
-  Line (dark, light), measured at b5680951 with Visuals' `teal_vs_lines.py`.
-  Paris is clear (36.5); no other map measured. Not a line-identity breach
-  (that rule is lines against pins), but a dashed outline may read as a
-  line. **Raised by the owner as a possible global rule (2026-10-17): the
-  search outline never competes with a transit line's color**, on every map,
-  as lines already clear pins. Next: sweep all 237 the same way, then bring
-  the owner the rule's wording, its threshold and where it is enforced
-  (beside `check_line_identity.py`), and what each fix costs (one outline
-  color site-wide, or a per-map color only where lines come close).
 
 ## Waiting on the owner
 

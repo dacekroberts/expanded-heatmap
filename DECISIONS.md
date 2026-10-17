@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**242 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-17**
 
 - [The front page shows the Last Global Sweep (owner)](#2026-10-17---the-front-page-shows-the-last-global-sweep-owner)
 - [Re-checks parked until 2026-11-05; Yamagata goes ahead; Philadelphia unanswered (owner)](#2026-10-17---re-checks-parked-until-2026-11-05-yamagata-goes-ahead-philadelphia-unanswered-owner)
 - [Yamagata stays on the August list; the September edition lags its renewals (owner)](#2026-10-17---yamagata-stays-on-the-august-list-the-september-edition-lags-its-renewals-owner)
+- [The search-area outline is not a transit line: the line color rules do not bind it (owner)](#2026-10-17---the-search-area-outline-is-not-a-transit-line-the-line-color-rules-do-not-bind-it-owner)
 
 **2026-10-16**
 
@@ -10052,3 +10053,24 @@ October edition after I return November 5th."
   `names_lost_character` (25 on the September list, 28 damaged names in the
   August file) is not yet in the baseline. Those names already show as their
   permit type on the live map.
+
+### 2026-10-17 - The search-area outline is not a transit line: the line color rules do not bind it (owner)
+
+Visuals measured the search-area outline's teal close to two of Seoul's line
+colors, at b5680951: CIE76 12.6 from the Gyeongchun Line (light basemap),
+and 17.7 and 18.5 from the Gyeongui-Jungang Line (dark and light). Paris was
+clear at 36.5. The outline is `.hm-search-area`, drawn in the site accent
+(#0d9488 light, #5eead4 dark, `pipeline/theme.py`), dashed, and only while
+the search box is open.
+
+- **Ruled by the owner, 2026-10-17:** "since it isn't a transit line it is
+  not bound by those colorway limitations". The outline keeps the site
+  accent on every map. The line-identity hard line (one color per line
+  site-wide, clearing its map's pins by CIE76 20) covers transit lines, and
+  only transit lines.
+- **So no sweep and no per-map outline color.** Seoul stays as it is. An
+  earlier PLAN item that framed this as a possible rule against the outline
+  (f5e7853e, the same day) misread the owner and is withdrawn.
+- **For later rules:** a map element that is not a transit line (the search
+  outline, rings, the basemap) is not measured against line colors unless
+  the owner says so for that element.
