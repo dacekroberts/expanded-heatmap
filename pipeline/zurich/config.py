@@ -266,6 +266,7 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/5349213311": "'Schwamendingen-Mitte': 'Schwamendingen-Mitte' quarter node about 380 m from the boundary row relation/1702327 'Schwamendingen Mitte' (wikidata, wikipedia); the same... (lane 4 borderline read; owner, 2026-10-16)",
     # A second row for one object within 300 m (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/7598544728": "duplicates of one object are one row: a place row on the landmark of its name (owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

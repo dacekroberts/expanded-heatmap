@@ -10,8 +10,13 @@ corrections to it go here.
 - b3ca4b08: this file. Not pushed.
 - b5d35b81: A0 credit (option B) and the legend clamp for a wrapped credit.
   Not pushed.
-- Next commit: the rights-tag wording, the no-match note, the DECISIONS
-  entry. Not pushed. No map re-rendered yet.
+- f95e1af5: the rights-tag wording, the no-match note. 65351d01: the
+  rename (A1). 3259357e: this file.
+- 9db63dca, 7d28ed26, 0ac4e4bc: lanes 3, 1 and 2 merged (with the Japan
+  hold on the worship branch tag, the 150 m first-word radius and the search
+  control above the layer control). e5345211: search-scope-check merged.
+- Next commit: lane 4's drops and keeps, every index rebuilt, the DECISIONS
+  entry. Then one 237-map render. Nothing pushed.
 
 ## Artifact changes
 None yet.
@@ -36,6 +41,15 @@ None yet.
 - Renders and reboots wait until the smaller changes are in: one pass.
 - A misdirected transit-globe pricing message was withdrawn; nothing from
   it is recorded.
+- The post-landing batch: "All 15 as recommended" (DECISIONS, 2026-10-16,
+  "the post-landing batch"). Held back for the owner: four lane 4 drops that
+  reverse 2026-10-13 rulings: four drops, five keeps (DECISIONS).
+- Transit-globe asked for the search boundaries (owner's ask, as a
+  build-time check only). Answered: they are the "area" key of each
+  app/static/places/<slug>.json, unchanged by this push, readable from
+  master now.
+- The heavy-job gate's 161 "measured peaks" lines are history, not holds;
+  kept (owner: "good catch").
 
 ## Assumptions in the forward note, as tested
 - Memory loads: TRUE.
@@ -64,7 +78,12 @@ None yet.
 - A1: committed 65351d01 (SITE_NAME, README, 237 city page titles,
   scaffold). Owed after the push: header and social images (Visuals'
   generator reads master), GitHub About text, share-link preview check.
-- Lanes 1, 2, 3 running as subagents on search-stations-2,
-  search-script-2, search-landmarks-2. Lane 4 done: files in
-  data/_search_rollout/lane4/ (521 borderline rows; no sights list
-  possible without a per-city sights pass).
+- Lanes 1 to 4 reported and are merged or applied (branches
+  search-stations-2 b88c5abf, search-script-2 c6978521,
+  search-landmarks-2 310df837; lane 4's lists in
+  data/_search_rollout/lane4/). A item 1 (scope check) merged.
+- Parked: Dos Rios (Sacramento, no station object in the cache), New York's
+  ranking warnings, the worship branch tag on Japanese maps (eye-read Tokyo
+  and Osaka first), the per-city sights pass, the nine held lane 4 rows.
+- Still owed: lane 5 tram re-checks on their dates; agent worktrees to
+  remove after the merge (owner approved).

@@ -340,6 +340,18 @@ PLACE_KEPT = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/9522558434": "'Explanada Cultural': 'Explanada Cultural', a bare node tagged a park 67 m from Museo del Palacio, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1128345946": "'Parque Lineal Acueducto': a repeat label of way/1121130817 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1189960984": "'Parque Lineal Acueducto': a repeat label of way/1121130817 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1189960993": "'Parque Lineal Acueducto': a repeat label of way/1121130817 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1189960994": "'Parque Lineal Acueducto': a repeat label of way/1121130817 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/542169415": "'Parque Lineal Las Torres': a repeat label of way/458734392 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/542169418": "'Parque Lineal Las Torres': a repeat label of way/458734392 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/542169425": "'Parque Lineal Las Torres': a repeat label of way/458734392 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/542169426": "'Parque Lineal Las Torres': a repeat label of way/458734392 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1079254810": "'Parque Lineal Las Torres': a repeat label of way/458734392 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/448562401": "'Parque SSP': 'Parque SSP', an agency's initials as the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/546897325": "'Parque Hundido 3° Sector': 'Parque Hundido 3° Sector', a type (sunken park) and a sector number, no place; 224 m from Plaza 4° Sector (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/689161650": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

@@ -321,6 +321,9 @@ PLACE_REVIEWED = {
     "T2 Parking Road": "a public airport road, no access tag",
 }
 PLACE_DROPPED = {
+    "way/474813985": "'The Green': tagged leisure=park and nothing else, named by a type word alone (73 m from Glasmore Abbey in Swords); the type-word park ruling drops it; in an... (lane 4 borderline read; owner, 2026-10-16)",
+    "way/32205818": "'The Green': tagged leisure=park and nothing else, named by a type word alone, no landmark or place row within 250 m (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1316674035": "'College Chapel': a chapel named only by a type, inside the All Hallows campus (38 m from the campus row, relation/5467501); its description says it carries a room... (lane 4 borderline read; owner, 2026-10-16)",
     "node/13677383001": "'Hardwicke Street Flats', council flats mapped as a neighbourhood: homes",
     "node/3326702964": "'Bremore Cottages', a row of cottages mapped as a locality: homes",
     "node/3152506221": "'Dubber Cottages', a row of cottages mapped as a locality: homes",

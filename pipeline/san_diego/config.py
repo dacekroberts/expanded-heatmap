@@ -252,6 +252,14 @@ PLACE_REVIEWED = {
     "Pharmacy Lane": "a public street of that name in a medical district, not a pharmacy's drive",
 }
 PLACE_DROPPED = {
+    "node/476068385": "'Peace Resource Center': a resource center tagged a place of worship with no religion tag, 33 m from a meeting house and 22 m from a church that share the site (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358860636": "'Summit Lighthouse Study Group of San Diego': a study group tagged a place of worship, 0 m from the row of its own body's church (node/358860156); no religion tag, no entry (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358860115": "'Christ Church Unity': 30 m from Christ Unity Church (node/358846519): two imported points, the same words in another order (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358846652": "'Gospel Center Church of God': 48 m from Gospel Center Church of God in Christ (node/358859930): the same name cut short (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358859933": "'Grace Church': 39 m from Grace Evangelical Methodist Church (node/358846655): reads as the short form of the same name; unsure (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358845219": "'Methodist Church of La Jolla': 92 m from La Jolla United Methodist Church (node/358860893): the same church under a reworded name (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358845476": "'Our Saviors Evangelical Church': 34 m from Our Saviors Lutheran Church (node/358860344): reads as the same church (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358846480": "'Saint Charles Retreat Center': a retreat center tagged a place of worship, 107 m from the row Saint Charles Catholic Church (way/554351631); no entry (lane 4 borderline read; owner, 2026-10-16)",
     "way/148910128": "'Balboa Park Miniature Railroad Station', a tourist or heritage ride indexed as a station: not transit (owner, 2026-10-13)",
     "node/3844511892": "'Northern Frontier', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
     "way/289336107": "'Shipwreck Isle', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",

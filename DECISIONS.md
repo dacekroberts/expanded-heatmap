@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**233 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**235 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-16**
 
 - [The standard map layer stops claiming a map design; the legend follows a wrapped credit; the no-match note names businesses (owner)](#2026-10-16---the-standard-map-layer-stops-claiming-a-map-design-the-legend-follows-a-wrapped-credit-the-no-match-note-names-businesses-owner)
 - [The site is called Global Transit-Business Atlas; city page titles carry it (owner)](#2026-10-16---the-site-is-called-global-transit-business-atlas-city-page-titles-carry-it-owner)
+- [Place search: the post-landing batch, fifteen calls at once (owner)](#2026-10-16---place-search-the-post-landing-batch-fifteen-calls-at-once-owner)
 
 **2026-10-14**
 
@@ -175,6 +176,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Search rollout: the station rules (search-rules-8, faults t to y) merged and tried on 168 cities (branch search-rollout)](#2026-10-13---search-rollout-the-station-rules-search-rules-8-faults-t-to-y-merged-and-tried-on-168-cities-branch-search-rollout)
 - [Search rollout: the landmark patch and the brand and shop rulings merged; the 151 extract-built maps rendered once; full checks (branch search-rollout)](#2026-10-13---search-rollout-the-landmark-patch-and-the-brand-and-shop-rulings-merged-the-151-extract-built-maps-rendered-once-full-checks-branch-search-rollout)
 - [Place search: the rollout lands on every map in one push; the heavy-job cap back to four (owner)](#2026-10-13---place-search-the-rollout-lands-on-every-map-in-one-push-the-heavy-job-cap-back-to-four-owner)
+- [Place search: the scope check measures how far an index reaches (rule D; branch search-scope-check)](#2026-10-13---place-search-the-scope-check-measures-how-far-an-index-reaches-rule-d-branch-search-scope-check)
 
 **2026-10-12**
 
@@ -9688,3 +9690,112 @@ Report: `data/_search_rollout/final_rules56/final_rebuild.md`, lists under
   `SITE_NAME` from master, so they are redrawn after the push. The GitHub
   About text goes to the owner to paste. The share-link preview is checked
   live after the reboot.
+
+### 2026-10-13 - Place search: the scope check measures how far an index reaches (rule D; branch search-scope-check)
+
+Owner-approved fix (2026-10-13) for the hole Mendoza fell through. Built on
+`search-scope-check`, cut from `search-integration` at 73f025df. Nothing
+pushed.
+
+- **Why the check passed Mendoza.** Rule B counts the map's stations per
+  NAMED AREA and asks nothing about an area's size. The scaffold named
+  relation 153540, the province, where the department (2204157) was meant.
+  The summary's area was one entry, "Mendoza", holding all 7 stations, so A,
+  B and C passed an index of 12,470 rows, 5,693 of them more than 25 km from
+  any station and the farthest 522.2 km out (search-rollout at b2e671b2, the
+  commit before f04f9939). Any area that is too large and still holds a
+  station passes B the same way.
+- **Rule D.** `scripts/check_place_scope.py` now measures the great-circle
+  (haversine) distance from each index row and each intersection row to the
+  nearest station marker of the committed map (`outputs/<slug>/heatmap.html`,
+  read by the marker colour the search script itself uses) and fails a city
+  whose farthest row is more than 25 km out. Never a difference of degrees:
+  two selftest cases at 60 N hold that. Committed files only; no fetch.
+- **The recorded reason.** `config.PLACE_SCOPE_REACH_REASON`, a dated string,
+  read from the config's text. A city over the limit with one passes, the
+  reason printed as a note. A reason with no date fails; so does a reason on
+  a city within the limit, so the reasons only shrink.
+- **A map with no station marker fails**, as does no map: an unmeasured
+  reach is not a pass. All 237 measured cities had markers.
+- **Measured before the limit was fixed in place** (237 cities on five
+  branches, 239 distinct states; `data/_search_rollout/scope_reach.md`):
+  median 10.4 km, 75th percentile 19.8, 90th 30.9, largest 267.1. 202 cities
+  are at or under 25 km, 35 over. This branch's 19 pass, São Paulo the
+  farthest at 24.2 km and Hong Kong at 24.0.
+- **The 35 are for the owner: no reason was written and the limit was not
+  moved.** Two read as faults: Bremen (53.9 km; relation 62559 holds
+  Bremerhaven's streets, which reads as the state for the city, Mendoza's
+  fault again; the relation's admin level is not confirmed, no network) and
+  Naha (267.1 km; one row, a national route's sea section, the outline
+  reaching 9.7 km). Nagasaki's farthest row is the same sea-section class.
+  The other 32 are a municipality's own far corner (islands, mountains,
+  annexed land), each listed with a proposed reason.
+- **Cost.** 3.5 s for the 19 cities; 30 s in the first form, which measured
+  every point against every nearby station on a 0.05 degree grid. The
+  selftest holds the grid search to a full search's answer. Selftest 11 to
+  27 cases, the old Mendoza state among them.
+- **Also changed:** `docs/commands.md` (the usage line, `--reach`) and the
+  place-search-city skill's floor-and-ceiling bullet.
+- **For the merge.** `scripts/place_search_night.py` calls `check_city`, so
+  a night build of a city over the limit will report rule D until the owner
+  has ruled on it.
+
+### 2026-10-16 - Place search: the post-landing batch, fifteen calls at once (owner)
+
+The owner's answer to the post-landing batch: "All 15 as recommended."
+Lanes 1 to 4 ran as subagents on dd621ee3; their reports and lists are in
+`data/_search_rollout/` (lane 4: `lane4/`).
+
+- **One drawn station, one row (lane 1, `search-stations-2` b88c5abf).**
+  Station rows at the same drawn point, at most 250 m apart, fold into one
+  row when their names read alike (bracket notes, S/U prefixes, line codes,
+  station words and 臺/台 set aside) or differ only by the city's name or a
+  pair of compass words on both rows. The kept row takes the drawn name. A
+  fold whose rows sit at drawn points more than 250 m apart splits by point
+  (21 splits, Tokyo's 両国 JR and Toei among them). 432 rows leave in 79
+  cities. A second agent read 391 of 415 sets and found two wrong folds and
+  one cut name, all fixed (Zurich Altstetten / Altstetten Nord, Toronto's two
+  Yonge Street stops 297 m apart, "Paris Gare du Nord").
+- **The policy change inside it:** where the map draws one point, a different
+  operator or mode no longer keeps a second row (Berlin S/U/tram, Tokyo's
+  operators). The earlier call stands where the map draws two points.
+- **Dos Rios (Sacramento) is parked:** neither place cache has a station
+  object for it; a fix is a new fetch or a search fallback to the drawn pin.
+- **Lane 3 (`search-landmarks-2` 310df837), all landed:** the kept-id test
+  reads only standing rows (Chicago's Pullman Administration Building gets
+  its row); a "Praça N" square named by a number alone leaves unless
+  registered (33 rows, Porto Alegre 28); the operator-entry article test
+  (one Zurich row; the National Archives stays in PLACE_KEPT); the twin test
+  as a report only.
+- **The worship branch tag lands outside Japan only.** A place of worship
+  named only by its denomination reads its `branch` tag as part of its name.
+  About 110 of the 135 rows it would add are Soka Gakkai halls in Japan, so
+  Japanese maps (PLACE_LANGUAGES "ja") are held until Tokyo and Osaka are
+  read by eye. Selftest case added.
+- **Lane 2 (`search-script-2` c6978521) plus two changes:** a join on a
+  station name's first word alone now reaches STATION_FIRST_WORD_M = 150 m,
+  not 300 m; the whole core still joins at 300 m (Philadelphia held 61
+  first-word joins between 150 and 299 m). The search control sits above the
+  layer control, under zoom (lane 2's option a). New York's ranking warnings
+  are parked.
+- **Lane 4's borderline lists, applied:** 446 of 450 drops (351 new
+  PLACE_DROPPED entries in 58 cities, 95 already there), plus the Fort
+  Edmonton replica of Rutherford House (way/322270496). Every one of the 446
+  is out of its city's index, checked by OSM id. Keeps by id where a rule holds the row
+  out: Lougheed House, Rutherford House (way/51066641) and the Fort Pitt
+  Block House.
+- **Also kept:** LEGOLAND Discovery Center Kansas City (node/13699871149),
+  decided with Tokyo's.
+- **Not applied, for the owner (nine rows):** lane 4 recommendations that
+  reverse the owner's own rulings of 2026-10-13. Four drops of rows ruled
+  kept (PLACE_RULED_KEPT: Taichung 學生福音中心, Taoyuan 五酒桶山風景區,
+  Florence Giardino Interno Via Argin Grosso, Monterrey CEDECO). Five keeps
+  of rows ruled dropped: Geneva's Église adventiste du Septième Jour and
+  Église néo-apostolique (each with a Wikidata entry of its own) and
+  Taoyuan's two 耶穌基督後期聖徒教會, under the worship ruling; Washington's
+  Three Servicemen Statue, a duplicate of The Three Soldiers. A batch
+  approval of a list is not read as reversing a ruling by name.
+- **No sights pass:** a true sights list for the cities without one needs a
+  per-city pass; left unbuilt under the feature freeze.
+- **Also in this push:** `search-scope-check` (rule D; the entry above,
+  folded from its draft).

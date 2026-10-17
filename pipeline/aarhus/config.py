@@ -222,6 +222,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/12042298812": "'Kristensamfundet': Kristensamfundet, the body's name alone on a node, no wikidata (lane 4 borderline read; owner, 2026-10-16)",
+    "way/87201365": "'LM-Huset': LM-Huset, the house of a mission body (Luthersk Mission) named by the body's initials and a hall word, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "node/9610253413": "'Klosterkirken': Klosterkirken, the abbey church inside the Vor Frue Kirke complex, 33 m from the church row way/1009083733 (wikidata, wikipedia) (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/5693733830": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

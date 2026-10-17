@@ -145,6 +145,7 @@ PLACE_REVIEWED = {
     "Emerson-Newton Implement Company": "the historic name of an NRHP-listed building (Wikipedia), not the present hotel's",
 }
 PLACE_DROPPED = {
+    "way/88014647": "'Cru House': a campus ministry's house (building=university) tagged a place of worship, 130 m from a church row; not a congregation's church (lane 4 borderline read; owner, 2026-10-16)",
     "way/56157617": "'1010 Lofts', an NRHP-listed building that is apartments today (building:use=apartments): a home",
     "way/60712042": "'430 Oak Grove', an NRHP-listed building that is 75 flats today, named by its address: a home",
     "way/45581681": "'American Trio Lofts', an NRHP-listed building that is apartments today (building:use=apartments): a home",

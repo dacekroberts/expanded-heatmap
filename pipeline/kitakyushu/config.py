@@ -375,6 +375,8 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/560343176": "'中央公園多目的広場': 中央公園多目的広場, the multi-purpose ground of 中央公園 as its own row (lane 4 borderline read; owner, 2026-10-16)",
+    "way/693732990": "'花の丘広場': 花の丘広場, 106 m from the row 花の丘 way/693733768, the same hill garden (lane 4 borderline read; owner, 2026-10-16)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/12627950265": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

@@ -290,6 +290,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/7071646549": "'Frälsningsarmén': Frälsningsarmén, the body's name alone on a node (lane 4 borderline read; owner, 2026-10-16)",
+    "node/262455428": "'Husby gård': Husby gård locality node (operator a craft society) 47 m from the park row way/582051323 of the same name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/110453488": "'Kyrklunden': Kyrklunden (the church grove), 5 m from Enskede kyrka way/110453506 (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/181153125": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

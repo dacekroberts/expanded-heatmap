@@ -413,6 +413,9 @@ PLACE_REVIEWED = {
     "The Library Company": "a historic library and museum with its own article",
 }
 PLACE_DROPPED = {
+    "way/334890701": "'St Paul Chapel': 27 m from Saint Paul Chapel Baptist Church (way/631127090): the same congregation's second outline under the short form of its name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/183997399": "'Founder's Garden': a campus garden 59 m from Temple University's row, tagged a park, named for founders only (lane 4 borderline read; owner, 2026-10-16)",
+    "way/908912921": "'The Rose Garden': a small garden tagged a park, run by a neighbors' association (operator tag), named by a type word alone (lane 4 borderline read; owner, 2026-10-16)",
     "way/344417364": "'Autism Rec', a glitched name (cut short, stray characters or two names in one), not repaired (owner, 2026-10-13)",
     "node/9625262199": "'Barn Site', demolished or gone by its own tags or name (owner, 2026-10-13)",
     "node/6157775445": "'Bear Country', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",

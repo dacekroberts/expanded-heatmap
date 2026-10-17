@@ -291,6 +291,8 @@ PLACE_REVIEWED = {
     "Central Parking Access Road": "a public secondary road at the airport, named for its function (owner, 2026-10-13: reviewed)",
 }
 PLACE_DROPPED = {
+    "node/358277040": "'Lourdes Chapel': an imported point 133 m from Marist Fathers Church (node/358283429), also an imported point; neither has an entry or a building; reads as the... (lane 4 borderline read; owner, 2026-10-16)",
+    "way/481124918": "'Union Square': a small park carrying the neighbourhood's Wikidata entry (Q7886037), 66 m from the place row Union Square (node/9809363479, which has the... (lane 4 borderline read; owner, 2026-10-16)",
     "relation/17935032": "'Smith Court Residences', private residences, named as such, whatever their wikidata: homes",
     "way/240390123": "'Modern Theatre Residence Hall', a university residence hall: a home",
     "node/358284346": "'Immaculate Conception-Salesian Rectory', a rectory tagged a place of worship, not notable: a religious residence, by id",

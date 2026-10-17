@@ -254,6 +254,8 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/727299352": "'Liga Islamică și culturală': Liga Islamică și culturală, a league's name on a prayer room node, no mosque name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/108494565": "'Biserica Spitalului': Biserica Spitalului (the hospital's church), a description with no dedication or place (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/5257876595": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

@@ -345,6 +345,16 @@ PLACE_REVIEWED = {
     "United Brick Corporation Brick Company": "a registered historic site with its own article (the brick complex), not a company",
 }
 PLACE_DROPPED = {
+    "way/67829281": "'Episcopal Church House': the diocese's office building on the cathedral close, 126 m from Washington National Cathedral and 64 m from Saint Albans; the tags say only place... (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1463787873": "'Lower Quad': a campus quad tagged a park, named by position and type only (lane 4 borderline read; owner, 2026-10-16)",
+    "way/38134365": "'The Beach': a lawn on the American University campus tagged a park, a nickname with no place in it; unsure (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1504284065": "'University Lawn': a campus lawn tagged a park, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1504284080": "'University Mall': a campus mall tagged a park, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/121977989": "'Upper Quad': a campus quad tagged a park, named by position and type only (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358957947": "'Glenwood Cemetery Chapel': 231 m from Glenwood Cemetery Mortuary Chapel (node/358960388, Wikidata Q5569462): the cemetery has one chapel, so this imported point is the same... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358958475": "'Union Chapel': 8 m from Union Methodist Church (node/358957105), both imported points with no entry: reads as the same congregation under an older name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/296939601": "'Ascension Chapel': a chapel in the Franciscan Monastery's grounds, within 100 m of the monastery's row (relation/2786525) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358956699": "'Portiuncula Chapel': the Portiuncula chapel in the Franciscan Monastery's grounds, about 135 m from the tomb shrine and inside 300 m of the monastery's row (lane 4 borderline read; owner, 2026-10-16)",
     "way/1131619243": "'TURNING HEARTS CHURCH;ST THOMAS MORE CHURCH', a type or model word standing in for a name (owner, 2026-10-13)",
     "way/67266273": "'Chapel two annex', a description standing in for a name (owner, 2026-10-13)",
     "way/55331764": "'Lenox School lofts', a home",

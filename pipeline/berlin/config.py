@@ -281,6 +281,30 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/220691611": "'Vedanta-Gesellschaft': Vedanta-Gesellschaft, the body's name alone, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "way/22114625": "'Platz des Picknicks': Platz des Picknicks, one of four activity squares of the Hans-Baluschek-Park strip (Picknicks, Sonnens, Spiels, Sports), no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/390999482": "'Platz des Sonnens': Platz des Sonnens, see Platz des Picknicks (lane 4 borderline read; owner, 2026-10-16)",
+    "way/390999483": "'Platz des Spiels': Platz des Spiels, see Platz des Picknicks (lane 4 borderline read; owner, 2026-10-16)",
+    "way/22565764": "'Platz des Sports': Platz des Sports, see Platz des Picknicks; this one is drawn as a basketball court (lane 4 borderline read; owner, 2026-10-16)",
+    "way/23181028": "'Siemensbahn': a repeat label of way/4588806 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/24485512": "'Siemensbahn': a repeat label of way/4588806 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/28261392": "'Siemensbahn': a repeat label of way/4588806 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/28545057": "'Siemensbahn': a repeat label of way/4588806 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/44466545": "'Siemensbahn': a repeat label of way/4588806 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/703053288": "'Siemensbahn': a repeat label of way/4588806 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/707056911": "'Siemensbahn': a repeat label of way/4588806 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/453301721": "'ehemalige Industriebahn Tegel–Friedrichsfelde': a repeat label of way/450504477; (lane 4 borderline read; owner, 2026-10-16)",
+    "relation/19953686": "'Berlin-Köpenick': Berlin-Köpenick, a site relation of the railway's operating point, 29 m from the station row Köpenick node/523045813: one station, two rows (lane 4 borderline read; owner, 2026-10-16)",
+    "node/13087992952": "'Nikolaiviertel': Nikolaiviertel as a neighbourhood node 23 m from the landmark row way/312391532 Nikolaiviertel (attraction, wikidata, wikipedia): one quarter, two... (lane 4 borderline read; owner, 2026-10-16)",
+    "way/33163887": "'Ehrenhof': Ehrenhof (court of honour), a bare type word on the forecourt of Schloss Bellevue, 13 m from the palace's own row way/1034456118 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/817867263": "'Ehrenhof': Ehrenhof, a bare type word on the forecourt of Schloss Charlottenburg, at the equestrian statue row node/1226265142, palace row way/186517395 (lane 4 borderline read; owner, 2026-10-16)",
+    "node/13868651453": "'Mescid-Gebetsraum': Mescid-Gebetsraum (prayer room), a type word in two languages on a node, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "way/174644655": "'Patientenpark': Patientenpark (patients' park), a hospital's grounds named by a type word, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "way/98599423": "'Rosengarten': Rosengarten alone, no place, no wikidata (the Rosengarten rows with a wikipedia tag stay) (lane 4 borderline read; owner, 2026-10-16)",
+    "way/430354855": "'Rosengarten': Rosengarten alone, no place, no wikidata, 85 m from Vogelgarten; a section of a larger garden (lane 4 borderline read; owner, 2026-10-16)",
+    "way/60121957": "'Badestrand für Alle': Badestrand für Alle (bathing beach for all), a description on a beach, no wikidata (lane 4 borderline read; owner, 2026-10-16)",
+    "way/965180503": "'Kleiner Strand': Kleiner Strand (small beach), a description on a beach, no wikidata (lane 4 borderline read; owner, 2026-10-16)",
+    "relation/19953685": "'Berlin Stadtforst': Berlin Stadtforst, a site relation of an operating point (railway ref BSST, short name Stadtforst) with no passenger service known to the tags (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/79406037": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

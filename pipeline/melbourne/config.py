@@ -198,6 +198,7 @@ PLACE_WAY_WORDS = ("place", "arcade", "court", "mews", "terrace", "close", "para
                    "esplanade")
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "way/772558888": "'RMIT University (City Campus)': a second block of the RMIT city campus with the same Wikidata entry (Q5123539) and article as the row RMIT University (way/26564452); the two are... (lane 4 borderline read; owner, 2026-10-16)",
     "way/448062027": "'Campbell Arcade entrance', a description standing in for a name: a station entrance label",
     "way/448062028": "'Campbell Arcade entrance', a description standing in for a name: a station entrance label",
     "way/1443830592": "'Entrance/Exit 2 - Royal Parade East', a description standing in for a name: a station entrance label",

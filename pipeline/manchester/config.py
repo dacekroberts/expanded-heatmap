@@ -266,6 +266,8 @@ PLACE_REVIEWED = {
     "Store Street": "a public city-centre street of that name",
 }
 PLACE_DROPPED = {
+    "relation/8412761": "'The Green': the lawn of the MediaCityUK piazza tagged a park, 33 m from the MediaCityUK stop, a bare type word with no place in it and no other tag (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1203128230": "'Fletcher Moss Botanical Garden': the botanical garden inside the park, 259 m from the row Fletcher Moss Gardens (way/4966937); both carry Wikidata Q5458809 and the same article,... (lane 4 borderline read; owner, 2026-10-16)",
     "node/12872978226": "'Deep Pit (Bradford Colliery)', closed and capped by its own tags (owner, 2026-10-13)",
     "node/12873039793": "'Parker Pit (Bradford Colliery)', closed and capped by its own tags (owner, 2026-10-13)",
     "node/13514237058": "'Site of Alkrington Colliery', demolished or gone by its own tags or name (owner, 2026-10-13)",

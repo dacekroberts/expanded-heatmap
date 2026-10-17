@@ -322,6 +322,9 @@ PLACE_FOLD = None
 #   way/263823315 'Mish House': tourism=attraction and an article of its own: a home tagged an attraction is kept
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "way/282956237": "'Broad Baptist Church': 11 m from Broad Street Baptist Church (node/358805223); this outline carries the name with a word missing (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358805071": "'Full Gospel Assembly Church': a bare point 28 m from the building Full Gospel Chapel (way/260349635); the names differ, so it may be an earlier congregation at the same address (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1193867827": "'The Commons': a lawn tagged a park with permissive access, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
     "way/260181659": "'Dashiell Hammett Place', an apartment building (rooms=22) named for a former resident: a home",
     "way/289372464": "a place of worship with a person's own name glued onto its name: a glitch, not repaired",
     "way/289665929": "'Luke Bt. St. Church', the words of the name are transposed: a glitch",

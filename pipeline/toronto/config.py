@@ -446,6 +446,7 @@ PLACE_REVIEWED = {
     "Pharmacy Avenue": "a public street; the word is its name (eye read, 2026-10-13)",
 }
 PLACE_DROPPED = {
+    "way/79425512": "'Willowdale United Church': 13 m from Willowdale Emmanuel United Church (node/5577285044, which carries the congregation's website): the same church under what reads as its... (lane 4 borderline read; owner, 2026-10-16)",
     # A description standing in for a name (owner, 2026-10-13, ruling 1 of the sixteen:
     # a description is no name, on any kind of row).
     "node/1224160700": "'near dam', description: a note about the spot, not a name (leisure=park) (eye read, 2026-10-13)",

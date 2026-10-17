@@ -231,6 +231,12 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/161672219": "'Καθολικό Βλατάδων': Καθολικό Βλατάδων, the main church of the Vlatadon monastery, inside the monastery's own row way/161675415 (under 20 m) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1923811836": "'2η Προβλήτα': 2η Προβλήτα, a port pier as a bare locality node (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1923811835": "'3η Προβλήτα': 3η Προβλήτα, port pier (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1923811832": "'4η Προβλήτα': 4η Προβλήτα, port pier (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1923811831": "'5η Προβλήτα': 5η Προβλήτα, port pier (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1923811833": "'6η Προβλήτα': 6η Προβλήτα, port pier (lane 4 borderline read; owner, 2026-10-16)",
     "node/12237396502": "a second row for a church that has a row (the weaker object)",
     "node/12237325686": "a second row for a church that has a row (the weaker object)",
     "node/12237339058": "a second row for a church that has a row (the weaker object)",

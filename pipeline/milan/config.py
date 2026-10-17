@@ -309,6 +309,8 @@ PLACE_REVIEWED = {
 # OSM objects a reading by eye found that no rule in place_index.py catches,
 # each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {
+    "node/11902369681": "'Chiostro Refaat Alareer': a cloister of the Universita degli Studi tagged a park (operator the university, start date 2024), a point with no other tag; a campus court, the... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1056245362": "'Porta Ticinese': a suburb point 223 m from the place row Ticinese (way/404140252, the city's own census quarter), same Wikidata entry (Q3991179) and the same... (lane 4 borderline read; owner, 2026-10-16)",
     "way/1210693372": "'Area esterna', a description (outside area) on a park; a description goes by id (owner, 2026-10-11)",
     "node/12278859101": "'ricostruzione di sarcofago romano con coperchio originale', a description standing in for a name (owner, 2026-10-11)",
     "node/11701168833": "'Nuova Zona Residenziale', a description (new residential zone) on a neighbourhood node (owner, 2026-10-11)",

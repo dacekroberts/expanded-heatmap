@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/anyang.json",
-  "places": 5015,
+  "places": 5012,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.906,
+      "en": 0.907,
       "ko": 0.999
     },
     "list_share": 0.5,

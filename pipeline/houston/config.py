@@ -183,6 +183,9 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "way/210993911": "'Allen Family Courtyard': the courtyard of the Children's Museum of Houston tagged a park, 22 m from the museum's own row (way/210993912), no other tag; a part of the museum (lane 4 borderline read; owner, 2026-10-16)",
+    "relation/17404794": "'Cooley Center Courtyard': a courtyard named for its building (the Cooley Center) tagged a park, no other tag; the Melbourne class (lane 4 borderline read; owner, 2026-10-16)",
+    "way/543779025": "'Ray Courtyard': a courtyard on the Rice campus tagged a park, no other tag, 82 m from Central Quadrangle; named for a donor rather than a place; the Melbourne... (lane 4 borderline read; owner, 2026-10-16)",
     "way/52499737": "'Coolgreen Park', not yet open by its own tags (owner, 2026-10-13)",
     "way/1113369158": "'Apache-Elbert Triangle', a description standing in for a name (owner, 2026-10-13)",
     "way/615900993": "'Hermann Park', another object's name on this one: not the thing its name says",

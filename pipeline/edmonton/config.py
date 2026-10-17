@@ -344,6 +344,7 @@ PLACE_REVIEWED = {
     "Transit Hotel": "a historic building (historic=building, Wikipedia) tagged as the building, not the business: the Panama Hotel precedent",
 }
 PLACE_DROPPED = {
+    "way/322270496": "'Rutherford House', the replica in Fort Edmonton Park; the real house (way/51066641) is kept by id (lane 4 borderline read; owner, 2026-10-16)",
     "way/632373455": "'Pointe Uptown Courtyard', a condominium complex's courtyard, by its own description: homes",
     "way/325217107": "'Mahamevnawa Buddhist Monastery Edmonton', a monastery tagged a place of worship, not notable: a religious residence, by id",
     "way/325035890": "'Truc Lam Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
@@ -422,6 +423,7 @@ PLACE_DROPPED = {
 # Public sights kept by id: in the cache, passed over by the rules (place_index,
 # PLACE_KEPT; owner, 2026-10-13).
 PLACE_KEPT = {
+    "way/51066641": "'Rutherford House', a provincial historic site open as a museum; kept against the home rule (lane 4 borderline read; owner, 2026-10-16)",
     "way/156535044": "'John Janzen Nature Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "way/226584734": "'John Walter Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "node/632192116": "'Legislative Assembly Interpretive Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",

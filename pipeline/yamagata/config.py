@@ -316,6 +316,12 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/5512677052": "'しあわせ地蔵菩薩': a Jizo named by a nickname (しあわせ), no religion tag, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "node/5602676822": "'六角地蔵尊': 六角地蔵尊, a Jizo figure named by its form, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "way/865608641": "'県民ふれあい広場': 県民ふれあい広場: ふれあい広場 with only 県民 in front, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "node/4849389041": "'宝珠山立石寺': 宝珠山立石寺, a node about 240 m from way/224101452 立石寺 (the main hall building); the same temple twice (lane 4 borderline read; owner, 2026-10-16)",
+    "node/7626256255": "'三重小塔': 三重小塔 of 立石寺, about 330 to 380 m from the temple's two rows (lane 4 borderline read; owner, 2026-10-16)",
+    "node/7626256259": "'大佛殿': 大佛殿 of 立石寺, beside the 奥之院 row node/7626256260 (about 400 m from the main hall) (lane 4 borderline read; owner, 2026-10-16)",
     # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/864044933": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

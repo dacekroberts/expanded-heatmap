@@ -256,6 +256,9 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "relation/8454744": "'University Athletic Park': playing fields tagged leisure=park and landuse=grass, 277 m from the University of Calgary's row, named by the university and a type only; unsure (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1016425791": "'West Beach': tagged leisure=park and nothing else, a compass word and a type word, no index row within 400 m; reads as a lake community's own beach; the tags... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/297633012": "'Beddington Pentecostal Church': a point 6 m from the building row BP Church (way/953610862): one Pentecostal church under its full name and its short name; neither has an entry (lane 4 borderline read; owner, 2026-10-16)",
     "way/749024649": "'Lake Sundance', a residents' association's lake; its description says exclusive to residents",
     "way/640136474": "'Cranston Residents Association', named for the residents' association whose facility it is",
     "node/11345358876": "'Cedarglen Living Park Area', a home builder's own park area (operator)",
@@ -310,6 +313,7 @@ PLACE_DROPPED = {
 # Famous places kept by id: in the cache, passed over by the rules (place_index,
 # PLACE_KEPT; owner, 2026-10-13).
 PLACE_KEPT = {
+    "way/169779670": "'Lougheed House', a public house museum with an admission fee, nobody's home now; kept against the home rule (lane 4 borderline read; owner, 2026-10-16)",
     "way/12244405": "'Canada Olympic Park', one of the city's best-known sights, in the cache with no row (tourism=attraction, leisure=park, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
     "node/1379435639": "'Calgary Farmers' Market', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "node/5319586638": "'National Music Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",

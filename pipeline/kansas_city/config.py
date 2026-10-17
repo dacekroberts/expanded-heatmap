@@ -186,6 +186,8 @@ PLACE_REVIEWED = {
     "Economy Parking Access Road": "a public tertiary road at the city-owned airport, no private access",
 }
 PLACE_DROPPED = {
+    "node/358051896": "'Basonia Church': an imported point 23 m from Besonia Baptist Church (node/358087246), also an imported point: reads as the same congregation under a misspelt name;... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358087763": "'Countryside United Methodist Church': an imported point at the same spot (0 m) as One Spirit United Methodist Church (node/358087574), same denomination: reads as one building under an... (lane 4 borderline read; owner, 2026-10-16)",
     "way/620966861": "'Somberbrook HOA', a homeowners' association's residents' facilities tagged a park",
     "relation/18741305": "'Convent of Christ the King', a convent tagged a place of worship, not notable: a religious residence, by id",
     "node/358087457": "'Merry Moments Preschool', a preschool tagged a place of worship: a business",
@@ -249,6 +251,7 @@ PLACE_DROPPED = {
 # Public sights kept by id: in the cache, passed over by the rules (place_index,
 # PLACE_KEPT; owner, 2026-10-13).
 PLACE_KEPT = {
+    "node/13699871149": "'LEGOLAND Discovery Center Kansas City', a paid attraction under a brand, decided with Tokyo's (lane 4 borderline read; owner, 2026-10-16)",
     "relation/19184935": "'Ewing and Muriel Kauffman Memorial Garden', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "node/14239851327": "'Kaleidoscope', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "way/132570887": "'Kansas City Public Library Central Library', owner, 2026-10-13: a public sight the rules pass over for want of a tag",

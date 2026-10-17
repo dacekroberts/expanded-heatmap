@@ -176,6 +176,8 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "way/40181299": "'Leland Stanford Mansion State Historic Park': the state historic park around the Leland Stanford Mansion, 22 m from the mansion's own row (node/368173324) and under the same entry (Q6520801):... (lane 4 borderline read; owner, 2026-10-16)",
+    "relation/6797936": "'Alumni Grove': a grove on the state university campus (394 m from the university's row) tagged a park, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
     "node/4124586741": "'Central Pacific Freight Depot', a tourist or heritage ride indexed as a station: not transit (owner, 2026-10-13)",
     "node/7700904748": "'Saint Francis of Assisi Friary', a religious residence",
     "way/485439022": "'Access road', a description standing in for a name (owner, 2026-10-13)",

@@ -254,6 +254,8 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "relation/13402580": "'Atrio della Casa delle Vestali': Atrio della Casa delle Vestali, 13 m from the row Casa delle Vestali relation/1842058 on the same wikidata and wikipedia entry (lane 4 borderline read; owner, 2026-10-16)",
+    "relation/1849832": "'Piazza del Foro': 'Piazza del Foro' on the Roman Forum's wikidata entry (Q180212), 182 m from the row Forum Romanum relation/1841080 (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/158036054": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",

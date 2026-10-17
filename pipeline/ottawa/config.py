@@ -170,6 +170,9 @@ PLACE_FOLD = None
 #   way/242719863 'St. Barnabas Church,': a church with an article of its own; the trailing comma is OpenStreetMap's and stops no search
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "way/566463323": "'Academic Quad': a quad on the Carleton University campus tagged a park, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/587749769": "'Alumni Park': a campus park at Carleton University (289 m from the university's row), named for alumni only (lane 4 borderline read; owner, 2026-10-16)",
+    "way/733418590": "'University Square': a square 121 m from the University of Ottawa's row, no place in the name; unsure whether it is the university's own named plaza (lane 4 borderline read; owner, 2026-10-16)",
     "relation/7057829": "'Chapel Hill South', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "node/12170991637": "'Artillery Piece', a description standing in for a name (owner, 2026-10-13)",
     "way/1289234021": "'Helicopter', a bare type word for a name (owner, 2026-10-13)",

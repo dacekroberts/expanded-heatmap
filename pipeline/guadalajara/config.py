@@ -340,6 +340,20 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/554361507": "'Explanada de la Biblioteca': 'Explanada de la Biblioteca' (the library forecourt) on the ITESO campus, a position as the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1202840394": "'Parque Lineal De Avenida México': a repeat label of way/1202840393 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1202840396": "'Parque Lineal De Avenida México': a repeat label of way/1202840393 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1202842939": "'Parque Lineal De Avenida México': a repeat label of way/1202840393 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/778645868": "'Parque lineal Normalistas': a repeat label of way/778645863 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1474438370": "'La Cima De Zapopan': 'La Cima De Zapopan' tagged a park 56 m from the neighbourhood row node/4831617329 of the same name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1342998561": "'Atrio de la Basílica': 'Atrio de la Basílica', the forecourt 73 m from the row Basílica de Nuestra Señora de Zapopan relation/11855622, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1491325763": "'Atrio del Santuario': 'Atrio del Santuario', the forecourt 11 m from the row Santuario de Nuestra Señora de la Soledad node/8406192817 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/400788546": "'Parque VM': 'Parque VM', initials as the name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/470441452": "'Extensión Parque Principa': 'Extensión Parque Principa' (sic), the extension of Parque Principal Villa California way/470441448, 146 m away (lane 4 borderline read; owner, 2026-10-16)",
+    "way/153903438": "'Parque Hundido': 'Parque Hundido' (sunken park), type words only; four rows of this name in different districts (lane 4 borderline read; owner, 2026-10-16)",
+    "way/243827186": "'Parque Hundido': 'Parque Hundido', type words only (lane 4 borderline read; owner, 2026-10-16)",
+    "way/483068192": "'Parque Hundido': 'Parque Hundido', type words only (lane 4 borderline read; owner, 2026-10-16)",
+    "way/584228135": "'Parque Hundido': 'Parque Hundido', type words only (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/480542836": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

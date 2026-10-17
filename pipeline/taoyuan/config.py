@@ -196,6 +196,23 @@ PLACE_KEPT = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/9852838082": "'大眾爺公廟': 大眾爺公廟, a generic deity plus 廟 with no place, like a bare 土地公廟 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/987705483": "'中華民國菩提道佛學會': 中華民國菩提道佛學會, a society's name alone on a building (lane 4 borderline read; owner, 2026-10-16)",
+    "way/761398236": "'慈濟八德園區': 慈濟八德園區, Tzu Chi's Bade campus tagged a place of worship; same call as the Jing Si Hall (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1450160376": "'慈濟桃園靜思堂': 慈濟桃園靜思堂, Tzu Chi's Jing Si Hall (official name is the foundation's); a large public building (lane 4 borderline read; owner, 2026-10-16)",
+    "node/6315528747": "'桃園市召會十會所': 桃園市召會十會所, the Local Church meeting hall number ten, a congregation named by the body and a number (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1044285236": "'大樟樹廣場': 大樟樹廣場, a plaza inside 貴山客家文化公園 (relation/10175584, a row) named for a tree, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1011354008": "'文友廣場': 文友廣場, 15 m from 龍潭武德殿, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "node/7024824487": "'陀螺廣場': 陀螺廣場 as a bare node in Bade; the Daxi 陀螺廣場 (way/839239679, the known riverside plaza) should stay (lane 4 borderline read; owner, 2026-10-16)",
+    "way/588978711": "'林森館': 林森館, a building tagged a place of worship 15 m from 恩惠堂副堂 and under 40 m from 恩惠堂; reads as the church's hall (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1039743661": "'八路財神殿': 八路財神殿, 33 m from the temple row 聖威宮 way/1039743659, probably its side hall (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1000680278": "'前園': 前園 (front garden), a position word (lane 4 borderline read; owner, 2026-10-16)",
+    "way/582425131": "'學校埤': 學校埤 (school pond) tagged a park (lane 4 borderline read; owner, 2026-10-16)",
+    "way/736442394": "'文創園': 文創園, a type word as the whole name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/751967067": "'湖濱公園': 湖濱公園 with no place and no operator tag (lane 4 borderline read; owner, 2026-10-16)",
+    "way/741164157": "'生態野溪公園': 生態野溪公園, a type phrase, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "way/610534302": "'福德祠公園': 福德祠公園, a park named for the shrine type beside 台北新都福德祠 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/817987506": "'平鎮市廿公園': 平鎮市廿公園, park number twenty with only the former city's name in front (lane 4 borderline read; owner, 2026-10-16)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/989883702": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

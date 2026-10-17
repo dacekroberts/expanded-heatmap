@@ -196,6 +196,8 @@ PLACE_REVIEWED = {
     "Store Street": "an ordinary residential street",
 }
 PLACE_DROPPED = {
+    "way/93115817": "'Saint Mary's': 84 m from Saint Mary's Church (way/117549015, its own article); this outline is tagged wesleyan and the church anglican, so it may be a second... (lane 4 borderline read; owner, 2026-10-16)",
+    "way/256979765": "'Saint Thomas Philadelphia Training Centre and Office': the training centre and office of the same campus, 38 m from the chapel; it carries a Wikidata entry (Q105108637) but no article (lane 4 borderline read; owner, 2026-10-16)",
     "node/304384666": "'The Methodist Church Birley Carr', no longer a church; its description says now apartments",
     "way/111377893": "'Intake Methodist Church', its note says it was this church: removed",
     "node/257665636": "'Shirefreen UJnited Reformed Church', a garbled node duplicate of way/146060385, which stays",

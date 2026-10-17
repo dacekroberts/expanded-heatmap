@@ -182,6 +182,8 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "node/3743515728": "'Jamia Masjid Sultania': a bare point 92 m from Jamia Masjid Sultania And Education Centre (way/204180729), the same mosque's building under its fuller name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/61738726": "'The Full Gospel Revival Centre': 105 m from Full Gospel Revival Centre & St Faith's Church (way/31360624, the congregation's website): a second building of the same congregation... (lane 4 borderline read; owner, 2026-10-16)",
     "way/244468048": "'Geological walk', a description standing in for a name",
     "node/2400164517": "'Moat (site of)', a description (\"site of\") standing in for a name",
     "relation/17280686": "'WW2 Bunkers', a description standing in for a name",

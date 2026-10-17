@@ -149,6 +149,7 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "node/12710799767": "'Holy Cross Catholic Church': 53 m from Holy Cross Church (way/587641665); neither carries a denomination or an entry, and the names differ by one word: reads as one parish as... (lane 4 borderline read; owner, 2026-10-16)",
     "node/5691446641": "'Whispering Firs Condominiums', a condominium complex mapped as a neighbourhood node: homes",
     "way/1032999207": "'Sacred Heart Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
     "way/587121586": "'Tacoma Golf Center', a closed golf business indexed through historic=ruins (abandoned:leisure=golf_course)",

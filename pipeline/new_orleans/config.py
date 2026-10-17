@@ -307,6 +307,15 @@ PLACE_REVIEWED = {
     "New Orleans Pharmacy Museum": "a museum with its own article, not a pharmacy",
 }
 PLACE_DROPPED = {
+    "node/358399740": "'Dominican Fathers of Saint Dominic Church': a bare point 58 m from Saint Dominic Catholic Church (way/1036092798, the parish website): the same parish named for its order (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358399748": "'Family Federation for World Peace and Unification': 44 m from Unification Church (node/358385155): the same body under its later name, no religion tag (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358385538": "'Guiding Light Baptist Church': 49 m from Guiding Light Missionary Baptist Church (node/358399785): the same name cut short (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358399843": "'Loving Four Baptist Church': 58 m from Greater Loving Four Tabernacle Baptist Church (node/358385126): the same name cut short (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358399913": "'Resurrection of Our Lord Church': 121 m from Resurrection of Our Lord Catholic Church (node/358393836, the parish website): the same parish (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358399930": "'Saint John Divine Baptist Church': 53 m from Saint John Divine Missionary Baptist Church (node/358385223): the same name cut short (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358385695": "'Saint Paul Baptist Church': 34 m from Saint Paul Community Baptist Church (node/358399949): may be the same church or a neighbour; unsure, recommend a read (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358385154": "'Trinity Evangelical Reformed Church': 34 m from First Trinity Evangelical United Church of Christ (node/358399761): reads as the same church under its earlier name (lane 4 borderline read; owner, 2026-10-16)",
+    "node/358384906": "'Zion Hall Baptist Church': 58 m from Zion Hill Missionary Baptist Church (node/358400028): reads as the same church with Hill misspelt (lane 4 borderline read; owner, 2026-10-16)",
     "node/358369618": "'Mount Carmel Convent', a religious residence",
     "node/358385658": "'Saint Clare's Monastery', a religious residence",
     "node/358384791": "'Saint Davids Convent', a religious residence",

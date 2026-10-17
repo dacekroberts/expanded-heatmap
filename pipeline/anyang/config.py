@@ -162,6 +162,9 @@ _EXHIBIT = "a Railroad Museum exhibit whose article is its class's or kind's, no
 _MALL = "a corridor of an underground shopping mall, named for the mall"
 _NO_NAME = "a description standing in for a name"
 PLACE_DROPPED = {
+    "node/13048352921": "'안양감리교회블레싱하우스': 안양감리교회블레싱하우스, an annex hall (Blessing House) of 안양감리교회 with no religion tag, 37 m from the church's own row way/1299194390 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/755923228": "'Doosan Park 2': Doosan Park 2, an English-only name of an apartment brand, a type word and a number, 117 m from 석수 station, no Korean name (lane 4 borderline read; owner, 2026-10-16)",
+    "way/699145732": "'자유공원 테니스장': 자유공원 테니스장, the tennis courts of 자유공원 tagged a park of their own; the park's row way/82085832 is about 470 m away (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/442863042": "peak named only by a height: rule fault class (still applied by id) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

@@ -119,6 +119,15 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/2579649365": "'Centro Social São João Batista': Centro Social São João Batista, a social centre tagged a place of worship, no religion tag (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1272585534": "'Obra Social N.S. de Fátima': Obra Social N.S. de Fátima, a parish's social work house tagged a place of worship, 112 m from the parish row way/1514972313 (lane 4 borderline read; owner, 2026-10-16)",
+    "node/6554207563": "'Obras Sociais CEF Jerônimo Candinho': Obras Sociais CEF Jerônimo Candinho, a spiritist centre's social works, no religion tag (lane 4 borderline read; owner, 2026-10-16)",
+    "way/551148327": "'Praça Administração': Praça Administração, a square named for the administration office beside it, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
+    "node/4949885122": "'Infraero': Infraero, the airport operator's name on a monument node, no wikidata (lane 4 borderline read; owner, 2026-10-16)",
+    "way/764261798": "'Praça 1DI': Praça 1DI, a type word and a code, 111 m from Praça da Bíblia (lane 4 borderline read; owner, 2026-10-16)",
+    "way/439463047": "'Praça AC-2': Praça AC-2, a type word and a lot code, no sector (lane 4 borderline read; owner, 2026-10-16)",
+    "node/12505623987": "'Praça AR 11- AR 7': Praça AR 11- AR 7, a type word between two block codes (lane 4 borderline read; owner, 2026-10-16)",
+    "way/261771198": "'Prainha': Prainha (little beach) alone on a park, 30 m from Praça dos Orixás (wikidata) (lane 4 borderline read; owner, 2026-10-16)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/12978825346": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

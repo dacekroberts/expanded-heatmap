@@ -209,6 +209,23 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/427495962": "'Acacias (F)': the stop Acacias under a platform letter, 11 m from the row Acacias (E) (node/1572466631), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1549447290": "'Avanchets-Étang (S)': the stop Avanchets-Étang under a platform letter, 11 m from the row Avanchets-Étang (R) (node/428676747), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1550806751": "'Balexert (Q)': the stop Balexert under a platform letter, 11 m from the row Balexert (P) (node/35416998), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1538653729": "'Bel-Air (B)': the stop Bel-Air under a platform letter, 7 m from the row Bel-Air (A) (node/1538653712), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1538555915": "'Bel-Air (E)': the stop Bel-Air under a platform letter, 109 m from the row Bel-Air (A) (node/1538653712), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1533266934": "'Bel-Air (F)': the stop Bel-Air under a platform letter, 134 m from the row Bel-Air (A) (node/1538653712), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1550672415": "'Bois-du-Lan (P)': the stop Bois-du-Lan under a platform letter, 11 m from the row Bois-du-Lan (O) (node/1550672534), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1538653739": "'Coutance (Z)': the stop Coutance under a platform letter, 13 m from the row Coutance (node/1033244930), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1550168468": "'Forumeyrin (L)': the stop Forumeyrin under a platform letter, 23 m from the row Forumeyrin (K) (node/698911254), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1549433444": "'Gare Cornavin (H)': the stop Gare Cornavin under a platform letter, 160 m from the row Gare Cornavin (node/1541473508), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/428678599": "'Gare Cornavin (I)': the stop Gare Cornavin under a platform letter, 163 m from the row Gare Cornavin (node/1541473508), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/306575952": "'Industrielle (Q)': the stop Industrielle under a platform letter, 7 m from the row Industrielle (P) (node/1572508529), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1550168376": "'Jardin-Alpin-Vivarium (W)': the stop Jardin-Alpin-Vivarium under a platform letter, 11 m from the row Jardin-Alpin-Vivarium (V) (node/695825965), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1550672568": "'Meyrin-Village (G)': the stop Meyrin-Village under a platform letter, 13 m from the row Meyrin-Village ( F) (node/1550672389), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1588234221": "'Place de Neuve (J)': the stop Place de Neuve under a platform letter, 11 m from the row Place de Neuve (I) (node/297914745), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1562689375": "'Plainpalais (C)': the stop Plainpalais under a platform letter, 69 m from the row Plainpalais (node/1082706650), which would stay (lane 4 borderline read; owner, 2026-10-16)",
+    "node/427495963": "'Uni-Mail (P)': the stop Uni-Mail under a platform letter, 7 m from the row Uni-Mail (O) (node/1582369226), which would stay (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/81482906": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

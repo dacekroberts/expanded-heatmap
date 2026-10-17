@@ -183,6 +183,7 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/4777453545": "'Comune di Firenze - Quartiere 3': a district office of the city (amenity=townhall) named 'Comune di Firenze - Quartiere 3'; the entry and article it carries are the district's, not... (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/473819618": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

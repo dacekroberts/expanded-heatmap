@@ -193,6 +193,7 @@ PLACE_REVIEWED = {
     "Hotel Street": "a four-lane public street of that name, not a hotel's drive",
 }
 PLACE_DROPPED = {
+    "node/11999626319": "'Iglesia Santa Cruz': a point 21 m from the building row Chapel of the Cross (relation/17748447), both Anglican; the name is the chapel's in Spanish, so it reads as the... (lane 4 borderline read; owner, 2026-10-16)",
     "way/831072620": "'Alexan Lower Greenville Dog Park', a home: an apartment complex's own feature",
     "way/1451838323": "'Giants of the Savana', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
     "way/1451838324": "'Wilds of Africa', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",

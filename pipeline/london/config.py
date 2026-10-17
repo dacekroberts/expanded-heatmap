@@ -280,6 +280,7 @@ PLACE_REVIEWED = {
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {
+    "way/146130119": "'Harvey Nichols': the article is the company's, not the building's; a store with a chain article fails the rule's own 'not the brand's article' test (lane 4 borderline read; owner, 2026-10-16)",
     # From the read of the landmarks and places (the place-read agent, batch 3, 2026-10-11: every place and every landmark that is not a park or a place of worship read with its tags, the rest screened), each id checked against its cached name.
     "way/1547913134": "a development's private drive (access=no, foot=private) drawn as a residential street and named for its car park",
     "relation/19960734": "a private country estate (access=private) tagged a locality",

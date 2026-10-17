@@ -310,9 +310,9 @@ PLACE_RULED_KEPT = {
     "way/101311622": "'Steinsrud', Oslo farms and crofts with a visiting tag (website) are kept (15 answers no. 2: 14 kept)",
     "way/101222539": "'Svingen', Oslo farms and crofts with a visiting tag (website) are kept (15 answers no. 2: 14 kept)",
     "way/1371007440": "'Biblioteksparken', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
-    "node/1180904125": "'Sinsenkrysset (G)', a drawn or network station is never dropped for its name (owner 2026-10-13, station guard)",
     "node/30391593": "'Sinsenkrysset (H)', a drawn or network station is never dropped for its name (owner 2026-10-13, station guard)",
-    "node/2454616597": "'Storo (A)', a drawn or network station is never dropped for its name (owner 2026-10-13, station guard)",
+    # Sinsenkrysset (G) and Storo (A) are no rows of their own since 2026-10-16:
+    # one drawn station, one row (lane 1); their names are aliases of the H and B rows.
     "node/2454616596": "'Storo (B)', a drawn or network station is never dropped for its name (owner 2026-10-13, station guard)",
     "node/2194522600": "'Airship “Norge” Landing Site', a monument is not held to the article rule and nothing in its tags says artwork (measured 2026-10-11, not applied)",
     "way/1539181176": "'Dyrafjeld', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
@@ -331,6 +331,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/7878995859": "'Kollbakkene': Kollbakkene locality node 35 m from the landmark row node/2348196150 of the same name (lane 4 borderline read; owner, 2026-10-16)",
+    "node/7771304209": "'Rustadsaga': Rustadsaga locality node 75 m from the landmark row node/2090480382 (the old sawmill) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/5379314693": "'Meditasjonskapellet': Meditasjonskapellet (the meditation chapel), a room of the Lovisenberg foundation (operator tag) as a bare node (lane 4 borderline read; owner, 2026-10-16)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/1104908532": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

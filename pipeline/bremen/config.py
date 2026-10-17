@@ -288,6 +288,16 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/12847014982": "'Bremer Seemannsmission': Bremer Seemannsmission, the mission's house tagged a place of worship on a node (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1923007456": "'Evangelische Studierenden Gemeinde': Evangelische Studierenden Gemeinde, the student chaplaincy's rooms, no church name (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1848312594": "'Seemannsmission, Seemannsclub \"Welcome\"': Seemannsmission, Seemannsclub \"Welcome\", a seamen's club of the mission tagged a place of worship (lane 4 borderline read; owner, 2026-10-16)",
+    "node/2573585064": "'Am Brill (Bgm.-Smidt-Straße), Bussteig/Gleis B': Am Brill (Bgm.-Smidt-Straße), Bussteig/Gleis B, a platform label in the name (ref=B); the stop's other row is Am Brill (Hutfilter-/Obernstraße)... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1993183907": "'Bahnhof Walle (Steig B)': Bahnhof Walle (Steig B), the tram stop's second platform 48 m from Bahnhof Walle (Steig A) node/1993183914; one stop, two rows, both named with a... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/7223541266": "'Hauptbahnhof O': Hauptbahnhof O, one platform of the tram stop at the main station, 12 m from Hauptbahnhof P node/2573586711 and beside the plain row Hauptbahnhof... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/2573586711": "'Hauptbahnhof P': Hauptbahnhof P, see Hauptbahnhof O (lane 4 borderline read; owner, 2026-10-16)",
+    "node/818850218": "'Bahnhof Sebaldsbrück': Bahnhof Sebaldsbrück, a tram stop position 63 m from the tram station row Bf Sebaldsbrück node/2436786076 (alt name Bahnhof Sebaldsbrück,... (lane 4 borderline read; owner, 2026-10-16)",
+    "way/154715965": "'Jüdische Trauerhalle': Jüdische Trauerhalle (Jewish funeral hall), a type phrase on a cemetery chapel, no wikidata (lane 4 borderline read; owner, 2026-10-16)",
+    "way/186021192": "'Sikh-Tempel': Sikh-Tempel, a type word alone, no place or gurdwara name (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/3380247432": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

@@ -194,6 +194,8 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "node/1303656596": "'Cascading Mountain (Wake Green Interchange)': a sculpture at the Wake Green bus interchange carrying the village's own Wikidata entry (Q7960937) and article (en:Wake Green), 258 m from the... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/3234602477": "'Peace Hub': tagged only amenity=place_of_worship, no religion, 42 m from The Priory Rooms (way/25094469, the Quaker meeting house on Bull Street, Wikidata... (lane 4 borderline read; owner, 2026-10-16)",
     "node/1745739183": "'The Patrick Collection', closed for good, removed or the site of a vanished thing, by its own tags or name (owner, 2026-10-13)",
     "node/1314883020": "'Blue Plaque: Joseph Lucas 1834-1902', closed for good, removed or the site of a vanished thing, by its own tags or name (owner, 2026-10-13)",
     "node/1374183345": "'Site of Langley Hall', closed for good, removed or the site of a vanished thing, by its own tags or name (owner, 2026-10-13)",

@@ -146,6 +146,10 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "node/357330637": "'Saint George Orthodox Church': a bare point 121 m from Saint George Antiochian Orthodox Church (way/533711510, Wikidata Q85109148): reads as the same church (lane 4 borderline read; owner, 2026-10-16)",
+    "way/534186932": "'Community House': a building tagged a place of worship and named only by its type, 69 m and 88 m from two church rows; the tags do not say whose it is (lane 4 borderline read; owner, 2026-10-16)",
+    "node/367959600": "'Lourdes Grotto': a grotto tagged a place of worship on a university campus, 110 m from the Duquesne University Chapel's row (way/118672536); no entry (lane 4 borderline read; owner, 2026-10-16)",
+    "way/27591273": "'Peace Garden': a garden run by Carnegie Mellon University (operator tag) tagged a park, no place in the name (lane 4 borderline read; owner, 2026-10-16)",
     "way/537224189": "'Residence at South High', a former school that is flats today (building:use=apartments): a home",
     "node/367965930": "'Prince of Peace Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
     "node/367965935": "'Saint Benedict the Moor Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
@@ -187,4 +191,9 @@ PLACE_DROPPED = {
     # fall squarely in an owner ruling, each with its ruling.
     "node/1666922240": "'Stephen Foster Memorial Museum', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): the museum inside the Stephen Foster Memorial, 16 m from the memorial's own row (way/121051329) and under the same entry (Q7609218); the memorial has the article",
     "node/357375662": "'Friendship Community Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 37 m from the building FRIENDSHIP COMMUNITY PRESBYTERIAN CHURCH (way/374295293): the same congregation under the short form of its name",
+}
+
+# (lane 4 borderline read; owner, 2026-10-16)
+PLACE_KEPT = {
+    "way/109499956": "'Fort Pitt Block House', a 1764 blockhouse and museum, never a home; the name matched 'House' by accident (lane 4 borderline read; owner, 2026-10-16)",
 }

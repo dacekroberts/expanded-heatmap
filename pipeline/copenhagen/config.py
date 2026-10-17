@@ -385,6 +385,13 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/11413615410": "'Hare Krishna-templet': Hare Krishna-templet, the body's name and a type word, no place (lane 4 borderline read; owner, 2026-10-16)",
+    "way/29416239": "'Kanonbådsskurene': Kanonbådsskurene as a neighbourhood outline 6 m from the landmark row relation/6881978 of the same name (wikidata): one object, two rows (lane 4 borderline read; owner, 2026-10-16)",
+    "way/974573565": "'Mellemste batardeau': Mellemste batardeau, see Nedre batardeau (lane 4 borderline read; owner, 2026-10-16)",
+    "way/974573564": "'Nedre batardeau': Nedre batardeau, one of three dams of one moat named by position and a type word (Nedre, Mellemste, Øvre), 29 m apart, no wikidata (lane 4 borderline read; owner, 2026-10-16)",
+    "way/666368046": "'Paradeplads': Paradeplads (parade ground), a bare type word on the square inside Kastellet, whose own row is way/175208408 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/974573566": "'Øvre batardeau': Øvre batardeau, see Nedre batardeau (lane 4 borderline read; owner, 2026-10-16)",
+    "way/151042764": "'Codanhus Forplads': Codanhus Forplads, the forecourt of an office block named for the block, no wikidata (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/1043641224": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",

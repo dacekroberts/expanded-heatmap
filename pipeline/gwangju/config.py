@@ -134,6 +134,13 @@ PLACE_REVIEWED = {name: _JUNCTION for name in (
 # customers-only service roads, candidate 1 the play-park and plaza rows
 # (docs/decisions_drafts/search-final.md, "Rule candidates").
 PLACE_DROPPED = {
+    "node/4675256132": "'샛별교회 기도원': 샛별교회 기도원, a church's prayer house; the church itself has no row nearby (lane 4 borderline read; owner, 2026-10-16)",
+    "way/990254298": "'천주교광주대교구': 천주교광주대교구, the archdiocese's seat (landuse=religious) tagged a place of worship; an office, not a church (lane 4 borderline read; owner, 2026-10-16)",
+    "way/473599630": "'솔바람광장': 솔바람광장 (pine-breeze plaza), 91 m from 햇살광장 and 67 m from the park row 하늘체육공원 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/473599626": "'이슬광장': 이슬광장 (dew plaza), 48 m from 햇살광장 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/993969159": "'문화근린공원': 문화근린공원 (culture neighbourhood park), type words only (lane 4 borderline read; owner, 2026-10-16)",
+    "way/961763163": "'생태휴양공원': 생태휴양공원 (eco recreation park), type words only, 156 m from 생태어린이공원 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/842071522": "'역사문화공원': 역사문화공원 (history and culture park), type words only (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/1346388792": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

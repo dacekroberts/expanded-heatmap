@@ -211,6 +211,7 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/181677255": "'Brahma Kumaris': Brahma Kumaris, the body's name alone on a building, no place (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/7147050239": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",

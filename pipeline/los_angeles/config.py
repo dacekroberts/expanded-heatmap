@@ -277,6 +277,8 @@ PLACE_REVIEWED = {
     "The Jim Henson Company Lot": "a historic studio lot with its own article",
 }
 PLACE_DROPPED = {
+    "node/358828771": "'Saint Athanasius Roman Catholic Church': an imported point at the same spot (0 m) as the building St Anthanasius Church (way/328299218), same denomination: one church twice. The point has... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/12087671469": "'Rosemary Chapel': a chapel point (place_of_worship=chapel) 29 m from Little Church of the Flowers (node/12084413563), no entry of its own; the two read as chapels... (lane 4 borderline read; owner, 2026-10-16)",
     "node/4391233440": "'Farmer's Market', a business's own feature under its own name",
     "node/5365944604": "'Truck Scales', a description standing in for a name (owner, 2026-10-13)",
     "way/778092634": "'Lafayette Park Square', a gated community's own way, described",

@@ -248,6 +248,11 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The hand read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/11776519869": "'Tor Nord': a square node named only 'north gate', 215 m from Rudi-Assauer-Platz at the arena; no place in the name and no other tag (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1419642268": "'Kampfbahn Glückauf - Freizeitsportanlage': the leisure sports ground at the Glückauf-Kampfbahn tagged a park, 82 m from the stadium's own row Glückauf Kampfbahn (relation/10394987,... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/1078599106": "'Schloß Horst': the tram stop point of Schloß Horst, 135 m from the station row of the same name (node/10359659188, tagged a subway station); they read as one... (lane 4 borderline read; owner, 2026-10-16)",
+    "node/247191278": "'Haus Oberfeldingen (ehem.)': a manor marked '(ehem.)', former, in its own name, tagged historic=ruins with no entry (lane 4 borderline read; owner, 2026-10-16)",
+    "node/570695608": "'ehemaliger Friedhof Beckhausen': 'former cemetery Beckhausen' by its own name, tagged historic=ruins, no entry (lane 4 borderline read; owner, 2026-10-16)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/5359183650": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

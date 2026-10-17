@@ -182,6 +182,33 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/1137163625": "'大眾爺公廟': 大眾爺公廟 with no place (lane 4 borderline read; owner, 2026-10-16)",
+    "node/2365711827": "'山神廟': 山神廟 with no place, 55 m from 無極殿 (lane 4 borderline read; owner, 2026-10-16)",
+    "node/10128382796": "'山達基台中中心': 山達基台中中心, the body's city centre (lane 4 borderline read; owner, 2026-10-16)",
+    "way/346917179": "'耶穌基督後期聖徒教會台中傳道部': 耶穌基督後期聖徒教會台中傳道部, the body's mission office (lane 4 borderline read; owner, 2026-10-16)",
+    "relation/7052455": "'耶穌基督後期聖徒教會台中傳道部': the same name on a second building 3.5 km away (branch=南台中支聯會, a stake centre) (lane 4 borderline read; owner, 2026-10-16)",
+    "way/388085257": "'慈濟臺中靜思堂': 慈濟臺中靜思堂 (branch=台中分會); the Jing Si Hall call, as in Taipei and Taoyuan (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1550474492": "'天晴廣場': 天晴廣場 (lane 4 borderline read; owner, 2026-10-16)",
+    "node/9979649824": "'姑婆芋展演廣場': 姑婆芋展演廣場, a performance plaza named for a plant (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1163237342": "'平安廣場': 平安廣場 (tagged a park) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/4993787239": "'梨蘋廣場': 梨蘋廣場 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1435167885": "'鑑心廣場': 鑑心廣場 (tagged a park) (lane 4 borderline read; owner, 2026-10-16)",
+    "way/288595699": "'東光園道': a repeat label of way/288595698 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/441786936": "'東光園道': a repeat label of way/288595698 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/774649296": "'東光園道': a repeat label of way/288595698 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/774649301": "'東光園道': a repeat label of way/288595698 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1320735263": "'21號倉庫': 21號倉庫, one of eight numbered warehouses beside the group's own row 臺中驛第二貨物倉庫群（20號倉庫群） relation/18122072 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1320735262": "'22號倉庫': 22號倉庫 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1320735261": "'23號倉庫': 23號倉庫 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1320735260": "'24號倉庫': 24號倉庫 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1320735259": "'25號倉庫': 25號倉庫 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1320735258": "'26號倉庫': 26號倉庫 (lane 4 borderline read; owner, 2026-10-16)",
+    "way/1320731712": "'27號倉庫': 27號倉庫 (lane 4 borderline read; owner, 2026-10-16)",
+    "node/8027290610": "'水圳遺址': 水圳遺址 (canal remains), a type phrase as the whole name (lane 4 borderline read; owner, 2026-10-16)",
+    "node/3262248716": "'流籠頭': 流籠頭 (cable-car head) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/2303353182": "'燒炭窯遺址': 燒炭窯遺址 (charcoal kiln remains) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/10050185988": "'索道遺跡': 索道遺跡 (cableway remains) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/10050198292": "'索道頭': 索道頭 (cableway head), 200 m from 索道遺跡 (lane 4 borderline read; owner, 2026-10-16)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/13529262395": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

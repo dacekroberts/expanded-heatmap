@@ -211,6 +211,7 @@ PLACE_REVIEWED = {
     "Store Street": "a residential street, no business tag",
 }
 PLACE_DROPPED = {
+    "node/30003439": "'Saint Stephens United Reform Church': a point 6 m from the building St Stephen's Presbyterian Church (way/507343647): one church twice under an earlier and a later denomination name;... (lane 4 borderline read; owner, 2026-10-16)",
     "way/213185601": "'O2 Academy Liverpool', a music venue under the business's name; its wikidata is a war memorial's",
     "way/468775286": "'Grassy Area', a description standing in for a name",
     "node/14239583820": "'Green Steps and seating', a description standing in for a name",

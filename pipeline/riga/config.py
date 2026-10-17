@@ -233,6 +233,8 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/12444090872": "'Lucavsala': Lucavsala neighbourhood node 289 m from the island's row way/181478320 (wikidata, wikipedia) (lane 4 borderline read; owner, 2026-10-16)",
+    "node/12444090873": "'Zaķusala': Zaķusala neighbourhood node 60 m from the island's row way/84972900 (wikidata, wikipedia) (lane 4 borderline read; owner, 2026-10-16)",
     # Museum contents with no article of their own (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/91892443": "museum contents stay only with a Wikipedia article of their own (fifteen answers 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",

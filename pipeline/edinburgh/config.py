@@ -164,6 +164,9 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
+    "way/87456580": "'Dalmeny House': still a family's lived-in residence, open only on a few summer days; the home rule's reason applies (lane 4 borderline read; owner, 2026-10-16)",
+    "way/88835539": "'Chapel of Remembrance': the remembrance chapel of Mortonhall Crematorium, 66 m from the main chapel's row Mortonhall Chapel (way/33745877) and 37 m from Pentland Chapel;... (lane 4 borderline read; owner, 2026-10-16)",
+    "way/88835542": "'Pentland Chapel': one of three multifaith chapels of Mortonhall Crematorium, 33 m from the main chapel's row Mortonhall Chapel (way/33745877); no entry of its own;... (lane 4 borderline read; owner, 2026-10-16)",
     "way/454542979": "'Westfield St James Quarter', a shopping mall mapped as a quarter (landuse=retail)",
     "relation/11913072": "'Castlebrae Business Centre', a listed former school under the name of the business centre in it; no article, so no Panama Hotel precedent",
     "node/6285079351": "'Home Farm Cottages', a row of cottages mapped as a hamlet: homes",

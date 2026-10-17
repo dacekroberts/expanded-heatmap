@@ -170,6 +170,7 @@ PLACE_REVIEWED = {
     "Store Street": "an ordinary residential street",
 }
 PLACE_DROPPED = {
+    "way/383833149": "'Gurdwara Singh Sabha': 84 m from Gurdwara Sri Guru Singh Sabha (way/464077441); the names differ by an honorific only, so this reads as one gurdwara in two buildings (lane 4 borderline read; owner, 2026-10-16)",
     "way/468507458": "'Arboretum', a description or a bare type word standing in for a name",
     "node/2168561999": "'Cenotaph', a description or a bare type word standing in for a name",
     "way/1181213030": "'Burial Chapel', a description or a bare type word standing in for a name",
