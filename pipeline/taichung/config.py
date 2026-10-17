@@ -156,7 +156,6 @@ PLACE_RULED_KEPT = {
     "way/1370244827": "'富宇大地公園', a park tied to a housing complex only by its name stays (second batch question g); only an estate operator tag drops one (third list rule 3)",
     "way/763051487": "places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
     "way/283040767": "'天主教立德中心', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
-    "way/227105790": "'學生福音中心', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
     "way/1013434346": "'石頭公園生態休閒農場', a tourism landmark is kept on a Wikidata entry or an article (NOTABLE_ONLY)",
     "node/3933401477": "'鼎財窩', places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
     "way/1305670144": "'外埔環保生態公園（暫時封閉）', a glitched name on a street's only row is not dropped (Onga River, seven rulings entry; no name repair); a place closed for works is kept (owner's two fixes, 2026-10-13)",
@@ -182,6 +181,7 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/227105790": "'學生福音中心', a student gospel centre with no place or church name, the class of the ministry halls dropped; reverses the 2026-10-13 keep (owner, 2026-10-16, deciding a held lane 4 row)",
     "way/1137163625": "'大眾爺公廟': 大眾爺公廟 with no place (lane 4 borderline read; owner, 2026-10-16)",
     "node/2365711827": "'山神廟': 山神廟 with no place, 55 m from 無極殿 (lane 4 borderline read; owner, 2026-10-16)",
     "node/10128382796": "'山達基台中中心': 山達基台中中心, the body's city centre (lane 4 borderline read; owner, 2026-10-16)",

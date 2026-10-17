@@ -94,6 +94,6 @@ None yet.
   data/_search_rollout/lane4/). A item 1 (scope check) merged.
 - Parked: Dos Rios (Sacramento, no station object in the cache), New York's
   ranking warnings, the worship branch tag on Japanese maps (eye-read Tokyo
-  and Osaka first), the per-city sights pass, the nine held lane 4 rows.
+  and Osaka first), the per-city sights pass, the nine held lane 4 rows (four decided 2026-10-16: DECISIONS).
 - Still owed: lane 5 tram re-checks on their dates; agent worktrees to
   remove after the merge (owner approved).

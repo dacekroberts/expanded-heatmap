@@ -158,7 +158,6 @@ PLACE_RULED_KEPT = {
     "way/374064989": "'Ex oratorio del Bandino', A landmark that stands, ruined, abandoned or under a former-use name, stays (owner 2026-10-13: keep all standing abandoned landmarks; third list 11: former in a name is not read as gone)",
     "way/306240095": "'Ex oratorio di Gesù Pellegrino', A landmark that stands, ruined, abandoned or under a former-use name, stays (owner 2026-10-13: keep all standing abandoned landmarks; third list 11: former in a name is not read as gone)",
     "way/478229004": "'Area Cani Paolo Uccello', A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
-    "way/760909959": "'Giardino Interno Via Argin Grosso', A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
     "way/306396530": "'Chiesa di San Giuliano (Firenze)', A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
     "way/484785562": "'Chiesa Evangelica Valdese di Firenze (Holy Trinity Church)', Two real names in one stay as written (owner 2026-10-13, second batch d; fourteen answers 12; candidate 23, no rule)",
     "way/771929814": "'Santo di Stefano in Pane', A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
@@ -183,6 +182,7 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/760909959": "'Giardino Interno Via Argin Grosso', a housing block's inner courtyard tagged a park; reverses the 2026-10-13 keep (owner, 2026-10-16, deciding a held lane 4 row)",
     "node/4777453545": "'Comune di Firenze - Quartiere 3': a district office of the city (amenity=townhall) named 'Comune di Firenze - Quartiere 3'; the entry and article it carries are the district's, not... (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).

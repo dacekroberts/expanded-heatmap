@@ -228,8 +228,6 @@ PLACE_DROPPED = {
     "node/427495963": "'Uni-Mail (P)': the stop Uni-Mail under a platform letter, 7 m from the row Uni-Mail (O) (node/1582369226), which would stay (lane 4 borderline read; owner, 2026-10-16)",
     # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
-    "way/81482906": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
-    "node/1481253448": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
     "node/13266892496": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
     "node/13249887750": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
     "node/12284825261": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
@@ -282,6 +280,8 @@ PLACE_DROPPED = {
 # Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
 # docs/decisions_drafts/search-final.md).
 PLACE_KEPT = {
+    "way/81482906": "'Église néo-apostolique', a church building with a Wikidata entry of its own (Q55380838); reverses the 2026-10-13 drop (owner, 2026-10-16, deciding a held lane 4 row)",
+    "node/1481253448": "'Église adventiste du Septième Jour', named only by its denomination but with a Wikidata entry of its own; reverses the 2026-10-13 drop (owner, 2026-10-16, deciding a held lane 4 row)",
     "way/313487068": "'Banc de la Treille', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "node/2362831289": "'Maison Rousseau et Littérature', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "way/5170038": "'Île Jean-Jacques-Rousseau', owner, 2026-10-13: a public sight the rules pass over for want of a tag",

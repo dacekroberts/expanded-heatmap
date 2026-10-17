@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**235 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-16**
 
 - [The standard map layer stops claiming a map design; the legend follows a wrapped credit; the no-match note names businesses (owner)](#2026-10-16---the-standard-map-layer-stops-claiming-a-map-design-the-legend-follows-a-wrapped-credit-the-no-match-note-names-businesses-owner)
 - [The site is called Global Transit-Business Atlas; city page titles carry it (owner)](#2026-10-16---the-site-is-called-global-transit-business-atlas-city-page-titles-carry-it-owner)
 - [Place search: the post-landing batch, fifteen calls at once (owner)](#2026-10-16---place-search-the-post-landing-batch-fifteen-calls-at-once-owner)
+- [Place search: four of the nine held lane 4 rows decided (owner)](#2026-10-16---place-search-four-of-the-nine-held-lane-4-rows-decided-owner)
 
 **2026-10-14**
 
@@ -9799,3 +9800,27 @@ Lanes 1 to 4 ran as subagents on dd621ee3; their reports and lists are in
   per-city pass; left unbuilt under the feature freeze.
 - **Also in this push:** `search-scope-check` (rule D; the entry above,
   folded from its draft).
+
+### 2026-10-16 - Place search: four of the nine held lane 4 rows decided (owner)
+
+The owner took Cleanup's recommendation on the nine lane 4 rows that
+reversed rulings of 2026-10-13 ("drop #1 and #3, keep #5 and #6; leave the
+other five as ruled").
+
+- **Dropped (were in PLACE_RULED_KEPT):** Taichung 學生福音中心
+  (way/227105790), a student gospel centre with no place or church name, the
+  class of the ministry halls dropped tonight (Bremen's student chaplaincy);
+  Florence Giardino Interno Via Argin Grosso (way/760909959), a housing
+  block's inner courtyard tagged a park, nearer the home rule than a public
+  park.
+- **Kept by id (were in PLACE_DROPPED under the worship ruling):** Geneva's
+  Église adventiste du Septième Jour (node/1481253448) and Église
+  néo-apostolique (way/81482906, Q55380838). Each has a Wikidata entry of
+  its own, the exception the article rule already makes.
+- **Left as ruled on 2026-10-13:** Taoyuan 五酒桶山風景區 (two same-named
+  parks more than 300 m apart are two rows), Monterrey CEDECO (an acronym is
+  still a name), Taoyuan's two 耶穌基督後期聖徒教會 (no entry of their own;
+  the same class was dropped in Aarhus, Bergen and Bremen), Washington's
+  Three Servicemen Statue (the owner's duplicate ruling).
+- Taichung, Florence and Geneva rebuilt and re-rendered; each row checked
+  by OSM id.
