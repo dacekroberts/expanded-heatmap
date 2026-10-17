@@ -1,7 +1,7 @@
 {
   "index": "app/static/places/sacramento.json",
-  "places": 15527,
-  "data_retrieved": "2026-10-13",
+  "places": 15523,
+  "data_retrieved": "2026-10-17",
   "languages": {
     "local": [
       "en"

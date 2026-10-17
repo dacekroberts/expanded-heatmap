@@ -170,8 +170,8 @@ SACRAMENTO_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
 PLACE_AREA = "(id:3606232940)"
-PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
-PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-17.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-17.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
