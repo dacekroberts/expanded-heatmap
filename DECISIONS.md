@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**245 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**246 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-11-04**
+
+- [New York and Dallas take Kansas City's rule; contact screen widened; line loaders raise (owner)](#2026-11-04---new-york-and-dallas-take-kansas-citys-rule-contact-screen-widened-line-loaders-raise-owner)
 
 **2026-11-03**
 
@@ -10129,3 +10133,38 @@ calls were left to the session.
   done from the repository and stay open.
 - **Finding 37:** the task is disabled, its one run was 2026-10-20 and did nothing
   visible, and the owner removes the two notes.
+
+### 2026-11-04 - New York and Dallas take Kansas City's rule; contact screen widened; line loaders raise (owner)
+
+The owner approved findings 4 (the rest), 10 and 11 of `docs/audit_2026-11-03.md`.
+
+- **New York and Dallas:** the residential-unit line of
+  `check_personal_exposure.py` went from 39 to 0 and from 4 to 0, with pins
+  unchanged at 44,360 and 4,197. Rule as Chicago's: upper-cased `looks_personal`
+  and `has_residential_unit`, street without the unit. New York tests `address`
+  and its `unit` column together, as the check does (55 rows of the clean file,
+  52 of the placed file). Dallas uses its `street` column and sets
+  `name_is_address` (12 and 8 rows); its `name_as_address` baseline stays the
+  count of personal legal forms.
+- **Session's call, New York:** one flagged newsstand has a street name with no
+  number, and its unit field holds only a unit word. Chicago's helper exits on
+  that. It shows its category instead, so the pin stays.
+- **Not changed, for the owner:** New York's DCA and NYS food rows also fall back
+  to a legal name, which the check's comment calls absent. Chicago's rule covered
+  that fallback; this approval covered the unit line only. Counts are in the
+  session's report.
+- **Finding 11:** a hit is dropped from the map, as before. National patterns need
+  a trunk 0 or a "+", with separators. Measured on all 237 cities' processed
+  files: 2 rows, both Seoul, the audit's two, so Seoul alone was re-rendered
+  (224,381 to 224,379 pins, storefronts 239,410 to 239,408). That the two are
+  phones rests on their shape. Left out as ambiguous: NNNN-NNNN (7 hits in Dallas
+  and San Francisco) and unbroken runs after a 0 (68 hits in 7 cities, 61 in
+  Mexico City). `check_personal_exposure.py` carries the same alternatives.
+- **Finding 10:** a missing source raises and names the fetch script, or step 1
+  for a `processed/` file. A requested line with no geometry raises, and so does
+  one missing shape_id of a multi-shape line, a step past the finding, since that
+  also loses drawn track. A dry run of all 237 map steps with `render_heatmap`
+  stubbed made 243 loader calls: none had a missing source, a missing line or a
+  warning, before or after the change. No city needed an opt-out; the keyword is
+  `undrawn=` on each loader. This shows the caches of 2026-11-04, not what a
+  refreshed feed will do.

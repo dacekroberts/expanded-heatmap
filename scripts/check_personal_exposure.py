@@ -1041,7 +1041,15 @@ UNIT = re.compile(r"\b(APT|UNIT|STE|SUITE|SPC|#)\b")
 EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 # Conservative on purpose: a 10-digit run with separators, not any long number
 # (a licence number or a street number must not match).
-PHONE = re.compile(r"(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}")
+# The national alternatives repeat map_common._CONTACT_PHONE_NATIONAL (audit
+# finding 11, 2026-11-04), where their measurement is recorded.
+PHONE = re.compile(
+    r"(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}"
+    r"|\(0\d{1,2}\)[ .\-]?\d{3,4}[ .\-]\d{4}(?!\d)"
+    r"|(?<![\d\-./])0\d{1,3}[ .\-]\d{3,4}[ .\-]\d{4}(?![\d\-./])"
+    r"|(?<![\d\-./])0(?:120|570|800)-\d{2,3}-\d{3,4}(?![\d\-./])"
+    r"|\+\d{1,3}[ .\-(]{1,2}\d[\d .\-()]{6,14}\d"
+    r"|(?<![\d\-./])0\d(?:[ .\-]\d{2}){4}(?![\d\-./])")
 # "C/O JOHN SMITH" names a person who is not the business. The separator is
 # MANDATORY: an optional one (`C[/.]?O`) matches the bare abbreviation "CO" and
 # flagged every "SAUSAGE CO" and "TYPEWRITER CO" in the project (567 false

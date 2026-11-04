@@ -3505,7 +3505,34 @@ LEGEND_NO_DATA_ROWS = """
 """
 
 
-def load_line_shapes(gtfs_zip, line_specs, system_name):
+def _require_line_source(path, system_name):
+    """A line source that is not on disk stops the step and names what makes it
+    (audit finding 10, 2026-11-04): raw/ comes from the city's fetch script,
+    processed/ from its step 1."""
+    path = Path(path)
+    if path.exists():
+        return
+    parts = path.parts
+    at = len(parts) - 1 - parts[::-1].index("data") if "data" in parts else None
+    city = parts[at + 1] if at is not None and at + 1 < len(parts) else "<city>"
+    maker = "step1_stations.py" if "processed" in parts else "fetch_sources.py"
+    raise FileNotFoundError(f"No {system_name} line source at {path}. "
+                            f"Run: python pipeline/{city}/{maker}")
+
+
+def _line_without_geometry(key, undrawn, message):
+    """A requested line with no geometry stops the step, unless the city's config
+    lists its key as deliberately undrawn (audit finding 10, 2026-11-04). A map
+    without a line, its label and its legend row must not pass with exit 0.
+    Measured 2026-11-04 on all 237 cities: none relies on the old skip, so no
+    config carries an opt-out yet."""
+    if key not in undrawn:
+        raise ValueError(f"{message} To leave this line off on purpose, name its "
+                         f"key {key!r} in the city's undrawn lines, with a comment.")
+    print(f"Undrawn by the city's config: {message}")
+
+
+def load_line_shapes(gtfs_zip, line_specs, system_name, undrawn=()):
     """Return real line geometries from GTFS shapes.txt: the actual alignment,
     not straight lines between stations.
 
@@ -3522,10 +3549,10 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
     Returns {key: (segments, color, label, end)} where `segments` is a list of
     coordinate lists, longest first, so `segments[0]` is the line's primary
     alignment, which is what the label is anchored to.
+
+    undrawn: keys left off on purpose (see _line_without_geometry).
     """
-    if not gtfs_zip.exists():
-        print(f"No GTFS feed at {gtfs_zip} - skipping the {system_name} line overlay.")
-        return {}
+    _require_line_source(gtfs_zip, system_name)
     with zipfile.ZipFile(gtfs_zip) as z, z.open("shapes.txt") as f:
         shapes = pd.read_csv(f, dtype=str)
     shapes["shape_pt_sequence"] = shapes["shape_pt_sequence"].astype(int)
@@ -3537,8 +3564,8 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
         for sid in shape_ids:
             pts = shapes[shapes["shape_id"] == sid].sort_values("shape_pt_sequence")
             if pts.empty:
-                print(f"WARNING: shape_id {sid!r} for the {label} not in this "
-                      "GTFS feed - check trips.txt for its current most-used shape_id.")
+                _line_without_geometry(key, undrawn, f"shape_id {sid!r} for the {label} not in this "
+                                       "GTFS feed - check trips.txt for its current most-used shape_id.")
                 continue
             # NOT rounded to COORD_DP, unlike every other coordinate in this
             # module, and the reason is licensing rather than precision.
@@ -3589,7 +3616,7 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
     return lines
 
 
-def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
+def load_osm_line_shapes(osm_routes_json, line_specs, system_name, undrawn=()):
     """Return real line geometries from OpenStreetMap route relations, with the
     same return contract as load_line_shapes, for a city whose agency publishes
     no reachable feed.
@@ -3612,10 +3639,7 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
     from shapely.geometry import MultiLineString
     from shapely.ops import linemerge
 
-    if not osm_routes_json.exists():
-        print(f"No OSM route file at {osm_routes_json} - skipping the "
-              f"{system_name} line overlay.")
-        return {}
+    _require_line_source(osm_routes_json, system_name)
     data = json.loads(osm_routes_json.read_text(encoding="utf-8"))
     rels = [e for e in data.get("elements", []) if e.get("type") == "relation"]
     if not rels:
@@ -3634,8 +3658,8 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
         else:
             mine = [r for r in rels if r.get("tags", {}).get("ref") == ref]
         if not mine:
-            print(f"WARNING: OSM ref {ref!r} for the {label} is not in "
-                  f"{osm_routes_json.name} - check the relation's tags.")
+            _line_without_geometry(key, undrawn, f"OSM ref {ref!r} for the {label} is not in "
+                                   f"{osm_routes_json.name} - check the relation's tags.")
             continue
         # ONE ALIGNMENT PER LINE, chosen as the most complete of the direction
         # relations. A route in OSM is usually two relations, one per
@@ -3654,7 +3678,7 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
                 for m in best.get("members", ())
                 if m.get("type") == "way" and m.get("geometry")]
         if not ways:
-            print(f"WARNING: OSM ref {ref!r} ({label}) carried no way geometry.")
+            _line_without_geometry(key, undrawn, f"OSM ref {ref!r} ({label}) carried no way geometry.")
             continue
 
         # Stitch the member ways into as few continuous segments as possible.
@@ -3681,7 +3705,7 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
 
 
 def load_geojson_line_shapes(geojson_path, line_specs, system_name,
-                             key_property="line"):
+                             key_property="line", undrawn=()):
     """Line geometries from a GeoJSON the city's own step 1 produced - the same
     return contract as the GTFS and OSM loaders.
 
@@ -3704,10 +3728,7 @@ def load_geojson_line_shapes(geojson_path, line_specs, system_name,
 
     Returns {key: (segments, color, label, end)}, segments longest first.
     """
-    if not geojson_path.exists():
-        print(f"No line GeoJSON at {geojson_path} - skipping the "
-              f"{system_name} line overlay.")
-        return {}
+    _require_line_source(geojson_path, system_name)
     data = json.loads(geojson_path.read_text(encoding="utf-8"))
     feats = data.get("features") or []
     if not feats:
@@ -3725,8 +3746,8 @@ def load_geojson_line_shapes(geojson_path, line_specs, system_name,
     for key, (source_key, color, label, end) in line_specs.items():
         feat = by_key.get(str(source_key))
         if feat is None:
-            print(f"WARNING: {key_property}={source_key!r} for the {label} is "
-                  f"not in {geojson_path.name} - check step 1's output.")
+            _line_without_geometry(key, undrawn, f"{key_property}={source_key!r} for the {label} is "
+                                   f"not in {geojson_path.name} - check step 1's output.")
             continue
         geom = feat.get("geometry") or {}
         if geom.get("type") == "LineString":
@@ -3734,8 +3755,8 @@ def load_geojson_line_shapes(geojson_path, line_specs, system_name,
         elif geom.get("type") == "MultiLineString":
             parts = geom["coordinates"]
         else:
-            print(f"WARNING: {label} has geometry {geom.get('type')!r}, which "
-                  "is not a line - skipped.")
+            _line_without_geometry(key, undrawn, f"{label} has geometry {geom.get('type')!r}, "
+                                   "which is not a line.")
             continue
         # (lon, lat) -> (lat, lon), which is what the rest of this module and
         # Folium use. NOT rounded to COORD_DP, for the same reason the other two
@@ -3743,7 +3764,7 @@ def load_geojson_line_shapes(geojson_path, line_specs, system_name,
         segments = [[(lat, lon) for lon, lat, *_ in part]
                     for part in parts if len(part) >= 2]
         if not segments:
-            print(f"WARNING: {label} carried no drawable geometry.")
+            _line_without_geometry(key, undrawn, f"{label} carried no drawable geometry.")
             continue
         segments.sort(key=len, reverse=True)
         lines[key] = (segments, color, label, end)
@@ -4496,14 +4517,29 @@ _CONTACT_EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 # Conservative: a 10-digit run with separators, so a licence number or a long
 # street number cannot match.
 _CONTACT_PHONE = re.compile(r"(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}")
+# National formats (audit finding 11, 2026-11-04). Measured on all 237 cities'
+# processed files: these catch 2 rows, both Seoul (2-3-4 with a trunk 0). Each
+# alternative needs a trunk 0 or a "+" and separators, and no digit, dash, dot
+# or slash beside it, so a date or an ID does not match. Measured and left out:
+# NNNN-NNNN (Korea's 1xxx-xxxx; 7 hits, all US names, not phones by context) and
+# unbroken digit runs after a 0 (68 hits in 7 cities, Mexico City's mostly IDs).
+# Re-measure before adding either.
+_CONTACT_PHONE_NATIONAL = re.compile(
+    r"\(0\d{1,2}\)[ .\-]?\d{3,4}[ .\-]\d{4}(?!\d)"          # (02)123-4567
+    r"|(?<![\d\-./])0\d{1,3}[ .\-]\d{3,4}[ .\-]\d{4}(?![\d\-./])"  # 02-123-4567, 010-1234-5678
+    r"|(?<![\d\-./])0(?:120|570|800)-\d{2,3}-\d{3,4}(?![\d\-./])"  # Japan's 0120-123-456
+    r"|\+\d{1,3}[ .\-(]{1,2}\d[\d .\-()]{6,14}\d"           # +33 1 23 45 67 89
+    r"|(?<![\d\-./])0\d(?:[ .\-]\d{2}){4}(?![\d\-./])")     # 01 23 45 67 89
 
 
 def _has_contact_details(name) -> bool:
     if pd.isna(name):
         return False
     text = str(name)
+    rest = _CONTACT_EMAIL.sub("", text)
     return bool(_CONTACT_EMAIL.search(text)
-                or _CONTACT_PHONE.search(_CONTACT_EMAIL.sub("", text)))
+                or _CONTACT_PHONE.search(rest)
+                or _CONTACT_PHONE_NATIONAL.search(rest))
 
 
 # A NAME THAT CANNOT BE SHOWN AS PUBLISHED shows the pin's classification

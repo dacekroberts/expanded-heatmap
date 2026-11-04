@@ -22,7 +22,7 @@
  "new_york": {
   "in_ring": 44360,
   "all": 62441,
-  "map_blob": "5dde8c56e83fe8aa8bc28c54ef7e7095348dfc23"
+  "map_blob": "e878551a9fd1d6ac67b62a64d24865c2107e308e"
  },
  "philadelphia": {
   "in_ring": 4851,
@@ -210,9 +210,9 @@
   "map_blob": "727175869f95f8b76db8dff26d33f08fdf5c9742"
  },
  "seoul": {
-  "in_ring": 224381,
-  "all": 239410,
-  "map_blob": "821e975fb9aaa164e660d9881b3ad16231a6e834"
+  "in_ring": 224379,
+  "all": 239408,
+  "map_blob": "5ec0aad9dd15a9230161dddc9fa5617d7783e0a7"
  },
  "taichung": {
   "in_ring": 12250,
@@ -582,7 +582,7 @@
  "dallas": {
   "in_ring": 4197,
   "all": 15884,
-  "map_blob": "11ae1bccf0b0d0e0bde84f0ab1ac4c91feeb39e7"
+  "map_blob": "2b1b0c1f737b4933b792df90ab2fa6f38ac44295"
  },
  "angers": {
   "in_ring": 1907,
