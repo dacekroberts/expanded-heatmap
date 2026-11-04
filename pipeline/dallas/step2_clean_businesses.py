@@ -31,6 +31,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.dallas import config  # noqa: E402
+from pipeline.residence import has_residential_unit, looks_personal  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront  # noqa: E402
 from pipeline.taxonomies.naics import VALUE_COLUMN  # noqa: E402
 
@@ -109,6 +110,22 @@ def main():
           f"{int(df['name_is_address'].sum()):,} show the address; by type "
           f"{df.loc[df['name_is_address'], 'org_type'].value_counts().to_dict()}")
     emit("name_as_address", int(df["name_is_address"].sum()))
+
+    # A PERSON-LIKE NAME AT A DWELLING UNIT SHOWS THE STREET: Kansas City's rule
+    # (owner, 2026-10-01), as Chicago applies it (2026-11-03), on any legal form.
+    # The unit words are residence.py's, wider than HOME_UNIT's: this tests a
+    # displayed name, not whether the premises stays on the map. The audit of
+    # 2026-11-03 measured 4 such pins (DECISIONS.md). The name_as_address baseline
+    # above stays the count of personal legal forms.
+    person = df["business_name"].str.upper().map(looks_personal)
+    flagged = person & df["address"].map(has_residential_unit)
+    still_unit = df.loc[flagged, "street"].map(has_residential_unit)
+    if still_unit.any():
+        sys.exit(f"{int(still_unit.sum())} flagged row(s) keep a unit word in the street column")
+    df["name_is_address"] = df["name_is_address"] | flagged
+    df.loc[flagged, "business_name"] = df.loc[flagged, "street"]
+    print(f"  person-like name at a dwelling unit: {int(flagged.sum()):,} show the street "
+          "(pins kept)")
 
     out = df.rename(columns={":id": "permit"})[
         ["permit", "business_name", VALUE_COLUMN, "address", "street", "unit", "zip",

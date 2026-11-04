@@ -46,6 +46,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.residence import has_residential_unit, looks_personal  # noqa: E402
 from pipeline.new_york.config import (  # noqa: E402
     AS_OF_DATE,
     BUSINESSES_CLEAN_CSV,
@@ -95,6 +96,19 @@ _STREET_ABBREV = {
 _CORP_SUFFIX = re.compile(
     r"\b(INC|INCORPORATED|LLC|L L C|LLP|PLLC|CORP|CORPORATION|CO|COMPANY|"
     r"LTD|LP|THE|AND|&)\b")
+
+
+# Everything from a dwelling-unit designator on (residence.RESIDENTIAL_UNIT's
+# words), or a bare "#".
+UNIT_TAIL = re.compile(
+    r"[\s,]*(?:\b(?:APT|APARTMENT|UNIT|PH|BSMT|REAR|LOWR|SPC|SPACE|TRLR)\b|#).*$",
+    re.IGNORECASE)
+
+
+def street_only(address):
+    """The street address without its unit, or "" where no street number is left."""
+    s = re.sub(r"\s+", " ", UNIT_TAIL.sub("", str(address or ""))).strip()
+    return s if re.search(r"\d", s) else ""
 
 
 def norm_address(value: str) -> str:
@@ -393,6 +407,27 @@ def main():
           .sort_values(["source", "source_key"])
           .reset_index(drop=True))
     df["record_id"] = df.index.astype(str)
+
+    # --- A person's name shows the street address ----------------------------
+    # Kansas City's rule (owner, 2026-10-01), as Chicago applies it (2026-11-03):
+    # a person-like name at a dwelling unit keeps its pin and shows the street
+    # address without the unit. The unit is tested in `address` and `unit`
+    # together, as scripts/check_personal_exposure.py does. The audit of
+    # 2026-11-03 measured 39 such pins (DECISIONS.md). Runs after the one-row-per-
+    # site key, so no row count depends on it.
+    full_address = df["address"].fillna("") + " " + df["unit"].fillna("")
+    person = df["business_name"].fillna("").astype(str).str.strip().str.upper().map(looks_personal)
+    flagged = person & full_address.map(has_residential_unit)
+    shown = df.loc[flagged, "address"].map(street_only)
+    # One newsstand (2026-11-04) has a street name and no number: it shows its
+    # category, so the pin stays and no bare street stands in for an address.
+    no_number = shown == ""
+    shown[no_number] = df.loc[shown[no_number].index, "business_category"]
+    if (shown.str.strip() == "").any():
+        sys.exit("a flagged row has neither a street number nor a category")
+    df.loc[flagged, "business_name"] = shown
+    print(f"Person-like name at a dwelling unit: {int(flagged.sum()):,} show the street "
+          f"address, {int(no_number.sum()):,} of them the category (pins kept)")
 
     print("\nBy bucket:")
     taxonomy = load_taxonomy_module(TAXONOMY_SYSTEM)
