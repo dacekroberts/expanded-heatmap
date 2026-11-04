@@ -717,6 +717,12 @@ _NOTICES = [
            "The overview map's basemap loads from CARTO, so your browser sends "
            "CARTO your IP address and browser details with each map request; "
            "CARTO processes them for this site. "
+           # Owner, 2026-11-04 (audit finding 8): the other hosts a page contacts on load.
+           # Re-read when a map's or page's outside libraries change.
+           "Opening any page also asks Google Fonts for the site's typeface, and a "
+           "city map loads its tiles from OpenStreetMap and its code from cdnjs, "
+           "jQuery, Bootstrap's CDN and jsDelivr. Each of those services receives "
+           "your IP address, as any website you load does. "
            # P5, approved by the owner 2026-10-11, the Cloudflare clause his of
            # 2026-10-12 (DECISIONS, that date): the Travel view's file host. True
            # only while the host sets no cookie, runs no Worker and keeps no
