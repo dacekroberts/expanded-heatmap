@@ -152,6 +152,10 @@ def _finish(df, source, spec, category, name, address, zip_col, lat, lon,
     return out
 
 
+# DCA rows whose shown name is the legal entity name, because the trade name is blank.
+DCA_LEGAL_NAME_KEYS = set()
+
+
 def load_dohmh(spec):
     """DOHMH restaurant inspections -> one row per establishment (camis)."""
     df = pd.read_csv(spec["file"], dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
@@ -264,6 +268,7 @@ def load_dca(spec):
     # dba_trade_name is blank on ~83% and is used only when present.
     dba = df["dba_trade_name"].fillna("").str.strip()
     name = dba.where(dba != "", df["business_name"])
+    DCA_LEGAL_NAME_KEYS.update(df.loc[dba == "", spec["key_column"]].astype(str).str.strip())
     print(f"  display name: {(dba != '').sum():,} rows use dba_trade_name, "
           f"{(dba == '').sum():,} fall back to business_name (the legal entity name, "
           "never blank in this registry)")
@@ -417,7 +422,10 @@ def main():
     # site key, so no row count depends on it.
     full_address = df["address"].fillna("") + " " + df["unit"].fillna("")
     person = df["business_name"].fillna("").astype(str).str.strip().str.upper().map(looks_personal)
-    flagged = person & full_address.map(has_residential_unit)
+    # Also a person-like legal name shown only because DCA's trade name is blank,
+    # as in Chicago (owner, 2026-11-04; 82 placed pins measured).
+    legal_name = (df["source"] == "dca") & df["source_key"].isin(DCA_LEGAL_NAME_KEYS)
+    flagged = person & (full_address.map(has_residential_unit) | legal_name)
     shown = df.loc[flagged, "address"].map(street_only)
     # One newsstand (2026-11-04) has a street name and no number: it shows its
     # category, so the pin stays and no bare street stands in for an address.

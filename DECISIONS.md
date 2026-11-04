@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**246 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-11-04**
 
 - [New York and Dallas take Kansas City's rule; contact screen widened; line loaders raise (owner)](#2026-11-04---new-york-and-dallas-take-kansas-citys-rule-contact-screen-widened-line-loaders-raise-owner)
+- [New York's person-like legal names take the same rule (owner)](#2026-11-04---new-yorks-person-like-legal-names-take-the-same-rule-owner)
 
 **2026-11-03**
 
@@ -10168,3 +10169,11 @@ The owner approved findings 4 (the rest), 10 and 11 of `docs/audit_2026-11-03.md
   warning, before or after the change. No city needed an opt-out; the keyword is
   `undrawn=` on each loader. This shows the caches of 2026-11-04, not what a
   refreshed feed will do.
+
+### 2026-11-04 - New York's person-like legal names take the same rule (owner)
+
+82 placed DCA pins showed a person-like legal name because the trade name was
+blank. The owner said yes to applying the rule Chicago uses: the pin stays and
+shows the street address without the unit, or its category where no street
+number exists. Company legal names are unchanged. The owner also kept the
+category call for the New York newsstand with no street number.
