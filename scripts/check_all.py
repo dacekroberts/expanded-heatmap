@@ -42,6 +42,7 @@ CHECKS = [
     ["scripts/check_barred_marks.py", "--selftest"],
     ["scripts/check_basemap_key.py"],
     ["scripts/check_category_continuity.py"],
+    ["scripts/check_excluded_premises.py"],
     ["scripts/check_category_continuity.py", "--selftest"],
     ["scripts/check_city_registry.py"],
     ["scripts/check_conflict_markers.py"],

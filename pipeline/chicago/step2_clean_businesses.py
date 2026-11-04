@@ -19,6 +19,7 @@ pipeline/taxonomies/chicago_license.py).
 Run:  python pipeline/chicago/step2_clean_businesses.py
 """
 
+import re
 import sys
 from pathlib import Path
 
@@ -26,6 +27,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.residence import has_residential_unit, looks_personal  # noqa: E402
 from pipeline.chicago.config import (  # noqa: E402
     BUSINESSES_RAW_CSV,
     BUSINESSES_CLEAN_CSV,
@@ -40,6 +42,20 @@ from pipeline.chicago.config import (  # noqa: E402
     SOURCE_ENCODING,
 )
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
+
+
+# Everything from a dwelling-unit designator on (residence.RESIDENTIAL_UNIT's words).
+UNIT_TAIL = re.compile(
+    r"[\s,]*\b(?:APT|APARTMENT|UNIT|PH|BSMT|REAR|LOWR|SPC|SPACE|TRLR)\b.*$",
+    re.IGNORECASE)
+
+
+def street_only(address):
+    """The street address without its unit. Exits rather than show an address with no number."""
+    s = re.sub(r"\s+", " ", UNIT_TAIL.sub("", str(address or ""))).strip()
+    if not re.search(r"\d", s):
+        sys.exit(f"no street number left after removing the unit, in row with address length {len(str(address))}")
+    return s
 
 
 def main():
@@ -105,6 +121,19 @@ def main():
     if blank.any():
         print(f"Filling {blank.sum()} blank doing_business_as_name(s) from legal_name")
         df.loc[blank, "business_name"] = df.loc[blank, "legal_name"]
+
+    # --- A person's name shows the street address --------------------------------
+    # Kansas City's rule (owner, 2026-10-01), as San Francisco applies it: a
+    # person-like name at a dwelling unit keeps its pin and shows the street
+    # address without the unit. Also applied to a person-like legal_name shown
+    # only because the trade name is blank. The audit of 2026-11-03 measured 24
+    # and 3 such pins (DECISIONS.md).
+    names = df["business_name"].fillna("").astype(str).str.strip()
+    person = names.str.upper().map(looks_personal)
+    flagged = person & (df["address"].map(has_residential_unit) | blank)
+    df.loc[flagged, "business_name"] = df.loc[flagged, "address"].map(street_only)
+    print(f"Person-like name at a dwelling unit or from legal_name: {int(flagged.sum()):,} "
+          "show the street address (pins kept)")
 
     keep = ["license_id", "business_name", value_column, "business_activity", "address",
             "latitude", "longitude", "site", "community_area_name"]

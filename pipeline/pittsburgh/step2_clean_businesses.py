@@ -93,7 +93,7 @@ def main():
 
     excluded = kept[kept["reason"] != ""]
     excluded[["id", "business_name", "description", "address", "reason"]].rename(
-        columns={"id": "source_key"}).sort_values(["reason", "business_name", "source_key"]).to_csv(
+        columns={"id": "source_key"}).sort_values(["reason", "business_name", "source_key"]).drop(columns=["business_name", "address"]).to_csv(
         config.EXCLUDED_PREMISES_CSV, index=False, encoding="utf-8")
     print(f"{len(excluded):,} left out -> {config.EXCLUDED_PREMISES_CSV.relative_to(config.ROOT)}")
 

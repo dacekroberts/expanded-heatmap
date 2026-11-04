@@ -132,7 +132,7 @@ def main():
     excluded = df[df["reason"] != ""]
     excluded[["FacilityMasterID", "FacilityName", "premises_type", "address", "reason"]].rename(
         columns={"FacilityMasterID": "source_key", "FacilityName": "business_name"}).sort_values(
-        ["reason", "business_name"]).to_csv(config.EXCLUDED_PREMISES_CSV, index=False,
+        ["reason", "business_name"]).drop(columns=["business_name", "address"]).to_csv(config.EXCLUDED_PREMISES_CSV, index=False,
                                             encoding="utf-8")
     print(f"{len(excluded):,} left out -> "
           f"{config.EXCLUDED_PREMISES_CSV.relative_to(config.ROOT)}")

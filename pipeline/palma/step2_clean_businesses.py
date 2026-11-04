@@ -162,7 +162,7 @@ def main():
     excluded = df[df["reason"] != ""]
     excluded[["Signatura", "Denominació comercial", "Grup", "address", "reason"]].rename(columns={
         "Signatura": "source_key", "Denominació comercial": "business_name",
-        "Grup": "establishment_type"}).sort_values(["reason", "business_name"]).to_csv(
+        "Grup": "establishment_type"}).sort_values(["reason", "business_name"]).drop(columns=["business_name", "address"]).to_csv(
         config.EXCLUDED_PREMISES_CSV, index=False, encoding="utf-8")
     print(f"{len(excluded):,} left out -> {config.EXCLUDED_PREMISES_CSV.relative_to(config.ROOT)}")
     print(excluded["reason"].value_counts().to_string())

@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**244 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-11-03**
+
+- [Excluded-premises files lose names and addresses; Chicago takes Kansas City's rule (owner)](#2026-11-03---excluded-premises-files-lose-names-and-addresses-chicago-takes-kansas-citys-rule-owner)
 
 **2026-10-17**
 
@@ -10074,3 +10078,24 @@ the search box is open.
 - **For later rules:** a map element that is not a transit line (the search
   outline, rings, the basemap) is not measured against line colors unless
   the owner says so for that element.
+
+### 2026-11-03 - Excluded-premises files lose names and addresses; Chicago takes Kansas City's rule (owner)
+
+The read-only audit of 2026-11-03 (`docs/audit_2026-11-03.md`) found two
+defects under the personal-information rule, and the owner said to fix them.
+
+- **Five excluded-premises files** (Kitchener-Waterloo, Ottawa, Palma,
+  Minneapolis, Pittsburgh) carried raw names beside street addresses, written
+  before any name masking and never read by the exposure check. They now hold
+  the register key, the type where one exists and the reason. No page reads
+  these files. `scripts/check_excluded_premises.py` refuses the columns coming
+  back. Whether any given name was a person's was not judged.
+- **Chicago** was published on a rate comparison, and the rule has no rate
+  threshold. It now applies Kansas City's rule, as San Francisco does, and also
+  to a person-like legal_name shown because the trade name is blank: the pin
+  stays and shows the street address without the unit. 35 rows of the full file
+  changed; the exposure check's residential-unit line went from 24 to 0 of
+  11,685 pins, with no pin count moved.
+- **Not changed:** git history still holds the old rows, which is the owner's
+  decision. New York (39) and Dallas (4) stand in the position Chicago did,
+  measured the same day, and come to the owner.

@@ -135,7 +135,7 @@ def main():
     excluded[["HealthFacilityIDNumber", "business_name", "facility_category", "FullAddress",
               "reason"]].rename(columns={"HealthFacilityIDNumber": "source_key",
                                          "FullAddress": "address"}).sort_values(
-        ["reason", "business_name", "source_key"]).to_csv(
+        ["reason", "business_name", "source_key"]).drop(columns=["business_name", "address"]).to_csv(
         config.EXCLUDED_PREMISES_CSV, index=False, encoding="utf-8")
     print(f"{len(excluded):,} left out -> {config.EXCLUDED_PREMISES_CSV.relative_to(config.ROOT)}")
 
