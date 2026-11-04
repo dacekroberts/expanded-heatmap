@@ -44,6 +44,7 @@ from components import (  # noqa: E402
     render_site_notices,
     scroll_table,
     set_base_font,
+    us_dates,
 )
 from station_scope import slug  # noqa: E402
 
@@ -75,7 +76,7 @@ def summary_rows():
             "Business record": c.get("record_kind", "—"),
             "Categories": c.get("categories", "—"),
             "Storefronts near a station": share,
-            "Data date": c.get("data_age", "—"),
+            "Data date": us_dates(c.get("data_age", "—")),
         })
     return rows
 

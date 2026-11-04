@@ -227,7 +227,7 @@ The table's rows are in [`united-states.md`](data_sources/united-states.md)
 and [`canada.md`](data_sources/canada.md).
 
 **The agreements quoted in that table are stored locally**, in
-[`licenses/`](licenses/). That directory's `README.md` is the list, with each
+[`licenses/`](https://github.com/dacekroberts/expanded-heatmap/tree/master/docs/licenses). That directory's `README.md` is the list, with each
 one's source URL, retrieval date and SHA-256; a count kept here went stale as
 the directory grew past twenty. Every one of them is revocable and amendable
 without notice, so the clauses quoted can be checked against the text that
@@ -822,7 +822,7 @@ off-screen". Every rendered map emits, in the map corner:
 > `© OpenStreetMap contributors` — linked to
 > `https://www.openstreetmap.org/copyright`
 
-This comes from Folium's default tile attribution and is present in every
+This comes from `OSM_ATTRIBUTION` in `pipeline/map_common.py` and is present in every
 committed `heatmap.html`. **Do not remove or restyle it away.** If the tile
 provider ever changes, its own attribution replaces this one — it does not
 simply disappear.
@@ -1045,8 +1045,9 @@ should not imply it is only about tiles.
    reverse (one setting per city); **line names are not**, because a standing
    rule requires every drawn line to carry its real public name. See the table
    under the GTFS notes.
-6. **Display the required notices** (above) — the one thing that still blocks
-   publishing, and part of the same app job as surfacing this page.
+6. ~~**Display the required notices** (above) — the one thing that still blocks
+   publishing, and part of the same app job as surfacing this page.~~ **Done:
+   every notice is displayed (see above); struck 2026-11-03.**
 7. **Decide the tile provider deliberately**, given that OSM's tile service is
    explicitly best-effort with no SLA.
 8. Optionally, read the Census geocoder's terms, which are still unread, as

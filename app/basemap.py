@@ -6,7 +6,7 @@ and glyph URL under basemaps.cartocdn.com (carto.com/basemaps/apikey/).
 Streamlit 1.64 sets a key of its own as a deck property but appends nothing to
 any request, and pydeck's `api_keys={"carto": ...}` only sets that same
 property, so the key has to be written into the style itself (DECISIONS,
-2026-10-02, and the drafts file `docs/decisions_drafts/` for this branch).
+2026-10-02).
 
 The style is CARTO's own open-source Positron (`assets/carto_positron/`,
 BSD-3 code, CC BY 4.0 design; its LICENSE.md sits beside it), committed

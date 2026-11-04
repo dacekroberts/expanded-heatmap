@@ -28,7 +28,7 @@ from urllib.parse import quote
 
 import streamlit as st
 
-from cities import CITIES, COUNTRY_ORDER, JAPAN_REGIONS
+from cities import CITIES, COUNTRY_ORDER, JAPAN_REGIONS, REGIONS
 
 # Publishers and other names a heading or notice title uses instead of a city.
 # Each maps to the country it belongs to. Measured 2026-10-01: without these,
@@ -302,7 +302,7 @@ def _label(name):
 def origin_country(origin):
     """The country a back-link origin (`?from=`, components.BACK LINKS)
     implies: a city's own, or a region's when every city in it shares one
-    country (Canada East, Czechia, a Japanese region); None for a region
+    country (Canada East, Czechia, all of Japan, a Japanese region); None for a region
     spanning several (Europe West, Benelux) or an unknown name. A city's
     footer and the Overview's region links carry only `?from=`, and the two
     reference pages opened on the United States from them (review lane 3,
@@ -312,7 +312,9 @@ def origin_country(origin):
     for c in CITIES:
         if c["name"] == origin:
             return c["country"]
-    countries = {c["country"] for c in CITIES if c["region"] == origin}
+    # Through REGIONS, since a composite view (Japan, Canada) is no city's own
+    # c["region"].
+    countries = {c["country"] for r in REGIONS if r["name"] == origin for c in r["cities"]}
     return countries.pop() if len(countries) == 1 else None
 
 
