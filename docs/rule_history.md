@@ -1085,6 +1085,10 @@ A landed row shrinks to one line; the full rows as of 2026-10-04 are at
 | Korea sweep, Daejeon, Gwangju, Gimhae: **LANDED 2026-10-04** | `.claude/worktrees/korea-sweep` (removed) | `korea-sweep-build` (removed) |
 | Tram kit, the ten other T1 cities; gone | `.claude/worktrees/tram-kit` | `worktree-tram-kit` |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build`; delete the branch when the worktree goes |
+| Staging / research; gone by 2026-11-03 | `.claude/worktrees/staging` (removed) | `worktree-staging` (removed) |
+| Place search pilot; landed; gone by 2026-11-03 | `.claude/worktrees/place-search` (removed) | `place-search` (removed) |
+| Basemap pilot; gone by 2026-11-03 | `.claude/worktrees/basemap` (removed) | `basemap` (removed) |
+| Cleanup's held landing (legend dot, Georgia); gone by 2026-11-03 | `.claude/worktrees/review-prep` (removed) | `legend-dot-georgia` (removed) |
 ```
 
 ```text

@@ -14,7 +14,7 @@ items are in [`docs/plan_done/`](docs/plan_done/). An item's detail is in
 [`docs/plan_detail/`](docs/plan_detail/), under the heading its line names.
 
 Rules that still apply: commit after every green step; log every judgment call
-in `DECISIONS.md`; run `python pipeline/drift_check.py <city>` after any
+(`decisions-entry` skill, which says where); run `python pipeline/drift_check.py <city>` after any
 pipeline change.
 
 Detail files: [japan](docs/plan_detail/japan.md),
@@ -41,8 +41,8 @@ re-check that comes late finds the same change.
   "Yamagata stays on the August list"). Before rebuilding, check that the
   edition carries those renewals. city_watch, "Yamagata: the September
   food list".
-- [ ] **São Paulo's Linha 6-Laranja** stays out until full service, and
-  Linha 17 per `docs/recheck_calendar.md`.
+- [ ] **São Paulo's Linha 6-Laranja** stays out until full service. Linha 17
+  is drawn; nothing is open on it.
 - [ ] **The weekly `archive_decisions.py` run** (each Sunday, from
   2026-10-18). process_and_tooling, "Efficiency review follow-ups".
 
@@ -131,8 +131,11 @@ Recorded, not urgent; each is small unless it says otherwise.
 ## Waiting on the owner
 
 - [ ] **Outside actions:** upload `visuals/repo/social-preview.png` (GitHub,
-  Settings, Social preview) and paste the About text; disable the Max
-  account's `place-search-post-landing` task (may fire 2026-10-18 12:05);
+  Settings, Social preview) and paste the About text; delete the two
+  stand-down notes of the Max account's `place-search-post-landing` task,
+  `data/_search_rollout/CANCELLED_place-search-post-landing.md` and the banner
+  on `data/_search_rollout/post_landing_queue.md` (the task is disabled; its one
+  run was 2026-10-20 and did nothing visible);
   Philadelphia's permission request, no response as of 2026-10-17 (silence is not
   consent; `docs/gated_access.md` item 12).
 - [ ] **Deferred under the feature freeze:** the phone legend fold by operator,

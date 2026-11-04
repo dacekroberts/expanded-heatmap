@@ -17,9 +17,8 @@ drafts file, folded 2026-10-12).
 Read that file's newest entries before a batch: the owner's open questions
 there may have been answered since.
 
-**Until place search lands on master, all of this lives on its branch** (the
-worktree `.claude/worktrees/place-search`, branch `place-search`; both once
-named `charming-lumiere-930853`, moved by Cleanup 2026-10-08); a city is added there, never on master.
+Place search landed on master on 2026-10-13 (3e16745d); its pilot worktree
+and branch are gone.
 
 ## The rollout: the cheap path (the owner's ruling, 2026-10-12)
 

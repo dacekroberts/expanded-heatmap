@@ -67,18 +67,14 @@ Git refuses to check out `master` in two worktrees at once, so each is on its
 own branch and merges back: the merge is an explicit review step instead of an
 implicit race.
 
-**The standing assignments** - current state (2026-10-08), so update this
+**The standing assignments** - current state (2026-11-03), so update this
 when one changes. Retired rows move to `docs/rule_history.md`, `#sr-registry`.
 
 | Role | Worktree | Branch |
 |---|---|---|
-| Staging / research | `.claude/worktrees/staging` | `worktree-staging` |
 | Cleanup / audit | `.claude/worktrees/cleanup` | `worktree-cleanup` |
 | Visuals (downstream) | `.claude/worktrees/visual` | `visual-handoff`, never merged |
 | Analytics (downstream) | `.claude/worktrees/analytics` | `analytics-handoff` |
-| Place search pilot; never removed before it lands | `.claude/worktrees/place-search` | `place-search` |
-| Basemap pilot | `.claude/worktrees/basemap` | `basemap` |
-| Cleanup's held landing (legend dot, Georgia) | `.claude/worktrees/review-prep` | `legend-dot-georgia` |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build`; delete the branch when the worktree goes |
 
 A build worktree's `data/` and `.venv-lean` are junctions to the main

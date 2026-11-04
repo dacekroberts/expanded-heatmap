@@ -102,10 +102,10 @@ a registry of taxonomy modules. Each module exposes `classify(row)`,
 `FIELD_LABEL`, `VALUE_COLUMN` and `legend_label(bucket)`. Step 2 filters
 with `filter_to_storefront()` and the map groups, labels and builds its
 legend through the module, so adding a taxonomy - including a non-US one
-such as NACE - means adding one module. `naics.py` is complete. The two
-local modules `nyc_dca` and `phl_licensetype` are **skeletons**: they map
-only values seen in sample rows and need a full `SELECT DISTINCT` pull of the
-city's classification field before use. `chicago_license` is complete; it is
+such as NACE - means adding one module. `naics.py` is complete, and so is
+`phl_licensetype`, Philadelphia's live taxonomy. New York's is `new_york`,
+which dispatches over four registries; the `nyc_dca` skeleton was retired into
+it. `chicago_license` is complete; it is
 the model for a taxonomy that classifies some values by a second field
 (`EXTRA_COLUMNS`).
 
@@ -274,7 +274,7 @@ Cities built and running end to end (pipeline, map, app page):
   downloaded alongside the District's own boundary.
 
 - **Buffalo** - NFTA Metro Rail, one light-rail line, every station inside
-  the city; held for the batch review. New York's multi-source shape at one
+  the city. New York's multi-source shape at one
   city's scale: the City's licences (counted only while unexpired, since the
   file marks every licence Active), the State's food-store and salon
   registers scoped by point-in-boundary, and grocers both list merged on
@@ -283,15 +283,15 @@ Cities built and running end to end (pipeline, map, app page):
   feed licence bars its marks "in association with the Data"; the boundary
   is the Census place polygon, because the City's layer is Erie County's work.
 - **Sacramento** - SacRT's Blue and Gold light-rail lines, stations inside
-  the City; held for the batch review. The City's business-tax register has
+  the City. The City's business-tax register has
   no geometry, so storefronts are placed by the Census geocoder and scoped by
   the City's polygon, because the register's city is a postal one. A name
   that reads as a person's shows the business description, because the
-  register records no legal form (owner). The Green Line is suspended and
-  drawn as the service runs; OSM lags SacRT on two Blue stations, one
+  register records no legal form (owner). The Green Line reopened on 2026-10-12
+  and stays undrawn, at every 30 minutes, short of the 15-minute test; OSM lags SacRT on two Blue stations, one
   unnamed and one (Dos Rios) placed from Wikidata until OSM maps it.
 - **Houston** - METRORail's Red, Green and Purple light-rail lines, all 40
-  stations inside the City; held for the batch review. The Texas
+  stations inside the City. The Texas
   Comptroller's sales-tax permits have no geometry, so storefronts are placed
   by an address join to the City's Site Addresses and the Census geocoder,
   and scoped by TIGER's place polygon (OSM's lacks annexed land). The permit
@@ -301,7 +301,7 @@ Cities built and running end to end (pipeline, map, app page):
   Rail from OSM: METRO's data agreement is kept out of the build.
 
 - **Seattle (Regional)** - Link light rail's 1 and 2 Lines, every station, in
-  eleven cities across King and Snohomish Counties; held for the batch review.
+  eleven cities across King and Snohomish Counties.
   **The first page built from five publishers, each used only in the places it
   covers**: Seattle's and Bellevue's own license registers (NAICS, through the
   shared module), King County's food inspections placed by parcel through the
@@ -317,8 +317,8 @@ Cities built and running end to end (pipeline, map, app page):
   Bellevue marks sole proprietorships. The food registers' workplace
   cafeterias, vending, hotel kitchens and clubs are left out by name, as in
   Minneapolis.
-- **Tbilisi** - the Tbilisi Metro's two lines, every station; held for the
-  batch review. **Georgia's first city**, in Europe East since 2026-10-08
+- **Tbilisi** - the Tbilisi Metro's two lines, every station.
+  **Georgia's first city**, in Europe East since 2026-10-08
   (owner; West Asia, its one-city view of 2026-10-02, retired).
   Businesses from one national source, Geostat's Statistical Business
   Register, filtered to the FACTUAL address in the city: one row per entity,

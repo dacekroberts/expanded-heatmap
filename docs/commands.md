@@ -38,7 +38,7 @@ python pipeline/drift_check.py --render-only [--jobs N] # map step only, against
 #   a run over EVERY city (either mode) whose steps all ran and whose row counts held writes app/global_sweep.json, the front page's "Last Global Sweep" date: commit it with the maps
 python scripts/drift_check_selftest.py                  # touches nothing
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims live
-python scripts/check_all.py [--list]                    # every pass/fail check, ~30s; the pre-push hook runs it
+python scripts/check_all.py [--list]                    # the pass/fail checks, ~30s; pre-push runs it; its docstring names what is left out
 git config core.hooksPath .githooks                     # once per clone: turns that hook on
 python scripts/check_provenance.py [--strict]           # after adding a city
 python scripts/check_no_fetch_in_steps.py [--list]
@@ -105,3 +105,54 @@ and `python scripts/check_word_budgets.py [--report]`.
 Session usage by context size: `python scripts/context_usage.py [--since YYYY-MM-DD] [--until YYYY-MM-DD] [--top N]`;
 the datasets behind the owner's "Claude usage review" page: `python scripts/usage_report.py --out <dir> [--prefix <folder prefix>]`.
 Authorship marks: `python scripts/fingerprint.py init|table|coverage|verify <file or URL>` (the key lives in `~/.ehm/`, never in the repo).
+
+## Scripts with no line above until 2026-11-03
+
+The required checks, the maintenance scripts and the one-off city and screening
+scripts alike. Each script's docstring has the arguments where this shows none.
+
+```bash
+python scripts/archive_decisions_selftest.py            # Watch the weekly DECISIONS archive survive a merge - and watch it fail without the guard.
+python scripts/category_continuity_table.py             # The cross-city category table that scripts/check_category_continuity.py runs.
+python scripts/check_barred_marks.py                    # No barred mark on any surface the app renders.
+python scripts/check_basemap_key.py                     # Does every CARTO address in the macro map's style carry the key?
+python scripts/check_category_continuity.py             # Fail when a taxonomy reaches a different answer from the cross-city rules.
+python scripts/check_excluded_premises.py               # Refuse a committed excluded-premises file that carries a name or an address.
+python scripts/check_macro_facts.py                     # The macro map's per-city facts: the completeness tier each dot is coloured by,
+python scripts/check_macro_labels.py [--width 375] [--verbose] # Check the macro map's city labels for collisions, covered markers and clipping.
+scripts/check_map_attribution.js                        # browser, javascript tool: the basemap credit is visible; more than one viewport height
+scripts/check_map_labels.js                             # browser, javascript tool: the map's labels
+scripts/check_map_view.js                               # browser, javascript tool: the map's opening zoom, live as well as locally
+python scripts/check_master_list_counts.py              # Every count docs/city_master_list.md states agrees with the rows it counts,
+python scripts/check_master_list_counts_selftest.py     # Watch scripts/check_master_list_counts.py fail, twenty-six ways, and its
+python scripts/check_personal_exposure.py <city_slug>   # Personal-data exposure check for a city's rendered map. Read-only.
+python scripts/check_place_unopened.py                  # Place search: the watch file of stations OpenStreetMap draws as not yet
+python scripts/check_privacy_verdicts.py                # Every built city has a recorded privacy verdict.
+python scripts/check_ring_shares.py                     # Each city's in-ring share - the storefronts inside its station rings, out of all
+python scripts/check_stray_bullets.py                   # Find a dash that the app will draw as a stray bullet.
+python scripts/check_stray_bullets_selftest.py          # Watch scripts/check_stray_bullets.py catch a stray bullet, and pass real lists.
+python scripts/check_theme_sync.py                      # Verify `.streamlit/config.toml` agrees with `pipeline/theme.py`.
+python scripts/efficiency_metrics.py                    # Re-measure the efficiency review's numbers for a window, so its changes can be judged.
+python scripts/france_excluded_section.py le_mans=13.0 reims=11.9 ... [--write] # Write the France tram batch's section of docs/excluded_categories.md: one
+python scripts/france_fill_build_day.py <slug> [<slug> ...] # Fill a French batch city's build-day config values from its FRESH feed.
+python scripts/france_inconsistency_rows.py <slug> [...] # Write a French tram city's rows into docs/map_inconsistencies.md's four
+python scripts/france_page.py <slug> [<slug> ...]       # Write a French tram city's app page from the owner's approved template
+python scripts/france_source_rows.py <slug> [...]       # Write a French tram city's rows into docs/data_sources/france.md - its
+python scripts/japan_census_control.py [city ...]       # The Economic Census join control for the Japanese cities (PLAN, "Join
+python scripts/japan_ward_table.py                      # The Japan list: every Japanese city, and every ward, from the data on disk.
+python scripts/latvia_register_control.py               # The control for `pipeline/countries/latvia_register.py`: Riga's output must
+python scripts/line_colour_search.py <city> [--near-m 500] [--near-de 18] # Choose a city's line colours: the SPATIAL form of the rule Kobe, Osaka,
+python scripts/osm_tram_control.py                      # The control for `pipeline/osm_tram.py`: run it on Aarhus's cache and
+python scripts/probe_geodata.py targets.tsv             # Probe a candidate geodata or tabular endpoint and say what it ACTUALLY is.
+scripts/profile_zoom_page.js                            # page half of scripts/profile_zoom.mjs
+scripts/proposals_page.html                             # the page scripts/proposals_page.py fills; not run
+python scripts/rank_canada_storefront_density.py [--cache DIR] # Rank Canada's candidate cities on STOREFRONT density, comparably.
+python scripts/readme_cities.py                         # README's "Mapped cities" list, generated from app/cities.py.
+python scripts/ring_rules_table.py                      # Every built city's ring edges and in-ring share, as docs/ring_rules.md (owner, 2026-09-29:
+python scripts/scaffold_france_batch.py --dry-run       # Scaffold the France tram batch - the 20 French T1 cities - from the screen's
+python scripts/screen_cnefe.py data/rio_de_janeiro/raw/3304557_RIO_DE_JANEIRO.zip # Screen a Brazilian city from IBGE's CNEFE 2022, the census address file:
+python scripts/screen_japan_join.py minato              # Join a Japanese municipality's food-business permits to MLIT's 位置参照情報
+python scripts/screen_rail.py feeds.tsv                 # Screen candidate cities on rail, by reading their real GTFS `routes.txt`.
+python scripts/screen_stop_spacing.py                   # Measure tram / light-rail stop density for a city, against two CONTROLS.
+python scripts/screen_taiwan_join.py taipei             # Join Taiwan's business tax register to a city's door-plate coordinate file,
+```

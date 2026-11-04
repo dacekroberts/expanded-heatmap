@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**244 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**245 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-11-03**
 
 - [Excluded-premises files lose names and addresses; Chicago takes Kansas City's rule (owner)](#2026-11-03---excluded-premises-files-lose-names-and-addresses-chicago-takes-kansas-citys-rule-owner)
+- [Audit fixes: the judgment calls in them (owner approved the list)](#2026-11-03---audit-fixes-the-judgment-calls-in-them-owner-approved-the-list)
 
 **2026-10-17**
 
@@ -10099,3 +10100,32 @@ defects under the personal-information rule, and the owner said to fix them.
 - **Not changed:** git history still holds the old rows, which is the owner's
   decision. New York (39) and Dallas (4) stand in the position Chicago did,
   measured the same day, and come to the owner.
+
+### 2026-11-03 - Audit fixes: the judgment calls in them (owner approved the list)
+
+The owner approved fixing listed findings of `docs/audit_2026-11-03.md`. These
+calls were left to the session.
+
+- **Finding 15, `check_macro_facts.py`:** a skipped count prints SKIPPED as the
+  last line, and the check still exits 0. Failing it would refuse every push
+  from a checkout with no `data/`. The audit offered either; the owner can make
+  it a failure.
+- **Finding 1, `drift_check --changed`:** a changed taxonomy no city reaches now
+  exits 1 rather than choosing the full sweep, so a new unwired module asks a
+  question. All taxonomy modules on master reach a city.
+- **Finding 9:** the affected set is computed from import statements, with no
+  dependants table to keep current. A module name built at run time is not seen,
+  apart from TAXONOMY_SYSTEM; the full sweep remains the pre-deploy gate.
+- **Finding 12:** the guard sits in `build_city()`, so the by-hand
+  `check_place_index_drift.py` and `place_extract_compare.py` also stop on a
+  missing stations file rather than report a false difference.
+- **Finding 14, the pre-push hook:** it counts untracked files as dirty, and
+  refuses any pushed ref that is not HEAD, including an older commit of the same
+  branch. Deleting a remote ref passes.
+- **Finding 24:** every missing script got a line, one-offs included, which makes
+  the claim true and leaves `CLAUDE.md`'s sentence alone. No check keeps it true.
+- **Finding 7:** Osaka, Sacramento and São Paulo's Linha 17 are struck. The
+  other rows marked Now (Hiroshima, Los Angeles, San Francisco) were not shown
+  done from the repository and stay open.
+- **Finding 37:** the task is disabled, its one run was 2026-10-20 and did nothing
+  visible, and the owner removes the two notes.
