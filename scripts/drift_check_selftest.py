@@ -106,6 +106,43 @@ def main():
         finally:
             drift_check.ROOT = real_root
 
+    # --changed reaches a city through imports and through an imported
+    # TAXONOMY_SYSTEM (audit of 2026-11-03, findings 1 and 9).
+    all_cities = drift_check.cities_with_pipelines()
+    for path, want in (
+            ("pipeline/taxonomies/scian.py", {"mexico_city", "guadalajara", "monterrey"}),
+            ("pipeline/taxonomies/naics.py", {"seattle", "vancouver", "los_angeles", "tacoma"}),
+            ("pipeline/new_york/step2_clean_businesses.py", {"new_york", "seattle", "buffalo"}),
+            ("pipeline/bucharest/step2_clean_businesses.py", {"bucharest", "cluj_napoca"}),
+            ("pipeline/kansas_city/step2_clean_businesses.py", {"kansas_city", "tacoma"}),
+            ("pipeline/riga/config.py", {"riga", "daugavpils"})):
+        got, _ = drift_check.cities_affected([path], all_cities)
+        expect(f"--changed: {path} reaches {sorted(want)}", want <= got, sorted(got))
+    got, _ = drift_check.cities_affected(["pipeline/guadalajara/step1_stations.py"], all_cities)
+    expect("--changed: a city's own step stays that city alone", got == {"guadalajara"}, sorted(got))
+    got, why = drift_check.cities_affected(["pipeline/taxonomies/no_such_module.py"], all_cities)
+    expect("--changed: a taxonomy no city reaches says so",
+           not got and why[0].endswith(drift_check.NO_CITY), why)
+    expect("--changed: Mexico's imported TAXONOMY_SYSTEM resolves",
+           drift_check.taxonomies_of("guadalajara") == {"scian"}, drift_check.taxonomies_of("guadalajara"))
+    expect("--changed: both arms of a conditional TAXONOMY_SYSTEM count",
+           drift_check.taxonomies_of("los_angeles") == {"los_angeles", "naics"},
+           drift_check.taxonomies_of("los_angeles"))
+    blind = [c for c in all_cities if not drift_check.taxonomies_of(c)]
+    expect("live tree: every city's TAXONOMY_SYSTEM resolves from source", not blind, blind)
+
+    # A baseline's every figure going silent fails (finding 28).
+    real_load = drift_check.baseline.load
+    drift_check.baseline.load = lambda city: {"stations": 3}
+    try:
+        ok, lines = drift_check.baseline.compare("anywhere", {})
+        expect("baseline: a stored baseline with nothing emitted fails", not ok, lines)
+        drift_check.baseline.load = lambda city: None
+        ok, lines = drift_check.baseline.compare("anywhere", {})
+        expect("baseline: no baseline and nothing emitted stays a reported gap", ok, lines)
+    finally:
+        drift_check.baseline.load = real_load
+
     # Positive control: the live tree. Every city has exactly one map step.
     bad = [c for c in drift_check.cities_with_pipelines() if len(drift_check.map_steps(c)) != 1]
     expect("live tree: every city has exactly one step*_map.py", not bad, ", ".join(bad))

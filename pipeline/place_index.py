@@ -552,9 +552,16 @@ def city_twins(config, index):
 
 def build_city(config):
     """(index, report) for a city's config, exactly as run() builds it, writing
-    nothing; it exits naming the fetch script when a cache is missing."""
+    nothing; it exits naming the fetch script when a cache is missing, and
+    step 1 when the stations file is. Without that file the index would build
+    with no station guard and no coverage check, then overwrite the committed
+    files with exit 0 (audit of 2026-11-03, finding 12); map_stations() still
+    answers None for the read-only checks."""
     import sys
     slug, name = city_of(config)
+    stations_csv = getattr(config, "STATIONS_CSV", None)
+    if stations_csv is not None and not Path(stations_csv).is_file():
+        sys.exit(f"Missing {stations_csv}.\nRun: python pipeline/{slug}/step1_stations.py")
     if not config.PLACE_OSM_JSON.exists():
         sys.exit(f"Missing {config.PLACE_OSM_JSON}.\nRun: python pipeline/place_index_fetch.py {slug}")
     fold = config.PLACE_FOLD

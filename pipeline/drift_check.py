@@ -48,15 +48,20 @@ figure as recorded.
 that is supposed to run after every pipeline change, and the project keeps
 adding cities. It maps changed files to the cities they can actually reach:
 
-    pipeline/<city>/**        -> that city
+    pipeline/<city>/**        -> that city, and every city whose imports reach
+                                 the changed module
     outputs/<city>/**         -> that city
-    pipeline/taxonomies/<t>.py-> every city whose config sets
-                                 TAXONOMY_SYSTEM = "<t>"
+    pipeline/taxonomies/<t>.py-> every city whose imports or TAXONOMY_SYSTEM
+                                 reach it (naics.py through vancouver.py, say);
+                                 a taxonomy no city reaches is an ERROR, exit 1
     anything else in pipeline/-> every city (map_common.py, theme.py and
                                  taxonomies/__init__.py are shared by all)
 
 It is deliberately conservative: a shared file means the full sweep, because
 a wrong "nothing to do" here is invisible until a deploy shows stale output.
+Reach comes from the import statements of every file in a city's folder, walked
+through pipeline/, plus the module its TAXONOMY_SYSTEM names. A name built at
+run time is not seen, other than that one.
 --changed is the fast gate for ordinary work; the unfiltered sweep is still
 the one to run before a deploy or when recording a baseline in DECISIONS.md.
 
@@ -91,6 +96,7 @@ takes no index lock. Opt-in rather than default because four cities' step 2
 means four geopandas datasets resident at once.
 """
 
+import ast
 import concurrent.futures
 import datetime
 import io
@@ -131,13 +137,147 @@ def cities_with_pipelines():
     )
 
 
-def taxonomy_of(city: str) -> str | None:
-    """Which taxonomy system a city's config declares, or None."""
+_INDEX, _REACH = {}, {}   # per ROOT: a run reads each tree once
+
+
+def module_index() -> dict:
+    """Every module under pipeline/, dotted name -> file."""
+    if ROOT in _INDEX:
+        return _INDEX[ROOT]
+    index = _INDEX[ROOT] = {}
+    for p in sorted((ROOT / "pipeline").rglob("*.py")):
+        parts = list(p.relative_to(ROOT).with_suffix("").parts)
+        if parts[-1] == "__init__":
+            parts = parts[:-1]
+        index[".".join(parts)] = p
+    return index
+
+
+def _parse(path: Path):
+    return ast.parse(path.read_text(encoding="utf-8"))
+
+
+def imports_of(name: str, path: Path, index: dict) -> set:
+    """The pipeline modules a file's import statements name, at any depth of
+    the file. A bare name that is a sibling file resolves in the file's own
+    folder, since a step run as a script has that folder on sys.path."""
+    package = ".".join(path.relative_to(ROOT).parent.parts)
+    found = set()
+
+    def add(dotted):
+        parts = dotted.split(".")
+        for i in range(1, len(parts) + 1):
+            prefix = ".".join(parts[:i])
+            if prefix in index:
+                found.add(prefix)
+
+    def canonical(dotted):
+        sibling = f"{package}.{dotted.split('.')[0]}"
+        return f"{package}.{dotted}" if sibling in index else dotted
+
+    for node in ast.walk(_parse(path)):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                add(canonical(alias.name))
+        elif isinstance(node, ast.ImportFrom):
+            if node.level:
+                keep = package.split(".")[:len(package.split(".")) - (node.level - 1)]
+                base = ".".join(keep + ([node.module] if node.module else []))
+            else:
+                base = canonical(node.module or "")
+            add(base)
+            for alias in node.names:
+                add(f"{base}.{alias.name}")
+    found.discard(name)
+    return found
+
+
+def _constant_in(path: Path, const: str, index: dict, seen: set) -> set:
+    """A module-level string constant's possible values: both arms of a
+    conditional (Los Angeles switches on REGIONAL), following the imports that
+    bring it in (Mexico's cities import theirs from pipeline/countries)."""
+    if path in seen:
+        return set()
+    seen.add(path)
+    tree = _parse(path)
+    modules = {}
+    for node in tree.body:
+        if isinstance(node, ast.Import):
+            for a in node.names:
+                modules[a.asname or a.name] = a.name
+        elif isinstance(node, ast.ImportFrom) and not node.level and node.module:
+            for a in node.names:
+                if f"{node.module}.{a.name}" in index:
+                    modules[a.asname or a.name] = f"{node.module}.{a.name}"
+    def values(v):
+        if isinstance(v, ast.Constant) and isinstance(v.value, str):
+            return {v.value}
+        if isinstance(v, ast.IfExp):
+            return values(v.body) | values(v.orelse)
+        if (isinstance(v, ast.Attribute) and isinstance(v.value, ast.Name)
+                and modules.get(v.value.id) in index):
+            return _constant_in(index[modules[v.value.id]], v.attr, index, seen)
+        return set()
+
+    found = set()
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == const for t in node.targets):
+            found = values(node.value)
+        elif isinstance(node, ast.ImportFrom) and not node.level and node.module in index:
+            for a in node.names:
+                if a.name == "*" or (a.asname or a.name) == const:
+                    source = const if a.name == "*" else a.name
+                    found = _constant_in(index[node.module], source, index, seen) or found
+    return found
+
+
+def taxonomies_of(city: str) -> set:
+    """The taxonomy systems a city's config can declare. Reads the source and
+    never imports it, so a config's own imports cannot run here."""
     config = ROOT / "pipeline" / city / "config.py"
     if not config.exists():
-        return None
-    m = re.search(r'^TAXONOMY_SYSTEM\s*=\s*["\']([^"\']+)', config.read_text(encoding="utf-8"), re.M)
-    return m.group(1) if m else None
+        return set()
+    return _constant_in(config, "TAXONOMY_SYSTEM", module_index(), set())
+
+
+def taxonomy_modules(index: dict) -> dict:
+    """pipeline/taxonomies/__init__.py's TAXONOMY_MODULES, read from source."""
+    path = index.get("pipeline.taxonomies")
+    if path is None:
+        return {}
+    for node in _parse(path).body:
+        if isinstance(node, ast.Assign) and getattr(node.targets[0], "id", "") == "TAXONOMY_MODULES":
+            return ast.literal_eval(node.value)
+    return {}
+
+
+def city_reach(all_cities) -> dict:
+    """{city: every pipeline module its files import, transitively, with the
+    module its TAXONOMY_SYSTEM names}. The taxonomies package loads that one
+    module by name, which no import statement shows."""
+    key = (ROOT, tuple(all_cities))
+    if key in _REACH:
+        return _REACH[key]
+    index = module_index()
+    systems = taxonomy_modules(index)
+    edges = {name: imports_of(name, path, index) for name, path in index.items()}
+    reach = {}
+    for city in all_cities:
+        prefix = f"pipeline.{city}."
+        todo = [n for n in index if n.startswith(prefix)]
+        todo += [systems.get(s, f"pipeline.taxonomies.{s}") for s in taxonomies_of(city)]
+        seen = set()
+        while todo:
+            name = todo.pop()
+            if name not in seen and name in index:
+                seen.add(name)
+                todo += edges[name]
+        reach[city] = seen
+    _REACH[key] = reach
+    return reach
+
+
+NO_CITY = "no city reaches it"
 
 
 def changed_paths(ref: str) -> list[str]:
@@ -150,6 +290,14 @@ def changed_paths(ref: str) -> list[str]:
 def cities_affected(paths, all_cities) -> tuple[set, list]:
     """Map changed paths to the cities they can reach. Returns (cities, why)."""
     affected, why = set(), []
+    reach = None
+
+    def reaching(path):
+        nonlocal reach
+        reach = city_reach(all_cities) if reach is None else reach
+        module = path.removesuffix(".py").replace("/", ".")
+        return {c for c in all_cities if module in reach[c]}
+
     for path in paths:
         parts = path.split("/")
         if parts[0] == "outputs" and len(parts) > 1 and parts[1] in all_cities:
@@ -158,13 +306,13 @@ def cities_affected(paths, all_cities) -> tuple[set, list]:
         elif parts[0] != "pipeline" or len(parts) < 2:
             continue
         elif parts[1] in all_cities:
-            affected.add(parts[1])
-            why.append(f"{path} -> {parts[1]}")
-        elif parts[1] == "taxonomies" and len(parts) > 2 and parts[2] != "__init__.py":
-            system = parts[2].removesuffix(".py")
-            hit = {c for c in all_cities if taxonomy_of(c) == system}
+            hit = {parts[1]} | (reaching(path) if path.endswith(".py") else set())
             affected |= hit
-            why.append(f"{path} -> {', '.join(sorted(hit)) or 'no city uses it'}")
+            why.append(f"{path} -> {', '.join(sorted(hit))}")
+        elif parts[1] == "taxonomies" and len(parts) > 2 and parts[2] != "__init__.py":
+            hit = reaching(path)
+            affected |= hit
+            why.append(f"{path} -> {', '.join(sorted(hit)) or NO_CITY}")
         elif parts[-1] == "drift_check.py":
             why.append(f"{path} -> (this script; affects no output)")
         else:
@@ -393,6 +541,11 @@ def resolve_changed(ref: str, all_cities) -> list:
     cities, why = cities_affected(paths, all_cities)
     for line in why:
         print(f"  {line}")
+    if any(line.endswith(NO_CITY) for line in why):
+        # Either a dead module or a reach this walk failed to see. A pass here
+        # would be the false green this gate exists to prevent.
+        sys.exit("\nERROR: a changed taxonomy module reaches no city, so --changed cannot "
+                 "say what it affects. Wire it to a city, remove it, or run the full sweep.")
     return sorted(cities)
 
 

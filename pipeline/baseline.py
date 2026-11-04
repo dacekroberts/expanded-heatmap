@@ -86,11 +86,15 @@ def save(city: str, counts: dict) -> Path:
 
 def compare(city: str, measured: dict):
     """Return (ok, lines_to_print). A missing baseline is reported, not failed:
-    a city that has never emitted one is a gap to fill, not a regression."""
+    a city that has never emitted one is a gap to fill, not a regression. A
+    stored baseline with nothing emitted fails: every figure has gone."""
+    stored = load(city)
     if not measured:
+        if stored:
+            return False, [f"  BASELINE FIGURE(S) NO LONGER EMITTED: {city} emits none, "
+                           f"and outputs/{city}/baseline.json holds {len(stored)}"]
         return True, [f"  baseline: {city} emits none "
                       f"(add pipeline.baseline.emit() calls to its steps)"]
-    stored = load(city)
     if stored is None:
         return True, [f"  baseline: none recorded for {city} yet - run "
                       f"drift_check --update-baseline to write "
