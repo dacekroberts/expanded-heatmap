@@ -265,6 +265,9 @@ def main():
             problems.append(f"{FACTS_JSON.relative_to(ROOT)} is missing: run with --write")
         for name in {c["name"] for c in CITIES} - set(stored):
             problems.append(f"{name}: no storefront count in {FACTS_JSON.name}")
+        for name in sorted(set(stored) - {c["name"] for c in CITIES}):
+            problems.append(f"{name}: {FACTS_JSON.name} holds a storefront count, but no city "
+                            f"has that name - run with --write")
         for name, n in counts.items():
             if name in stored and stored[name] != n:
                 problems.append(f"{name}: {FACTS_JSON.name} says {stored[name]:,} storefronts, "
@@ -280,6 +283,11 @@ def main():
     print(f"OK - {len(CITIES)} cities: " + ", ".join(f"{t} {n}" for t, n in tiers.items())
           + f"; tiers agree with table B, every phrase's figures with tables C and D, "
             f"storefront counts current for {len(counts)}")
+    if skipped:
+        # Last on purpose, and short: check_all shows a passing check's last
+        # line, cut to 80 characters. Exit stays 0 so a checkout with no data/
+        # can still push; the line says the counts went uncompared.
+        print(f"SKIPPED: {len(skipped)} of {len(CITIES)} storefront counts not compared (no data/)")
     return 0
 
 

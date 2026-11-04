@@ -8,7 +8,9 @@ keys (pipeline/name_keys.py), never as the names: a plain list publishes, in
 the repository, exactly the people the map leaves out (owner, 2026-10-01;
 DECISIONS.md). This fails any module-level PERSON_NAMED, PERSON_NAMES or
 other PERSON_NAME* constant in pipeline/ that holds a string which is not a
-16-hex-digit key.
+16-hex-digit key, in any literal shape (tuple, list, set, dict, a frozenset()
+call, an annotated or augmented assignment), and any such constant whose value
+cannot be read from the source, since an unread value is an untested one.
 """
 import ast
 import re
@@ -18,23 +20,54 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 KEY = re.compile(r"^[0-9a-f]{16}$")
 CONST = re.compile(r"^PERSON_NAME")
+WRAPPERS = {"frozenset", "set", "tuple", "list", "sorted"}
+UNREADABLE = -1
+
+
+def literal_strings(node):
+    """Every string in a literal value, or None if any part of it is not a
+    literal this check can read (a name, a comprehension, another call)."""
+    if isinstance(node, ast.Constant):
+        return [node.value] if isinstance(node.value, str) else []
+    if isinstance(node, ast.Call):
+        if (getattr(node.func, "id", None) not in WRAPPERS or node.keywords):
+            return None
+        parts = node.args
+    elif isinstance(node, (ast.Tuple, ast.List, ast.Set)):
+        parts = node.elts
+    elif isinstance(node, ast.Dict):
+        parts = node.keys + node.values
+    else:
+        return None
+    found = []
+    for part in parts:
+        strings = None if part is None else literal_strings(part)
+        if strings is None:
+            return None
+        found += strings
+    return found
 
 
 def plain_entries(source):
-    """[(constant, line, count)] for each PERSON_NAME* literal holding a non-key."""
+    """[(constant, line, count)] for each PERSON_NAME* value holding a non-key;
+    count is UNREADABLE for a value literal_strings() cannot read."""
     out = []
     for node in ast.parse(source).body:
-        if not isinstance(node, ast.Assign):
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+        elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
+            targets = [node.target]
+        else:
             continue
-        for target in node.targets:
+        for target in targets:
             name = getattr(target, "id", None)
-            if not name or not CONST.match(name):
+            if not name or not CONST.match(name) or node.value is None:
                 continue
-            if not isinstance(node.value, (ast.Tuple, ast.List, ast.Set)):
+            strings = literal_strings(node.value)
+            if strings is None:
+                out.append((name, node.lineno, UNREADABLE))
                 continue
-            bad = [e for e in node.value.elts
-                   if isinstance(e, ast.Constant) and isinstance(e.value, str)
-                   and not KEY.match(e.value)]
+            bad = [s for s in strings if not KEY.match(s)]
             if bad:
                 out.append((name, node.lineno, len(bad)))
     return out
@@ -48,6 +81,10 @@ def check(root=ROOT):
             continue
         seen += 1
         for name, line, n in plain_entries(text):
+            if n == UNREADABLE:
+                problems.append(f"{py.relative_to(root)}:{line}: {name} has a value this check "
+                                f"cannot read - write it as a literal of keys")
+                continue
             problems.append(f"{py.relative_to(root)}:{line}: {name} holds {n} plain "
                             f"name(s) - store keys (python pipeline/name_keys.py \"NAME\")")
     return seen, problems
@@ -60,6 +97,17 @@ def selftest():
         (plain_entries('PERSON_NAMES = {"Any Name"}'), [("PERSON_NAMES", 1, 1)]),
         (plain_entries('LINE_NAMES = {"A": "Tram A"}'), []),          # not a withheld list
         (plain_entries('PERSONAL_OWN_TYPES = ("Individual",)'), []),  # a type, not names
+        (plain_entries('PERSON_NAMED = frozenset({"ANY NAME"})'), [("PERSON_NAMED", 1, 1)]),
+        (plain_entries('PERSON_NAMED = frozenset({"adfded197c319f26"})'), []),
+        (plain_entries('PERSON_NAMED = frozenset()'), []),
+        (plain_entries('PERSON_NAMED: tuple = ("ANY NAME",)'), [("PERSON_NAMED", 1, 1)]),
+        (plain_entries('PERSON_NAMED: tuple'), []),                   # no value to read
+        (plain_entries('PERSON_NAMED += ("ANY NAME",)'), [("PERSON_NAMED", 1, 1)]),
+        (plain_entries('PERSON_NAME_X = "ANY NAME"'), [("PERSON_NAME_X", 1, 1)]),
+        (plain_entries('PERSON_NAMES = {"ANY NAME": 1}'), [("PERSON_NAMES", 1, 1)]),
+        (plain_entries('PERSON_NAMED = OTHER'), [("PERSON_NAMED", 1, UNREADABLE)]),
+        (plain_entries('PERSON_NAMED = load("a")'), [("PERSON_NAMED", 1, UNREADABLE)]),
+        (plain_entries('PERSON_NAMED = {n for n in X}'), [("PERSON_NAMED", 1, UNREADABLE)]),
     ]
     bad = [i for i, (got, want) in enumerate(cases) if got != want]
     print(f"{len(cases) - len(bad)} of {len(cases)} cases behaved as intended."

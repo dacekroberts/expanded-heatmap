@@ -2,6 +2,28 @@
 # Refuse a push while any pass/fail check fails. See scripts/check_all.py.
 # Enabled once per clone: git config core.hooksPath .githooks
 # A worktree whose branch predates this file simply has no hook.
+#
+# check_all.py tests the working tree, so the tree must BE what is pushed:
+# refuse uncommitted or untracked files, and any pushed ref other than HEAD.
+# Deleting a remote ref pushes no content, so it passes this part.
 cd "$(git rev-parse --show-toplevel)" || exit 1
+if [ -n "$(git status --porcelain)" ]; then
+    echo "pre-push: REFUSED, the working tree is not clean, so the checks would test"
+    echo "something other than the commits being pushed. Commit or remove these:"
+    git status --porcelain
+    exit 1
+fi
+head=$(git rev-parse HEAD)
+zero=0000000000000000000000000000000000000000
+while read -r local_ref local_sha remote_ref remote_sha; do
+    [ -z "$local_sha" ] && continue
+    [ "$local_sha" = "$zero" ] && continue
+    commit=$(git rev-parse "$local_sha^{commit}" 2>/dev/null)
+    if [ "$commit" != "$head" ]; then
+        echo "pre-push: REFUSED, $local_ref ($local_sha) is not HEAD ($head), so the checks"
+        echo "would test a different tree. Check it out and push from there."
+        exit 1
+    fi
+done
 echo "pre-push: running scripts/check_all.py (about 30s)"
 exec python scripts/check_all.py

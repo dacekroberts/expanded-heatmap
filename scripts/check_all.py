@@ -20,9 +20,15 @@ WHAT IS LEFT OUT, and why:
   - check_plan_done.py, check_stale_claims.py: report only, never fail.
   - check_stray_bullets.py --all: docs the app does not render; a report.
   - the .js/.mjs checks: they need a browser and a running server.
+  - check_internal_prose.py: report only, never fails.
+  - check_place_index_drift.py without --selftest: rebuilds every city's index
+    from data/, by hand after a place_index change. Only its selftest is here.
+  - check_line_identity.py --rendered: reads every committed map, by hand after
+    a re-render. The hook compares the config colours and names only, so the
+    rendered half of the line-colour hard line is a manual gate.
 
-It checks the working tree, not the commits being pushed. Push from a clean
-tree and the two are the same.
+It checks the working tree, not the commits being pushed. The hook makes the
+two the same: it refuses a dirty tree, and any pushed ref that is not HEAD.
 """
 import argparse
 import os
@@ -48,12 +54,14 @@ CHECKS = [
     ["scripts/check_conflict_markers.py"],
     ["scripts/check_conflict_markers_selftest.py"],
     ["scripts/check_discard_evidence.py"],
+    ["scripts/check_discard_evidence.py", "--selftest"],
     ["scripts/check_html_lang.py"],
     ["scripts/check_html_lang.py", "--selftest"],
     ["scripts/check_word_budgets.py"],
     ["scripts/fingerprint.py", "coverage"],
     ["scripts/check_inconsistency_list.py"],
     ["scripts/check_inline_arrays.py"],
+    ["scripts/check_inline_arrays.py", "--selftest"],
     ["scripts/check_macro_facts.py"],
     ["scripts/check_macro_labels.py"],
     ["scripts/check_line_identity.py"],
@@ -71,10 +79,12 @@ CHECKS = [
     ["scripts/check_no_fetch_in_steps.py"],
     ["scripts/check_no_fetch_in_steps_selftest.py"],
     ["scripts/check_overpass_hosts.py"],
+    ["scripts/check_overpass_hosts.py", "--selftest"],
     ["scripts/check_place_search.py"],
     ["scripts/check_place_search.py", "--selftest"],
     ["pipeline/place_index.py", "--selftest"],
     ["pipeline/place_index_fetch.py", "--selftest"],
+    ["pipeline/place_wikidata_fetch.py", "--selftest"],
     ["pipeline/osm_extract.py", "--selftest"],
     ["pipeline/place_extract_fetch.py", "--selftest"],
     ["scripts/place_search_fetch_queue.py", "--selftest"],
@@ -88,8 +98,10 @@ CHECKS = [
     ["scripts/check_place_unopened.py", "--selftest"],
     ["scripts/check_privacy_verdicts.py"],
     ["scripts/check_provenance.py"],
+    ["scripts/check_provenance.py", "--selftest"],
     ["scripts/check_render_current.py"],
     ["scripts/check_ring_shares.py"],
+    ["scripts/ring_rules_table.py", "--check"],
     ["scripts/check_scope_disclosure.py"],
     ["scripts/check_scope_disclosure_selftest.py"],
     ["scripts/check_stray_bullets.py"],
@@ -101,6 +113,7 @@ CHECKS = [
     ["scripts/drift_check_selftest.py"],
     ["scripts/heavy_job.py", "--selftest"],
     ["scripts/python_memcap.py", "--check"],
+    ["scripts/python_memcap.py", "--selftest"],
     ["scripts/readme_cities.py", "--check"],
     ["scripts/rendered_surfaces.py", "--check"],
     ["scripts/prose_proposals.py", "--selftest"],
