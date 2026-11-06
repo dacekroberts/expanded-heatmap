@@ -100,14 +100,42 @@ with st.container(horizontal_alignment="center"):
         # (app/static/), so it fetches nothing from the host either. Relative, no
         # leading slash: Streamlit Cloud serves the page under /~/+/, where a
         # root-relative path returns the app's HTML instead (measured 2026-10-14).
+        # A light cut follows the viewer's theme (owner, 2026-11-06): the page
+        # background's brightness decides, read again each second until the
+        # first Play, so a theme switch before Play swaps film and poster and
+        # one after Play leaves the playing film alone. The ?v= tag is the
+        # upload date: Cloudflare's edge kept the old file under the bare URL
+        # after a replace (measured 2026-11-06), so a replaced film takes a new tag.
         OPENER_VIDEO_URL = ("https://files.dacekroberts.dev/video/"
-                            "global-transit-business-atlas-opener-16-9.mp4")
+                            "global-transit-business-atlas-opener-16-9.mp4?v=2026-11-06")
+        OPENER_VIDEO_LIGHT_URL = ("https://files.dacekroberts.dev/video/"
+                                  "global-transit-business-atlas-opener-16-9-light.mp4?v=2026-11-06")
         OPENER_POSTER_URL = "app/static/opener-poster.jpg"
+        OPENER_POSTER_LIGHT_URL = "app/static/opener-poster-light.jpg"
         OPENER_IDLE_JS = """<script>
 (function () {
   var v = document.getElementById("opener-video");
   if (!v || v.dataset.idle) return;
   v.dataset.idle = "1";
+  function pageIsLight() {
+    var n = (getComputedStyle(document.body).backgroundColor || "").match(/[0-9.]+/g);
+    if (!n || n.length < 3 || (n.length > 3 && +n[3] < 0.1)) {
+      return !(window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+    return 0.299 * n[0] + 0.587 * n[1] + 0.114 * n[2] >= 128;
+  }
+  function pick() {
+    if (v.dataset.started) return;
+    var light = pageIsLight();
+    var src = v.dataset[light ? "srcLight" : "srcDark"];
+    if (v.getAttribute("src") !== src) {
+      v.setAttribute("src", src);
+      v.setAttribute("poster", v.dataset[light ? "posterLight" : "posterDark"]);
+    }
+  }
+  pick();
+  var tick = setInterval(pick, 1000);
+  v.addEventListener("play", function () { v.dataset.started = "1"; clearInterval(tick); });
   var t = null;
   function show() {
     v.controls = true;
@@ -135,6 +163,8 @@ with st.container(horizontal_alignment="center"):
         st.html(
             f'<video id="opener-video" src="{OPENER_VIDEO_URL}" '
             f'poster="{OPENER_POSTER_URL}" '
+            f'data-src-dark="{OPENER_VIDEO_URL}" data-src-light="{OPENER_VIDEO_LIGHT_URL}" '
+            f'data-poster-dark="{OPENER_POSTER_URL}" data-poster-light="{OPENER_POSTER_LIGHT_URL}" '
             'controls preload="none" playsinline '
             'aria-label="Opening video" '
             'style="display:block;width:100%;aspect-ratio:16/9;'

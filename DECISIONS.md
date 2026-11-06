@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**248 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-11-06**
+
+- [The Overview opener follows the viewer's theme, with the new name on both cuts (owner)](#2026-11-06---the-overview-opener-follows-the-viewers-theme-with-the-new-name-on-both-cuts-owner)
 
 **2026-11-04**
 
@@ -10177,3 +10181,26 @@ blank. The owner said yes to applying the rule Chicago uses: the pin stays and
 shows the street address without the unit, or its category where no street
 number exists. Company legal names are unchanged. The owner also kept the
 category call for the New York newsstand with no street number.
+
+### 2026-11-06 - The Overview opener follows the viewer's theme, with the new name on both cuts (owner)
+
+- **What:** the opener now has a light cut beside the dark one (both 3:35,
+  1920 x 1080, 30 fps), exported from the Motion chat with the site's new
+  name on every card. Before the first Play the player picks the cut and its
+  poster from the page background's brightness, read again each second, so
+  a theme switch before Play swaps both; after Play the film is left alone
+  (owner: "light mode is going to follow viewer's theme").
+- **Where:** both films on the file host under `video/`, uploaded by the
+  owner from the dashboard. The dark file kept its name and replaced the
+  10-14 upload. Cloudflare's edge kept serving the old file under the bare
+  URL (69,238,218 bytes; the new one is 69,244,611), so both URLs carry
+  `?v=2026-11-06`; a replaced film takes a new tag. Read from here: both
+  200, `video/mp4`, range requests 206.
+- **Posters:** `app/static/opener-poster.jpg` (re-cut, new name) and
+  `app/static/opener-poster-light.jpg`, each the film's first frame at
+  1280 x 720.
+- **The privacy notice is unchanged:** `preload="none"` stays, and a local
+  check found no request to the host before Play on either theme.
+- **Not on the site:** the 4:5 opener cuts and the 60-second pitch (16:9 and
+  4:5, dark only) stay in `visuals/motion/out/` for posting elsewhere.
+
